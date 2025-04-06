@@ -69,7 +69,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-custom-darkest">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-[#0B0205]">
       {/* Theme toggle */}
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
@@ -77,11 +77,11 @@ const Login = () => {
       
       {/* Decorative elements - subtle gradient background */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-custom-medium/20 blur-3xl"></div>
-        <div className="absolute bottom-10 right-[10%] w-72 h-72 rounded-full bg-custom-accent/30 blur-3xl"></div>
+        <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-[#240046]/20 blur-3xl"></div>
+        <div className="absolute bottom-10 right-[10%] w-72 h-72 rounded-full bg-[#2C1B47]/30 blur-3xl"></div>
       </div>
       
-      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-custom-dark/80 backdrop-blur-lg border-0 rounded-xl">
+      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-[#10002B]/80 backdrop-blur-lg border-0 rounded-xl">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight text-white">Welcome Back</CardTitle>
           <CardDescription className="text-custom-lighter">
@@ -102,7 +102,7 @@ const Login = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-custom-medium/40 border-0 text-white placeholder:text-white/60 pl-10"
+                    className="bg-[#240046]/40 border-0 text-white placeholder:text-white/60 pl-10"
                     disabled={isLoading}
                     required
                   />
@@ -123,7 +123,7 @@ const Login = () => {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="bg-custom-medium/40 border-0 text-white placeholder:text-white/60 pl-10"
+                    className="bg-[#240046]/40 border-0 text-white placeholder:text-white/60 pl-10"
                     disabled={isLoading}
                     required
                   />
@@ -171,7 +171,7 @@ const Login = () => {
               <Separator className="w-full bg-white/10" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-custom-dark px-2 text-custom-light">
+              <span className="bg-[#10002B] px-2 text-custom-light">
                 Or continue with
               </span>
             </div>
@@ -180,7 +180,7 @@ const Login = () => {
           <div className="grid grid-cols-3 gap-3">
             <Button
               variant="outline"
-              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-0 text-white"
+              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-0 text-white"
               type="button"
               onClick={() => handleOAuthLogin("GitHub")}
               disabled={isLoading}
@@ -191,7 +191,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-0 text-white"
+              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-0 text-white"
               type="button"
               onClick={() => handleOAuthLogin("Google")}
               disabled={isLoading}
@@ -207,7 +207,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-0 text-white"
+              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-0 text-white"
               type="button"
               onClick={() => handleOAuthLogin("Facebook")}
               disabled={isLoading}
@@ -217,7 +217,7 @@ const Login = () => {
           </div>
 
           <div className="text-center text-xs">
-            <div className="flex items-center justify-center gap-1 py-2 px-3 rounded-md bg-custom-medium/30">
+            <div className="flex items-center justify-center gap-1 py-2 px-3 rounded-md bg-[#240046]/30">
               <AlertCircle className="h-3 w-3 text-custom-lighter/70" /> 
               <span className="text-custom-lighter">
                 Protected by reCAPTCHA and subject to the{" "}
@@ -229,7 +229,7 @@ const Login = () => {
           </div>
         </CardContent>
         
-        <CardFooter className="flex flex-col space-y-4 border-t border-custom-medium/30 pt-6">
+        <CardFooter className="flex flex-col space-y-4 border-t border-[#240046]/30 pt-6">
           <div className="text-center text-sm text-custom-light">
             Don't have an account?{" "}
             <a href="/signup" className="underline text-white hover:text-custom-lighter transition-colors font-medium">

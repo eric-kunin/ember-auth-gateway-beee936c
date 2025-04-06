@@ -13,13 +13,13 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className="rounded-full w-10 h-10 flex items-center justify-center
       backdrop-blur-lg hover:bg-white/10
-      dark:bg-custom-medium/30 dark:hover:bg-custom-medium/50
+      dark:bg-custom-dark/30 dark:hover:bg-custom-medium/50
       bg-custom-primary/20 hover:bg-custom-primary/30 transition-all duration-300
       shadow-lg border border-white/10"
     >
       {theme === 'dark' ? 
-        <Sun className="h-5 w-5 text-custom-lighter" /> : 
-        <Moon className="h-5 w-5 text-white" />
+        <Sun className="h-5 w-5 text-white" /> : 
+        <Moon className="h-5 w-5 text-custom-medium" />
       }
       <span className="sr-only">Toggle theme</span>
     </Button>
