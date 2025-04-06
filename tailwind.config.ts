@@ -64,11 +64,14 @@ export default {
           ring: 'hsl(var(--sidebar-ring))'
         },
         theme: {
-          dark: '#0B0205',
-          purple: '#2C1B47',
-          main: '#724C9D',
-          light: '#DCCAE9',
-          accent: '#9356A0',
+          darkest: '#10002B',
+          darker: '#240046',
+          dark: '#3C096C',
+          primary: '#5A189A',
+          medium: '#7B2CBF',
+          light: '#9D4EDD',
+          lighter: '#C77DFF',
+          lightest: '#E0AAFF',
         }
       },
       borderRadius: {

@@ -15,17 +15,23 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-theme-dark via-theme-purple to-theme-main dark:from-[#0B0205] dark:via-[#1A1025] dark:to-[#2C1B47]">
+    <div className="min-h-screen flex flex-col items-center justify-center auth-gradient">
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
-      <div className="text-center">
+      <div className="text-center z-10">
         <h1 className="text-7xl font-bold mb-4 text-white">404</h1>
-        <div className="w-16 h-1 mx-auto bg-theme-accent mb-8"></div>
-        <p className="text-2xl text-theme-light mb-8 dark:text-gray-300">Oops! Page not found</p>
-        <Button asChild className="bg-theme-accent hover:bg-theme-accent/90 transition-all transform hover:translate-y-[-2px]">
+        <div className="w-16 h-1 mx-auto bg-theme-medium mb-8"></div>
+        <p className="text-2xl text-theme-lightest mb-8 dark:text-theme-lighter">Oops! Page not found</p>
+        <Button asChild className="bg-theme-medium hover:bg-theme-primary transition-all transform hover:translate-y-[-2px]">
           <a href="/login">Return to Login</a>
         </Button>
+      </div>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div className="absolute top-1/4 left-[15%] w-64 h-64 rounded-full bg-theme-primary/20 blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-[15%] w-72 h-72 rounded-full bg-theme-medium/30 blur-3xl"></div>
       </div>
     </div>
   );

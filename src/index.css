@@ -14,7 +14,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 267 72% 3%;
 
-    --primary: 273 40% 42%;
+    /* Updated color values for light mode */
+    --primary: 273 72% 35%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 273 37% 83%;
@@ -23,7 +24,7 @@
     --muted: 273 37% 83%;
     --muted-foreground: 267 12% 40%;
 
-    --accent: 279 44% 48%;
+    --accent: 271 60% 35%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
@@ -43,6 +44,16 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* New colors from the palette */
+    --theme-darkest: 263 100% 6%;   /* #10002B */
+    --theme-darker: 258 100% 14%;   /* #240046 */
+    --theme-dark: 270 85% 23%;      /* #3C096C */
+    --theme-primary: 272 72% 35%;   /* #5A189A */
+    --theme-medium: 271 60% 45%;    /* #7B2CBF */
+    --theme-light: 270 54% 61%;     /* #9D4EDD */
+    --theme-lighter: 270 55% 75%;   /* #C77DFF */
+    --theme-lightest: 270 100% 94%; /* #E0AAFF */
   }
 
   .dark {
@@ -55,7 +66,7 @@
     --popover: 267 62% 20%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 273 40% 42%;
+    --primary: 270 85% 23%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 267 42% 16%;
@@ -64,7 +75,7 @@
     --muted: 267 42% 16%;
     --muted-foreground: 267 16% 70%;
 
-    --accent: 279 44% 48%;
+    --accent: 272 72% 35%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -96,7 +107,7 @@
 }
 
 .auth-gradient {
-  background: linear-gradient(135deg, #2C1B47 0%, #724C9D 50%, #9356A0 100%);
+  background: linear-gradient(135deg, #10002B 0%, #240046 40%, #3C096C 70%, #5A189A 100%);
 }
 
 .auth-card {
@@ -107,7 +118,16 @@
 }
 
 .shimmer-effect {
-  background: linear-gradient(90deg, rgba(220, 202, 233, 0.1), rgba(147, 86, 160, 0.2), rgba(114, 76, 157, 0.1), rgba(220, 202, 233, 0.1));
+  background: linear-gradient(90deg, rgba(201, 167, 255, 0.1), rgba(157, 78, 221, 0.2), rgba(123, 44, 191, 0.1), rgba(201, 167, 255, 0.1));
   background-size: 400% 100%;
   animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.privacy-link {
+  @apply underline text-theme-lightest hover:text-white transition-colors;
 }
