@@ -63,15 +63,15 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
         },
-        theme: {
-          darkest: '#10002B',
-          darker: '#240046',
-          dark: '#3C096C',
-          primary: '#5A189A',
-          medium: '#7B2CBF',
-          light: '#9D4EDD',
-          lighter: '#C77DFF',
-          lightest: '#E0AAFF',
+        // Custom theme colors
+        custom: {
+          darkest: '#0B0205',   // New darkest color
+          dark: '#10002B',      // Dark purple
+          medium: '#240046',    // Medium purple
+          accent: '#2C1B47',    // Accent purple
+          primary: '#9D4EDD',   // Primary purple (keep from existing)
+          light: '#C77DFF',     // Light purple (keep from existing)
+          lighter: '#E0AAFF',   // Lighter purple (keep from existing)
         }
       },
       borderRadius: {

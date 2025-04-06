@@ -11,22 +11,6 @@ import { Switch } from "@/components/ui/switch";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Separator } from "@/components/ui/separator";
 
-// Step component for the step indicator
-const StepIndicator = ({ currentStep, totalSteps }: { currentStep: number, totalSteps: number }) => {
-  return (
-    <div className="flex items-center justify-center gap-2 mt-2 mb-4">
-      {Array.from({ length: totalSteps }).map((_, i) => (
-        <div 
-          key={i}
-          className={`h-1.5 rounded-full transition-all duration-300 ${
-            i < currentStep ? "w-8 bg-[#9D4EDD]" : "w-4 bg-white/20"
-          }`}
-        />
-      ))}
-    </div>
-  );
-};
-
 const Login = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -35,8 +19,6 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 3;
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,11 +34,9 @@ const Login = () => {
     
     try {
       setIsLoading(true);
-      setCurrentStep(2);
       
       // This is just a mockup without actual authentication
       setTimeout(() => {
-        setCurrentStep(3);
         toast({
           title: "Success!",
           description: "You've successfully logged in.",
@@ -67,7 +47,6 @@ const Login = () => {
       
     } catch (error: any) {
       setIsLoading(false);
-      setCurrentStep(1);
       toast({
         variant: "destructive",
         title: "Login Failed",
@@ -78,11 +57,9 @@ const Login = () => {
 
   const handleOAuthLogin = (provider: string) => {
     setIsLoading(true);
-    setCurrentStep(2);
     
     // This is just a mockup without actual OAuth authentication
     setTimeout(() => {
-      setCurrentStep(3);
       toast({
         title: `${provider} Login`,
         description: `Logging in with ${provider}...`,
@@ -92,18 +69,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-[#10002B]">
-      {/* App Logo Header */}
-      <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
-        <div className="flex flex-col items-center">
-          <img 
-            src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
-            alt="AkhlaDate Logo" 
-            className="h-24 w-24 object-contain drop-shadow-lg"
-          />
-        </div>
-      </div>
-
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-custom-darkest">
       {/* Theme toggle */}
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
@@ -111,33 +77,32 @@ const Login = () => {
       
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-theme-primary/20 blur-3xl"></div>
-        <div className="absolute bottom-10 right-[10%] w-72 h-72 rounded-full bg-theme-medium/30 blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-theme-lighter/20 blur-3xl"></div>
+        <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-custom-medium/20 blur-3xl"></div>
+        <div className="absolute bottom-10 right-[10%] w-72 h-72 rounded-full bg-custom-accent/30 blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-custom-primary/20 blur-3xl"></div>
       </div>
       
-      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-[#1A001A]/70 backdrop-blur-lg border border-[#9D4EDD]/20 rounded-2xl">
+      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-custom-dark/70 backdrop-blur-lg border border-custom-primary/20 rounded-2xl">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight text-white">Welcome Back</CardTitle>
-          <CardDescription className="text-[#C77DFF]">
+          <CardDescription className="text-custom-light">
             Sign in to access your account
           </CardDescription>
-          <StepIndicator currentStep={currentStep} totalSteps={totalSteps} />
         </CardHeader>
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailLogin}>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-[#E0AAFF]" htmlFor="email">Email</Label>
+                <Label className="text-custom-lighter" htmlFor="email">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#E0AAFF]/60" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-custom-lighter/60" />
                   <Input
                     id="email"
                     placeholder="name@example.com"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-[#240046]/40 border-[#9D4EDD]/30 text-white placeholder:text-white/60 focus:ring-[#9D4EDD] focus:border-[#9D4EDD] pl-10"
+                    className="bg-custom-medium/40 border-custom-primary/30 text-white placeholder:text-white/60 focus:ring-custom-primary focus:border-custom-primary pl-10"
                     disabled={isLoading}
                     required
                   />
@@ -145,19 +110,19 @@ const Login = () => {
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between">
-                  <Label className="text-[#E0AAFF]" htmlFor="password">Password</Label>
-                  <a href="#" className="text-xs text-[#E0AAFF] hover:text-white transition-colors">
+                  <Label className="text-custom-lighter" htmlFor="password">Password</Label>
+                  <a href="#" className="text-xs text-custom-lighter hover:text-white transition-colors">
                     Forgot password?
                   </a>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#E0AAFF]/60" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-custom-lighter/60" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="bg-[#240046]/40 border-[#9D4EDD]/30 text-white placeholder:text-white/60 focus:ring-[#9D4EDD] focus:border-[#9D4EDD] pl-10"
+                    className="bg-custom-medium/40 border-custom-primary/30 text-white placeholder:text-white/60 focus:ring-custom-primary focus:border-custom-primary pl-10"
                     disabled={isLoading}
                     required
                   />
@@ -176,15 +141,16 @@ const Login = () => {
                   id="remember-me"
                   checked={rememberMe}
                   onCheckedChange={setRememberMe}
+                  className="data-[state=checked]:bg-custom-primary data-[state=checked]:border-custom-primary"
                 />
-                <Label htmlFor="remember-me" className="text-sm text-[#C77DFF]">
+                <Label htmlFor="remember-me" className="text-sm text-custom-light">
                   Remember me for 30 days
                 </Label>
               </div>
               
               <Button
                 type="submit"
-                className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all duration-300 transform hover:translate-y-[-2px]"
+                className="w-full bg-custom-primary hover:bg-custom-primary/90 transition-all duration-300 transform hover:translate-y-[-2px]"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -204,7 +170,7 @@ const Login = () => {
               <Separator className="w-full bg-white/20" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-[#10002B]/80 px-2 text-[#C77DFF] backdrop-blur-sm">
+              <span className="bg-custom-dark/80 px-2 text-custom-light backdrop-blur-sm">
                 Or continue with
               </span>
             </div>
@@ -213,7 +179,7 @@ const Login = () => {
           <div className="grid grid-cols-3 gap-3">
             <Button
               variant="outline"
-              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-[#9D4EDD]/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
+              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-custom-primary/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
               type="button"
               onClick={() => handleOAuthLogin("GitHub")}
               disabled={isLoading}
@@ -224,7 +190,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-[#9D4EDD]/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
+              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-custom-primary/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
               type="button"
               onClick={() => handleOAuthLogin("Google")}
               disabled={isLoading}
@@ -240,7 +206,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-[#9D4EDD]/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
+              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-custom-primary/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
               type="button"
               onClick={() => handleOAuthLogin("Facebook")}
               disabled={isLoading}
@@ -250,9 +216,9 @@ const Login = () => {
           </div>
 
           <div className="text-center text-xs">
-            <div className="flex flex-wrap items-center justify-center gap-1 py-2 px-3 rounded-md bg-[#240046]/30 backdrop-blur-sm">
-              <AlertCircle className="h-3 w-3 text-[#E0AAFF]/70" /> 
-              <span className="text-[#E0AAFF]">
+            <div className="flex flex-wrap items-center justify-center gap-1 py-2 px-3 rounded-md bg-custom-medium/30 backdrop-blur-sm">
+              <AlertCircle className="h-3 w-3 text-custom-lighter/70" /> 
+              <span className="text-custom-lighter">
                 Protected by reCAPTCHA and subject to the{" "}
                 <a href="#" className="privacy-link mx-1 underline">Privacy Policy</a> 
                 and{" "}
@@ -261,10 +227,10 @@ const Login = () => {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4 border-t border-[#9D4EDD]/20 bg-[#240046]/30 rounded-b-lg pt-6">
-          <div className="text-center text-sm text-[#C77DFF]">
+        <CardFooter className="flex flex-col space-y-4 border-t border-custom-primary/20 bg-custom-medium/30 rounded-b-lg pt-6">
+          <div className="text-center text-sm text-custom-light">
             Don't have an account?{" "}
-            <a href="/signup" className="underline text-white hover:text-[#E0AAFF] transition-colors font-medium">
+            <a href="/signup" className="underline text-white hover:text-custom-lighter transition-colors font-medium">
               Sign up
             </a>
           </div>
