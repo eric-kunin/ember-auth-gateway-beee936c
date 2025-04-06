@@ -69,40 +69,40 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-[#0B0205]">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative bg-[#0B0205]">
       {/* Theme toggle */}
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>
       
-      {/* Decorative elements - subtle gradient background */}
+      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-[#240046]/20 blur-3xl"></div>
         <div className="absolute bottom-10 right-[10%] w-72 h-72 rounded-full bg-[#2C1B47]/30 blur-3xl"></div>
       </div>
       
-      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-[#10002B]/80 backdrop-blur-lg border-0 rounded-xl">
-        <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold tracking-tight text-white">Welcome Back</CardTitle>
+      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-[#10002B]/95 border-0 rounded-2xl">
+        <CardHeader className="space-y-1 text-center pt-10 pb-4">
+          <CardTitle className="text-2xl font-bold text-white">Welcome Back</CardTitle>
           <CardDescription className="text-custom-lighter">
             Sign in to access your account
           </CardDescription>
         </CardHeader>
         
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6 px-8">
           <form onSubmit={handleEmailLogin}>
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div className="space-y-2">
-                <Label className="text-custom-lighter" htmlFor="email">Email</Label>
+                <Label className="text-white text-sm" htmlFor="email">Email</Label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-custom-lighter/60" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
                   <Input
                     id="email"
                     placeholder="name@example.com"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-[#240046]/40 border-0 text-white placeholder:text-white/60 pl-10"
+                    className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
                     disabled={isLoading}
                     required
                   />
@@ -110,27 +110,27 @@ const Login = () => {
               </div>
               
               <div className="space-y-2">
-                <div className="flex justify-between">
-                  <Label className="text-custom-lighter" htmlFor="password">Password</Label>
+                <div className="flex justify-between items-center">
+                  <Label className="text-white text-sm" htmlFor="password">Password</Label>
                   <a href="#" className="text-xs text-custom-lighter hover:text-white transition-colors">
                     Forgot password?
                   </a>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-custom-lighter/60" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="bg-[#240046]/40 border-0 text-white placeholder:text-white/60 pl-10"
+                    className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
                     disabled={isLoading}
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/60 hover:text-white text-xs font-medium"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-xs font-medium"
                   >
                     {showPassword ? "HIDE" : "SHOW"}
                   </button>
@@ -142,16 +142,16 @@ const Login = () => {
                   id="remember-me"
                   checked={rememberMe}
                   onCheckedChange={setRememberMe}
-                  className="data-[state=checked]:bg-custom-primary data-[state=checked]:border-custom-primary"
+                  className="data-[state=checked]:bg-[#9D4EDD]"
                 />
-                <Label htmlFor="remember-me" className="text-sm text-custom-light">
+                <Label htmlFor="remember-me" className="text-sm text-custom-lighter">
                   Remember me for 30 days
                 </Label>
               </div>
               
               <Button
                 type="submit"
-                className="w-full bg-custom-primary hover:bg-custom-primary/90 text-white border-0"
+                className="w-full bg-[#9D4EDD] hover:bg-[#9D4EDD]/90 text-white border-0 h-12 mt-2"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -171,7 +171,7 @@ const Login = () => {
               <Separator className="w-full bg-white/10" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-[#10002B] px-2 text-custom-light">
+              <span className="bg-[#10002B] px-2 text-custom-lighter">
                 Or continue with
               </span>
             </div>
@@ -180,7 +180,7 @@ const Login = () => {
           <div className="grid grid-cols-3 gap-3">
             <Button
               variant="outline"
-              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-0 text-white"
+              className="bg-[#240046]/80 hover:bg-[#240046] border-0 text-white h-12"
               type="button"
               onClick={() => handleOAuthLogin("GitHub")}
               disabled={isLoading}
@@ -191,7 +191,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-0 text-white"
+              className="bg-[#240046]/80 hover:bg-[#240046] border-0 text-white h-12"
               type="button"
               onClick={() => handleOAuthLogin("Google")}
               disabled={isLoading}
@@ -207,7 +207,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-[#240046]/40 hover:bg-[#240046]/60 border-0 text-white"
+              className="bg-[#240046]/80 hover:bg-[#240046] border-0 text-white h-12"
               type="button"
               onClick={() => handleOAuthLogin("Facebook")}
               disabled={isLoading}
@@ -217,19 +217,19 @@ const Login = () => {
           </div>
 
           <div className="text-center text-xs">
-            <div className="flex items-center justify-center gap-1 py-2 px-3 rounded-md bg-[#240046]/30">
+            <div className="flex items-center justify-center gap-1 py-3 px-3 rounded-md bg-[#240046]/30">
               <AlertCircle className="h-3 w-3 text-custom-lighter/70" /> 
               <span className="text-custom-lighter">
                 Protected by reCAPTCHA and subject to the{" "}
-                <a href="#" className="privacy-link mx-1">Privacy Policy</a> 
+                <a href="#" className="underline text-white hover:text-custom-lighter">Privacy Policy</a> 
                 and{" "}
-                <a href="#" className="privacy-link mx-1">Terms of Service</a>
+                <a href="#" className="underline text-white hover:text-custom-lighter">Terms of Service</a>
               </span>
             </div>
           </div>
         </CardContent>
         
-        <CardFooter className="flex flex-col space-y-4 border-t border-[#240046]/30 pt-6">
+        <CardFooter className="flex flex-col space-y-4 border-t border-[#240046]/30 pt-6 pb-8 px-8">
           <div className="text-center text-sm text-custom-light">
             Don't have an account?{" "}
             <a href="/signup" className="underline text-white hover:text-custom-lighter transition-colors font-medium">
