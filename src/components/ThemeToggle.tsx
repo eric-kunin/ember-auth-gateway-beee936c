@@ -11,13 +11,14 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      className="rounded-full backdrop-blur-lg hover:bg-white/20 text-white
-      dark:bg-custom-medium/40 dark:hover:bg-custom-medium/60
-      bg-custom-primary/30 hover:bg-custom-primary/40 transition-all duration-300
+      className="rounded-full w-10 h-10 flex items-center justify-center
+      backdrop-blur-lg hover:bg-white/10
+      dark:bg-custom-medium/30 dark:hover:bg-custom-medium/50
+      bg-custom-primary/20 hover:bg-custom-primary/30 transition-all duration-300
       shadow-lg border border-white/10"
     >
       {theme === 'dark' ? 
-        <Sun className="h-5 w-5 text-custom-lighter animate-pulse" /> : 
+        <Sun className="h-5 w-5 text-custom-lighter" /> : 
         <Moon className="h-5 w-5 text-white" />
       }
       <span className="sr-only">Toggle theme</span>

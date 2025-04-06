@@ -75,20 +75,20 @@ const Login = () => {
         <ThemeToggle />
       </div>
       
-      {/* Decorative elements */}
+      {/* Decorative elements - subtle gradient background */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-custom-medium/20 blur-3xl"></div>
         <div className="absolute bottom-10 right-[10%] w-72 h-72 rounded-full bg-custom-accent/30 blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full bg-custom-primary/20 blur-3xl"></div>
       </div>
       
-      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-custom-dark/70 backdrop-blur-lg border border-custom-primary/20 rounded-2xl">
+      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-custom-dark/80 backdrop-blur-lg border-0 rounded-xl">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl font-bold tracking-tight text-white">Welcome Back</CardTitle>
-          <CardDescription className="text-custom-light">
+          <CardDescription className="text-custom-lighter">
             Sign in to access your account
           </CardDescription>
         </CardHeader>
+        
         <CardContent className="space-y-4">
           <form onSubmit={handleEmailLogin}>
             <div className="space-y-4">
@@ -102,12 +102,13 @@ const Login = () => {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-custom-medium/40 border-custom-primary/30 text-white placeholder:text-white/60 focus:ring-custom-primary focus:border-custom-primary pl-10"
+                    className="bg-custom-medium/40 border-0 text-white placeholder:text-white/60 pl-10"
                     disabled={isLoading}
                     required
                   />
                 </div>
               </div>
+              
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <Label className="text-custom-lighter" htmlFor="password">Password</Label>
@@ -122,7 +123,7 @@ const Login = () => {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="bg-custom-medium/40 border-custom-primary/30 text-white placeholder:text-white/60 focus:ring-custom-primary focus:border-custom-primary pl-10"
+                    className="bg-custom-medium/40 border-0 text-white placeholder:text-white/60 pl-10"
                     disabled={isLoading}
                     required
                   />
@@ -150,7 +151,7 @@ const Login = () => {
               
               <Button
                 type="submit"
-                className="w-full bg-custom-primary hover:bg-custom-primary/90 transition-all duration-300 transform hover:translate-y-[-2px]"
+                className="w-full bg-custom-primary hover:bg-custom-primary/90 text-white border-0"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -167,10 +168,10 @@ const Login = () => {
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <Separator className="w-full bg-white/20" />
+              <Separator className="w-full bg-white/10" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-custom-dark/80 px-2 text-custom-light backdrop-blur-sm">
+              <span className="bg-custom-dark px-2 text-custom-light">
                 Or continue with
               </span>
             </div>
@@ -179,7 +180,7 @@ const Login = () => {
           <div className="grid grid-cols-3 gap-3">
             <Button
               variant="outline"
-              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-custom-primary/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
+              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-0 text-white"
               type="button"
               onClick={() => handleOAuthLogin("GitHub")}
               disabled={isLoading}
@@ -190,7 +191,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-custom-primary/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
+              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-0 text-white"
               type="button"
               onClick={() => handleOAuthLogin("Google")}
               disabled={isLoading}
@@ -206,7 +207,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-custom-primary/20 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
+              className="bg-custom-medium/40 hover:bg-custom-medium/60 border-0 text-white"
               type="button"
               onClick={() => handleOAuthLogin("Facebook")}
               disabled={isLoading}
@@ -216,18 +217,19 @@ const Login = () => {
           </div>
 
           <div className="text-center text-xs">
-            <div className="flex flex-wrap items-center justify-center gap-1 py-2 px-3 rounded-md bg-custom-medium/30 backdrop-blur-sm">
+            <div className="flex items-center justify-center gap-1 py-2 px-3 rounded-md bg-custom-medium/30">
               <AlertCircle className="h-3 w-3 text-custom-lighter/70" /> 
               <span className="text-custom-lighter">
                 Protected by reCAPTCHA and subject to the{" "}
-                <a href="#" className="privacy-link mx-1 underline">Privacy Policy</a> 
+                <a href="#" className="privacy-link mx-1">Privacy Policy</a> 
                 and{" "}
-                <a href="#" className="privacy-link mx-1 underline">Terms of Service</a>
+                <a href="#" className="privacy-link mx-1">Terms of Service</a>
               </span>
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4 border-t border-custom-primary/20 bg-custom-medium/30 rounded-b-lg pt-6">
+        
+        <CardFooter className="flex flex-col space-y-4 border-t border-custom-medium/30 pt-6">
           <div className="text-center text-sm text-custom-light">
             Don't have an account?{" "}
             <a href="/signup" className="underline text-white hover:text-custom-lighter transition-colors font-medium">
