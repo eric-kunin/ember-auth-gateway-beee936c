@@ -221,9 +221,9 @@ const Login = () => {
               <AlertCircle className="h-3 w-3 text-custom-lighter/70" /> 
               <span className="text-custom-lighter">
                 Protected by reCAPTCHA and subject to the{" "}
-                <a href="#" className="underline text-white hover:text-custom-lighter">Privacy Policy</a> 
+                <a href="#" className="privacy-link">Privacy Policy</a> 
                 and{" "}
-                <a href="#" className="underline text-white hover:text-custom-lighter">Terms of Service</a>
+                <a href="#" className="privacy-link">Terms of Service</a>
               </span>
             </div>
           </div>
