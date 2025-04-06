@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -57,15 +56,15 @@
   }
 
   .dark {
-    /* Updated dark mode background to use #10002B */
+    /* Set the exact color #10002B for background */
     --background: 263 100% 6%;  /* #10002B */
     --foreground: 0 0% 98%;
 
-    /* Update card background to use #240046 */
+    /* Set the exact color #240046 for card */
     --card: 258 100% 14%;  /* #240046 */
     --card-foreground: 0 0% 98%;
 
-    /* Update popover background to use #240046 */
+    /* Set the exact color #240046 for popover */
     --popover: 258 100% 14%;  /* #240046 */
     --popover-foreground: 0 0% 98%;
 
@@ -88,7 +87,7 @@
     --input: 267 42% 16%;
     --ring: 273 40% 42%;
     
-    /* Update sidebar background to use #10002B */
+    /* Set the exact color #10002B for sidebar background */
     --sidebar-background: 263 100% 6%;  /* #10002B */
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -110,6 +109,7 @@
   }
 }
 
+/* Update the auth gradient to use exact #10002B color */
 .auth-gradient {
   background: linear-gradient(135deg, #10002B 0%, #240046 40%, #3C096C 70%, #5A189A 100%);
 }

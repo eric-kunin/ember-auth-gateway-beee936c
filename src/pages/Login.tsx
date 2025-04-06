@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -70,7 +71,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-theme-darkest via-theme-darker to-theme-dark">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-[#10002B]">
       {/* App Logo Header */}
       <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
         <div className="flex flex-col items-center">
