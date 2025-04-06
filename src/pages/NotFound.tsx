@@ -15,18 +15,23 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center auth-gradient">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-theme-darkest via-theme-darker to-theme-dark">
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
-      <div className="text-center z-10">
-        <div className="mx-auto mb-6 flex items-center justify-center">
+      
+      {/* App Logo Header */}
+      <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
+        <div className="flex flex-col items-center">
           <img 
             src="/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png" 
             alt="AkhlaDate Logo" 
             className="h-24 w-24 object-contain drop-shadow-lg"
           />
         </div>
+      </div>
+      
+      <div className="text-center z-10 mt-20">
         <h1 className="text-7xl font-bold mb-4 text-white">404</h1>
         <div className="w-16 h-1 mx-auto bg-theme-medium mb-8"></div>
         <p className="text-2xl text-theme-lightest mb-8 dark:text-theme-lighter">Oops! Page not found</p>

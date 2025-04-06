@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -71,7 +70,18 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden auth-gradient">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-theme-darkest via-theme-darker to-theme-dark">
+      {/* App Logo Header */}
+      <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
+        <div className="flex flex-col items-center">
+          <img 
+            src="/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png" 
+            alt="AkhlaDate Logo" 
+            className="h-24 w-24 object-contain drop-shadow-lg"
+          />
+        </div>
+      </div>
+
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-10 left-[10%] w-64 h-64 rounded-full bg-theme-primary/20 blur-3xl"></div>
@@ -84,15 +94,8 @@ const Login = () => {
         <ThemeToggle />
       </div>
       
-      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-white/10 backdrop-blur-lg border border-white/20 dark:bg-black/20 dark:border-white/10">
+      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-black/40 backdrop-blur-lg border border-white/10">
         <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-4 flex items-center justify-center">
-            <img 
-              src="/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png" 
-              alt="AkhlaDate Logo" 
-              className="h-28 w-28 object-contain drop-shadow-lg animate-pulse"
-            />
-          </div>
           <CardTitle className="text-2xl font-bold tracking-tight text-white">Welcome Back</CardTitle>
           <CardDescription className="text-theme-lightest dark:text-theme-lighter">
             Sign in to access your account
@@ -188,7 +191,7 @@ const Login = () => {
           <div className="grid grid-cols-3 gap-3">
             <Button
               variant="outline"
-              className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
+              className="bg-black/20 hover:bg-black/30 border-white/10 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
               type="button"
               onClick={() => handleOAuthLogin("Facebook")}
               disabled={isLoading}
@@ -197,7 +200,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
+              className="bg-black/20 hover:bg-black/30 border-white/10 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
               type="button"
               onClick={() => handleOAuthLogin("Google")}
               disabled={isLoading}
@@ -213,7 +216,7 @@ const Login = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
+              className="bg-black/20 hover:bg-black/30 border-white/10 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
               type="button"
               onClick={() => handleOAuthLogin("GitHub")}
               disabled={isLoading}
@@ -223,18 +226,18 @@ const Login = () => {
           </div>
 
           <div className="text-center text-xs">
-            <div className="flex flex-wrap items-center justify-center gap-1 py-2 px-3 rounded-md bg-white/5 backdrop-blur-sm">
+            <div className="flex flex-wrap items-center justify-center gap-1 py-2 px-3 rounded-md bg-black/20 backdrop-blur-sm">
               <AlertCircle className="h-3 w-3 text-theme-lightest/70" /> 
               <span className="text-theme-lightest dark:text-theme-lighter">
-                Protected by reCAPTCHA and subject to the 
+                Protected by reCAPTCHA and subject to the{" "}
                 <a href="#" className="privacy-link mx-1 underline">Privacy Policy</a> 
-                and 
+                and{" "}
                 <a href="#" className="privacy-link mx-1 underline">Terms of Service</a>
               </span>
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4 border-t border-white/10 bg-white/5 rounded-b-lg pt-6 dark:bg-black/20">
+        <CardFooter className="flex flex-col space-y-4 border-t border-white/10 bg-black/20 rounded-b-lg pt-6">
           <div className="text-center text-sm text-theme-lightest dark:text-theme-lighter">
             Don't have an account?{" "}
             <a href="/signup" className="underline text-white hover:text-theme-light transition-colors font-medium">

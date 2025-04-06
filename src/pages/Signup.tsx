@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -79,7 +78,18 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-theme-dark via-theme-purple to-theme-main dark:from-[#0B0205] dark:via-[#1A1025] dark:to-[#2C1B47]">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-theme-darkest via-theme-darker to-theme-dark">
+      {/* App Logo Header */}
+      <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
+        <div className="flex flex-col items-center">
+          <img 
+            src="/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png" 
+            alt="AkhlaDate Logo" 
+            className="h-24 w-24 object-contain drop-shadow-lg"
+          />
+        </div>
+      </div>
+      
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-10 right-[10%] w-64 h-64 rounded-full bg-theme-accent/20 blur-3xl"></div>
@@ -92,15 +102,8 @@ const Signup = () => {
         <ThemeToggle />
       </div>
       
-      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-white/10 backdrop-blur-lg border border-white/20 dark:bg-black/20 dark:border-white/10">
+      <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-black/40 backdrop-blur-lg border border-white/10">
         <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-4 flex items-center justify-center">
-            <img 
-              src="/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png" 
-              alt="AkhlaDate Logo" 
-              className="h-28 w-28 object-contain drop-shadow-lg animate-pulse"
-            />
-          </div>
           <CardTitle className="text-2xl font-bold tracking-tight text-white">Create an Account</CardTitle>
           <CardDescription className="text-theme-light dark:text-gray-300">
             Enter your details to sign up
@@ -178,7 +181,7 @@ const Signup = () => {
               <Separator className="w-full bg-white/20" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-theme-light bg-theme-purple/50 backdrop-blur-sm dark:bg-[#1A1025]/80">
+              <span className="bg-background px-2 text-theme-light bg-theme-purple/50 backdrop-blur-sm dark:bg-black/50">
                 Or continue with
               </span>
             </div>
@@ -187,7 +190,7 @@ const Signup = () => {
           <div className="grid grid-cols-2 gap-4">
             <Button
               variant="outline"
-              className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
+              className="bg-black/20 hover:bg-black/30 border-white/10 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
               type="button"
               onClick={() => handleOAuthSignup("GitHub")}
               disabled={isLoading}
@@ -196,7 +199,7 @@ const Signup = () => {
             </Button>
             <Button
               variant="outline"
-              className="bg-white/10 hover:bg-white/20 border-white/20 text-white transition-all duration-300 transform hover:translate-y-[-2px] dark:bg-black/30 dark:hover:bg-black/40"
+              className="bg-black/20 hover:bg-black/30 border-white/10 text-white transition-all duration-300 transform hover:translate-y-[-2px]"
               type="button"
               onClick={() => handleOAuthSignup("Google")}
               disabled={isLoading}
@@ -205,7 +208,7 @@ const Signup = () => {
             </Button>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-4 border-t border-white/10 bg-white/5 rounded-b-lg pt-6 dark:bg-black/20">
+        <CardFooter className="flex flex-col space-y-4 border-t border-white/10 bg-black/20 rounded-b-lg pt-6">
           <div className="text-center text-sm text-theme-light dark:text-gray-300">
             Already have an account?{" "}
             <a href="/login" className="underline text-white hover:text-theme-light transition-colors">
