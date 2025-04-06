@@ -94,8 +94,12 @@ const Signup = () => {
       
       <Card className="w-full max-w-md mx-4 z-10 shadow-xl bg-white/10 backdrop-blur-lg border border-white/20 dark:bg-black/20 dark:border-white/10">
         <CardHeader className="space-y-1 text-center">
-          <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full bg-theme-accent/20">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-theme-accent to-theme-main animate-pulse"></div>
+          <div className="mx-auto mb-4 flex items-center justify-center">
+            <img 
+              src="/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png" 
+              alt="AkhlaDate Logo" 
+              className="h-28 w-28 object-contain drop-shadow-lg animate-pulse"
+            />
           </div>
           <CardTitle className="text-2xl font-bold tracking-tight text-white">Create an Account</CardTitle>
           <CardDescription className="text-theme-light dark:text-gray-300">
