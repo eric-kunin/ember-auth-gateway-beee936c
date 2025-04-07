@@ -177,3 +177,26 @@ html.light .auth-card {
   box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
   animation: button-pulse 2s infinite;
 }
+
+/* Social login button improvements */
+html.light .social-button {
+  background-color: rgba(245, 239, 255, 0.9);
+  border-color: rgba(157, 78, 221, 0.2);
+  color: #240046;
+}
+
+html.light .social-button:hover {
+  background-color: rgba(224, 216, 235, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(157, 78, 221, 0.2);
+}
+
+/* Privacy notice improvements for light mode */
+html.light .privacy-notice {
+  background-color: rgba(240, 230, 255, 0.8);
+  border: 1px solid rgba(157, 78, 221, 0.2);
+}
+
+html.light .privacy-notice-text {
+  color: #240046;
+}

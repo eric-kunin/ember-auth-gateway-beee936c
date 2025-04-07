@@ -97,6 +97,13 @@ const SignupForm = ({
             disabled={isLoading}
             required
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] text-xs font-medium transition-colors duration-300"
+          >
+            {showPassword ? "HIDE" : "SHOW"}
+          </button>
         </div>
       </div>
       
