@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, AlertCircle } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface SignupFormProps {
   email: string;
@@ -19,6 +20,8 @@ interface SignupFormProps {
   setAgreeToTerms: (agree: boolean) => void;
   isLoading: boolean;
   handleSignup: (e: React.FormEvent) => void;
+  passwordErrors?: string[];
+  passwordTouched?: boolean;
 }
 
 const SignupForm = ({
@@ -33,7 +36,9 @@ const SignupForm = ({
   agreeToTerms,
   setAgreeToTerms,
   isLoading,
-  handleSignup
+  handleSignup,
+  passwordErrors = [],
+  passwordTouched = false
 }: SignupFormProps) => {
   const isMobile = useIsMobile();
   
@@ -68,9 +73,12 @@ const SignupForm = ({
             placeholder="password123"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+            className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
+                     ${passwordTouched && passwordErrors.length > 0 ? 
+                        'border-red-500 dark:border-red-500' : 
+                        'border-[#E0AAFF]/30 dark:border-0'}`}
             disabled={isLoading}
             required
           />
@@ -82,6 +90,18 @@ const SignupForm = ({
             {showPassword ? "HIDE" : "SHOW"}
           </button>
         </div>
+        
+        {/* Password validation errors */}
+        {passwordTouched && passwordErrors.length > 0 && (
+          <div className="space-y-2 mt-2 animate-fade-in">
+            {passwordErrors.map((error, index) => (
+              <div key={index} className="flex items-start gap-2">
+                <AlertCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                <p className="text-xs text-red-500">{error}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       
       <div className="space-y-2">
@@ -94,9 +114,12 @@ const SignupForm = ({
             placeholder="password123"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+            className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
+                     ${passwordTouched && password !== confirmPassword ? 
+                        'border-red-500 dark:border-red-500' : 
+                        'border-[#E0AAFF]/30 dark:border-0'}`}
             disabled={isLoading}
             required
           />
@@ -108,6 +131,12 @@ const SignupForm = ({
             {showPassword ? "HIDE" : "SHOW"}
           </button>
         </div>
+        {passwordTouched && password !== confirmPassword && confirmPassword && (
+          <div className="flex items-start gap-2 mt-1">
+            <AlertCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+            <p className="text-xs text-red-500">Passwords do not match</p>
+          </div>
+        )}
       </div>
       
       <div className="flex items-center space-x-2">
