@@ -20,7 +20,9 @@ const SocialLoginButton = ({
   return (
     <Button
       variant="outline"
-      className="bg-[#240046]/40 hover:bg-[#240046]/60 border-[#9D4EDD]/20 text-white"
+      className="bg-[#240046]/40 hover:bg-[#240046]/60 border-[#9D4EDD]/20 text-white
+                transform transition-all duration-300 ease-in-out
+                hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20"
       type="button"
       onClick={() => onClick(provider)}
       disabled={disabled}
