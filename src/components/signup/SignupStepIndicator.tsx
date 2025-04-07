@@ -12,6 +12,15 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
 }) => {
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
+  // Calculate the progress width for the green line
+  const calculateProgressWidth = () => {
+    if (currentStep === 1) return "0%";
+    
+    // For steps beyond 1, calculate proportionally
+    const progress = (currentStep - 1) / (totalSteps - 1) * 100;
+    return `${progress}%`;
+  };
+
   return (
     <div className="flex justify-center items-center mb-4 relative">
       {/* Connecting lines */}
@@ -21,9 +30,7 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
       <div 
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out"
         style={{ 
-          width: currentStep === 1 ? '0%' : 
-                 currentStep === 2 ? '50%' : 
-                 '100%',
+          width: calculateProgressWidth(),
           left: currentStep === 1 ? '30%' : '50%'
         }}
       ></div>

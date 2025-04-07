@@ -1,55 +1,38 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import BackgroundElements from "@/components/login/BackgroundElements";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import SignupCard from "@/components/signup/SignupCard";
+import { AccountFormValues } from "@/components/signup/schemas";
+import { PersonalInfoFormValues } from "@/components/signup/schemas";
 
 const Signup = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   
-  // Form states
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreeToTerms, setAgreeToTerms] = useState(false);
-  const [name, setName] = useState("");
-  const [gender, setGender] = useState("");
-  const [birthdate, setBirthdate] = useState<Date | undefined>(undefined);
-  const [phone, setPhone] = useState("");
+  // Form states for persistence between steps
+  const [accountData, setAccountData] = useState<AccountFormValues>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreeToTerms: false
+  });
+  
+  const [personalData, setPersonalData] = useState<PersonalInfoFormValues>({
+    name: "",
+    gender: "",
+    birthdate: undefined as unknown as Date,
+    phone: ""
+  });
   
   // UI states
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   
-  // Password validation states
-  const [passwordErrors, setPasswordErrors] = useState<string[]>([]);
-  const [passwordTouched, setPasswordTouched] = useState(false);
-
   const totalSteps = 3;
   const progress = (currentStep / totalSteps) * 100;
-
-  // Validate password when it changes
-  useEffect(() => {
-    if (passwordTouched) {
-      const errors: string[] = [];
-      
-      if (password.length < 8) {
-        errors.push("Password must be at least 8 characters");
-      }
-      if (!/[A-Z]/.test(password)) {
-        errors.push("Password must contain at least one uppercase letter");
-      }
-      if (!/[0-9]/.test(password)) {
-        errors.push("Password must contain at least one number");
-      }
-      
-      setPasswordErrors(errors);
-    }
-  }, [password, passwordTouched]);
 
   const handleNextStep = () => {
     if (currentStep < totalSteps) {
@@ -63,70 +46,28 @@ const Signup = () => {
     }
   };
 
-  const handleSignupStep1 = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setPasswordTouched(true);
-    
-    if (!email || !password || !confirmPassword) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "All fields are required",
-      });
-      return;
-    }
-    
-    if (passwordErrors.length > 0) {
-      toast({
-        variant: "destructive",
-        title: "Password Error",
-        description: passwordErrors[0],
-      });
-      return;
-    }
-    
-    if (password !== confirmPassword) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Passwords do not match",
-      });
-      return;
-    }
-
-    if (!agreeToTerms) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "You must agree to the Terms of Service",
-      });
-      return;
-    }
-    
-    // Move to step 2
+  const handleSignupStep1 = (data: AccountFormValues) => {
+    setAccountData(data);
     handleNextStep();
   };
 
-  const handleSignupStep2 = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!name || !gender || !birthdate) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "All fields are required",
-      });
-      return;
-    }
-    
-    // Move to step 3
+  const handleSignupStep2 = (data: PersonalInfoFormValues) => {
+    setPersonalData(data);
     handleNextStep();
   };
 
   const handleCompleteSignup = () => {
     setIsLoading(true);
     
-    // This is just a mockup without actual signup
+    // This would be where you'd send the data to your API
+    const userData = {
+      ...accountData,
+      ...personalData,
+    };
+    
+    console.log("Submitting user data:", userData);
+    
+    // Mock signup delay
     setTimeout(() => {
       toast({
         title: "Account Created!",
@@ -147,7 +88,7 @@ const Signup = () => {
         description: `Signing up with ${provider}...`,
       });
       setIsLoading(false);
-      navigate("/login");
+      navigate("/dashboard");
     }, 1000);
   };
 
@@ -164,31 +105,10 @@ const Signup = () => {
           currentStep={currentStep}
           totalSteps={totalSteps}
           progress={progress}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={(val) => {
-            setPassword(val);
-            setPasswordTouched(true);
-          }}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
+          accountData={accountData}
+          personalData={personalData}
           isLoading={isLoading}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-          agreeToTerms={agreeToTerms}
-          setAgreeToTerms={setAgreeToTerms}
           handleSignupStep1={handleSignupStep1}
-          passwordErrors={passwordErrors}
-          passwordTouched={passwordTouched}
-          name={name}
-          setName={setName}
-          gender={gender}
-          setGender={setGender}
-          birthdate={birthdate}
-          setBirthdate={setBirthdate}
-          phone={phone}
-          setPhone={setPhone}
           handleSignupStep2={handleSignupStep2}
           handlePrevStep={handlePrevStep}
           handleCompleteSignup={handleCompleteSignup}
