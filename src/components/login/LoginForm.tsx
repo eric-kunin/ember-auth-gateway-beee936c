@@ -33,16 +33,18 @@ const LoginForm = ({
   return (
     <form onSubmit={handleEmailLogin} className="space-y-5">
       <div className="space-y-2">
-        <Label className="text-white text-sm" htmlFor="email">Email</Label>
+        <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="email">Email</Label>
         <div className="relative">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
           <Input
             id="email"
             placeholder="name@example.com"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
+            className="bg-white/50 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                     text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                     pl-10 h-12 py-2 transition-colors duration-300"
             disabled={isLoading}
             required
           />
@@ -51,26 +53,28 @@ const LoginForm = ({
       
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <Label className="text-white text-sm" htmlFor="password">Password</Label>
-          <a href="#" className="text-xs text-custom-lighter hover:text-white transition-colors">
+          <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="password">Password</Label>
+          <a href="#" className="text-xs text-[#9D4EDD] dark:text-custom-lighter hover:text-[#7B2CBF] dark:hover:text-white transition-colors">
             Forgot password?
           </a>
         </div>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
+            className="bg-white/50 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                     text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                     pl-10 h-12 py-2 transition-colors duration-300"
             disabled={isLoading}
             required
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-xs font-medium"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-white/80 hover:text-[#7B2CBF] dark:hover:text-white text-xs font-medium transition-colors duration-300"
           >
             {showPassword ? "HIDE" : "SHOW"}
           </button>
@@ -84,14 +88,14 @@ const LoginForm = ({
           onCheckedChange={setRememberMe}
           className="data-[state=checked]:bg-[#9D4EDD]"
         />
-        <Label htmlFor="remember-me" className="text-sm text-custom-lighter">
+        <Label htmlFor="remember-me" className="text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
           Remember me for 30 days
         </Label>
       </div>
       
       <Button
         type="submit"
-        className="w-full bg-[#9D4EDD] hover:bg-[#9D4EDD]/90 text-white border-0 h-12"
+        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 transition-all duration-300"
         disabled={isLoading}
       >
         {isLoading ? (

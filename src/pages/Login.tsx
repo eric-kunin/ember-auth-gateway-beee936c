@@ -66,7 +66,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
+    <div className="min-h-screen w-full flex flex-col bg-white dark:bg-[#0B0205] transition-colors duration-300">
       <div className="absolute top-6 right-6 z-50">
         <ThemeToggle />
       </div>
@@ -75,10 +75,12 @@ const Login = () => {
         <BackgroundElements />
         
         {/* Login card */}
-        <div className="relative z-10 w-full max-w-md p-8 mx-4 my-12 rounded-2xl bg-[#10002B]/95 shadow-xl border-0">
+        <div className="relative z-10 w-full max-w-md p-8 mx-4 my-12 rounded-2xl 
+                      bg-white/80 dark:bg-[#10002B]/95 shadow-xl border-0
+                      transition-colors duration-300">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-white mb-1">Welcome Back</h1>
-            <p className="text-custom-lighter">Sign in to access your account</p>
+            <h1 className="text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">Welcome Back</h1>
+            <p className="text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">Sign in to access your account</p>
           </div>
           
           <LoginForm 
@@ -101,9 +103,9 @@ const Login = () => {
 
           <PrivacyNotice />
           
-          <div className="text-center text-sm text-custom-light">
+          <div className="text-center text-sm text-[#3B185F] dark:text-custom-light transition-colors duration-300">
             Don't have an account?{" "}
-            <a href="/signup" className="text-white hover:text-custom-lighter transition-colors font-medium">
+            <a href="/signup" className="text-[#240046] dark:text-white hover:text-custom-primary dark:hover:text-custom-lighter transition-colors font-medium">
               Sign up
             </a>
           </div>
