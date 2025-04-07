@@ -2,12 +2,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import BackgroundElements from "@/components/login/BackgroundElements";
 import SignupForm from "@/components/signup/SignupForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import TermsNotice from "@/components/signup/TermsNotice";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -87,64 +88,53 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#0B0205]">
-      {/* Theme toggle */}
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
+    <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
+      <Header />
       
-      {/* Background elements */}
-      <BackgroundElements />
-      
-      {/* App Logo Header */}
-      <div className="relative z-10 mb-6">
-        <div className="flex flex-col items-center">
-          <img 
-            src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
-            alt="AkhlaDate Logo" 
-            className="h-20 w-20 object-contain drop-shadow-lg"
+      <main className="flex-1 flex items-center justify-center relative">
+        <BackgroundElements />
+        
+        {/* Signup card */}
+        <div className="relative z-10 w-full max-w-md p-8 mx-4 my-12 rounded-2xl bg-[#10002B]/95 shadow-xl border-0">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold text-white mb-1">Create an Account</h1>
+            <p className="text-custom-lighter">Sign up to get started</p>
+          </div>
+          
+          <SignupForm 
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+            agreeToTerms={agreeToTerms}
+            setAgreeToTerms={setAgreeToTerms}
+            isLoading={isLoading}
+            handleSignup={handleSignup}
           />
-        </div>
-      </div>
-      
-      {/* Signup card */}
-      <div className="relative z-10 w-full max-w-md p-8 mx-4 rounded-2xl bg-[#10002B]/95 shadow-xl border-0">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white mb-1">Create an Account</h1>
-          <p className="text-custom-lighter">Sign up to get started</p>
-        </div>
-        
-        <SignupForm 
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          confirmPassword={confirmPassword}
-          setConfirmPassword={setConfirmPassword}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-          agreeToTerms={agreeToTerms}
-          setAgreeToTerms={setAgreeToTerms}
-          isLoading={isLoading}
-          handleSignup={handleSignup}
-        />
 
-        <SocialLogin 
-          handleOAuthLogin={handleOAuthSignup}
-          isLoading={isLoading}
-        />
-        
-        <PrivacyNotice />
-        
-        <div className="text-center text-sm text-custom-light">
-          Already have an account?{" "}
-          <a href="/login" className="text-white hover:text-custom-lighter transition-colors font-medium">
-            Sign in
-          </a>
+          <SocialLogin 
+            handleOAuthLogin={handleOAuthSignup}
+            isLoading={isLoading}
+          />
+          
+          <PrivacyNotice />
+          
+          <div className="text-center text-sm text-custom-light">
+            Already have an account?{" "}
+            <a href="/login" className="text-white hover:text-custom-lighter transition-colors font-medium">
+              Sign in
+            </a>
+          </div>
+          
+          <TermsNotice />
         </div>
-        
-        <TermsNotice />
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 };

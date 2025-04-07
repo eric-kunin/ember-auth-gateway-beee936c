@@ -2,11 +2,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import BackgroundElements from "@/components/login/BackgroundElements";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 const Login = () => {
   const { toast } = useToast();
@@ -66,48 +67,49 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-[#0B0205]">
-      {/* Theme toggle */}
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
+    <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
+      <Header />
       
-      <BackgroundElements />
-      
-      {/* Login card */}
-      <div className="relative z-10 w-full max-w-md p-8 mx-4 rounded-2xl bg-[#10002B]/95 shadow-xl border-0">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white mb-1">Welcome Back</h1>
-          <p className="text-custom-lighter">Sign in to access your account</p>
-        </div>
+      <main className="flex-1 flex items-center justify-center relative">
+        <BackgroundElements />
         
-        <LoginForm 
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          rememberMe={rememberMe}
-          setRememberMe={setRememberMe}
-          isLoading={isLoading}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-          handleEmailLogin={handleEmailLogin}
-        />
+        {/* Login card */}
+        <div className="relative z-10 w-full max-w-md p-8 mx-4 my-12 rounded-2xl bg-[#10002B]/95 shadow-xl border-0">
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold text-white mb-1">Welcome Back</h1>
+            <p className="text-custom-lighter">Sign in to access your account</p>
+          </div>
+          
+          <LoginForm 
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            rememberMe={rememberMe}
+            setRememberMe={setRememberMe}
+            isLoading={isLoading}
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+            handleEmailLogin={handleEmailLogin}
+          />
 
-        <SocialLogin 
-          handleOAuthLogin={handleOAuthLogin}
-          isLoading={isLoading}
-        />
+          <SocialLogin 
+            handleOAuthLogin={handleOAuthLogin}
+            isLoading={isLoading}
+          />
 
-        <PrivacyNotice />
-        
-        <div className="text-center text-sm text-custom-light">
-          Don't have an account?{" "}
-          <a href="/signup" className="text-white hover:text-custom-lighter transition-colors font-medium">
-            Sign up
-          </a>
+          <PrivacyNotice />
+          
+          <div className="text-center text-sm text-custom-light">
+            Don't have an account?{" "}
+            <a href="/signup" className="text-white hover:text-custom-lighter transition-colors font-medium">
+              Sign up
+            </a>
+          </div>
         </div>
-      </div>
+      </main>
+
+      <Footer />
     </div>
   );
 };
