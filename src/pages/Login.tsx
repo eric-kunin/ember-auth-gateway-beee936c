@@ -106,7 +106,7 @@ const Login = () => {
           
           <div className="text-center text-sm text-[#3B185F] dark:text-custom-light transition-colors duration-300">
             Don't have an account?{" "}
-            <a href="/signup" className="text-[#9D4EDD] dark:text-[#C77DFF] hover:text-[#7B2CBF] dark:hover:text-white transition-colors font-medium underline font-bold">
+            <a href="/signup" className="text-[#9D4EDD] dark:text-[#C77DFF] hover:text-[#7B2CBF] dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
               Sign up
             </a>
           </div>
