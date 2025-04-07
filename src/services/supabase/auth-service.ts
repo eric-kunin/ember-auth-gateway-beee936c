@@ -16,13 +16,18 @@ export const signUpUser = async (userData: SignupFormData) => {
       throw new Error('User creation failed');
     }
 
-    // Then create a profile for the user - put the data in an array for upsert
+    // Format the birthdate as a string since we're getting TypeScript errors related to Date objects
+    const birthDateString = userData.birthdate instanceof Date 
+      ? userData.birthdate.toISOString().split('T')[0] 
+      : userData.birthdate.toString();
+
+    // Then create a profile for the user - make sure to use the correct format
     const { error: profileError } = await supabase.from('profiles').upsert([{
       id: authData.user.id,
       first_name: userData.name.split(' ')[0],
       last_name: userData.name.split(' ')[1] || '',
       gender: userData.gender,
-      birth_date: userData.birthdate,
+      birth_date: birthDateString,
       bio: userData.bio || '',
       profession: userData.profession || '',
       eye_color: userData.eyeColor || null,
