@@ -103,9 +103,9 @@ const SignupPersonalInfo = ({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="female" title="Select female gender">Female</SelectItem>
-                  <SelectItem value="male" title="Select male gender">Male</SelectItem>
-                  <SelectItem value="other" title="Select other gender identity">Other</SelectItem>
+                  <SelectItem value="Female" title="Select female gender">Female</SelectItem>
+                  <SelectItem value="Male" title="Select male gender">Male</SelectItem>
+                  <SelectItem value="Other" title="Select other gender identity">Other</SelectItem>
                   <SelectItem value="prefer-not-to-say" title="Prefer not to disclose gender">Prefer not to say</SelectItem>
                 </SelectContent>
               </Select>
