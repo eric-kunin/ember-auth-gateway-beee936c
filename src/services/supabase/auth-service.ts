@@ -22,7 +22,7 @@ export const signUpUser = async (userData: SignupFormData) => {
       : userData.birthdate.toString();
 
     // Then create a profile for the user - make sure to use the correct format
-    const { error: profileError } = await supabase.from('profiles').upsert([{
+    const { error: profileError } = await supabase.from('profiles').upsert({
       id: authData.user.id,
       first_name: userData.name.split(' ')[0],
       last_name: userData.name.split(' ')[1] || '',
@@ -41,7 +41,7 @@ export const signUpUser = async (userData: SignupFormData) => {
       user_role: 'user',
       is_online: true,
       last_seen_at: new Date().toISOString()
-    }]);
+    });
 
     if (profileError) {
       throw profileError;
