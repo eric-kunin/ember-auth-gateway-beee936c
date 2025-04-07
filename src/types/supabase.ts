@@ -61,57 +61,66 @@ export enum EyeColor {
   Blue = 'blue',
   Green = 'green',
   Hazel = 'hazel',
-  Gray = 'gray',
   Other = 'other'
 }
 
 export enum Religion {
+  Jewish = 'jewish',
+  Christian = 'christian',
+  Catholic = 'catholic',
+  Protestant = 'protestant',
   Orthodox = 'orthodox',
-  Conservative = 'conservative',
-  Reform = 'reform',
-  Secular = 'secular',
-  Traditional = 'traditional',
-  Other = 'other'
+  Muslim = 'muslim',
+  Hindu = 'hindu',
+  Buddhist = 'buddhist',
+  Sikh = 'sikh',
+  Spiritual = 'spiritual but not religious',
+  Atheist = 'atheist',
+  Agnostic = 'agnostic',
+  Other = 'other',
+  PreferNotToSay = 'prefer not to say'
 }
 
 export enum ReligiousLevel {
   NotReligious = 'not religious',
   SomewhatReligious = 'somewhat religious',
-  Religious = 'religious',
-  VeryReligious = 'very religious'
+  ModeratelyReligious = 'moderately religious',
+  VeryReligious = 'very religious',
+  Orthodox = 'orthodox'
 }
 
 export enum SmokingStatus {
   NonSmoker = 'non-smoker',
   Occasional = 'occasional',
   Regular = 'regular',
-  Quitting = 'quitting'
+  Quitting = 'trying to quit'
 }
 
 export enum DrinkingStatus {
   NonDrinker = 'non-drinker',
   Social = 'social',
-  Regular = 'regular',
-  Rarely = 'rarely'
+  Regular = 'regular'
 }
 
 export enum LookingFor {
-  SeriousRelationship = 'serious relationship',
-  Casual = 'casual',
   Friendship = 'friendship',
+  CasualDating = 'casual dating',
+  SeriousRelationship = 'serious relationship',
+  LongTermRelationship = 'long-term relationship',
   Marriage = 'marriage'
 }
 
 export enum LookingForGender {
   Male = 'Male',
   Female = 'Female',
-  Both = 'Both'
+  Both = 'Both',
+  Other = 'Other'
 }
 
 export enum UserRole {
   User = 'user',
-  Admin = 'admin',
-  Moderator = 'moderator'
+  Moderator = 'moderator',
+  Admin = 'admin'
 }
 
 // Helper type for working with Supabase responses

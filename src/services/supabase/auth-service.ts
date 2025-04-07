@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
@@ -21,11 +20,11 @@ export const signUpUser = async (userData: SignupFormData) => {
       ? userData.birthdate.toISOString().split('T')[0] 
       : String(userData.birthdate || '');
 
-    // Map gender value to match the database enum requirements
-    const genderValue = userData.gender.toLowerCase();
+    // Make sure the gender value is properly capitalized to match the enum
+    const genderValue = userData.gender; // Use the direct value, should be "Male", "Female", or "Other"
 
+    // Use the correct enum values as defined in the database schema
     // Then create a profile for the user with only the fields that exist in the profiles table
-    // We need to match the exact schema of the profiles table
     const { error: profileError } = await supabase.from('profiles').upsert({
       id: authData.user.id,
       first_name: userData.name.split(' ')[0] || '',
@@ -42,11 +41,9 @@ export const signUpUser = async (userData: SignupFormData) => {
       drinking_status: userData.drinkingStatus || null,
       looking_for: userData.lookingFor || null,
       looking_for_gender: userData.lookingForGender || null,
-      user_role: 'user',
+      user_role: 'user', // Always set to 'user' for new signups
       is_online: true,
       last_seen_at: new Date().toISOString()
-    }, {
-      onConflict: 'id'
     });
 
     if (profileError) {
