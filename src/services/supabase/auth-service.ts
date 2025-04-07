@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
@@ -25,26 +26,28 @@ export const signUpUser = async (userData: SignupFormData) => {
 
     // Use the correct enum values as defined in the database schema
     // Then create a profile for the user with only the fields that exist in the profiles table
-    const { error: profileError } = await supabase.from('profiles').upsert({
-      id: authData.user.id,
-      first_name: userData.name.split(' ')[0] || '',
-      last_name: userData.name.split(' ')[1] || '',
-      gender: genderValue,
-      birth_date: birthDateString,
-      bio: userData.bio || '',
-      profession: userData.profession || '',
-      eye_color: userData.eyeColor || null,
-      height: userData.height || null,
-      religion: userData.religion || null,
-      religious_level: userData.religiousLevel || null,
-      smoking_status: userData.smokingStatus || null,
-      drinking_status: userData.drinkingStatus || null,
-      looking_for: userData.lookingFor || null,
-      looking_for_gender: userData.lookingForGender || null,
-      user_role: 'user', // Always set to 'user' for new signups
-      is_online: true,
-      last_seen_at: new Date().toISOString()
-    });
+    const { error: profileError } = await supabase.from('profiles').upsert([
+      {
+        id: authData.user.id,
+        first_name: userData.name.split(' ')[0] || '',
+        last_name: userData.name.split(' ')[1] || '',
+        gender: genderValue,
+        birth_date: birthDateString,
+        bio: userData.bio || '',
+        profession: userData.profession || '',
+        eye_color: userData.eyeColor || null,
+        height: userData.height || null,
+        religion: userData.religion || null,
+        religious_level: userData.religiousLevel || null,
+        smoking_status: userData.smokingStatus || null,
+        drinking_status: userData.drinkingStatus || null,
+        looking_for: userData.lookingFor || null,
+        looking_for_gender: userData.lookingForGender || null,
+        user_role: 'user', // Always set to 'user' for new signups
+        is_online: true,
+        last_seen_at: new Date().toISOString()
+      }
+    ]);
 
     if (profileError) {
       throw profileError;
