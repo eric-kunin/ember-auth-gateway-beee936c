@@ -20,13 +20,13 @@ const SocialLoginButton = ({
   return (
     <Button
       variant="outline"
-      className="bg-[#240046]/80 hover:bg-[#240046] border-0 text-white h-12"
+      className="bg-[#240046]/40 hover:bg-[#240046]/60 border-[#9D4EDD]/20 text-white"
       type="button"
       onClick={() => onClick(provider)}
       disabled={disabled}
     >
       {typeof Icon === 'function' && '$$typeof' in Icon ? (
-        <Icon className={`h-5 w-5 ${iconColor ? "" : ""}`} color={iconColor} />
+        <Icon className={`h-5 w-5`} color={iconColor} />
       ) : (
         <Icon />
       )}
