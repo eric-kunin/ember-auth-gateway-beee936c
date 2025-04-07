@@ -98,20 +98,20 @@
   }
 }
 
-/* Update the auth gradient to use the new colors */
+/* Update the auth gradient to use the new darker colors */
 .auth-gradient {
   background: linear-gradient(135deg, #0B0205 0%, #10002B 40%, #240046 70%, #2C1B47 100%);
 }
 
 .auth-card {
-  backdrop-filter: blur(12px);
-  background: rgba(16, 0, 43, 0.15); /* Based on #10002B with transparency */
-  border: 1px solid rgba(157, 78, 221, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(16px);
+  background: rgba(16, 0, 43, 0.2); /* Darker background with more transparency */
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .shimmer-effect {
-  background: linear-gradient(90deg, rgba(201, 167, 255, 0.1), rgba(157, 78, 221, 0.2), rgba(123, 44, 191, 0.1), rgba(201, 167, 255, 0.1));
+  background: linear-gradient(90deg, rgba(201, 167, 255, 0.05), rgba(157, 78, 221, 0.1), rgba(123, 44, 191, 0.05), rgba(201, 167, 255, 0.05));
   background-size: 400% 100%;
   animation: shimmer 8s ease-in-out infinite;
 }
