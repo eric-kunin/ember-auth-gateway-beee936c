@@ -42,7 +42,7 @@ const LoginForm = ({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/50 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                      pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
@@ -66,7 +66,7 @@ const LoginForm = ({
             placeholder="password123"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/50 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                      pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
@@ -96,7 +96,8 @@ const LoginForm = ({
       
       <Button
         type="submit"
-        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 transition-all duration-300"
+        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 
+                 signin-button-hover transition-all duration-300"
         disabled={isLoading}
       >
         {isLoading ? (

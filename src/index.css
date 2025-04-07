@@ -125,18 +125,55 @@
   @apply underline text-custom-lighter hover:text-white transition-colors;
 }
 
+/* Light mode specific styling */
 html.light .auth-gradient {
-  background: linear-gradient(135deg, #f5efff 0%, #f0e6ff 40%, #e0d0ff 70%, #d8c8ff 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f5efff 40%, #e8d8ff 70%, #d8c8ff 100%);
 }
 
 html.light .auth-card {
   backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.85); 
+  background: rgba(255, 255, 255, 0.9); 
   border: 1px solid rgba(157, 78, 221, 0.15);
-  box-shadow: 0 8px 32px rgba(157, 78, 221, 0.1);
+  box-shadow: 0 8px 32px rgba(157, 78, 221, 0.15);
 }
 
 /* Global animation for theme transition */
 .theme-transition {
   @apply transition-all duration-300;
+}
+
+/* Theme toggle animations */
+@keyframes sun-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes moon-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-15deg); }
+  75% { transform: rotate(15deg); }
+}
+
+.animate-sun {
+  animation: sun-rotate 1s ease-in-out;
+}
+
+.animate-moon {
+  animation: moon-wobble 1s ease-in-out;
+}
+
+/* Button hover animation */
+@keyframes button-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.signin-button-hover {
+  transition: all 0.3s ease-in-out;
+}
+
+.signin-button-hover:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+  animation: button-pulse 2s infinite;
 }
