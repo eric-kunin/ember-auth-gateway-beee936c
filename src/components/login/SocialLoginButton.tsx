@@ -25,10 +25,10 @@ const SocialLoginButton = ({
       onClick={() => onClick(provider)}
       disabled={disabled}
     >
-      {typeof Icon === 'function' && '$$typeof' in Icon ? (
+      {typeof Icon === 'function' && Icon.displayName ? (
         <Icon className={`h-5 w-5`} color={iconColor} />
       ) : (
-        <Icon />
+        <Icon className={`h-5 w-5 ${iconColor ? '' : ''}`} color={iconColor} />
       )}
     </Button>
   );
