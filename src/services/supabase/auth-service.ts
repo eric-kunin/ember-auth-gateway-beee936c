@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
@@ -18,7 +19,6 @@ export const signUpUser = async (userData: SignupFormData) => {
     // Then create a profile for the user
     const { error: profileError } = await supabase.from('profiles').insert({
       // Using explicit column names based on the table structure
-      username: userData.name,
       id: authData.user.id,
       first_name: userData.name.split(' ')[0],
       last_name: userData.name.split(' ')[1] || '',
