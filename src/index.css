@@ -18,10 +18,10 @@
     --primary: 273 72% 35%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 273 37% 83%;
+    --secondary: 273 57% 90%;
     --secondary-foreground: 267 62% 20%;
 
-    --muted: 273 37% 83%;
+    --muted: 273 57% 90%;
     --muted-foreground: 267 12% 40%;
 
     --accent: 271 60% 35%;
@@ -30,8 +30,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 267 26% 80%;
-    --input: 267 26% 80%;
+    --border: 267 30% 85%;
+    --input: 267 30% 85%;
     --ring: 273 40% 42%;
 
     --radius: 0.75rem;
@@ -126,12 +126,12 @@
 }
 
 html.light .auth-gradient {
-  background: linear-gradient(135deg, #f8f2ff 0%, #f0e6ff 40%, #e0d0ff 70%, #d8c8ff 100%);
+  background: linear-gradient(135deg, #f5efff 0%, #f0e6ff 40%, #e0d0ff 70%, #d8c8ff 100%);
 }
 
 html.light .auth-card {
   backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.7); 
+  background: rgba(255, 255, 255, 0.85); 
   border: 1px solid rgba(157, 78, 221, 0.15);
   box-shadow: 0 8px 32px rgba(157, 78, 221, 0.1);
 }

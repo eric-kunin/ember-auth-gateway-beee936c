@@ -37,16 +37,18 @@ const SignupForm = ({
   return (
     <form onSubmit={handleSignup} className="space-y-5">
       <div className="space-y-2">
-        <Label className="text-white text-sm" htmlFor="email">Email</Label>
+        <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="email">Email</Label>
         <div className="relative">
-          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
           <Input
             id="email"
             placeholder="name@example.com"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
+            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                     text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -54,22 +56,25 @@ const SignupForm = ({
       </div>
       
       <div className="space-y-2">
-        <Label className="text-white text-sm" htmlFor="password">Password</Label>
+        <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="password">Password</Label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
+            placeholder="password123"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
+            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                     text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-xs font-medium"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] text-xs font-medium transition-colors duration-300"
           >
             {showPassword ? "HIDE" : "SHOW"}
           </button>
@@ -77,15 +82,18 @@ const SignupForm = ({
       </div>
       
       <div className="space-y-2">
-        <Label className="text-white text-sm" htmlFor="confirm-password">Confirm Password</Label>
+        <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="confirm-password">Confirm Password</Label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
           <Input
             id="confirm-password"
             type={showPassword ? "text" : "password"}
+            placeholder="password123"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="bg-[#240046]/80 border-0 text-white placeholder:text-white/60 pl-10 h-12 py-2"
+            className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                     text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -99,14 +107,14 @@ const SignupForm = ({
           onCheckedChange={setAgreeToTerms}
           className="data-[state=checked]:bg-[#9D4EDD]"
         />
-        <Label htmlFor="terms" className="text-sm text-custom-lighter">
+        <Label htmlFor="terms" className="text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
           I agree to the Terms of Service and Privacy Policy
         </Label>
       </div>
       
       <Button
         type="submit"
-        className="w-full bg-[#9D4EDD] hover:bg-[#9D4EDD]/90 text-white border-0 h-12"
+        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 transition-all duration-300"
         disabled={isLoading}
       >
         {isLoading ? (
