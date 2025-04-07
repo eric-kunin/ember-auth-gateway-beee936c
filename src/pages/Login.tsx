@@ -7,28 +7,14 @@ import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import BackgroundElements from "@/components/login/BackgroundElements";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LoginFormValues } from "@/components/login/schemas";
 
 const Login = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
-  const handleEmailLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!email || !password) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Email and password are required",
-      });
-      return;
-    }
-    
+  const handleEmailLogin = async (data: LoginFormValues) => {
     try {
       setIsLoading(true);
       
@@ -85,16 +71,8 @@ const Login = () => {
           </div>
           
           <LoginForm 
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
-            rememberMe={rememberMe}
-            setRememberMe={setRememberMe}
+            onSubmit={handleEmailLogin}
             isLoading={isLoading}
-            showPassword={showPassword}
-            setShowPassword={setShowPassword}
-            handleEmailLogin={handleEmailLogin}
           />
 
           <SocialLogin 
