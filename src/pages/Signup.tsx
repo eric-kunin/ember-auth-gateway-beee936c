@@ -7,6 +7,7 @@ import SignupForm from "@/components/signup/SignupForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import TermsNotice from "@/components/signup/TermsNotice";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -87,6 +88,10 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      
       <main className="flex-1 flex items-center justify-center relative">
         <BackgroundElements />
         
