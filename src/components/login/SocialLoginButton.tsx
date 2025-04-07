@@ -26,10 +26,11 @@ const SocialLoginButton = ({
       disabled={disabled}
     >
       {typeof Icon === 'function' && Icon.displayName ? (
-        <Icon className={`h-5 w-5`} color={iconColor} />
+        <Icon className="h-5 w-5" color={iconColor || undefined} />
       ) : (
-        <Icon className={`h-5 w-5 ${iconColor ? '' : ''}`} color={iconColor} />
+        <Icon className="h-5 w-5" color={iconColor || undefined} />
       )}
+      <span className="sr-only">{provider}</span>
     </Button>
   );
 };

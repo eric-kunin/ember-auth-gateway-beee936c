@@ -18,8 +18,8 @@ export function ThemeToggle() {
       border border-white/10 shadow-lg"
     >
       {theme === 'dark' ? 
-        <Sun className="h-[18px] w-[18px] text-white animate-pulse" /> : 
-        <Moon className="h-[18px] w-[18px] text-custom-medium animate-pulse" />
+        <Sun className="h-[20px] w-[20px] text-white" /> : 
+        <Moon className="h-[20px] w-[20px] text-[#240046]" />
       }
       <span className="sr-only">Toggle theme</span>
     </Button>
