@@ -88,7 +88,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-6 right-6 z-50">
         <ThemeToggle />
       </div>
       
