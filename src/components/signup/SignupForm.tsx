@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Mail, Lock } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SignupFormProps {
   email: string;
@@ -34,8 +35,10 @@ const SignupForm = ({
   isLoading,
   handleSignup
 }: SignupFormProps) => {
+  const isMobile = useIsMobile();
+  
   return (
-    <form onSubmit={handleSignup} className="space-y-5">
+    <form onSubmit={handleSignup} className="space-y-4 sm:space-y-5">
       <div className="space-y-2">
         <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="email">Email</Label>
         <div className="relative">
@@ -48,7 +51,7 @@ const SignupForm = ({
             onChange={(e) => setEmail(e.target.value)}
             className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -67,7 +70,7 @@ const SignupForm = ({
             onChange={(e) => setPassword(e.target.value)}
             className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -93,7 +96,7 @@ const SignupForm = ({
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -114,14 +117,15 @@ const SignupForm = ({
           onCheckedChange={setAgreeToTerms}
           className="data-[state=checked]:bg-[#9D4EDD]"
         />
-        <Label htmlFor="terms" className="text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
+        <Label htmlFor="terms" className={`text-xs sm:text-sm ${isMobile ? 'pr-2' : ''} text-[#3B185F] dark:text-custom-lighter transition-colors duration-300`}>
           I agree to the Terms of Service and Privacy Policy
         </Label>
       </div>
       
       <Button
         type="submit"
-        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 transition-all duration-300"
+        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-11 sm:h-12 
+                 signin-button-hover transition-all duration-300"
         disabled={isLoading}
       >
         {isLoading ? (

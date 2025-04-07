@@ -31,7 +31,7 @@ const LoginForm = ({
   handleEmailLogin
 }: LoginFormProps) => {
   return (
-    <form onSubmit={handleEmailLogin} className="space-y-5">
+    <form onSubmit={handleEmailLogin} className="space-y-4 sm:space-y-5">
       <div className="space-y-2">
         <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="email">Email</Label>
         <div className="relative">
@@ -44,7 +44,7 @@ const LoginForm = ({
             onChange={(e) => setEmail(e.target.value)}
             className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/50 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -52,7 +52,7 @@ const LoginForm = ({
       </div>
       
       <div className="space-y-2">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center flex-wrap">
           <Label className="text-[#240046] dark:text-white text-sm transition-colors duration-300" htmlFor="password">Password</Label>
           <a href="#" className="text-xs text-[#9D4EDD] dark:text-custom-lighter hover:text-[#7B2CBF] dark:hover:text-white transition-colors">
             Forgot password?
@@ -68,7 +68,7 @@ const LoginForm = ({
             onChange={(e) => setPassword(e.target.value)}
             className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/50 dark:border-0 
                      text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                     pl-10 h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                     pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
             disabled={isLoading}
             required
           />
@@ -89,14 +89,14 @@ const LoginForm = ({
           onCheckedChange={setRememberMe}
           className="data-[state=checked]:bg-[#9D4EDD]"
         />
-        <Label htmlFor="remember-me" className="text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
+        <Label htmlFor="remember-me" className="text-xs sm:text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
           Remember me for 30 days
         </Label>
       </div>
       
       <Button
         type="submit"
-        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 
+        className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-11 sm:h-12 
                  signin-button-hover transition-all duration-300"
         disabled={isLoading}
       >

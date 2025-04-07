@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import SocialLoginButton from "./SocialLoginButton";
 import GoogleIcon from "./GoogleIcon";
 import { Github, Facebook } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SocialLoginProps {
   handleOAuthLogin: (provider: string) => void;
@@ -10,6 +11,8 @@ interface SocialLoginProps {
 }
 
 const SocialLogin = ({ handleOAuthLogin, isLoading }: SocialLoginProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <>
       <div className="relative my-6">
@@ -23,7 +26,7 @@ const SocialLogin = ({ handleOAuthLogin, isLoading }: SocialLoginProps) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <div className={`grid ${isMobile ? 'grid-cols-1 gap-2' : 'grid-cols-3 gap-3'} mb-6`}>
         <SocialLoginButton
           provider="GitHub"
           icon={Github}

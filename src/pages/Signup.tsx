@@ -88,7 +88,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#f5efff] dark:bg-[#0B0205] transition-colors duration-300">
-      <div className="absolute top-6 right-6 z-50">
+      <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>
       
@@ -96,13 +96,13 @@ const Signup = () => {
         <BackgroundElements />
         
         {/* Signup card */}
-        <div className="relative z-10 w-full max-w-md p-8 mx-4 my-12 rounded-2xl 
+        <div className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
                       bg-white/90 dark:bg-[#10002B]/95 shadow-xl
                       border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                       transition-colors duration-300">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">Create an Account</h1>
-            <p className="text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">Sign up to get started</p>
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">Create an Account</h1>
+            <p className="text-sm sm:text-base text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">Sign up to get started</p>
           </div>
           
           <SignupForm 
