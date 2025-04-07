@@ -17,7 +17,7 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
     // For step 1, no progress line
     if (currentStep === 1) return "0%";
     
-    // For step 2, show full progress from step 1 to 2
+    // For step 2, show 50% progress
     if (currentStep === 2) return "50%";
     
     // For step 3, show full progress
@@ -26,14 +26,14 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
     return "0%";
   };
 
-  // Calculate position for the progress line
+  // Calculate position for the progress line - adjusted to match steps
   const calculatePosition = () => {
     if (currentStep === 1) {
-      return { left: '50%', transform: 'translateX(-100%)' };
+      return { left: '0%', transform: 'translateX(0%)' };
     } else if (currentStep === 2) {
-      return { left: '25%', transform: 'translateX(0)' };
+      return { left: '0%', transform: 'translateX(0%)' };
     } else {
-      return { left: '50%', transform: 'translateX(-50%)' };
+      return { left: '0%', transform: 'translateX(0%)' };
     }
   };
 
@@ -46,11 +46,9 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
       
       {/* Green progress line */}
       <div 
-        className="absolute top-1/2 h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out"
+        className="absolute top-1/2 left-0 h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out"
         style={{ 
-          width: calculateProgressWidth(),
-          left: position.left,
-          transform: position.transform
+          width: calculateProgressWidth()
         }}
       ></div>
       

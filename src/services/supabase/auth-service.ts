@@ -26,7 +26,7 @@ export const signUpUser = async (userData: SignupFormData) => {
 
     // Then create a profile for the user with only the fields that exist in the profiles table
     // We need to match the exact schema of the profiles table
-    const { error: profileError } = await supabase.from('profiles').upsert([{
+    const { error: profileError } = await supabase.from('profiles').upsert({
       id: authData.user.id,
       first_name: userData.name.split(' ')[0] || '',
       last_name: userData.name.split(' ')[1] || '',
@@ -45,7 +45,7 @@ export const signUpUser = async (userData: SignupFormData) => {
       user_role: 'user',
       is_online: true,
       last_seen_at: new Date().toISOString()
-    }], {
+    }, {
       onConflict: 'id'
     });
 
