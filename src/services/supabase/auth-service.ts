@@ -19,10 +19,10 @@ export const signUpUser = async (userData: SignupFormData) => {
     // Format the birthdate as a string since we're getting TypeScript errors related to Date objects
     const birthDateString = userData.birthdate instanceof Date 
       ? userData.birthdate.toISOString().split('T')[0] 
-      : userData.birthdate.toString();
+      : String(userData.birthdate || '');
 
     // Then create a profile for the user - make sure to use the correct format
-    const { error: profileError } = await supabase.from('profiles').upsert({
+    const { error: profileError } = await supabase.from('profiles').upsert([{
       id: authData.user.id,
       first_name: userData.name.split(' ')[0],
       last_name: userData.name.split(' ')[1] || '',
@@ -41,7 +41,7 @@ export const signUpUser = async (userData: SignupFormData) => {
       user_role: 'user',
       is_online: true,
       last_seen_at: new Date().toISOString()
-    });
+    }]);
 
     if (profileError) {
       throw profileError;
