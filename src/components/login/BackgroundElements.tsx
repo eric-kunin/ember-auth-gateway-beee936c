@@ -1,7 +1,7 @@
 
 const BackgroundElements = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden z-0">
+    <div className="absolute inset-0 overflow-hidden z-0 transition-colors duration-500">
       {/* Main background gradient - changes between light and dark mode */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-[#f8f2ff] to-[#ede1ff] dark:from-[#0B0205] dark:via-[#10002B] dark:to-black transition-colors duration-500"></div>
       
