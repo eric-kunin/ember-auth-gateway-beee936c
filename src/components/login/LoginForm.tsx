@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Mail, Lock } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { loginFormSchema, LoginFormValues } from "./schemas";
 import {
   Form,
@@ -63,7 +62,7 @@ const LoginForm = ({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-xs text-red-500 absolute mt-1" />
               </div>
             </FormItem>
           )}
@@ -102,7 +101,7 @@ const LoginForm = ({
                 >
                   {showPassword ? "HIDE" : "SHOW"}
                 </button>
-                <FormMessage />
+                <FormMessage className="text-xs text-red-500 absolute mt-1" />
               </div>
             </FormItem>
           )}
@@ -112,16 +111,16 @@ const LoginForm = ({
           control={form.control}
           name="rememberMe"
           render={({ field }) => (
-            <FormItem className="flex items-center space-x-2">
+            <FormItem className="flex items-center space-x-3 space-y-0">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  className="data-[state=checked]:bg-[#9D4EDD]"
+                  className="data-[state=checked]:bg-[#9D4EDD] data-[state=checked]:border-[#9D4EDD]"
                 />
               </FormControl>
               <div className="space-y-0.5">
-                <FormLabel htmlFor="remember-me" className="text-xs sm:text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
+                <FormLabel className="text-xs sm:text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300 cursor-pointer">
                   Remember me for 30 days
                 </FormLabel>
               </div>
@@ -131,7 +130,7 @@ const LoginForm = ({
 
         <Button
           type="submit"
-          className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-11 sm:h-12 
+          className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12
                  signin-button-hover transition-all duration-300"
           disabled={isLoading}
         >

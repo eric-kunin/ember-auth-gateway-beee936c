@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import SignupCard from "@/components/signup/SignupCard";
 import { AccountFormValues } from "@/components/signup/schemas";
 import { PersonalInfoFormValues } from "@/components/signup/schemas";
+import { signUpUser } from "@/services/supabase/auth-service";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -25,6 +26,21 @@ const Signup = () => {
     gender: "",
     birthdate: undefined as unknown as Date,
     phone: ""
+  });
+  
+  // Additional profile data
+  const [profileData, setProfileData] = useState({
+    bio: "",
+    profession: "",
+    eyeColor: "",
+    height: undefined as number | undefined,
+    religion: "",
+    religiousLevel: "",
+    smokingStatus: "",
+    drinkingStatus: "",
+    lookingFor: "",
+    lookingForGender: "",
+    languageIds: [] as number[]
   });
   
   // UI states
@@ -56,26 +72,56 @@ const Signup = () => {
     handleNextStep();
   };
 
-  const handleCompleteSignup = () => {
+  const handleProfileDataChange = (data: any) => {
+    setProfileData({...profileData, ...data});
+  };
+
+  const handleCompleteSignup = async () => {
     setIsLoading(true);
     
-    // This would be where you'd send the data to your API
-    const userData = {
-      ...accountData,
-      ...personalData,
-    };
-    
-    console.log("Submitting user data:", userData);
-    
-    // Mock signup delay
-    setTimeout(() => {
+    try {
+      // Combine all data for signup
+      const userData = {
+        email: accountData.email,
+        password: accountData.password,
+        confirmPassword: accountData.confirmPassword,
+        agreeToTerms: accountData.agreeToTerms,
+        name: personalData.name,
+        gender: personalData.gender,
+        birthdate: personalData.birthdate,
+        phone: personalData.phone,
+        ...profileData
+      };
+      
+      // Call signup service
+      const { user, error } = await signUpUser(userData);
+      
+      if (error) {
+        toast({
+          variant: "destructive",
+          title: "Signup Failed",
+          description: error,
+        });
+        setIsLoading(false);
+        return;
+      }
+      
       toast({
         title: "Account Created!",
         description: "Your account has been successfully created.",
       });
-      setIsLoading(false);
+      
+      // Navigate to dashboard on success
       navigate("/dashboard");
-    }, 1500);
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Signup Failed",
+        description: error.message || "An error occurred during signup.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleOAuthSignup = (provider: string) => {
@@ -107,9 +153,11 @@ const Signup = () => {
           progress={progress}
           accountData={accountData}
           personalData={personalData}
+          profileData={profileData}
           isLoading={isLoading}
           handleSignupStep1={handleSignupStep1}
           handleSignupStep2={handleSignupStep2}
+          handleProfileDataChange={handleProfileDataChange}
           handlePrevStep={handlePrevStep}
           handleCompleteSignup={handleCompleteSignup}
           handleOAuthSignup={handleOAuthSignup}

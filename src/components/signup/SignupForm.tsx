@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { accountFormSchema, AccountFormValues } from "./schemas";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
@@ -65,7 +66,7 @@ const SignupForm = ({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-xs text-red-500 mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-1" />
               </div>
             </FormItem>
           )}
@@ -103,8 +104,11 @@ const SignupForm = ({
                     <Eye className="h-5 w-5" />
                   )}
                 </button>
-                <FormMessage className="text-xs text-red-500 mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-1" />
               </div>
+              <p className="text-xs text-[#3B185F]/70 dark:text-custom-lighter/70 mt-1">
+                Password must be at least 8 characters, include an uppercase letter and a number.
+              </p>
             </FormItem>
           )}
         />
@@ -141,7 +145,7 @@ const SignupForm = ({
                     <Eye className="h-5 w-5" />
                   )}
                 </button>
-                <FormMessage className="text-xs text-red-500 mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-1" />
               </div>
             </FormItem>
           )}
@@ -151,34 +155,27 @@ const SignupForm = ({
           control={form.control}
           name="agreeToTerms"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-center space-x-2 space-y-0">
+            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20 p-4 bg-[#f8f2ff]/50 dark:bg-[#240046]/40">
               <FormControl>
-                <div className="items-top flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    id="terms"
-                    checked={field.value}
-                    onChange={field.onChange}
-                    className="h-4 w-4 rounded border-gray-300 text-[#9D4EDD] focus:ring-[#9D4EDD]"
-                  />
-                  <div className="grid gap-1.5 leading-none">
-                    <label
-                      htmlFor="terms"
-                      className={`text-xs sm:text-sm ${isMobile ? 'pr-2' : ''} text-[#3B185F] dark:text-custom-lighter transition-colors duration-300`}
-                    >
-                      I agree to the Terms of Service and Privacy Policy
-                    </label>
-                  </div>
-                </div>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  className="data-[state=checked]:bg-[#9D4EDD] data-[state=checked]:border-[#9D4EDD]"
+                />
               </FormControl>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="space-y-1 leading-none">
+                <FormLabel className="text-sm text-[#3B185F] dark:text-custom-lighter cursor-pointer">
+                  I agree to the <a href="#" className="text-[#9D4EDD] underline">Terms of Service</a> and <a href="#" className="text-[#9D4EDD] underline">Privacy Policy</a>
+                </FormLabel>
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
         
         <Button
           type="submit"
-          className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-11 sm:h-12 
+          className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12
                    signin-button-hover transition-all duration-300"
           disabled={isLoading}
         >

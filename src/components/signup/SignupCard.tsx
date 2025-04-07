@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import SignupForm from "@/components/signup/SignupForm";
 import SignupPersonalInfo from "@/components/signup/SignupPersonalInfo";
 import SignupComplete from "@/components/signup/SignupComplete";
+import ProfileDetailsForm from "@/components/signup/ProfileDetailsForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import TermsNotice from "@/components/signup/TermsNotice";
@@ -16,9 +17,11 @@ interface SignupCardProps {
   progress: number;
   accountData: AccountFormValues;
   personalData: PersonalInfoFormValues;
+  profileData: any;
   isLoading: boolean;
   handleSignupStep1: (data: AccountFormValues) => void;
   handleSignupStep2: (data: PersonalInfoFormValues) => void;
+  handleProfileDataChange: (data: any) => void;
   handlePrevStep: () => void;
   handleCompleteSignup: () => void;
   handleOAuthSignup: (provider: string) => void;
@@ -30,9 +33,11 @@ const SignupCard: React.FC<SignupCardProps> = ({
   progress,
   accountData,
   personalData,
+  profileData,
   isLoading,
   handleSignupStep1,
   handleSignupStep2,
+  handleProfileDataChange,
   handlePrevStep,
   handleCompleteSignup,
   handleOAuthSignup,
@@ -86,10 +91,13 @@ const SignupCard: React.FC<SignupCardProps> = ({
       )}
 
       {currentStep === 3 && (
-        <SignupComplete
+        <ProfileDetailsForm
+          defaultValues={profileData}
+          personalData={personalData}
           isLoading={isLoading}
-          handleComplete={handleCompleteSignup}
-          handleBack={handlePrevStep}
+          onSubmit={handleProfileDataChange}
+          onBack={handlePrevStep}
+          onComplete={handleCompleteSignup}
         />
       )}
       
