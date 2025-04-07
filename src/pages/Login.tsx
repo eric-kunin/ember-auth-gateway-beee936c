@@ -6,8 +6,6 @@ import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import BackgroundElements from "@/components/login/BackgroundElements";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 const Login = () => {
   const { toast } = useToast();
@@ -68,8 +66,6 @@ const Login = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
-      <Header />
-      
       <main className="flex-1 flex items-center justify-center relative">
         <BackgroundElements />
         
@@ -108,8 +104,6 @@ const Login = () => {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };

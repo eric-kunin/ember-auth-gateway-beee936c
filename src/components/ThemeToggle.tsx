@@ -2,17 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
 import { Moon, Sun } from "lucide-react";
-import { useEffect } from "react";
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    // Apply theme class to document element when component mounts and when theme changes
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
-  }, [theme]);
 
   return (
     <Button

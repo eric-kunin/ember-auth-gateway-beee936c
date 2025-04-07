@@ -7,8 +7,6 @@ import SignupForm from "@/components/signup/SignupForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import TermsNotice from "@/components/signup/TermsNotice";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -89,8 +87,6 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-[#0B0205] dark:bg-[#0B0205]">
-      <Header />
-      
       <main className="flex-1 flex items-center justify-center relative">
         <BackgroundElements />
         
@@ -133,8 +129,6 @@ const Signup = () => {
           <TermsNotice />
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 };
