@@ -22,7 +22,8 @@ export const signUpUser = async (userData: SignupFormData) => {
       : String(userData.birthdate || '');
 
     // Make sure the gender value is properly capitalized to match the enum
-    const genderValue = userData.gender; // Use the direct value, should be "Male", "Female", or "Other"
+    // Ensure the gender value matches the database schema enum (capitalized)
+    const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
     // Use the correct enum values as defined in the database schema
     // Then create a profile for the user with only the fields that exist in the profiles table
@@ -31,18 +32,18 @@ export const signUpUser = async (userData: SignupFormData) => {
         id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
-        gender: genderValue,
+        gender: genderValue, // Make sure this is "Male", "Female", or "Other"
         birth_date: birthDateString,
         bio: userData.bio || '',
         profession: userData.profession || '',
-        eye_color: userData.eyeColor || null,
+        eye_color: userData.eyeColor || null, // Should be "blue", "green", "brown", "hazel", "other"
         height: userData.height || null,
-        religion: userData.religion || null,
-        religious_level: userData.religiousLevel || null,
-        smoking_status: userData.smokingStatus || null,
-        drinking_status: userData.drinkingStatus || null,
-        looking_for: userData.lookingFor || null,
-        looking_for_gender: userData.lookingForGender || null,
+        religion: userData.religion || null, // Make sure these match the enum values (lowercase)
+        religious_level: userData.religiousLevel || null, // Example: "not religious", "somewhat religious"
+        smoking_status: userData.smokingStatus || null, // Example: "non-smoker", "occasional"
+        drinking_status: userData.drinkingStatus || null, // Example: "non-drinker", "social"
+        looking_for: userData.lookingFor || null, // Example: "friendship", "casual dating"
+        looking_for_gender: userData.lookingForGender || null, // Should be "Male", "Female", "Both", "Other"
         user_role: 'user', // Always set to 'user' for new signups
         is_online: true,
         last_seen_at: new Date().toISOString()
