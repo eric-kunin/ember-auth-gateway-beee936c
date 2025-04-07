@@ -26,19 +26,6 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
     return "0%";
   };
 
-  // Calculate position for the progress line - adjusted to match steps
-  const calculatePosition = () => {
-    if (currentStep === 1) {
-      return { left: '0%', transform: 'translateX(0%)' };
-    } else if (currentStep === 2) {
-      return { left: '0%', transform: 'translateX(0%)' };
-    } else {
-      return { left: '0%', transform: 'translateX(0%)' };
-    }
-  };
-
-  const position = calculatePosition();
-
   return (
     <div className="flex justify-center items-center mb-4 relative">
       {/* Connecting lines */}
