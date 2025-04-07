@@ -21,10 +21,10 @@ export const signUpUser = async (userData: SignupFormData) => {
       ? userData.birthdate.toISOString().split('T')[0] 
       : String(userData.birthdate || '');
 
-    // Then create a profile for the user - make sure to use the correct format
+    // Then create a profile for the user with only the fields that exist in the profiles table
     const { error: profileError } = await supabase.from('profiles').upsert({
       id: authData.user.id,
-      first_name: userData.name.split(' ')[0],
+      first_name: userData.name.split(' ')[0] || '',
       last_name: userData.name.split(' ')[1] || '',
       gender: userData.gender,
       birth_date: birthDateString,
