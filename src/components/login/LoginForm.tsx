@@ -59,6 +59,7 @@ const LoginForm = ({
                             text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                             pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                     disabled={isLoading}
+                    title="Enter your email address"
                     {...field}
                   />
                 </FormControl>
@@ -77,7 +78,7 @@ const LoginForm = ({
                 <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
                   Password
                 </FormLabel>
-                <a href="#" className="text-xs text-[#9D4EDD] dark:text-custom-lighter hover:text-[#7B2CBF] dark:hover:text-white transition-colors">
+                <a href="#" className="text-xs text-[#9D4EDD] dark:text-custom-lighter hover:text-[#7B2CBF] dark:hover:text-white transition-colors" title="Reset your password">
                   Forgot password?
                 </a>
               </div>
@@ -91,6 +92,7 @@ const LoginForm = ({
                             text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                             pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                     disabled={isLoading}
+                    title="Enter your password"
                     {...field}
                   />
                 </FormControl>
@@ -98,6 +100,7 @@ const LoginForm = ({
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] text-xs font-medium transition-colors duration-300"
+                  title={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? "HIDE" : "SHOW"}
                 </button>
@@ -117,6 +120,7 @@ const LoginForm = ({
                   checked={field.value}
                   onCheckedChange={field.onChange}
                   className="data-[state=checked]:bg-[#9D4EDD] data-[state=checked]:border-[#9D4EDD]"
+                  title="Remember me for 30 days"
                 />
               </FormControl>
               <div className="space-y-0.5">
@@ -133,6 +137,7 @@ const LoginForm = ({
           className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12
                  signin-button-hover transition-all duration-300"
           disabled={isLoading}
+          title="Sign in to your account"
         >
           {isLoading ? (
             <div className="flex items-center gap-2">

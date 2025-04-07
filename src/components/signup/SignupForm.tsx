@@ -63,6 +63,7 @@ const SignupForm = ({
                              text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                              pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                     disabled={isLoading}
+                    title="Enter your email address"
                     {...field}
                   />
                 </FormControl>
@@ -90,6 +91,7 @@ const SignupForm = ({
                              text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                              pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                     disabled={isLoading}
+                    title="Enter a password with at least 8 characters, including an uppercase letter and a number"
                     {...field}
                   />
                 </FormControl>
@@ -97,6 +99,7 @@ const SignupForm = ({
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] transition-colors duration-300"
+                  title={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -106,7 +109,7 @@ const SignupForm = ({
                 </button>
                 <FormMessage className="text-xs text-red-500 absolute mt-1" />
               </div>
-              <p className="text-xs text-[#3B185F]/70 dark:text-custom-lighter/70 mt-1">
+              <p className="text-xs text-[#3B185F]/70 dark:text-custom-lighter/70 mt-2 pt-1">
                 Password must be at least 8 characters, include an uppercase letter and a number.
               </p>
             </FormItem>
@@ -131,6 +134,7 @@ const SignupForm = ({
                              text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                              pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                     disabled={isLoading}
+                    title="Confirm your password"
                     {...field}
                   />
                 </FormControl>
@@ -138,6 +142,7 @@ const SignupForm = ({
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] transition-colors duration-300"
+                  title={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -178,6 +183,7 @@ const SignupForm = ({
           className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12
                    signin-button-hover transition-all duration-300"
           disabled={isLoading}
+          title="Create your account"
         >
           {isLoading ? (
             <div className="flex items-center gap-2">

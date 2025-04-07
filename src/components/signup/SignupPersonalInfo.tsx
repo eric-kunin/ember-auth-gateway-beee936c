@@ -103,10 +103,10 @@ const SignupPersonalInfo = ({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                  <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                  <SelectItem value="female" title="Select female gender">Female</SelectItem>
+                  <SelectItem value="male" title="Select male gender">Male</SelectItem>
+                  <SelectItem value="other" title="Select other gender identity">Other</SelectItem>
+                  <SelectItem value="prefer-not-to-say" title="Prefer not to disclose gender">Prefer not to say</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />
@@ -192,6 +192,7 @@ const SignupPersonalInfo = ({
             onClick={onBack}
             variant="outline"
             className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30"
+            title="Go back to previous step"
           >
             Back
           </Button>
@@ -200,6 +201,7 @@ const SignupPersonalInfo = ({
             className="flex-1 bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-11 sm:h-12 
                      signin-button-hover transition-all duration-300"
             disabled={isLoading}
+            title="Continue to next step"
           >
             Next
           </Button>
