@@ -4,7 +4,7 @@ import { LucideIcon } from "lucide-react";
 
 interface SocialLoginButtonProps {
   provider: string;
-  icon: LucideIcon;
+  icon: LucideIcon | React.FC;
   onClick: (provider: string) => void;
   disabled: boolean;
   iconColor?: string;
@@ -25,7 +25,11 @@ const SocialLoginButton = ({
       onClick={() => onClick(provider)}
       disabled={disabled}
     >
-      <Icon className={`h-5 w-5 ${iconColor ? "" : ""}`} color={iconColor} />
+      {typeof Icon === 'function' && '$$typeof' in Icon ? (
+        <Icon className={`h-5 w-5 ${iconColor ? "" : ""}`} color={iconColor} />
+      ) : (
+        <Icon />
+      )}
     </Button>
   );
 };

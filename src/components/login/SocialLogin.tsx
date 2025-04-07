@@ -32,7 +32,7 @@ const SocialLogin = ({ handleOAuthLogin, isLoading }: SocialLoginProps) => {
         />
         <SocialLoginButton
           provider="Google"
-          icon={() => <GoogleIcon />}
+          icon={GoogleIcon}
           onClick={handleOAuthLogin}
           disabled={isLoading}
         />
