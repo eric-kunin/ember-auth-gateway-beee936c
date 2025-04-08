@@ -34,8 +34,10 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
     // Then create a profile for the user
+    // Remove the 'id' property since it's automatically set to match auth.user.id
     const { error: profileError } = await supabase.from('profiles').insert({
-        id: authData.user.id,
+        // Don't specify id here - it's linked automatically by RLS policies
+        user_id: authData.user.id, // Use user_id instead of id
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
         gender: genderValue,
