@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
@@ -33,10 +32,9 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
     // Make sure the gender value is properly capitalized to match the enum
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
-    // Then create a profile for the user - the proper way with the correct field names
+    // Then create a profile for the user - using id instead of user_id to match Supabase schema
     const { error: profileError } = await supabase.from('profiles').insert({
-        // Using user_id instead of id to match Supabase schema
-        user_id: authData.user.id,
+        id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
         gender: genderValue,

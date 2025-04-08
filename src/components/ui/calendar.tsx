@@ -1,7 +1,7 @@
 
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker, DropdownNav } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import { format, getYear, setYear } from "date-fns";
 
 import { cn } from "@/lib/utils";
@@ -100,7 +100,7 @@ function Calendar({
             <div className="flex-1 text-right">
               <YearNavigation 
                 displayMonth={props.displayMonth} 
-                onChange={props.onMonthChange} 
+                onChange={(date) => props.goToMonth && props.goToMonth(date)} 
               />
             </div>
             <div className="flex-1 text-center">
