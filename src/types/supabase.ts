@@ -1,4 +1,3 @@
-
 import { Database } from '@/integrations/supabase/types';
 
 // Profile types based on the data structure you're working with
@@ -47,6 +46,7 @@ export type SignupFormData = {
   lookingForGender?: string;
   languageIds?: number[];
   locationId?: string;
+  privateImages?: string[];
 };
 
 // Enums based on your database structure

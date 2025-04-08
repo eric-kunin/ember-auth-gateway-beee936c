@@ -15,6 +15,7 @@ interface ProfileImage {
   publicUrl: string;
   file?: File;
   isUploading?: boolean;
+  isPrivate?: boolean;
 }
 
 const Signup = () => {

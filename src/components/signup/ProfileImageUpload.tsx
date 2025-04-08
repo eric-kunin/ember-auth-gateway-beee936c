@@ -1,9 +1,10 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Upload, X, ImagePlus, Loader2, Check } from "lucide-react";
+import { Upload, X, ImagePlus, Loader2, Lock, Unlock } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { uploadProfileImage, deleteProfileImage, MAX_PROFILE_IMAGES } from '@/services/supabase/storage-service';
+import { uploadProfileImage, deleteProfileImage, toggleImagePrivacy, MAX_PROFILE_IMAGES } from '@/services/supabase/storage-service';
 
 interface ProfileImage {
   imageId?: string;
@@ -11,6 +12,7 @@ interface ProfileImage {
   publicUrl: string;
   file?: File;
   isUploading?: boolean;
+  isPrivate?: boolean;
 }
 
 interface ProfileImageUploadProps {
@@ -57,7 +59,8 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
       file,
       filePath: URL.createObjectURL(file),
       publicUrl: URL.createObjectURL(file),
-      isUploading: true
+      isUploading: true,
+      isPrivate: false
     }));
     
     setImages(prev => [...prev, ...pendingImages]);
@@ -70,7 +73,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         const uploadedImages: ProfileImage[] = [];
         
         for (const file of newFiles) {
-          const result = await uploadProfileImage(userId, file);
+          const result = await uploadProfileImage(userId, file, false);
           
           if ('error' in result) {
             toast({
@@ -82,7 +85,8 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
             uploadedImages.push({
               imageId: result.imageId,
               filePath: result.filePath,
-              publicUrl: result.publicUrl
+              publicUrl: result.publicUrl,
+              isPrivate: result.isPrivate
             });
           }
         }
@@ -160,6 +164,65 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     onImagesChange(updatedImages);
   };
 
+  const handleTogglePrivacy = async (index: number) => {
+    const imageToToggle = images[index];
+    const newPrivacyStatus = !imageToToggle.isPrivate;
+    
+    // Update local state first for immediate UI feedback
+    const updatedImages = [...images];
+    updatedImages[index] = { ...imageToToggle, isPrivate: newPrivacyStatus };
+    setImages(updatedImages);
+    
+    // Update in database if we have a userId and imageId
+    if (userId && imageToToggle.imageId && !imageToToggle.isUploading) {
+      setIsLoading(true);
+      
+      try {
+        const result = await toggleImagePrivacy(
+          userId,
+          imageToToggle.imageId,
+          newPrivacyStatus
+        );
+        
+        if ('error' in result) {
+          // Revert the local state change if the API call fails
+          updatedImages[index] = { ...imageToToggle };
+          setImages(updatedImages);
+          
+          toast({
+            variant: "destructive",
+            title: "Update failed",
+            description: result.error
+          });
+        } else {
+          toast({
+            title: newPrivacyStatus ? "Image Private" : "Image Public",
+            description: newPrivacyStatus ? 
+              "Image is now private and won't be visible to others" : 
+              "Image is now public and visible to others"
+          });
+        }
+      } catch (error) {
+        console.error('Error toggling image privacy:', error);
+        
+        // Revert the local state change if there's an error
+        updatedImages[index] = { ...imageToToggle };
+        setImages(updatedImages);
+        
+        toast({
+          variant: "destructive",
+          title: "Update Error",
+          description: "Failed to update image privacy."
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    // Notify parent component of the change
+    onImagesChange(updatedImages);
+  };
+
   const handleAddImage = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -178,23 +241,46 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
             <img 
               src={image.publicUrl} 
               alt={`Profile ${index + 1}`}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${image.isPrivate ? 'opacity-70' : ''}`}
             />
             {image.isUploading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/50">
                 <Loader2 className="h-8 w-8 text-white animate-spin" />
               </div>
             )}
-            <Button
-              type="button"
-              variant="destructive"
-              size="icon"
-              className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity h-6 w-6"
-              onClick={() => handleRemoveImage(index)}
-              disabled={disabled || isLoading}
-            >
-              <X className="h-4 w-4" />
-            </Button>
+            <div className="absolute top-1 right-1 flex space-x-1">
+              <Button
+                type="button"
+                variant="secondary"
+                size="icon"
+                className={`h-6 w-6 bg-white/80 hover:bg-white ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+                onClick={() => handleTogglePrivacy(index)}
+                disabled={disabled || isLoading || image.isUploading}
+                title={image.isPrivate ? "Make image public" : "Make image private"}
+              >
+                {image.isPrivate ? 
+                  <Lock className="h-3 w-3 text-gray-700" /> : 
+                  <Unlock className="h-3 w-3 text-gray-700" />
+                }
+              </Button>
+              <Button
+                type="button"
+                variant="destructive"
+                size="icon"
+                className={`h-6 w-6 ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+                onClick={() => handleRemoveImage(index)}
+                disabled={disabled || isLoading}
+                title="Remove image"
+              >
+                <X className="h-3 w-3" />
+              </Button>
+            </div>
+            {image.isPrivate && (
+              <div className="absolute bottom-1 left-1 bg-black/60 text-white text-xs px-1.5 py-0.5 rounded-sm flex items-center">
+                <Lock className="h-3 w-3 mr-1" />
+                Private
+              </div>
+            )}
           </Card>
         ))}
         
@@ -211,6 +297,13 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
             </div>
           </Card>
         )}
+      </div>
+      
+      <div className="text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center gap-1 mb-1">
+          <Lock className="h-3 w-3" />
+          <span>Private photos will only be visible when you choose to reveal them</span>
+        </div>
       </div>
       
       <input 

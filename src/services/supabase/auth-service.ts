@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
@@ -7,6 +8,7 @@ interface ProfileImage {
   publicUrl: string;
   file?: File;
   isUploading?: boolean;
+  isPrivate?: boolean;
 }
 
 export const signUpUser = async (userData: SignupFormData, profileImages: ProfileImage[] = []) => {
@@ -31,8 +33,8 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
     // Make sure the gender value is properly capitalized to match the enum
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
-    // Then create a profile for the user with only the fields that exist in the profiles table
-    const { error: profileError } = await supabase.from('profiles').insert([{
+    // Then create a profile for the user
+    const { error: profileError } = await supabase.from('profiles').insert({
         id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
@@ -51,7 +53,7 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
         user_role: 'user',
         is_online: true,
         last_seen_at: new Date().toISOString()
-    }]);
+    });
 
     if (profileError) {
       throw profileError;
@@ -78,11 +80,14 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
             .getPublicUrl(fileName);
             
           // Store the reference in the profile_images table
-          await supabase.from('profile_images').insert([{
+          await supabase.from('profile_images').insert({
             profile_id: authData.user.id,
             file_path: fileName,
-            is_main: profileImages.indexOf(image) === 0 // First image is main
-          }]);
+            image_url: publicUrl,
+            display_order: profileImages.indexOf(image),
+            is_main: profileImages.indexOf(image) === 0, // First image is main
+            is_lock: image.isPrivate || false
+          });
           
           // If this is the first image, set it as the main profile image
           if (profileImages.indexOf(image) === 0) {

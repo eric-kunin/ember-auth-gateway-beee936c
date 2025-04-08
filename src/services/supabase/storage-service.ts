@@ -8,7 +8,7 @@ export const MAX_PROFILE_IMAGES = 4;
 /**
  * Upload a file to Supabase storage
  */
-export const uploadProfileImage = async (userId: string, file: File) => {
+export const uploadProfileImage = async (userId: string, file: File, isPrivate: boolean = false) => {
   try {
     // Create a unique file path
     const fileName = `${uuidv4()}-${file.name}`;
@@ -33,7 +33,10 @@ export const uploadProfileImage = async (userId: string, file: File) => {
       .from('profile_images')
       .insert({
         profile_id: userId,
-        file_path: filePath
+        image_url: publicUrl,
+        file_path: filePath,
+        display_order: 0,
+        is_lock: isPrivate
       })
       .select('*')
       .single();
@@ -47,7 +50,8 @@ export const uploadProfileImage = async (userId: string, file: File) => {
     return {
       imageId: imageRecord.id,
       filePath,
-      publicUrl
+      publicUrl,
+      isPrivate
     };
   } catch (error: any) {
     console.error("Error uploading profile image:", error);
@@ -86,6 +90,28 @@ export const deleteProfileImage = async (userId: string, filePath: string, image
   } catch (error: any) {
     console.error("Error deleting profile image:", error);
     return { error: error.message || 'Failed to delete image' };
+  }
+};
+
+/**
+ * Toggle image privacy status
+ */
+export const toggleImagePrivacy = async (userId: string, imageId: string, isPrivate: boolean) => {
+  try {
+    const { error } = await supabase
+      .from('profile_images')
+      .update({ is_lock: isPrivate })
+      .eq('id', imageId)
+      .eq('profile_id', userId);
+
+    if (error) {
+      throw error;
+    }
+
+    return { success: true };
+  } catch (error: any) {
+    console.error("Error updating image privacy:", error);
+    return { error: error.message || 'Failed to update image privacy' };
   }
 };
 
