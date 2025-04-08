@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import BackgroundElements from "@/components/login/BackgroundElements";
+import UserCardsBackground from "@/components/login/UserCardsBackground";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import SignupCard from "@/components/signup/SignupCard";
 import { AccountFormValues } from "@/components/signup/schemas";
@@ -164,6 +165,7 @@ const Signup = () => {
       
       <main className="flex-1 flex items-center justify-center relative">
         <BackgroundElements />
+        <UserCardsBackground />
         
         <SignupCard 
           currentStep={currentStep}

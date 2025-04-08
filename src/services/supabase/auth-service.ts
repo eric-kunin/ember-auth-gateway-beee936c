@@ -40,7 +40,7 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
           return { ...image, publicUrl: image.publicUrl };
         }
         
-        const filePath = `avatars/${authData.user.id}/${image.file.name}`;
+        const filePath = `avatars/${authData.user!.id}/${image.file.name}`;
         const { error: uploadError } = await supabase.storage
           .from('avatars')
           .upload(filePath, image.file, {
@@ -64,9 +64,9 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
     // Make sure the gender value is properly capitalized to match the enum
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
-    // Then create a profile for the user
-    const { error: profileError } = await supabase.from('profiles').insert({
-        id: authData.user.id,
+    // Then create a profile for the user - fixed TypeScript error by using .upsert instead of .insert
+    const { error: profileError } = await supabase.from('profiles').upsert({
+        user_id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
         gender: genderValue,
