@@ -108,8 +108,8 @@ const Signup = () => {
       
       // Show loading toast for better feedback
       toast({
-        title: "Creating your account...",
-        description: "This might take a moment if you've added images."
+        title: "יוצר את החשבון שלך...",
+        description: "זה עשוי לקחת רגע אם הוספת תמונות."
       });
       
       // Call signup service with the images
@@ -118,7 +118,7 @@ const Signup = () => {
       if (error) {
         toast({
           variant: "destructive",
-          title: "Signup Failed",
+          title: "ההרשמה נכשלה",
           description: error,
         });
         setIsLoading(false);
@@ -126,8 +126,8 @@ const Signup = () => {
       }
       
       toast({
-        title: "Account Created!",
-        description: "Your account has been successfully created.",
+        title: "החשבון נוצר!",
+        description: "החשבון שלך נוצר בהצלחה.",
       });
       
       // Navigate to dashboard on success
@@ -135,8 +135,8 @@ const Signup = () => {
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "Signup Failed",
-        description: error.message || "An error occurred during signup.",
+        title: "ההרשמה נכשלה",
+        description: error.message || "אירעה שגיאה במהלך ההרשמה.",
       });
     } finally {
       setIsLoading(false);
@@ -158,7 +158,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[#f5efff] dark:bg-[#0B0205] transition-colors duration-300">
+    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#10002B] via-[#240046] to-[#3C096C] transition-colors duration-300">
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>

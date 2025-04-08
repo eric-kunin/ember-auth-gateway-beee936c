@@ -66,7 +66,7 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
 
     // Then create a profile for the user - fixed TypeScript error by using .upsert instead of .insert
     const { error: profileError } = await supabase.from('profiles').upsert({
-        user_id: authData.user.id,
+        id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
         gender: genderValue,
