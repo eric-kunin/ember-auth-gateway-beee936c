@@ -1,8 +1,15 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
-export const signUpUser = async (userData: SignupFormData) => {
+interface ProfileImage {
+  imageId?: string;
+  filePath: string;
+  publicUrl: string;
+  file?: File;
+  isUploading?: boolean;
+}
+
+export const signUpUser = async (userData: SignupFormData, profileImages: ProfileImage[] = []) => {
   try {
     // First, register the user with Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -22,57 +29,90 @@ export const signUpUser = async (userData: SignupFormData) => {
       : String(userData.birthdate || '');
 
     // Make sure the gender value is properly capitalized to match the enum
-    // Ensure the gender value matches the database schema enum (capitalized)
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
-    // Use the correct enum values as defined in the database schema
     // Then create a profile for the user with only the fields that exist in the profiles table
-    const { error: profileError } = await supabase.from('profiles').upsert([
-      {
+    const { error: profileError } = await supabase.from('profiles').insert([{
         id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
-        gender: genderValue, // Make sure this is "Male", "Female", or "Other"
+        gender: genderValue,
         birth_date: birthDateString,
         bio: userData.bio || '',
         profession: userData.profession || '',
-        eye_color: userData.eyeColor || null, // Should be "blue", "green", "brown", "hazel", "other"
+        eye_color: userData.eyeColor || null,
         height: userData.height || null,
-        religion: userData.religion || null, // Make sure these match the enum values (lowercase)
-        religious_level: userData.religiousLevel || null, // Example: "not religious", "somewhat religious"
-        smoking_status: userData.smokingStatus || null, // Example: "non-smoker", "occasional"
-        drinking_status: userData.drinkingStatus || null, // Example: "non-drinker", "social"
-        looking_for: userData.lookingFor || null, // Example: "friendship", "casual dating"
-        looking_for_gender: userData.lookingForGender || null, // Should be "Male", "Female", "Both", "Other"
-        user_role: 'user', // Always set to 'user' for new signups
+        religion: userData.religion || null,
+        religious_level: userData.religiousLevel || null,
+        smoking_status: userData.smokingStatus || null,
+        drinking_status: userData.drinkingStatus || null,
+        looking_for: userData.lookingFor || null,
+        looking_for_gender: userData.lookingForGender || null,
+        user_role: 'user',
         is_online: true,
         last_seen_at: new Date().toISOString()
-      }
-    ]);
+    }]);
 
     if (profileError) {
       throw profileError;
     }
 
+    // Upload profile images if any
+    if (profileImages.length > 0) {
+      for (const image of profileImages) {
+        if (image.file) {
+          const fileName = `${authData.user.id}/${Date.now()}-${image.file.name.replace(/\s+/g, '-')}`;
+          
+          const { error: uploadError } = await supabase.storage
+            .from('profile_images')
+            .upload(fileName, image.file);
+            
+          if (uploadError) {
+            console.error("Error uploading image:", uploadError);
+            continue;
+          }
+          
+          // Get public URL for the image
+          const { data: { publicUrl } } = supabase.storage
+            .from('profile_images')
+            .getPublicUrl(fileName);
+            
+          // Store the reference in the profile_images table
+          await supabase.from('profile_images').insert([{
+            profile_id: authData.user.id,
+            file_path: fileName,
+            is_main: profileImages.indexOf(image) === 0 // First image is main
+          }]);
+          
+          // If this is the first image, set it as the main profile image
+          if (profileImages.indexOf(image) === 0) {
+            await supabase.from('profiles').update({
+              main_profile_image_url: publicUrl
+            }).eq('id', authData.user.id);
+          }
+        }
+      }
+    }
+
     // Add entry to password_management
-    const { error: passwordError } = await supabase.from('password_management').insert({
+    const { error: passwordError } = await supabase.from('password_management').insert([{
       user_id: authData.user.id,
       password_strength: 'default',
       requires_reset: false,
       password_last_changed: new Date().toISOString()
-    });
+    }]);
 
     if (passwordError) {
       console.error("Error adding password management entry:", passwordError);
     }
 
     // Set up initial balance
-    const { error: balanceError } = await supabase.from('profile_balance').insert({
+    const { error: balanceError } = await supabase.from('profile_balance').insert([{
       user_id: authData.user.id,
       balance: 0,
       total_spent: 0,
       total_received: 0
-    });
+    }]);
 
     if (balanceError) {
       console.error("Error setting up initial balance:", balanceError);

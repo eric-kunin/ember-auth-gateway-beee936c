@@ -11,6 +11,14 @@ import PrivacyNotice from "@/components/login/PrivacyNotice";
 import TermsNotice from "@/components/signup/TermsNotice";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 
+interface ProfileImage {
+  imageId?: string;
+  filePath: string;
+  publicUrl: string;
+  file?: File;
+  isUploading?: boolean;
+}
+
 interface SignupCardProps {
   currentStep: number;
   totalSteps: number;
@@ -18,9 +26,10 @@ interface SignupCardProps {
   accountData: AccountFormValues;
   personalData: PersonalInfoFormValues;
   profileData: any;
+  profileImages: ProfileImage[];
   isLoading: boolean;
   handleSignupStep1: (data: AccountFormValues) => void;
-  handleSignupStep2: (data: PersonalInfoFormValues) => void;
+  handleSignupStep2: (data: PersonalInfoFormValues, images: ProfileImage[]) => void;
   handleProfileDataChange: (data: any) => void;
   handlePrevStep: () => void;
   handleCompleteSignup: () => void;
@@ -34,6 +43,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
   accountData,
   personalData,
   profileData,
+  profileImages,
   isLoading,
   handleSignupStep1,
   handleSignupStep2,
@@ -87,6 +97,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
           isLoading={isLoading}
           onSubmit={handleSignupStep2}
           onBack={handlePrevStep}
+          initialImages={profileImages}
         />
       )}
 

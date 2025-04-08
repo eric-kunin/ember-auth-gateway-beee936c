@@ -28,12 +28,23 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ProfileImageUpload } from "./ProfileImageUpload";
+import { useState } from "react";
+
+interface ProfileImage {
+  imageId?: string;
+  filePath: string;
+  publicUrl: string;
+  file?: File;
+  isUploading?: boolean;
+}
 
 interface SignupPersonalInfoProps {
   defaultValues?: Partial<PersonalInfoFormValues>;
   isLoading: boolean;
-  onSubmit: (data: PersonalInfoFormValues) => void;
+  onSubmit: (data: PersonalInfoFormValues, images?: ProfileImage[]) => void;
   onBack: () => void;
+  initialImages?: ProfileImage[];
 }
 
 const SignupPersonalInfo = ({
@@ -45,16 +56,23 @@ const SignupPersonalInfo = ({
   isLoading,
   onSubmit,
   onBack,
+  initialImages = [],
 }: SignupPersonalInfoProps) => {
+  const [profileImages, setProfileImages] = useState<ProfileImage[]>(initialImages);
+  
   const form = useForm<PersonalInfoFormValues>({
     resolver: zodResolver(personalInfoFormSchema),
     defaultValues,
     mode: "onChange"
   });
 
+  const handleSubmit = (data: PersonalInfoFormValues) => {
+    onSubmit(data, profileImages);
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5">
         <FormField
           control={form.control}
           name="name"
@@ -185,6 +203,14 @@ const SignupPersonalInfo = ({
             </FormItem>
           )}
         />
+
+        <div className="pt-2">
+          <ProfileImageUpload 
+            onImagesChange={setProfileImages}
+            existingImages={initialImages}
+            disabled={isLoading}
+          />
+        </div>
 
         <div className="flex gap-2 pt-2">
           <Button

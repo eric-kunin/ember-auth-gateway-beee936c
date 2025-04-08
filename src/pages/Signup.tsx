@@ -9,6 +9,14 @@ import { AccountFormValues } from "@/components/signup/schemas";
 import { PersonalInfoFormValues } from "@/components/signup/schemas";
 import { signUpUser } from "@/services/supabase/auth-service";
 
+interface ProfileImage {
+  imageId?: string;
+  filePath: string;
+  publicUrl: string;
+  file?: File;
+  isUploading?: boolean;
+}
+
 const Signup = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -27,6 +35,8 @@ const Signup = () => {
     birthdate: undefined as unknown as Date,
     phone: ""
   });
+
+  const [profileImages, setProfileImages] = useState<ProfileImage[]>([]);
   
   // Additional profile data
   const [profileData, setProfileData] = useState({
@@ -67,8 +77,9 @@ const Signup = () => {
     handleNextStep();
   };
 
-  const handleSignupStep2 = (data: PersonalInfoFormValues) => {
+  const handleSignupStep2 = (data: PersonalInfoFormValues, images: ProfileImage[] = []) => {
     setPersonalData(data);
+    setProfileImages(images);
     handleNextStep();
   };
 
@@ -94,7 +105,7 @@ const Signup = () => {
       };
       
       // Call signup service
-      const { user, error } = await signUpUser(userData);
+      const { user, error } = await signUpUser(userData, profileImages);
       
       if (error) {
         toast({
@@ -154,6 +165,7 @@ const Signup = () => {
           accountData={accountData}
           personalData={personalData}
           profileData={profileData}
+          profileImages={profileImages}
           isLoading={isLoading}
           handleSignupStep1={handleSignupStep1}
           handleSignupStep2={handleSignupStep2}
