@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoFormSchema, PersonalInfoFormValues } from "./schemas";
@@ -76,6 +75,10 @@ const SignupPersonalInfo = ({
   const handleSubmit = (data: PersonalInfoFormValues) => {
     onSubmit(data, profileImages);
   };
+
+  // Calculate a sensible default birth year (18 years ago)
+  const defaultDate = new Date();
+  defaultDate.setFullYear(defaultDate.getFullYear() - 18);
 
   return (
     <Form {...form}>
@@ -169,13 +172,16 @@ const SignupPersonalInfo = ({
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
+                <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
+                    defaultMonth={field.value || defaultDate}
                     disabled={(date) => date > new Date()}
                     initialFocus
+                    fromYear={1900}
+                    toYear={new Date().getFullYear()}
                   />
                 </PopoverContent>
               </Popover>

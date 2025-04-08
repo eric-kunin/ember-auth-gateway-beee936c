@@ -1,11 +1,52 @@
+
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, DropdownNav } from "react-day-picker";
+import { format, getYear, setYear } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
+
+function YearNavigation(props: {
+  displayMonth: Date;
+  onChange: (date: Date) => void;
+  captionLayout?: "buttons" | "dropdown";
+}) {
+  const { displayMonth, onChange, captionLayout } = props;
+  const currentYear = getYear(new Date());
+  
+  // Create a range of years - 100 years in the past to current year
+  const startYear = currentYear - 100;
+  const years = Array.from({ length: currentYear - startYear + 1 }, 
+    (_, i) => startYear + i);
+
+  return (
+    <Select
+      value={getYear(displayMonth).toString()}
+      onValueChange={(year) => {
+        const newDate = setYear(displayMonth, parseInt(year));
+        onChange(newDate);
+      }}
+    >
+      <SelectTrigger 
+        className="h-7 w-16 text-xs border-none bg-transparent focus:ring-0"
+        aria-label="Change year"
+      >
+        <SelectValue placeholder={getYear(displayMonth)} />
+      </SelectTrigger>
+      <SelectContent position="popper" className="max-h-[300px] overflow-y-auto">
+        {years.map((year) => (
+          <SelectItem key={year} value={year.toString()} className="text-xs">
+            {year}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
 
 function Calendar({
   className,
@@ -16,12 +57,12 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      className={cn("p-3 pointer-events-auto", className)}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
-        caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium",
+        caption: "flex justify-center pt-1 relative items-center gap-1",
+        caption_label: "text-sm font-medium grow text-center",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
@@ -54,6 +95,24 @@ function Calendar({
       components={{
         IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
+        Caption: props => (
+          <div className="flex justify-center items-center gap-1">
+            <div className="flex-1 text-right">
+              <YearNavigation 
+                displayMonth={props.displayMonth} 
+                onChange={props.onMonthChange} 
+              />
+            </div>
+            <div className="flex-1 text-center">
+              <span className="text-sm font-medium">
+                {format(props.displayMonth, 'MMMM')}
+              </span>
+            </div>
+            <div className="flex-1">
+              {/* Spacer div to maintain centering */}
+            </div>
+          </div>
+        ),
       }}
       {...props}
     />
