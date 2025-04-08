@@ -2,51 +2,13 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
-import { format, getYear, setYear } from "date-fns";
+import { format, getYear, getMonth, setYear, setMonth } from "date-fns";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
-
-function YearNavigation(props: {
-  displayMonth: Date;
-  onChange: (date: Date) => void;
-  captionLayout?: "buttons" | "dropdown";
-}) {
-  const { displayMonth, onChange, captionLayout } = props;
-  const currentYear = getYear(new Date());
-  
-  // Create a range of years - 100 years in the past to current year
-  const startYear = currentYear - 100;
-  const years = Array.from({ length: currentYear - startYear + 1 }, 
-    (_, i) => startYear + i);
-
-  return (
-    <Select
-      value={getYear(displayMonth).toString()}
-      onValueChange={(year) => {
-        const newDate = setYear(displayMonth, parseInt(year));
-        onChange(newDate);
-      }}
-    >
-      <SelectTrigger 
-        className="h-7 w-16 text-xs border-none bg-transparent focus:ring-0"
-        aria-label="Change year"
-      >
-        <SelectValue placeholder={getYear(displayMonth)} />
-      </SelectTrigger>
-      <SelectContent position="popper" className="max-h-[300px] overflow-y-auto">
-        {years.map((year) => (
-          <SelectItem key={year} value={year.toString()} className="text-xs">
-            {year}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
 
 function Calendar({
   className,
@@ -95,24 +57,83 @@ function Calendar({
       components={{
         IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
-        Caption: props => (
-          <div className="flex justify-center items-center gap-1">
-            <div className="flex-1 text-right">
-              <YearNavigation 
-                displayMonth={props.displayMonth} 
-                onChange={(date) => props.goToMonth && props.goToMonth(date)} 
-              />
+        Caption: ({ displayMonth, onMonthChange }) => {
+          // List of months
+          const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ];
+          
+          // Current year and month
+          const currentYear = getYear(displayMonth);
+          const currentMonth = getMonth(displayMonth);
+          
+          // Create a range of years - 100 years in the past to current year
+          const endYear = new Date().getFullYear();
+          const startYear = endYear - 100;
+          const years = Array.from(
+            { length: endYear - startYear + 1 },
+            (_, i) => startYear + i
+          ).reverse(); // Reverse to show newest years first
+          
+          return (
+            <div className="flex px-2 justify-between items-center w-full">
+              <Select
+                value={currentYear.toString()}
+                onValueChange={(year) => {
+                  const newDate = setYear(displayMonth, parseInt(year));
+                  onMonthChange(newDate);
+                }}
+              >
+                <SelectTrigger 
+                  className="h-8 w-20 text-sm border-0 focus:ring-0 bg-transparent dark:bg-[#10002B] dark:hover:bg-[#240046]/80"
+                  aria-label="Change year"
+                >
+                  <SelectValue placeholder={currentYear} />
+                </SelectTrigger>
+                <SelectContent className="max-h-[300px] overflow-y-auto">
+                  {years.map((year) => (
+                    <SelectItem key={year} value={year.toString()} className="text-xs">
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              
+              <Select
+                value={currentMonth.toString()}
+                onValueChange={(month) => {
+                  const newDate = setMonth(displayMonth, parseInt(month));
+                  onMonthChange(newDate);
+                }}
+              >
+                <SelectTrigger 
+                  className="h-8 w-28 text-sm border-0 focus:ring-0 bg-transparent dark:bg-[#10002B] dark:hover:bg-[#240046]/80"
+                  aria-label="Change month"
+                >
+                  <SelectValue placeholder={months[currentMonth]} />
+                </SelectTrigger>
+                <SelectContent className="max-h-[300px] overflow-y-auto">
+                  {months.map((month, index) => (
+                    <SelectItem key={month} value={index.toString()} className="text-xs">
+                      {month}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            <div className="flex-1 text-center">
-              <span className="text-sm font-medium">
-                {format(props.displayMonth, 'MMMM')}
-              </span>
-            </div>
-            <div className="flex-1">
-              {/* Spacer div to maintain centering */}
-            </div>
-          </div>
-        ),
+          );
+        }
       }}
       {...props}
     />
