@@ -57,7 +57,7 @@ function Calendar({
       components={{
         IconLeft: ({ ..._props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ..._props }) => <ChevronRight className="h-4 w-4" />,
-        Caption: ({ displayMonth, onMonthChange }) => {
+        Caption: (props) => {
           // List of months
           const months = [
             "January",
@@ -75,8 +75,8 @@ function Calendar({
           ];
           
           // Current year and month
-          const currentYear = getYear(displayMonth);
-          const currentMonth = getMonth(displayMonth);
+          const currentYear = getYear(props.displayMonth);
+          const currentMonth = getMonth(props.displayMonth);
           
           // Create a range of years - 100 years in the past to current year
           const endYear = new Date().getFullYear();
@@ -91,8 +91,8 @@ function Calendar({
               <Select
                 value={currentYear.toString()}
                 onValueChange={(year) => {
-                  const newDate = setYear(displayMonth, parseInt(year));
-                  onMonthChange(newDate);
+                  const newDate = setYear(props.displayMonth, parseInt(year));
+                  props.onMonthChange?.(newDate);
                 }}
               >
                 <SelectTrigger 
@@ -101,7 +101,7 @@ function Calendar({
                 >
                   <SelectValue placeholder={currentYear} />
                 </SelectTrigger>
-                <SelectContent className="max-h-[300px] overflow-y-auto">
+                <SelectContent className="max-h-[300px] overflow-y-auto bg-white dark:bg-[#240046]/95 z-50">
                   {years.map((year) => (
                     <SelectItem key={year} value={year.toString()} className="text-xs">
                       {year}
@@ -113,8 +113,8 @@ function Calendar({
               <Select
                 value={currentMonth.toString()}
                 onValueChange={(month) => {
-                  const newDate = setMonth(displayMonth, parseInt(month));
-                  onMonthChange(newDate);
+                  const newDate = setMonth(props.displayMonth, parseInt(month));
+                  props.onMonthChange?.(newDate);
                 }}
               >
                 <SelectTrigger 
@@ -123,7 +123,7 @@ function Calendar({
                 >
                   <SelectValue placeholder={months[currentMonth]} />
                 </SelectTrigger>
-                <SelectContent className="max-h-[300px] overflow-y-auto">
+                <SelectContent className="max-h-[300px] overflow-y-auto bg-white dark:bg-[#240046]/95 z-50">
                   {months.map((month, index) => (
                     <SelectItem key={month} value={index.toString()} className="text-xs">
                       {month}

@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
 
@@ -64,7 +65,7 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
     // Then create a profile for the user
-    const { error: profileError } = await supabase.from('profiles').insert([{
+    const { error: profileError } = await supabase.from('profiles').insert({
         id: authData.user.id,
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
@@ -83,7 +84,7 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
         height: userData.height || null,
         looking_for: userData.lookingFor || null,
         looking_for_gender: userData.lookingForGender || null
-    }]);
+    });
 
     if (profileError) {
       console.error("Error creating profile:", profileError);

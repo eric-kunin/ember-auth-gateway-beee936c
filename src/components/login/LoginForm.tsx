@@ -63,8 +63,10 @@ const LoginForm = ({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-xs text-red-500 absolute mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-2 block pb-2" />
               </div>
+              {/* Add extra space to accommodate error messages */}
+              <div className="h-5"></div>
             </FormItem>
           )}
         />
@@ -104,8 +106,10 @@ const LoginForm = ({
                 >
                   {showPassword ? "HIDE" : "SHOW"}
                 </button>
-                <FormMessage className="text-xs text-red-500 absolute mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-2 block pb-2" />
               </div>
+              {/* Add extra space to accommodate error messages */}
+              <div className="h-5"></div>
             </FormItem>
           )}
         />

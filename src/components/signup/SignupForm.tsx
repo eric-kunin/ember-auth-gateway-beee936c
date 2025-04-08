@@ -67,8 +67,10 @@ const SignupForm = ({
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-xs text-red-500 absolute mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-2 block pb-2" />
               </div>
+              {/* Add extra space to accommodate error messages */}
+              <div className="h-5"></div>
             </FormItem>
           )}
         />
@@ -107,11 +109,13 @@ const SignupForm = ({
                     <Eye className="h-5 w-5" />
                   )}
                 </button>
-                <FormMessage className="text-xs text-red-500 absolute mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-2 block pb-2" />
               </div>
-              <p className="text-xs text-[#3B185F]/70 dark:text-custom-lighter/70 mt-2 pt-1">
+              <p className="text-xs text-[#3B185F]/70 dark:text-custom-lighter/70 mt-2 pt-4">
                 Password must be at least 8 characters, include an uppercase letter and a number.
               </p>
+              {/* Add extra space to accommodate error messages */}
+              <div className="h-5"></div>
             </FormItem>
           )}
         />
@@ -150,8 +154,10 @@ const SignupForm = ({
                     <Eye className="h-5 w-5" />
                   )}
                 </button>
-                <FormMessage className="text-xs text-red-500 absolute mt-1" />
+                <FormMessage className="text-xs text-red-500 absolute mt-2 block pb-2" />
               </div>
+              {/* Add extra space to accommodate error messages */}
+              <div className="h-5"></div>
             </FormItem>
           )}
         />
@@ -172,7 +178,7 @@ const SignupForm = ({
                 <FormLabel className="text-sm text-[#3B185F] dark:text-custom-lighter cursor-pointer">
                   I agree to the <a href="#" className="text-[#9D4EDD] underline">Terms of Service</a> and <a href="#" className="text-[#9D4EDD] underline">Privacy Policy</a>
                 </FormLabel>
-                <FormMessage className="text-xs text-red-500" />
+                <FormMessage className="text-xs text-red-500 mt-2 block" />
               </div>
             </FormItem>
           )}
