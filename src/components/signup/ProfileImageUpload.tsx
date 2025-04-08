@@ -30,6 +30,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
 }) => {
   const [images, setImages] = useState<ProfileImage[]>(existingImages);
   const [isLoading, setIsLoading] = useState(false);
+  const [processingIndex, setProcessingIndex] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
@@ -39,6 +40,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     }
   }, [existingImages]);
 
+  // Optimized file handling with better feedback
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     
@@ -54,25 +56,29 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
       return;
     }
     
-    // Show pending upload state
-    const pendingImages = newFiles.map(file => ({
-      file,
-      filePath: URL.createObjectURL(file),
-      publicUrl: URL.createObjectURL(file),
-      isUploading: true,
-      isPrivate: false
-    }));
-    
-    setImages(prev => [...prev, ...pendingImages]);
-    
-    // If we have a userId, upload the files to Supabase
-    if (userId) {
-      setIsLoading(true);
+    // Process one file at a time to prevent overwhelming the network
+    for (let i = 0; i < newFiles.length; i++) {
+      const file = newFiles[i];
       
-      try {
-        const uploadedImages: ProfileImage[] = [];
+      // Add pending image with loading state
+      const tempId = `temp-${Date.now()}-${i}`;
+      const pendingImage: ProfileImage = {
+        filePath: tempId,
+        publicUrl: URL.createObjectURL(file),
+        file,
+        isUploading: true,
+        isPrivate: false
+      };
+      
+      setImages(prev => [...prev, pendingImage]);
+      onImagesChange([...images, pendingImage]);
+      
+      // If we have a userId, upload the file to Supabase
+      if (userId) {
+        setIsLoading(true);
+        setProcessingIndex(images.length); // Set the index of the currently processing image
         
-        for (const file of newFiles) {
+        try {
           const result = await uploadProfileImage(userId, file, false);
           
           if ('error' in result) {
@@ -81,39 +87,51 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
               title: "Upload failed",
               description: result.error
             });
+            
+            // Remove the pending image on error
+            setImages(prev => prev.filter(img => img.filePath !== tempId));
+            onImagesChange(images.filter(img => img.filePath !== tempId));
           } else {
-            uploadedImages.push({
+            // Replace the pending image with the uploaded one
+            const uploadedImage: ProfileImage = {
               imageId: result.imageId,
               filePath: result.filePath,
               publicUrl: result.publicUrl,
               isPrivate: result.isPrivate
+            };
+            
+            setImages(prev => 
+              prev.map(img => img.filePath === tempId ? uploadedImage : img)
+            );
+            
+            const updatedImages = images.map(img => 
+              img.filePath === tempId ? uploadedImage : img
+            );
+            
+            onImagesChange(updatedImages);
+            
+            toast({
+              title: "Image uploaded",
+              description: "Your image was uploaded successfully."
             });
           }
+        } catch (error) {
+          console.error('Error uploading image:', error);
+          
+          // Remove the pending image on error
+          setImages(prev => prev.filter(img => img.filePath !== tempId));
+          onImagesChange(images.filter(img => img.filePath !== tempId));
+          
+          toast({
+            variant: "destructive",
+            title: "Upload Error",
+            description: "Failed to upload the image. Please try again."
+          });
+        } finally {
+          setIsLoading(false);
+          setProcessingIndex(null);
         }
-        
-        // Replace the pending images with the uploaded ones
-        setImages(prev => 
-          prev.filter(img => !pendingImages.find(p => p.filePath === img.filePath))
-            .concat(uploadedImages)
-        );
-        
-        // Notify parent component
-        onImagesChange(images.filter(img => !pendingImages.find(p => p.filePath === img.filePath))
-          .concat(uploadedImages));
-      } catch (error) {
-        console.error('Error uploading images:', error);
-        toast({
-          variant: "destructive",
-          title: "Upload Error",
-          description: "Failed to upload one or more images."
-        });
-      } finally {
-        setIsLoading(false);
       }
-    } else {
-      // No userId means we're in the signup process, just keep the local files
-      setImages(prev => [...prev]);
-      onImagesChange([...images, ...pendingImages]);
     }
     
     // Reset the file input
@@ -124,6 +142,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
 
   const handleRemoveImage = async (index: number) => {
     const imageToRemove = images[index];
+    setProcessingIndex(index);
     
     if (userId && imageToRemove.imageId && !imageToRemove.isUploading) {
       setIsLoading(true);
@@ -141,8 +160,15 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
             title: "Delete failed",
             description: result.error
           });
+          setProcessingIndex(null);
+          setIsLoading(false);
           return;
         }
+        
+        toast({
+          title: "Image removed",
+          description: "The image was successfully removed."
+        });
       } catch (error) {
         console.error('Error deleting image:', error);
         toast({
@@ -150,6 +176,9 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
           title: "Delete Error",
           description: "Failed to delete the image."
         });
+        setProcessingIndex(null);
+        setIsLoading(false);
+        return;
       } finally {
         setIsLoading(false);
       }
@@ -159,6 +188,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     const updatedImages = [...images];
     updatedImages.splice(index, 1);
     setImages(updatedImages);
+    setProcessingIndex(null);
     
     // Notify parent component
     onImagesChange(updatedImages);
@@ -167,6 +197,8 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   const handleTogglePrivacy = async (index: number) => {
     const imageToToggle = images[index];
     const newPrivacyStatus = !imageToToggle.isPrivate;
+    
+    setProcessingIndex(index);
     
     // Update local state first for immediate UI feedback
     const updatedImages = [...images];
@@ -216,6 +248,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         });
       } finally {
         setIsLoading(false);
+        setProcessingIndex(null);
       }
     }
     
@@ -229,6 +262,57 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     }
   };
 
+  // Optimize image rendering for better performance
+  const renderImages = () => {
+    return images.map((image, index) => (
+      <Card key={index} className="relative overflow-hidden h-32 group">
+        <img 
+          src={image.publicUrl} 
+          alt={`Profile ${index + 1}`}
+          className={`w-full h-full object-cover ${image.isPrivate ? 'opacity-70' : ''}`}
+        />
+        {(image.isUploading || processingIndex === index) && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+            <Loader2 className="h-8 w-8 text-white animate-spin" />
+          </div>
+        )}
+        <div className="absolute top-1 right-1 flex space-x-1">
+          <Button
+            type="button"
+            variant="secondary"
+            size="icon"
+            className={`h-6 w-6 bg-white/80 hover:bg-white ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+            onClick={() => handleTogglePrivacy(index)}
+            disabled={disabled || isLoading || image.isUploading || processingIndex !== null}
+            title={image.isPrivate ? "Make image public" : "Make image private"}
+          >
+            {image.isPrivate ? 
+              <Lock className="h-3 w-3 text-gray-700" /> : 
+              <Unlock className="h-3 w-3 text-gray-700" />
+            }
+          </Button>
+          <Button
+            type="button"
+            variant="destructive"
+            size="icon"
+            className={`h-6 w-6 ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+            onClick={() => handleRemoveImage(index)}
+            disabled={disabled || isLoading || processingIndex !== null}
+            title="Remove image"
+          >
+            <X className="h-3 w-3" />
+          </Button>
+        </div>
+        {image.isPrivate && (
+          <div className="absolute bottom-1 left-1 bg-black/60 text-white text-xs px-1.5 py-0.5 rounded-sm flex items-center">
+            <Lock className="h-3 w-3 mr-1" />
+            Private
+          </div>
+        )}
+      </Card>
+    ));
+  };
+
   return (
     <div className="space-y-4">
       <div className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
@@ -236,64 +320,21 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
       </div>
       
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {images.map((image, index) => (
-          <Card key={index} className="relative overflow-hidden h-32 group">
-            <img 
-              src={image.publicUrl} 
-              alt={`Profile ${index + 1}`}
-              className={`w-full h-full object-cover ${image.isPrivate ? 'opacity-70' : ''}`}
-            />
-            {image.isUploading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                <Loader2 className="h-8 w-8 text-white animate-spin" />
-              </div>
-            )}
-            <div className="absolute top-1 right-1 flex space-x-1">
-              <Button
-                type="button"
-                variant="secondary"
-                size="icon"
-                className={`h-6 w-6 bg-white/80 hover:bg-white ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
-                onClick={() => handleTogglePrivacy(index)}
-                disabled={disabled || isLoading || image.isUploading}
-                title={image.isPrivate ? "Make image public" : "Make image private"}
-              >
-                {image.isPrivate ? 
-                  <Lock className="h-3 w-3 text-gray-700" /> : 
-                  <Unlock className="h-3 w-3 text-gray-700" />
-                }
-              </Button>
-              <Button
-                type="button"
-                variant="destructive"
-                size="icon"
-                className={`h-6 w-6 ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
-                onClick={() => handleRemoveImage(index)}
-                disabled={disabled || isLoading}
-                title="Remove image"
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
-            {image.isPrivate && (
-              <div className="absolute bottom-1 left-1 bg-black/60 text-white text-xs px-1.5 py-0.5 rounded-sm flex items-center">
-                <Lock className="h-3 w-3 mr-1" />
-                Private
-              </div>
-            )}
-          </Card>
-        ))}
+        {renderImages()}
         
         {images.length < MAX_PROFILE_IMAGES && (
           <Card 
             className={`flex items-center justify-center h-32 border-dashed cursor-pointer
-                       ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-[#9D4EDD]'}
+                       ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:border-[#9D4EDD]'}
                        transition-colors`}
-            onClick={disabled ? undefined : handleAddImage}
+            onClick={(disabled || isLoading) ? undefined : handleAddImage}
           >
             <div className="flex flex-col items-center text-center p-2">
-              <ImagePlus className="h-8 w-8 text-[#9D4EDD] mb-2" />
-              <span className="text-xs">Add Photo</span>
+              {isLoading ? 
+                <Loader2 className="h-8 w-8 text-[#9D4EDD] mb-2 animate-spin" /> :
+                <ImagePlus className="h-8 w-8 text-[#9D4EDD] mb-2" />
+              }
+              <span className="text-xs">{isLoading ? "Uploading..." : "Add Photo"}</span>
             </div>
           </Card>
         )}
