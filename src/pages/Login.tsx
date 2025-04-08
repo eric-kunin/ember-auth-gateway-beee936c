@@ -6,6 +6,7 @@ import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import BackgroundElements from "@/components/login/BackgroundElements";
+import UserCardsBackground from "@/components/login/UserCardsBackground";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LoginFormValues } from "@/components/login/schemas";
 
@@ -59,6 +60,7 @@ const Login = () => {
       
       <main className="flex-1 flex items-center justify-center relative">
         <BackgroundElements />
+        <UserCardsBackground />
         
         {/* Login card */}
         <div className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
