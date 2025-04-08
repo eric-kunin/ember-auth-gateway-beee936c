@@ -31,7 +31,9 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   const [images, setImages] = useState<ProfileImage[]>(existingImages);
   const [isLoading, setIsLoading] = useState(false);
   const [processingIndex, setProcessingIndex] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dropZoneRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -40,11 +42,10 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     }
   }, [existingImages]);
 
-  // Optimized file handling with better feedback
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || e.target.files.length === 0) return;
+  const processFiles = async (files: File[]) => {
+    if (disabled || isLoading) return;
     
-    const newFiles = Array.from(e.target.files);
+    const newFiles = Array.from(files);
     
     // Check if adding these files would exceed the limit
     if (images.length + newFiles.length > MAX_PROFILE_IMAGES) {
@@ -56,30 +57,48 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
       return;
     }
     
-    // Process one file at a time to prevent overwhelming the network
-    for (let i = 0; i < newFiles.length; i++) {
-      const file = newFiles[i];
-      
-      // Add pending image with loading state
+    // Create temporary images and add them to state immediately for better UX
+    const tempImages = newFiles.map((file, i) => {
       const tempId = `temp-${Date.now()}-${i}`;
-      const pendingImage: ProfileImage = {
+      return {
         filePath: tempId,
         publicUrl: URL.createObjectURL(file),
         file,
-        isUploading: true,
+        isUploading: false,  // We'll set this to true when actually uploading
         isPrivate: false
-      };
+      } as ProfileImage;
+    });
+    
+    const updatedImages = [...images, ...tempImages];
+    setImages(updatedImages);
+    onImagesChange(updatedImages);
+    
+    // If we're in signup mode (no userId yet), we're done - the actual upload will happen when the form is submitted
+    if (!userId) {
+      toast({
+        title: "Images added",
+        description: "Images will be uploaded when you complete signup."
+      });
+      return;
+    }
+    
+    // For existing users with a userId, upload the files immediately
+    for (let i = 0; i < tempImages.length; i++) {
+      const tempImage = tempImages[i];
+      const imageIndex = updatedImages.findIndex(img => img.filePath === tempImage.filePath);
       
-      setImages(prev => [...prev, pendingImage]);
-      onImagesChange([...images, pendingImage]);
-      
-      // If we have a userId, upload the file to Supabase
-      if (userId) {
-        setIsLoading(true);
-        setProcessingIndex(images.length); // Set the index of the currently processing image
+      if (imageIndex !== -1 && tempImage.file) {
+        setProcessingIndex(imageIndex);
+        
+        // Mark this image as uploading
+        const updatingImages = [...updatedImages];
+        updatingImages[imageIndex] = { ...updatingImages[imageIndex], isUploading: true };
+        setImages(updatingImages);
+        onImagesChange(updatingImages);
         
         try {
-          const result = await uploadProfileImage(userId, file, false);
+          setIsLoading(true);
+          const result = await uploadProfileImage(userId, tempImage.file, tempImage.isPrivate || false);
           
           if ('error' in result) {
             toast({
@@ -88,11 +107,12 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
               description: result.error
             });
             
-            // Remove the pending image on error
-            setImages(prev => prev.filter(img => img.filePath !== tempId));
-            onImagesChange(images.filter(img => img.filePath !== tempId));
+            // Remove the failed image
+            const filteredImages = updatingImages.filter(img => img.filePath !== tempImage.filePath);
+            setImages(filteredImages);
+            onImagesChange(filteredImages);
           } else {
-            // Replace the pending image with the uploaded one
+            // Replace temp image with the uploaded one
             const uploadedImage: ProfileImage = {
               imageId: result.imageId,
               filePath: result.filePath,
@@ -100,15 +120,12 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
               isPrivate: result.isPrivate
             };
             
-            setImages(prev => 
-              prev.map(img => img.filePath === tempId ? uploadedImage : img)
+            const finalImages = updatingImages.map(img => 
+              img.filePath === tempImage.filePath ? uploadedImage : img
             );
             
-            const updatedImages = images.map(img => 
-              img.filePath === tempId ? uploadedImage : img
-            );
-            
-            onImagesChange(updatedImages);
+            setImages(finalImages);
+            onImagesChange(finalImages);
             
             toast({
               title: "Image uploaded",
@@ -118,9 +135,10 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         } catch (error) {
           console.error('Error uploading image:', error);
           
-          // Remove the pending image on error
-          setImages(prev => prev.filter(img => img.filePath !== tempId));
-          onImagesChange(images.filter(img => img.filePath !== tempId));
+          // Remove the failed image
+          const filteredImages = updatedImages.filter(img => img.filePath !== tempImage.filePath);
+          setImages(filteredImages);
+          onImagesChange(filteredImages);
           
           toast({
             variant: "destructive",
@@ -137,6 +155,45 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     // Reset the file input
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
+    }
+  };
+
+  // Handle file input change
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    processFiles(Array.from(e.target.files));
+  };
+
+  // Drag and drop handlers
+  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (disabled || isLoading) return;
+    setIsDragging(true);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (disabled || isLoading) return;
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    if (disabled || isLoading) return;
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      processFiles(Array.from(e.dataTransfer.files));
     }
   };
 
@@ -265,7 +322,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   // Optimize image rendering for better performance
   const renderImages = () => {
     return images.map((image, index) => (
-      <Card key={index} className="relative overflow-hidden h-32 group">
+      <Card key={image.filePath || index} className="relative overflow-hidden h-32 group">
         <img 
           src={image.publicUrl} 
           alt={`Profile ${index + 1}`}
@@ -319,12 +376,20 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         Profile Photos (Max {MAX_PROFILE_IMAGES})
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div 
+        ref={dropZoneRef}
+        className={`grid grid-cols-2 sm:grid-cols-4 gap-4 ${isDragging ? 'border-2 border-dashed border-[#9D4EDD] bg-[#9D4EDD]/10 p-3 rounded-lg' : ''}`}
+        onDragEnter={handleDragEnter}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
         {renderImages()}
         
         {images.length < MAX_PROFILE_IMAGES && (
           <Card 
             className={`flex items-center justify-center h-32 border-dashed cursor-pointer
+                       ${isDragging ? 'bg-[#9D4EDD]/20 border-[#9D4EDD]' : ''}
                        ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:border-[#9D4EDD]'}
                        transition-colors`}
             onClick={(disabled || isLoading) ? undefined : handleAddImage}
@@ -334,7 +399,12 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
                 <Loader2 className="h-8 w-8 text-[#9D4EDD] mb-2 animate-spin" /> :
                 <ImagePlus className="h-8 w-8 text-[#9D4EDD] mb-2" />
               }
-              <span className="text-xs">{isLoading ? "Uploading..." : "Add Photo"}</span>
+              <span className="text-xs">
+                {isDragging ? "Drop Images Here" : isLoading ? "Uploading..." : "Add Photo"}
+              </span>
+              {!isLoading && !isDragging && (
+                <span className="text-[10px] text-gray-500 mt-1">or drag & drop</span>
+              )}
             </div>
           </Card>
         )}

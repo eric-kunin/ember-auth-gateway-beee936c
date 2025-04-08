@@ -105,7 +105,13 @@ const Signup = () => {
         ...profileData
       };
       
-      // Call signup service
+      // Show loading toast for better feedback
+      toast({
+        title: "Creating your account...",
+        description: "This might take a moment if you've added images."
+      });
+      
+      // Call signup service with the images
       const { user, error } = await signUpUser(userData, profileImages);
       
       if (error) {

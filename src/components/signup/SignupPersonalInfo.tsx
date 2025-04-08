@@ -29,7 +29,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ProfileImageUpload } from "./ProfileImageUpload";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ProfileImage {
   imageId?: string;
@@ -37,6 +37,7 @@ interface ProfileImage {
   publicUrl: string;
   file?: File;
   isUploading?: boolean;
+  isPrivate?: boolean;
 }
 
 interface SignupPersonalInfoProps {
@@ -59,6 +60,12 @@ const SignupPersonalInfo = ({
   initialImages = [],
 }: SignupPersonalInfoProps) => {
   const [profileImages, setProfileImages] = useState<ProfileImage[]>(initialImages);
+  
+  useEffect(() => {
+    if (initialImages?.length > 0) {
+      setProfileImages(initialImages);
+    }
+  }, [initialImages]);
   
   const form = useForm<PersonalInfoFormValues>({
     resolver: zodResolver(personalInfoFormSchema),
