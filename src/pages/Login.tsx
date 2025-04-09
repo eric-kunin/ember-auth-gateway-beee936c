@@ -68,8 +68,8 @@ const Login = () => {
                       border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                       transition-colors duration-300">
           <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-xl sm:text-2xl font-bold text-white mb-1 transition-colors duration-300">ברוכים הבאים לAkhlaDate</h1>
-            <p className="text-sm sm:text-base text-[#E0AAFF] dark:text-custom-lighter transition-colors duration-300">התחבר כדי להמשיך</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white mb-1 transition-colors duration-300">Welcome to AkhlaDate</h1>
+            <p className="text-sm sm:text-base text-[#E0AAFF] dark:text-custom-lighter transition-colors duration-300">Sign in to continue</p>
           </div>
           
           <LoginForm 
@@ -85,9 +85,9 @@ const Login = () => {
           <PrivacyNotice />
           
           <div className="text-center text-sm text-[#E0AAFF] dark:text-custom-light transition-colors duration-300">
-            אין לך חשבון עדיין?{" "}
+            Don't have an account yet?{" "}
             <a href="/signup" className="text-[#E0AAFF] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
-              הירשם
+              Sign up
             </a>
           </div>
         </div>

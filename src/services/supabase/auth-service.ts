@@ -64,9 +64,9 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
     // Make sure the gender value is properly capitalized to match the enum
     const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
 
-    // Then create a profile for the user - fixed TypeScript error by removing the "id" field
+    // Then create a profile for the user
     const { error: profileError } = await supabase.from('profiles').upsert({
-        user_id: authData.user.id, // Use user_id instead of id
+        id: authData.user.id,  // Use 'id' which is the correct field name for the profiles table
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
         gender: genderValue,

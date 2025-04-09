@@ -108,8 +108,8 @@ const Signup = () => {
       
       // Show loading toast for better feedback
       toast({
-        title: "יוצר את החשבון שלך...",
-        description: "זה עשוי לקחת רגע אם הוספת תמונות."
+        title: "Creating your account...",
+        description: "This may take a moment if you added photos."
       });
       
       // Call signup service with the images
@@ -118,7 +118,7 @@ const Signup = () => {
       if (error) {
         toast({
           variant: "destructive",
-          title: "ההרשמה נכשלה",
+          title: "Signup Failed",
           description: error,
         });
         setIsLoading(false);
@@ -126,8 +126,8 @@ const Signup = () => {
       }
       
       toast({
-        title: "החשבון נוצר!",
-        description: "החשבון שלך נוצר בהצלחה.",
+        title: "Account Created!",
+        description: "Your account has been successfully created.",
       });
       
       // Navigate to dashboard on success
@@ -135,8 +135,8 @@ const Signup = () => {
     } catch (error: any) {
       toast({
         variant: "destructive",
-        title: "ההרשמה נכשלה",
-        description: error.message || "אירעה שגיאה במהלך ההרשמה.",
+        title: "Signup Failed",
+        description: error.message || "An error occurred during signup.",
       });
     } finally {
       setIsLoading(false);
