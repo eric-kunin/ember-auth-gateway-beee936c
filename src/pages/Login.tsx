@@ -129,15 +129,31 @@ const Login = () => {
           <PrivacyNotice />
           
           <motion.div 
-            className="text-center text-sm text-[#E0AAFF] dark:text-custom-light transition-colors duration-300"
+            className="text-center mt-4 text-sm text-[#E0AAFF] dark:text-custom-light transition-colors duration-300"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            Don't have an account yet?{" "}
-            <a href="/signup" className="text-[#E0AAFF] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
-              Sign up
-            </a>
+            <div className="mb-2">
+              Don't have an account yet?{" "}
+              <a href="/signup" className="text-[#E0AAFF] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
+                Sign up
+              </a>
+            </div>
+            <div>
+              <button 
+                onClick={handleToggleForgotPassword} 
+                className="text-[#E0AAFF] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-medium underline decoration-2 underline-offset-2 inline-flex items-center"
+              >
+                Forgot your password?
+                <motion.span 
+                  className="ml-1"
+                  initial={{ x: -3 }}
+                  whileHover={{ x: 2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >→</motion.span>
+              </button>
+            </div>
           </motion.div>
         </motion.div>
       </main>
