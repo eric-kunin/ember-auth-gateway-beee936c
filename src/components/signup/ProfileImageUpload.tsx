@@ -64,7 +64,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         filePath: tempId,
         publicUrl: URL.createObjectURL(file),
         file,
-        isUploading: false,  // We'll set this to true when actually uploading
+        isUploading: true,  // Set to true as these will immediately be considered "uploading"
         isPrivate: false
       } as ProfileImage;
     });
@@ -73,12 +73,23 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     setImages(updatedImages);
     onImagesChange(updatedImages);
     
-    // If we're in signup mode (no userId yet), we're done - the actual upload will happen when the form is submitted
+    // If we're in signup mode (no userId yet), mark images as no longer uploading
+    // since the actual upload will happen later when the form is submitted
     if (!userId) {
-      toast({
-        title: "Images added",
-        description: "Images will be uploaded when you complete signup."
-      });
+      // After a short delay to show loading state for better UX
+      setTimeout(() => {
+        const completedImages = updatedImages.map(img => ({
+          ...img, 
+          isUploading: false
+        }));
+        setImages(completedImages);
+        onImagesChange(completedImages);
+        
+        toast({
+          title: "Images added",
+          description: "Images will be uploaded when you complete signup."
+        });
+      }, 700);
       return;
     }
     
@@ -117,7 +128,8 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
               imageId: result.imageId,
               filePath: result.filePath,
               publicUrl: result.publicUrl,
-              isPrivate: result.isPrivate
+              isPrivate: result.isPrivate,
+              isUploading: false // Make sure to mark as no longer uploading
             };
             
             const finalImages = updatingImages.map(img => 
@@ -198,10 +210,23 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   };
 
   const handleRemoveImage = async (index: number) => {
+    if (disabled || isLoading || processingIndex !== null) return;
+    
     const imageToRemove = images[index];
     setProcessingIndex(index);
     
-    if (userId && imageToRemove.imageId && !imageToRemove.isUploading) {
+    // For signup mode (no userId), just remove from local state
+    if (!userId) {
+      const updatedImages = [...images];
+      updatedImages.splice(index, 1);
+      setImages(updatedImages);
+      onImagesChange(updatedImages);
+      setProcessingIndex(null);
+      return;
+    }
+    
+    // For existing users, handle deletion from storage
+    if (imageToRemove.imageId && !imageToRemove.isUploading) {
       setIsLoading(true);
       
       try {
@@ -252,6 +277,8 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   };
 
   const handleTogglePrivacy = async (index: number) => {
+    if (disabled || isLoading || processingIndex !== null) return;
+    
     const imageToToggle = images[index];
     const newPrivacyStatus = !imageToToggle.isPrivate;
     
@@ -262,8 +289,15 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     updatedImages[index] = { ...imageToToggle, isPrivate: newPrivacyStatus };
     setImages(updatedImages);
     
+    // For signup mode (no userId), just update local state
+    if (!userId) {
+      onImagesChange(updatedImages);
+      setProcessingIndex(null);
+      return;
+    }
+    
     // Update in database if we have a userId and imageId
-    if (userId && imageToToggle.imageId && !imageToToggle.isUploading) {
+    if (imageToToggle.imageId && !imageToToggle.isUploading) {
       setIsLoading(true);
       
       try {
@@ -307,6 +341,8 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         setIsLoading(false);
         setProcessingIndex(null);
       }
+    } else {
+      setProcessingIndex(null);
     }
     
     // Notify parent component of the change
@@ -319,7 +355,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
     }
   };
 
-  // Optimize image rendering for better performance
+  // Render images
   const renderImages = () => {
     return images.map((image, index) => (
       <Card key={image.filePath || index} className="relative overflow-hidden h-32 group">
@@ -333,34 +369,36 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
             <Loader2 className="h-8 w-8 text-white animate-spin" />
           </div>
         )}
-        <div className="absolute top-1 right-1 flex space-x-1">
-          <Button
-            type="button"
-            variant="secondary"
-            size="icon"
-            className={`h-6 w-6 bg-white/80 hover:bg-white ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
-            onClick={() => handleTogglePrivacy(index)}
-            disabled={disabled || isLoading || image.isUploading || processingIndex !== null}
-            title={image.isPrivate ? "Make image public" : "Make image private"}
-          >
-            {image.isPrivate ? 
-              <Lock className="h-3 w-3 text-gray-700" /> : 
-              <Unlock className="h-3 w-3 text-gray-700" />
-            }
-          </Button>
-          <Button
-            type="button"
-            variant="destructive"
-            size="icon"
-            className={`h-6 w-6 ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
-            onClick={() => handleRemoveImage(index)}
-            disabled={disabled || isLoading || processingIndex !== null}
-            title="Remove image"
-          >
-            <X className="h-3 w-3" />
-          </Button>
-        </div>
-        {image.isPrivate && (
+        {!image.isUploading && processingIndex !== index && (
+          <div className="absolute top-1 right-1 flex space-x-1">
+            <Button
+              type="button"
+              variant="secondary"
+              size="icon"
+              className={`h-6 w-6 bg-white/80 hover:bg-white ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+              onClick={() => handleTogglePrivacy(index)}
+              disabled={disabled || isLoading || processingIndex !== null}
+              title={image.isPrivate ? "Make image public" : "Make image private"}
+            >
+              {image.isPrivate ? 
+                <Lock className="h-3 w-3 text-gray-700" /> : 
+                <Unlock className="h-3 w-3 text-gray-700" />
+              }
+            </Button>
+            <Button
+              type="button"
+              variant="destructive"
+              size="icon"
+              className={`h-6 w-6 ${disabled ? 'opacity-0' : 'opacity-0 group-hover:opacity-100'} transition-opacity`}
+              onClick={() => handleRemoveImage(index)}
+              disabled={disabled || isLoading || processingIndex !== null}
+              title="Remove image"
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
+        )}
+        {image.isPrivate && !image.isUploading && (
           <div className="absolute bottom-1 left-1 bg-black/60 text-white text-xs px-1.5 py-0.5 rounded-sm flex items-center">
             <Lock className="h-3 w-3 mr-1" />
             Private

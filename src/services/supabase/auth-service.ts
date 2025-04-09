@@ -66,7 +66,7 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
 
     // Then create a profile for the user
     const { error: profileError } = await supabase.from('profiles').upsert({
-        id: authData.user.id,  // Use 'id' which is the correct field name for the profiles table
+        id: authData.user.id,  // This is the correct field to use with upsert
         first_name: userData.name.split(' ')[0] || '',
         last_name: userData.name.split(' ')[1] || '',
         gender: genderValue,
