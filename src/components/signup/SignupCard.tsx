@@ -10,6 +10,7 @@ import SocialLogin from "@/components/login/SocialLogin";
 import PrivacyNotice from "@/components/login/PrivacyNotice";
 import TermsNotice from "@/components/signup/TermsNotice";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
+import { motion } from "framer-motion";
 
 interface ProfileImage {
   imageId?: string;
@@ -53,10 +54,15 @@ const SignupCard: React.FC<SignupCardProps> = ({
   handleOAuthSignup,
 }) => {
   return (
-    <div className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
-                  bg-white/90 dark:bg-[#10002B]/95 shadow-xl
-                  border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
-                  transition-colors duration-300">
+    <motion.div 
+      className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
+                bg-white/90 dark:bg-[#10002B]/95 shadow-xl
+                border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
+                transition-colors duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="text-center mb-2">
         <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">
           Create an Account
@@ -74,43 +80,52 @@ const SignupCard: React.FC<SignupCardProps> = ({
         <Progress value={progress} className="h-2" />
       </div>
       
-      {currentStep === 1 && (
-        <>
-          <SignupForm 
-            defaultValues={accountData}
+      {/* Step content with animations */}
+      <motion.div
+        key={currentStep}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.3 }}
+      >
+        {currentStep === 1 && (
+          <>
+            <SignupForm 
+              defaultValues={accountData}
+              isLoading={isLoading}
+              onSubmit={handleSignupStep1}
+            />
+
+            <SocialLogin 
+              handleOAuthLogin={handleOAuthSignup}
+              isLoading={isLoading}
+            />
+            
+            <PrivacyNotice />
+          </>
+        )}
+
+        {currentStep === 2 && (
+          <SignupPersonalInfo
+            defaultValues={personalData}
             isLoading={isLoading}
-            onSubmit={handleSignupStep1}
+            onSubmit={handleSignupStep2}
+            onBack={handlePrevStep}
+            initialImages={profileImages}
           />
+        )}
 
-          <SocialLogin 
-            handleOAuthLogin={handleOAuthSignup}
+        {currentStep === 3 && (
+          <ProfileDetailsForm
+            defaultValues={profileData}
+            personalData={personalData}
             isLoading={isLoading}
+            onSubmit={handleProfileDataChange}
+            onBack={handlePrevStep}
+            onComplete={handleCompleteSignup}
           />
-          
-          <PrivacyNotice />
-        </>
-      )}
-
-      {currentStep === 2 && (
-        <SignupPersonalInfo
-          defaultValues={personalData}
-          isLoading={isLoading}
-          onSubmit={handleSignupStep2}
-          onBack={handlePrevStep}
-          initialImages={profileImages}
-        />
-      )}
-
-      {currentStep === 3 && (
-        <ProfileDetailsForm
-          defaultValues={profileData}
-          personalData={personalData}
-          isLoading={isLoading}
-          onSubmit={handleProfileDataChange}
-          onBack={handlePrevStep}
-          onComplete={handleCompleteSignup}
-        />
-      )}
+        )}
+      </motion.div>
       
       <div className="text-center mt-4 text-sm text-[#3B185F] dark:text-custom-light transition-colors duration-300">
         Already have an account?{" "}
@@ -120,7 +135,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
       </div>
       
       <TermsNotice />
-    </div>
+    </motion.div>
   );
 };
 
