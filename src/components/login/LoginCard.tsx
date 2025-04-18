@@ -2,9 +2,9 @@
 import { motion } from "framer-motion";
 import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
-import PrivacyNotice from "@/components/login/PrivacyNotice";
 import ForgotPasswordForm from "@/components/login/ForgotPasswordForm";
 import { LoginFormValues } from "@/components/login/schemas";
+import { LogIn } from "lucide-react";
 
 interface LoginCardProps {
   isLoading: boolean;
@@ -32,20 +32,17 @@ const LoginCard = ({
       transition={{ duration: 0.5 }}
     >
       <div className="text-center mb-6 sm:mb-8">
-        <h1 className="text-xl sm:text-2xl font-bold text-[#E0AAFF] dark:text-white mb-1 transition-colors duration-300">
-          Welcome to AkhlaDate
-        </h1>
-        <p className="text-sm sm:text-base text-[#9D4EDD] dark:text-custom-lighter transition-colors duration-300">
-          Sign in to continue
-        </p>
-        <motion.p 
-          className="text-md sm:text-lg text-[#7B2CBF] dark:text-custom-light font-semibold mt-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
+        <motion.div 
+          className="flex items-center justify-center gap-2 mb-2"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.3 }}
         >
-          Find New Connections
-        </motion.p>
+          <LogIn className="w-6 h-6 text-[#9D4EDD] dark:text-white" />
+          <h1 className="text-xl sm:text-2xl font-bold text-[#9D4EDD] dark:text-white transition-colors duration-300">
+            Sign in to continue
+          </h1>
+        </motion.div>
       </div>
       
       {showForgotPassword ? (
@@ -79,8 +76,6 @@ const LoginCard = ({
           />
         </motion.div>
       )}
-
-      <PrivacyNotice />
       
       <motion.div 
         className="text-center mt-4 text-sm text-[#E0AAFF] dark:text-custom-light transition-colors duration-300"

@@ -128,13 +128,13 @@ export const updateProfile = async (profileData: {
   avatar_url?: string;
 }) => {
   try {
-    const { data: user, error: sessionError } = await supabase.auth.getUser();
+    const { data: { user }, error: sessionError } = await supabase.auth.getUser();
     if (sessionError || !user) throw sessionError;
 
     const { error } = await supabase
       .from("profiles")
       .update(profileData)
-      .eq("id", user.id)
+      .eq("user_id", user.id)
       .select()
       .single();
 
