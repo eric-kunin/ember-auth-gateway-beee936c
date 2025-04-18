@@ -1,5 +1,7 @@
+
 import { supabase } from '@/integrations/supabase/client';
 import { SignupFormData } from '@/types/supabase';
+import { Database } from '@/integrations/supabase/types'; // Make sure to import the Database type
 
 interface ProfileImage {
   filePath: string;
@@ -60,29 +62,29 @@ export const signUpUser = async (userData: SignupFormData, profileImages: Profil
       profileImages = uploadedImages;
     }
     
-    // Make sure the gender value is properly capitalized to match the enum
-    const genderValue = userData.gender; // Should be "Male", "Female", or "Other"
+    // Explicitly type the profile insert to match the database schema
+    const profileInsert: Database['public']['Tables']['profiles']['Insert'] = {
+      user_id: authData.user.id,
+      first_name: userData.name.split(' ')[0] || '',
+      last_name: userData.name.split(' ')[1] || '',
+      gender: userData.gender,
+      birth_date: userData.birthdate ? new Date(userData.birthdate).toISOString() : null,
+      phone: userData.phone || null,
+      bio: userData.bio || null,
+      profile_images: profileImages.map(img => img.publicUrl) || [],
+      religion: userData.religion || null,
+      religious_level: userData.religiousLevel || null,
+      profession: userData.profession || null,
+      smoking_status: userData.smokingStatus || null,
+      drinking_status: userData.drinkingStatus || null,
+      eye_color: userData.eyeColor || null,
+      height: userData.height || null,
+      looking_for: userData.lookingFor || null,
+      looking_for_gender: userData.lookingForGender || null
+    };
 
-    // Then create a profile for the user with the correct schema
-    const { error: profileError } = await supabase.from('profiles').upsert({
-        user_id: authData.user.id,
-        first_name: userData.name.split(' ')[0] || '',
-        last_name: userData.name.split(' ')[1] || '',
-        gender: genderValue,
-        birth_date: userData.birthdate ? new Date(userData.birthdate).toISOString() : null,
-        phone: userData.phone || null,
-        bio: userData.bio || null,
-        profile_images: profileImages.map(img => img.publicUrl) || [],
-        religion: userData.religion || null,
-        religious_level: userData.religiousLevel || null,
-        profession: userData.profession || null,
-        smoking_status: userData.smokingStatus || null,
-        drinking_status: userData.drinkingStatus || null,
-        eye_color: userData.eyeColor || null,
-        height: userData.height || null,
-        looking_for: userData.lookingFor || null,
-        looking_for_gender: userData.lookingForGender || null
-    });
+    // Use the explicitly typed insert
+    const { error: profileError } = await supabase.from('profiles').upsert(profileInsert);
 
     if (profileError) {
       console.error("Error creating profile:", profileError);

@@ -80,12 +80,14 @@ const Login = () => {
           transition={{ duration: 0.5 }}
         >
           <div className="text-center mb-6 sm:mb-8">
-            <h1 className="text-xl sm:text-2xl font-bold text-white mb-1 transition-colors duration-300">Welcome to AkhlaDate</h1>
-            <p className="text-sm sm:text-base text-[#E0AAFF] dark:text-custom-lighter transition-colors duration-300">
+            <h1 className="text-xl sm:text-2xl font-bold text-[#E0AAFF] dark:text-white mb-1 transition-colors duration-300">
+              Welcome to AkhlaDate
+            </h1>
+            <p className="text-sm sm:text-base text-[#9D4EDD] dark:text-custom-lighter transition-colors duration-300">
               Sign in to continue
             </p>
             <motion.p 
-              className="text-md sm:text-lg text-[#E0AAFF] font-semibold mt-2"
+              className="text-md sm:text-lg text-[#7B2CBF] dark:text-custom-light font-semibold mt-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -136,23 +138,9 @@ const Login = () => {
           >
             <div className="mb-2">
               Don't have an account yet?{" "}
-              <a href="/signup" className="text-[#E0AAFF] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
+              <a href="/signup" className="text-[#9D4EDD] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
                 Sign up
               </a>
-            </div>
-            <div>
-              <button 
-                onClick={handleToggleForgotPassword} 
-                className="text-[#E0AAFF] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-medium underline decoration-2 underline-offset-2 inline-flex items-center"
-              >
-                Forgot your password?
-                <motion.span 
-                  className="ml-1"
-                  initial={{ x: -3 }}
-                  whileHover={{ x: 2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >→</motion.span>
-              </button>
             </div>
           </motion.div>
         </motion.div>
