@@ -4,7 +4,7 @@ import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import ForgotPasswordForm from "@/components/login/ForgotPasswordForm";
 import { LoginFormValues } from "@/components/login/schemas";
-import { LogIn } from "lucide-react";
+import { LogIn, Users } from "lucide-react";
 
 interface LoginCardProps {
   isLoading: boolean;
@@ -42,6 +42,18 @@ const LoginCard = ({
           <h1 className="text-xl sm:text-2xl font-bold text-[#9D4EDD] dark:text-white transition-colors duration-300">
             Sign in to continue
           </h1>
+        </motion.div>
+        
+        <motion.div
+          className="flex items-center justify-center gap-2 mt-3"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.3 }}
+        >
+          <Users className="w-5 h-5 text-[#7B2CBF] dark:text-custom-light" />
+          <p className="text-md sm:text-lg text-[#7B2CBF] dark:text-custom-light font-semibold">
+            Find new connections
+          </p>
         </motion.div>
       </div>
       
