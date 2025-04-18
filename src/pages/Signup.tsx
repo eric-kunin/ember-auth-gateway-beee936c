@@ -106,6 +106,13 @@ const Signup = () => {
         ...profileData
       };
       
+      // Generate a mock user ID for testing purposes
+      const mockUserId = "12345678-1234-1234-1234-123456789012";
+      
+      // Mock image URLs and paths for testing
+      const imageUrls = profileImages.map(img => img.publicUrl || '');
+      const imagePaths = profileImages.map(img => img.filePath || '');
+      
       // Show loading toast for better feedback
       toast({
         title: "Creating your account...",
@@ -113,25 +120,23 @@ const Signup = () => {
       });
       
       // Call signup service with the images
-      const { user, error } = await signUpUser(userData, profileImages);
-      
-      if (error) {
+      try {
+        await signUpUser(userData, mockUserId, imageUrls, imagePaths);
+        
+        toast({
+          title: "Account Created!",
+          description: "Your account has been successfully created.",
+        });
+        
+        // Navigate to dashboard on success
+        navigate("/dashboard");
+      } catch (error: any) {
         toast({
           variant: "destructive",
           title: "Signup Failed",
-          description: error,
+          description: error.message || "An error occurred during signup.",
         });
-        setIsLoading(false);
-        return;
       }
-      
-      toast({
-        title: "Account Created!",
-        description: "Your account has been successfully created.",
-      });
-      
-      // Navigate to dashboard on success
-      navigate("/dashboard");
     } catch (error: any) {
       toast({
         variant: "destructive",

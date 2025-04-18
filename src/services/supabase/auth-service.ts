@@ -1,5 +1,6 @@
-import { supabase } from "@/lib/supabase";
-import { RegisterFormValues } from "@/components/register/schemas";
+
+import { supabase } from "@/integrations/supabase/client";
+import { RegisterFormValues } from "@/components/signup/schemas";
 import { UUID } from "crypto";
 
 export const signUpUser = async (
@@ -26,8 +27,36 @@ export const signUpUser = async (
     }
 
     console.log("User profile updated successfully");
+    return { user: userId, error: null };
   } catch (error: any) {
     console.error("Error during sign up:", error.message);
     throw error;
+  }
+};
+
+export const resetPassword = async (email: string) => {
+  try {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/update-password`
+    });
+
+    if (error) {
+      console.error('Error resetting password:', error);
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+
+    return {
+      success: true,
+      data
+    };
+  } catch (err: any) {
+    console.error('Unexpected error during password reset:', err);
+    return {
+      success: false,
+      error: err.message
+    };
   }
 };
