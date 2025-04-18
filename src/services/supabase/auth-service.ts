@@ -1,150 +1,116 @@
-import { supabase } from '@/integrations/supabase/client';
-import { SignupFormData } from '@/types/supabase';
-import { Database } from '@/integrations/supabase/types';
+import { supabase } from "@/supabase";
+import { v4 as uuidv4 } from 'uuid';
 
-interface ProfileImage {
-  filePath: string;
-  publicUrl: string;
-  file?: File;
-}
-
-type Gender = "Male" | "Female" | "Other";
-type Religion = "prefer not to say" | "other" | "jewish" | "christian" | "catholic" | "protestant" | "orthodox" | "muslim" | "hindu" | "buddhist" | "sikh" | "spiritual but not religious" | "atheist" | "agnostic";
-type ReligiousLevel = "orthodox" | "not religious" | "somewhat religious" | "moderately religious" | "very religious";
-type SmokingStatus = "regular" | "non-smoker" | "occasional" | "trying to quit";
-type DrinkingStatus = "non-drinker" | "social" | "regular";
-type EyeColor = "other" | "blue" | "green" | "brown" | "hazel";
-type LookingFor = "friendship" | "casual dating" | "serious relationship" | "long-term relationship" | "marriage";
-type LookingForGender = "Male" | "Female" | "Other" | "Both";
-
-export const signUpUser = async (userData: SignupFormData, profileImages: ProfileImage[] = []) => {
+export const signUpUser = async (userData: any, profileImages: any[] = []) => {
   try {
-    // First, create the user account with email and password
+    // Remove phone from userData as it's not part of the profiles table
+    const { phone, ...profileData } = userData;
+    
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: userData.email,
       password: userData.password,
       options: {
         data: {
+          ...profileData,
           name: userData.name,
-          gender: userData.gender as Gender,
-          birth_date: userData.birthdate ? new Date(userData.birthdate).toISOString() : null,
-          phone: userData.phone || null,
-        }
-      }
+          gender: userData.gender,
+          birthdate: userData.birthdate,
+          role: 'authenticated',
+        },
+      },
     });
-
+    
     if (authError) {
-      throw new Error(authError.message);
+      return { user: null, error: authError.message };
     }
-
-    if (!authData.user) {
-      throw new Error('Signup failed - no user data returned');
-    }
-
-    // Store profile images if provided
-    if (profileImages.length > 0) {
-      const uploadPromises = profileImages.map(async (image, index) => {
+    
+    const userId = authData.user?.id;
+    
+    // Upload profile images and get their public URLs
+    const uploadedImages = await Promise.all(
+      profileImages.map(async (image) => {
         if (!image.file) {
-          return { ...image, publicUrl: image.publicUrl };
+          console.warn("Skipping upload for image without file:", image);
+          return { ...image, publicUrl: image.publicUrl || null };
         }
         
-        const filePath = `avatars/${authData.user!.id}/${image.file.name}`;
+        const imageName = `${uuidv4()}-${image.file.name}`;
+        const imagePath = `avatars/${userId}/${imageName}`;
+        
         const { error: uploadError } = await supabase.storage
           .from('avatars')
-          .upload(filePath, image.file, {
+          .upload(imagePath, image.file, {
             cacheControl: '3600',
             upsert: false
           });
-
+        
         if (uploadError) {
           console.error("Error uploading image:", uploadError);
-          throw new Error(`Failed to upload image: ${uploadError.message}`);
+          return { ...image, publicUrl: null, uploadError: uploadError.message };
         }
-
-        const { data: storageData } = supabase.storage.from('avatars').getPublicUrl(filePath);
-        return { ...image, publicUrl: storageData.publicUrl };
-      });
-
-      const uploadedImages = await Promise.all(uploadPromises);
-      profileImages = uploadedImages;
+        
+        const publicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${imagePath}`;
+        return { ...image, publicUrl, imagePath };
+      })
+    );
+    
+    // Filter out any images that failed to upload
+    const successfulImages = uploadedImages.filter(image => image.publicUrl);
+    
+    // Extract public URLs and paths of the uploaded images
+    const imageUrls = successfulImages.map(image => image.publicUrl);
+    const imagePaths = successfulImages.map(image => image.imagePath);
+    
+    // Update user's profile in the profiles table with image URLs and paths
+    const { error: profileUpdateError } = await supabase
+      .from('profiles')
+      .update({
+        avatar_urls: imageUrls,
+        avatar_paths: imagePaths,
+        phone: userData.phone, // Add phone number here
+      })
+      .eq('id', userId);
+    
+    if (profileUpdateError) {
+      console.error("Error updating profile:", profileUpdateError);
+      return { user: null, error: profileUpdateError.message };
     }
     
-    const profileInsert: Database['public']['Tables']['profiles']['Insert'] = {
-      user_id: authData.user.id,
-      first_name: userData.name.split(' ')[0] || '',
-      last_name: userData.name.split(' ')[1] || '',
-      gender: userData.gender as Gender,
-      birth_date: userData.birthdate ? new Date(userData.birthdate).toISOString() : null,
-      phone: userData.phone || null,
-      bio: userData.bio || null,
-      profile_images: profileImages.map(img => img.publicUrl) || [],
-      religion: (userData.religion || null) as Religion | null,
-      religious_level: (userData.religiousLevel || null) as ReligiousLevel | null,
-      profession: userData.profession || null,
-      smoking_status: (userData.smokingStatus || null) as SmokingStatus | null,
-      drinking_status: (userData.drinkingStatus || null) as DrinkingStatus | null,
-      eye_color: (userData.eyeColor || null) as EyeColor | null,
-      height: userData.height || null,
-      looking_for: (userData.lookingFor || null) as LookingFor | null,
-      looking_for_gender: (userData.lookingForGender || null) as LookingForGender | null
-    };
-
-    const { error: profileError } = await supabase.from('profiles').upsert(profileInsert);
-
-    if (profileError) {
-      console.error("Error creating profile:", profileError);
-      throw new Error(`Failed to create profile: ${profileError.message}`);
-    }
-
     return { user: authData.user, error: null };
   } catch (error: any) {
-    console.error("Signup error:", error);
+    console.error("Error during signup:", error);
     return { user: null, error: error.message };
   }
 };
 
 export const resetPassword = async (email: string) => {
   try {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/update-password`,
     });
-    
     if (error) {
-      throw new Error(error.message);
+      console.error('Error resetting password:', error);
+      return { success: false, error: error.message };
     }
-    
-    return { success: true, error: null };
-  } catch (error: any) {
-    console.error("Password reset error:", error);
-    return { success: false, error: error.message };
+    return { success: true, data };
+  } catch (err: any) {
+    console.error('Unexpected error during password reset:', err);
+    return { success: false, error: err.message };
   }
 };
 
-export const updateProfile = async (profileData: {
-  username?: string;
-  display_name?: string;
-  bio?: string;
-  birth_date?: string;
-  avatar_url?: string;
-}) => {
+export const updatePassword = async (newPassword: string) => {
   try {
-    const { data: { user }, error: sessionError } = await supabase.auth.getUser();
-    if (sessionError || !user) throw sessionError;
-
-    const { error } = await supabase
-      .from("profiles")
-      .update(profileData)
-      .eq("user_id", user.id)
-      .select()
-      .single();
-
-    if (error) throw error;
-    return { success: true };
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    return {
-      success: false,
-      error: (error as Error)?.message || "Failed to update profile",
-    };
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+    if (error) {
+      console.error('Error updating password:', error);
+      return { success: false, error: error.message };
+    }
+    return { success: true, data };
+  } catch (err: any) {
+    console.error('Unexpected error during password update:', err);
+    return { success: false, error: err.message };
   }
 };

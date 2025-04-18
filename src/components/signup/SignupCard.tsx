@@ -1,4 +1,3 @@
-
 import React from "react";
 import SignupStepIndicator from "./SignupStepIndicator";
 import { Progress } from "@/components/ui/progress";
@@ -7,8 +6,6 @@ import SignupPersonalInfo from "@/components/signup/SignupPersonalInfo";
 import SignupComplete from "@/components/signup/SignupComplete";
 import ProfileDetailsForm from "@/components/signup/ProfileDetailsForm";
 import SocialLogin from "@/components/login/SocialLogin";
-import PrivacyNotice from "@/components/login/PrivacyNotice";
-import TermsNotice from "@/components/signup/TermsNotice";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { motion } from "framer-motion";
 
@@ -72,15 +69,12 @@ const SignupCard: React.FC<SignupCardProps> = ({
         </p>
       </div>
       
-      {/* Step indicators */}
       <SignupStepIndicator currentStep={currentStep} totalSteps={totalSteps} />
 
-      {/* Progress bar */}
       <div className="mb-6">
         <Progress value={progress} className="h-2" />
       </div>
       
-      {/* Step content with animations */}
       <motion.div
         key={currentStep}
         initial={{ opacity: 0, x: 50 }}
@@ -100,8 +94,6 @@ const SignupCard: React.FC<SignupCardProps> = ({
               handleOAuthLogin={handleOAuthSignup}
               isLoading={isLoading}
             />
-            
-            <PrivacyNotice />
           </>
         )}
 
@@ -133,8 +125,6 @@ const SignupCard: React.FC<SignupCardProps> = ({
           Sign in
         </a>
       </div>
-      
-      <TermsNotice />
     </motion.div>
   );
 };
