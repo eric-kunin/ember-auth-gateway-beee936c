@@ -1,12 +1,12 @@
 
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, Lock, ArrowRight } from "lucide-react";
+import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { loginFormSchema, LoginFormValues } from "./schemas";
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Tooltip,
@@ -131,10 +131,14 @@ const LoginForm = ({
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] text-xs font-medium transition-colors duration-300"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] transition-colors duration-300"
                     title={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? "HIDE" : "SHOW"}
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5 opacity-70 hover:opacity-100" />
+                    ) : (
+                      <Eye className="h-5 w-5 opacity-70 hover:opacity-100" />
+                    )}
                   </button>
                 </div>
                 <div className="h-6">
@@ -197,3 +201,4 @@ const LoginForm = ({
 };
 
 export default LoginForm;
+
