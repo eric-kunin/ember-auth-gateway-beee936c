@@ -119,3 +119,32 @@ export const resetPassword = async (email: string) => {
     return { success: false, error: error.message };
   }
 };
+
+export const updateProfile = async (profileData: {
+  username?: string;
+  display_name?: string;
+  bio?: string;
+  birth_date?: string;
+  avatar_url?: string;
+}) => {
+  try {
+    const { data: user, error: sessionError } = await supabase.auth.getUser();
+    if (sessionError || !user) throw sessionError;
+
+    const { error } = await supabase
+      .from("profiles")
+      .update(profileData)
+      .eq("id", user.id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return { success: true };
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    return {
+      success: false,
+      error: (error as Error)?.message || "Failed to update profile",
+    };
+  }
+};
