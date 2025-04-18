@@ -1,10 +1,10 @@
 
 import { supabase } from "@/integrations/supabase/client";
-import { RegisterFormValues } from "@/components/signup/schemas";
+import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
 import { UUID } from "crypto";
 
 export const signUpUser = async (
-  userData: RegisterFormValues,
+  userData: any,
   userId: UUID,
   imageUrls: string[],
   imagePaths: string[]

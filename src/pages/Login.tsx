@@ -47,6 +47,7 @@ const Login = () => {
         description: `Logging in with ${provider}...`,
       });
       setIsLoading(false);
+      navigate("/dashboard");
     }, 1000);
   };
 

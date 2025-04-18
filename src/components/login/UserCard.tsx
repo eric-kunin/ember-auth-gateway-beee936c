@@ -74,7 +74,7 @@ const UserCard: React.FC<UserCardProps> = ({
         </div>
       </div>
       
-      <CardContent className="p-3 text-right" dir="rtl">
+      <CardContent className="p-3 text-right">
         <div className="font-medium text-[#240046] dark:text-white text-lg truncate mb-1">
           {nickname}
         </div>

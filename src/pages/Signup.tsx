@@ -2,13 +2,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import BackgroundElements from "@/components/login/BackgroundElements";
-import UserCardsBackground from "@/components/login/UserCardsBackground";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import SignupCard from "@/components/signup/SignupCard";
 import { AccountFormValues } from "@/components/signup/schemas";
 import { PersonalInfoFormValues } from "@/components/signup/schemas";
 import { signUpUser } from "@/services/supabase/auth-service";
+import LoginBackground from "@/components/login/LoginBackground";
 
 interface ProfileImage {
   imageId?: string;
@@ -163,33 +162,28 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#10002B] via-[#240046] to-[#3C096C] transition-colors duration-300">
+    <LoginBackground>
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>
       
-      <main className="flex-1 flex items-center justify-center relative">
-        <BackgroundElements />
-        <UserCardsBackground />
-        
-        <SignupCard 
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          progress={progress}
-          accountData={accountData}
-          personalData={personalData}
-          profileData={profileData}
-          profileImages={profileImages}
-          isLoading={isLoading}
-          handleSignupStep1={handleSignupStep1}
-          handleSignupStep2={handleSignupStep2}
-          handleProfileDataChange={handleProfileDataChange}
-          handlePrevStep={handlePrevStep}
-          handleCompleteSignup={handleCompleteSignup}
-          handleOAuthSignup={handleOAuthSignup}
-        />
-      </main>
-    </div>
+      <SignupCard 
+        currentStep={currentStep}
+        totalSteps={totalSteps}
+        progress={progress}
+        accountData={accountData}
+        personalData={personalData}
+        profileData={profileData}
+        profileImages={profileImages}
+        isLoading={isLoading}
+        handleSignupStep1={handleSignupStep1}
+        handleSignupStep2={handleSignupStep2}
+        handleProfileDataChange={handleProfileDataChange}
+        handlePrevStep={handlePrevStep}
+        handleCompleteSignup={handleCompleteSignup}
+        handleOAuthSignup={handleOAuthSignup}
+      />
+    </LoginBackground>
   );
 };
 
