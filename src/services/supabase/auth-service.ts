@@ -1,3 +1,4 @@
+
 import { supabase } from "@/integrations/supabase/client";
 import type { UUID } from "crypto";
 
@@ -12,7 +13,7 @@ export const signUpUser = async (
     const { error: profileUpdateError } = await supabase
       .from('profiles')
       .update({
-        profile_avatar_url: imageUrls[0], // Changed from avatar_url to profile_avatar_url
+        main_profile_image_url: imageUrls[0], // Changed to main_profile_image_url
         phone_number: userData.phone, // Changed from phone to phone_number
         profile_photos: imageUrls, // Changed from photos to profile_photos
         profile_photo_paths: imagePaths // Changed from photo_paths to profile_photo_paths

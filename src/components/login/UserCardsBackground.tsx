@@ -13,8 +13,8 @@ const UserCardsBackground: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none p-4">
-      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-4 max-w-[2100px] mx-auto">
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none p-8">
+      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-4 md:gap-6 max-w-[2100px] mx-auto">
         {randomUsers.map((user, index) => (
           <UserCard
             key={`${user.id}-${index}`}
@@ -23,7 +23,7 @@ const UserCardsBackground: React.FC = () => {
             location={user.location}
             imageUrl={user.imageUrl}
             verified={user.verified}
-            className="opacity-60 hover:opacity-90 transition-opacity"
+            className="opacity-70 hover:opacity-90 transition-opacity"
           />
         ))}
       </div>
