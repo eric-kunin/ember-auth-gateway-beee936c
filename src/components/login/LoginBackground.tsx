@@ -10,10 +10,10 @@ interface LoginBackgroundProps {
 const LoginBackground = ({ children }: LoginBackgroundProps) => {
   return (
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#10002B] via-[#240046] to-[#3C096C] transition-colors duration-300 overflow-hidden">
-      <BackgroundElements />
-      <UserCardsBackground />
-      <main className="flex-1 flex items-center justify-center relative z-20">
-        <div className="relative">
+      <main className="flex-1 flex items-center justify-center relative z-10">
+        <BackgroundElements />
+        <UserCardsBackground />
+        <div className="relative z-20">
           {children}
         </div>
       </main>
