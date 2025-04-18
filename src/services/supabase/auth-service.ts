@@ -1,7 +1,5 @@
-
 import { supabase } from "@/integrations/supabase/client";
-import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
-import { UUID } from "crypto";
+import type { UUID } from "crypto";
 
 export const signUpUser = async (
   userData: any,
@@ -14,10 +12,10 @@ export const signUpUser = async (
     const { error: profileUpdateError } = await supabase
       .from('profiles')
       .update({
-        avatar_url: imageUrls[0], // Use first image as main avatar
-        phone: userData.phone,
-        photos: imageUrls, // Store all images in photos array
-        photo_paths: imagePaths
+        profile_avatar_url: imageUrls[0], // Changed from avatar_url to profile_avatar_url
+        phone_number: userData.phone, // Changed from phone to phone_number
+        profile_photos: imageUrls, // Changed from photos to profile_photos
+        profile_photo_paths: imagePaths // Changed from photo_paths to profile_photo_paths
       })
       .eq('id', userId);
 
