@@ -29,16 +29,16 @@ const UserCard = ({
       whileHover={{ scale: 1.05 }}
       className={className}
     >
-      <Card className="relative overflow-hidden bg-white/10 dark:bg-[#240046]/40 backdrop-blur-sm 
-                    border-[#E0AAFF]/20 dark:border-[#9D4EDD]/20 p-3 hover:shadow-xl transition-all duration-300">
+      <Card className="relative overflow-hidden bg-white/5 dark:bg-[#2D1657]/40 backdrop-blur-sm 
+                    border-[#E0AAFF]/10 dark:border-[#9D4EDD]/20 p-4 hover:shadow-2xl transition-all duration-300">
         <div className="relative">
-          <Avatar className="w-full h-24 rounded-lg">
+          <Avatar className="w-full h-32 rounded-lg">
             <AvatarImage src={imageUrl} alt={nickname} className="object-cover" />
             <AvatarFallback className="text-2xl bg-[#9D4EDD]/30">{nickname[0]}</AvatarFallback>
           </Avatar>
           
           {verified && (
-            <div className="absolute top-2 right-2 bg-white/80 dark:bg-[#10002B]/70 p-1 rounded-full">
+            <div className="absolute top-2 right-2 bg-white/90 dark:bg-[#1E0B36]/80 p-1 rounded-full">
               <CheckCircle className="h-4 w-4 text-[#9D4EDD]" />
             </div>
           )}
