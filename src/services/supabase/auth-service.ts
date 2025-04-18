@@ -1,4 +1,5 @@
-import { supabase } from "@/supabase";
+
+import { supabase } from "@/integrations/supabase/client";
 import { v4 as uuidv4 } from 'uuid';
 
 export const signUpUser = async (userData: any, profileImages: any[] = []) => {
@@ -49,6 +50,7 @@ export const signUpUser = async (userData: any, profileImages: any[] = []) => {
           return { ...image, publicUrl: null, uploadError: uploadError.message };
         }
         
+        // Use the proper Supabase URL from the environment variable
         const publicUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/avatars/${imagePath}`;
         return { ...image, publicUrl, imagePath };
       })
