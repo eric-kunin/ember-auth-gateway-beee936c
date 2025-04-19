@@ -9,6 +9,7 @@ export function ThemeToggle() {
   const [animateIcon, setAnimateIcon] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  // This ensures hydration matching
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -22,6 +23,7 @@ export function ThemeToggle() {
     }, 1000);
   };
 
+  // Prevent rendering until after client-side hydration
   if (!mounted) {
     return null;
   }
@@ -32,15 +34,16 @@ export function ThemeToggle() {
       size="icon"
       onClick={handleToggle}
       className="rounded-full w-12 h-12 flex items-center justify-center
-      backdrop-blur-xl 
-      dark:bg-[#240046]/70 dark:hover:bg-[#240046]/90
-      bg-white/60 hover:bg-white/80 transition-all duration-300
-      border-2 dark:border-purple-500/30 border-purple-500/20 
-      shadow-lg hover:shadow-purple-500/20"
+        backdrop-blur-xl 
+        dark:bg-[#240046]/70 dark:hover:bg-[#240046]/90
+        bg-white/60 hover:bg-white/80 transition-all duration-300
+        border-2 dark:border-purple-500/30 border-purple-500/20 
+        shadow-lg hover:shadow-purple-500/20
+        z-50 cursor-pointer"
     >
       {theme === 'dark' ? 
-        <Sun className={`h-6 w-6 text-yellow-300 ${animateIcon ? 'animate-sun' : ''} transition-colors duration-300`} /> : 
-        <Moon className={`h-6 w-6 text-[#240046] ${animateIcon ? 'animate-moon' : ''} transition-colors duration-300`} />
+        <Sun className={`h-6 w-6 text-yellow-300 ${animateIcon ? 'animate-sun' : ''} transition-colors duration-300 pointer-events-none`} /> : 
+        <Moon className={`h-6 w-6 text-[#240046] ${animateIcon ? 'animate-moon' : ''} transition-colors duration-300 pointer-events-none`} />
       }
       <span className="sr-only">Toggle theme</span>
     </Button>

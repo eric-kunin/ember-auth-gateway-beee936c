@@ -16,8 +16,8 @@ const Forbidden = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0B0205] via-[#10002B] to-[#240046] transition-all duration-300">
-      <div className="absolute top-4 right-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-[#10002B] to-[#240046] transition-all duration-500">
+      <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>
       
@@ -31,7 +31,7 @@ const Forbidden = () => {
         </div>
       </div>
       
-      <div className="text-center z-10 mt-20 bg-[#1A001A]/80 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)]">
+      <div className="text-center z-10 mt-20 bg-black/50 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)]">
         <div className="mb-6 flex justify-center">
           <Lock className="h-16 w-16 text-[#E0AAFF] animate-bounce" />
         </div>
@@ -51,8 +51,8 @@ const Forbidden = () => {
       </div>
       
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-1/3 left-[20%] w-72 h-72 rounded-full bg-[#9D4EDD]/20 blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/3 right-[20%] w-80 h-80 rounded-full bg-[#7B2CBF]/30 blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/3 left-[20%] w-72 h-72 rounded-full bg-[#9D4EDD]/5 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-[20%] w-80 h-80 rounded-full bg-[#7B2CBF]/10 blur-3xl animate-pulse"></div>
       </div>
     </div>
   );
