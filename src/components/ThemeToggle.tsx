@@ -33,7 +33,7 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={handleToggle}
-      className="rounded-full w-10 h-10 flex items-center justify-center
+      className="absolute top-4 right-4 rounded-full w-10 h-10 flex items-center justify-center
         backdrop-blur-xl 
         dark:bg-[#240046]/70 dark:hover:bg-[#240046]/90
         bg-white/60 hover:bg-white/80 transition-all duration-300
@@ -42,8 +42,14 @@ export function ThemeToggle() {
         z-50 cursor-pointer"
     >
       {theme === 'dark' ? 
-        <Sun className="h-5 w-5 text-yellow-300 pointer-events-none transition-colors duration-300" /> : 
-        <Moon className="h-5 w-5 text-[#240046] pointer-events-none transition-colors duration-300" />
+        <Sun 
+          className={`h-5 w-5 text-yellow-300 transition-colors duration-300 
+            ${animateIcon ? 'animate-sun' : ''}`} 
+        /> : 
+        <Moon 
+          className={`h-5 w-5 text-[#240046] transition-colors duration-300
+            ${animateIcon ? 'animate-moon' : ''}`} 
+        />
       }
       <span className="sr-only">Toggle theme</span>
     </Button>
