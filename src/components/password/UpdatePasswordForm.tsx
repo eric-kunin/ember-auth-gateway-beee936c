@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -49,10 +48,10 @@ export const UpdatePasswordForm = () => {
       
       toast({
         title: "Password updated!",
-        description: "Your password has been reset successfully. You can now login with your new password.",
+        description: "Your password has been reset successfully. Redirecting to login...",
       });
       
-      setTimeout(() => navigate("/login"), 2000);
+      setTimeout(() => navigate("/login"), 3000);
     } catch (error) {
       toast({
         variant: "destructive",

@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useNavigate } from "react-router-dom";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -33,6 +34,7 @@ const ForgotPasswordForm = ({
   isLoading: externalLoading,
 }: ForgotPasswordFormProps) => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(externalLoading);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -53,6 +55,10 @@ const ForgotPasswordForm = ({
           title: "Reset link sent!",
           description: "Check your email for password reset instructions.",
         });
+        
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
       } else {
         toast({
           variant: "destructive",
