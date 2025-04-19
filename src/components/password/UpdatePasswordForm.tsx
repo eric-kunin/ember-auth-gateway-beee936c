@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Eye, EyeOff, Shield } from "lucide-react";
+import { Shield, KeyRound, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -45,7 +45,6 @@ export const UpdatePasswordForm = () => {
   const onSubmit = async (data: UpdatePasswordFormValues) => {
     try {
       setIsLoading(true);
-      // Here you would typically call your password update API
       console.log("Updating password:", data);
       
       toast({
@@ -53,7 +52,6 @@ export const UpdatePasswordForm = () => {
         description: "Your password has been reset successfully. You can now login with your new password.",
       });
       
-      // Redirect to login page after successful password reset
       setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
       toast({
@@ -67,14 +65,17 @@ export const UpdatePasswordForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md p-6 space-y-6 bg-white/10 dark:bg-[#10002B]/80 rounded-lg border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20 backdrop-blur-md">
+    <div className="w-full max-w-md p-8 space-y-8 bg-white/5 dark:bg-[#10002B]/90 rounded-lg border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20 backdrop-blur-xl animate-fade-in">
       <div className="text-center space-y-2">
-        <h2 className="text-2xl font-semibold text-[#9D4EDD]">Reset Password</h2>
-        <p className="text-[#E0AAFF] text-sm">Please enter your new password below</p>
+        <div className="flex items-center justify-center mb-4">
+          <KeyRound className="h-12 w-12 text-[#9D4EDD] animate-pulse" />
+        </div>
+        <h2 className="text-3xl font-semibold text-[#9D4EDD]">Reset Password</h2>
+        <p className="text-[#E0AAFF] text-sm">Create your new secure password</p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
             name="newPassword"
@@ -85,7 +86,7 @@ export const UpdatePasswordForm = () => {
                   <FormControl>
                     <Input
                       type={showNewPassword ? "text" : "password"}
-                      className="bg-white/10 border-[#E0AAFF]/30 text-white pr-10"
+                      className="bg-white/10 border-[#E0AAFF]/30 text-white pr-10 focus:ring-[#9D4EDD] transition-all"
                       {...field}
                     />
                   </FormControl>
@@ -118,7 +119,7 @@ export const UpdatePasswordForm = () => {
                   <FormControl>
                     <Input
                       type={showConfirmPassword ? "text" : "password"}
-                      className="bg-white/10 border-[#E0AAFF]/30 text-white pr-10"
+                      className="bg-white/10 border-[#E0AAFF]/30 text-white pr-10 focus:ring-[#9D4EDD] transition-all"
                       {...field}
                     />
                   </FormControl>
@@ -143,7 +144,7 @@ export const UpdatePasswordForm = () => {
 
           <Button 
             type="submit" 
-            className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white"
+            className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white transform hover:scale-105 transition-all"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -159,7 +160,7 @@ export const UpdatePasswordForm = () => {
       </Form>
 
       <div className="pt-4 border-t border-[#E0AAFF]/20">
-        <div className="flex items-center gap-2 text-xs text-[#9D4EDD]/70">
+        <div className="flex items-center justify-center gap-2 text-xs text-[#9D4EDD]/70">
           <Shield className="h-4 w-4" />
           <span>Secured by reCAPTCHA</span>
         </div>
