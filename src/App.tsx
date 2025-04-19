@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import { UpdatePasswordForm } from "@/components/password/UpdatePasswordForm";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,13 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/update-password" element={
+              <div className="min-h-screen w-full flex flex-col bg-[#1E0B36] transition-colors duration-300">
+                <main className="flex-1 flex items-center justify-center">
+                  <UpdatePasswordForm />
+                </main>
+              </div>
+            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
