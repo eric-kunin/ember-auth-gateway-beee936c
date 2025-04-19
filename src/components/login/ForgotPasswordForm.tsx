@@ -1,10 +1,11 @@
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Mail, ArrowLeft, CheckCircle, Send, Shield } from "lucide-react";
+import { Mail, ArrowLeft, CircleCheck, Send, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { resetPassword } from "@/services/supabase/auth-service";
@@ -56,6 +57,7 @@ const ForgotPasswordForm = ({
           description: "Check your email for password reset instructions.",
         });
         
+        // Ensure redirect happens after 3 seconds
         setTimeout(() => {
           navigate('/login');
         }, 3000);
@@ -104,17 +106,17 @@ const ForgotPasswordForm = ({
             >
               <motion.div
                 initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
+                animate={{ scale: 1, rotate: [0, 10, -10, 0] }}
                 transition={{
                   type: "spring",
                   stiffness: 260,
                   damping: 20,
-                  delay: 0.2,
+                  duration: 1,
                 }}
                 className="relative"
               >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#E0AAFF]/20 to-[#C77DFF]/20 blur-xl" />
-                <CheckCircle className="h-16 w-16 text-[#9D4EDD] relative z-10" />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500/20 to-green-600/20 blur-xl" />
+                <CircleCheck className="h-16 w-16 text-green-500 relative z-10 animate-bounce" />
               </motion.div>
               <p className="text-[#E0AAFF] dark:text-[#C77DFF] text-center">
                 Password reset link has been sent to your email. Please check your inbox.
