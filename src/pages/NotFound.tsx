@@ -30,42 +30,32 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0B0205] via-[#10002B] to-[#240046] transition-all duration-300">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0B0205] via-[#10002B] to-[#240046] dark:from-black dark:via-[#10002B] dark:to-[#240046] transition-all duration-300">
       <div className="absolute top-4 right-4">
         <ThemeToggle />
       </div>
       
-      <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
-        <div className="flex flex-col items-center">
-          <img 
-            src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
-            alt="AkhlaDate Logo" 
-            className="h-24 w-24 object-contain drop-shadow-lg animate-pulse"
-          />
-        </div>
-      </div>
-      
-      <div className="text-center z-10 mt-20 bg-[#1A001A]/80 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)]">
+      <div className="text-center z-10 mt-8 bg-[#1A001A]/90 dark:bg-black/40 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)]">
         <h1 className="text-8xl font-bold mb-4 text-[#E0AAFF] animate-fade-in">404</h1>
         <div className="w-16 h-1 mx-auto bg-[#9D4EDD] mb-8 animate-grow-line"></div>
         <StepIndicator currentStep={1} totalSteps={3} />
-        <p className="text-2xl text-[#E0AAFF] mb-4 animate-fade-in">Hearts Misaligned?</p>
+        <p className="text-2xl text-[#E0AAFF] mb-4 animate-fade-in">Connection Lost?</p>
         <p className="text-md text-[#C77DFF] mb-8 animate-fade-in">
-          Looks like Cupid's GPS needs recalibrating! 
-          Don't worry, even love's navigator takes a wrong turn sometimes.
+          Seems like you've wandered into uncharted territory! 
+          Let's guide you back to where the hearts connect.
         </p>
         <Button 
           asChild 
           className="bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in"
         >
-          <a href="/login">Redirect to Romance</a>
+          <a href="/login">Back to Love's Path</a>
         </Button>
       </div>
       
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-1/4 left-[15%] w-80 h-80 rounded-full bg-[#9D4EDD]/20 blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-[15%] w-96 h-96 rounded-full bg-[#7B2CBF]/30 blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-[#E0AAFF]/10 blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/4 left-[15%] w-80 h-80 rounded-full bg-[#9D4EDD]/10 dark:bg-[#9D4EDD]/5 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-[15%] w-96 h-96 rounded-full bg-[#7B2CBF]/20 dark:bg-[#7B2CBF]/10 blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-[#E0AAFF]/5 blur-3xl animate-pulse"></div>
       </div>
     </div>
   );
