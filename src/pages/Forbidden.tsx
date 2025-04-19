@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Lock } from "lucide-react";
+import { Lock, Heart } from "lucide-react";
 
 const Forbidden = () => {
   const location = useLocation();
@@ -17,21 +17,11 @@ const Forbidden = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-[#10002B] to-[#240046] transition-all duration-500">
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
-      
-      <div className="absolute top-10 left-0 right-0 flex justify-center z-20">
-        <div className="flex flex-col items-center">
-          <img 
-            src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
-            alt="AkhlaDate Logo" 
-            className="h-24 w-24 object-contain drop-shadow-lg animate-pulse"
-          />
+      <div className="text-center z-10 mt-8 bg-black/60 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)] relative">
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
         </div>
-      </div>
-      
-      <div className="text-center z-10 mt-20 bg-black/50 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)]">
+        
         <div className="mb-6 flex justify-center">
           <Lock className="h-16 w-16 text-[#E0AAFF] animate-bounce" />
         </div>
@@ -44,9 +34,12 @@ const Forbidden = () => {
         </p>
         <Button 
           asChild 
-          className="bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in"
+          className="bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in flex gap-2 items-center mx-auto"
         >
-          <a href="/login">Return to Love's Gateway</a>
+          <a href="/login">
+            <Heart className="h-4 w-4 text-pink-200 animate-pulse" />
+            <span>Return to Love's Gateway</span>
+          </a>
         </Button>
       </div>
       

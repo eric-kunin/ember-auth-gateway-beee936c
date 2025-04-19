@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Heart } from "lucide-react";
 
 const StepIndicator = ({ currentStep, totalSteps }: { currentStep: number, totalSteps: number }) => {
   return (
@@ -31,12 +32,12 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-[#10002B] to-[#240046] transition-all duration-500">
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
-      
-      <div className="text-center z-10 mt-8 bg-black/50 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)]">
-        <h1 className="text-8xl font-bold mb-4 text-[#E0AAFF] animate-fade-in">404</h1>
+      <div className="text-center z-10 mt-8 bg-black/60 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)] relative">
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
+        </div>
+        
+        <h1 className="text-8xl font-bold mb-4 text-[#E0AAFF] animate-pulse">404</h1>
         <div className="w-16 h-1 mx-auto bg-[#9D4EDD] mb-8 animate-grow-line"></div>
         <StepIndicator currentStep={1} totalSteps={3} />
         <p className="text-2xl text-[#E0AAFF] mb-4 animate-fade-in">Connection Lost?</p>
@@ -44,11 +45,15 @@ const NotFound = () => {
           Seems like you've wandered into uncharted territory! 
           Let's guide you back to where the hearts connect.
         </p>
+        
         <Button 
           asChild 
-          className="bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in"
+          className="bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all transform hover:translate-y-[-2px] hover:shadow-lg animate-fade-in flex gap-2 items-center mx-auto"
         >
-          <a href="/login">Back to Love's Path</a>
+          <a href="/login">
+            <Heart className="h-4 w-4 text-pink-200 animate-pulse" />
+            <span>Back to Love's Path</span>
+          </a>
         </Button>
       </div>
       
