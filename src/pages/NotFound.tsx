@@ -1,5 +1,4 @@
-
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -22,18 +21,25 @@ const StepIndicator = ({ currentStep, totalSteps }: { currentStep: number, total
 
 const NotFound = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.error(
       "404 Error: User attempted to access non-existent route:",
       location.pathname
     );
-  }, [location.pathname]);
+
+    const timer = setTimeout(() => {
+      navigate('/login');
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [location.pathname, navigate]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-[#10002B] to-[#240046] transition-all duration-500">
       <div className="text-center z-10 mt-8 bg-black/60 backdrop-blur-xl border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300 shadow-[0_8px_32px_rgba(157,78,221,0.15)] relative">
-        <div className="absolute top-4 right-4">
+        <div className="absolute -top-2 -right-2">
           <ThemeToggle />
         </div>
         
