@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -38,6 +38,7 @@ const ForgotPasswordForm = ({
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(externalLoading);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [countdown, setCountdown] = useState(3);
 
   const form = useForm<ForgotPasswordFormValues>({
     resolver: zodResolver(forgotPasswordSchema),
@@ -45,6 +46,18 @@ const ForgotPasswordForm = ({
       email: "",
     },
   });
+
+  // Handle countdown and redirect
+  useEffect(() => {
+    if (isSubmitted && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else if (isSubmitted && countdown === 0) {
+      navigate('/login');
+    }
+  }, [isSubmitted, countdown, navigate]);
 
   const onSubmit = async (data: ForgotPasswordFormValues) => {
     setIsLoading(true);
@@ -56,11 +69,6 @@ const ForgotPasswordForm = ({
           title: "Reset link sent!",
           description: "Check your email for password reset instructions.",
         });
-        
-        // Ensure redirect happens after 3 seconds
-        setTimeout(() => {
-          navigate('/login');
-        }, 3000);
       } else {
         toast({
           variant: "destructive",
@@ -121,10 +129,13 @@ const ForgotPasswordForm = ({
               <p className="text-[#E0AAFF] dark:text-[#C77DFF] text-center">
                 Password reset link has been sent to your email. Please check your inbox.
               </p>
+              <p className="text-green-400 font-medium">
+                Redirecting to login in {countdown} seconds...
+              </p>
               <Button
                 type="button"
                 variant="outline"
-                onClick={onCancel}
+                onClick={() => navigate('/login')}
                 className="w-full sm:w-auto border-[#E0AAFF]/30 text-[#9D4EDD] hover:bg-[#9D4EDD]/10
                          dark:border-[#9D4EDD]/30 dark:text-[#E0AAFF] dark:hover:bg-[#9D4EDD]/20
                          transition-all duration-300"
