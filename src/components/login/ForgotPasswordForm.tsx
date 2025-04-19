@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -48,14 +49,23 @@ const ForgotPasswordForm = ({
 
   // Handle countdown and redirect
   useEffect(() => {
+    let timer: number;
+    
     if (isSubmitted && countdown > 0) {
-      const timer = setTimeout(() => {
+      timer = window.setTimeout(() => {
         setCountdown(countdown - 1);
       }, 1000);
-      return () => clearTimeout(timer);
     } else if (isSubmitted && countdown === 0) {
-      navigate('/login');
+      // Use setTimeout to ensure state updates are complete before navigation
+      timer = window.setTimeout(() => {
+        navigate('/login');
+      }, 100);
     }
+    
+    // Clean up the timer when the component unmounts or when dependencies change
+    return () => {
+      if (timer) window.clearTimeout(timer);
+    };
   }, [isSubmitted, countdown, navigate]);
 
   const onSubmit = async (data: ForgotPasswordFormValues) => {
@@ -113,25 +123,26 @@ const ForgotPasswordForm = ({
             >
               <motion.div
                 initial={{ scale: 0 }}
-                animate={{ scale: 1, rotate: [0, 10, -10, 0] }}
+                animate={{ scale: 1 }}
                 transition={{
                   type: "spring",
                   stiffness: 260,
                   damping: 20,
-                  duration: 1,
                 }}
-                className="relative"
+                className="relative flex items-center justify-center"
               >
-                <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl" />
-                <CircleCheck 
-                  className="h-24 w-24 text-green-500 relative z-10 animate-bounce" 
-                  strokeWidth={1.5} 
-                />
+                <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl"></div>
+                <div className="relative z-10 w-24 h-24 rounded-full flex items-center justify-center bg-green-500/10">
+                  <CircleCheck 
+                    className="h-16 w-16 text-green-500" 
+                    strokeWidth={1.5} 
+                  />
+                </div>
               </motion.div>
               <p className="text-green-500 text-center font-medium">
                 Password reset link has been sent to your email
               </p>
-              <p className="text-green-400 font-medium">
+              <p className="text-green-500 font-medium">
                 Redirecting to login in {countdown} seconds...
               </p>
               <Button
