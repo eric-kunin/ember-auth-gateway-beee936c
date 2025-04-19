@@ -1,30 +1,15 @@
 
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const StepIndicator = ({ currentStep, totalSteps }: { currentStep: number, totalSteps: number }) => {
-  return (
-    <div className="flex items-center justify-center gap-2 mt-2 mb-4">
-      {Array.from({ length: totalSteps }).map((_, i) => (
-        <div 
-          key={i}
-          className={`h-1.5 rounded-full transition-all duration-300 ${
-            i < currentStep ? "w-8 bg-[#9D4EDD]" : "w-4 bg-white/20"
-          }`}
-        />
-      ))}
-    </div>
-  );
-};
-
-const NotFound = () => {
+const Forbidden = () => {
   const location = useLocation();
 
   useEffect(() => {
     console.error(
-      "404 Error: User attempted to access non-existent route:",
+      "403 Error: Unauthorized access attempt:",
       location.pathname
     );
   }, [location.pathname]);
@@ -47,27 +32,25 @@ const NotFound = () => {
       </div>
       
       <div className="text-center z-10 mt-20 bg-[#1A001A]/70 backdrop-blur-lg border border-[#9D4EDD]/20 rounded-2xl p-8 w-96 transform hover:scale-105 transition-all duration-300">
-        <h1 className="text-7xl font-bold mb-4 text-[#E0AAFF]">404</h1>
+        <h1 className="text-7xl font-bold mb-4 text-[#E0AAFF]">403</h1>
         <div className="w-16 h-1 mx-auto bg-[#9D4EDD] mb-8"></div>
-        <StepIndicator currentStep={1} totalSteps={3} />
-        <p className="text-2xl text-[#E0AAFF] mb-4">Lost in Love?</p>
+        <p className="text-2xl text-[#E0AAFF] mb-4">Connection Blocked</p>
         <p className="text-md text-[#C77DFF] mb-8">
-          Looks like you've wandered off the path to connection. 
-          Don't worry, even Cupid takes wrong turns sometimes!
+          Looks like Cupid's taking a break! This area is off-limits for now. 
+          Maybe it's time to explore other paths to love?
         </p>
         <Button asChild className="bg-[#9D4EDD] hover:bg-[#7B2CBF] transition-all transform hover:translate-y-[-2px]">
-          <a href="/login">Find Your Way Back</a>
+          <a href="/login">Return to Love</a>
         </Button>
       </div>
       
-      {/* Enhanced decorative elements */}
+      {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-1/4 left-[15%] w-80 h-80 rounded-full bg-[#9D4EDD]/20 blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-[15%] w-96 h-96 rounded-full bg-[#7B2CBF]/30 blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-[#E0AAFF]/10 blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/3 left-[20%] w-72 h-72 rounded-full bg-[#9D4EDD]/20 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-[20%] w-80 h-80 rounded-full bg-[#7B2CBF]/30 blur-3xl animate-pulse"></div>
       </div>
     </div>
   );
 };
 
-export default NotFound;
+export default Forbidden;
