@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -122,11 +123,14 @@ const ForgotPasswordForm = ({
                 }}
                 className="relative"
               >
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500/20 to-green-600/20 blur-xl" />
-                <CircleCheck className="h-16 w-16 text-green-500 relative z-10 animate-bounce" />
+                <div className="absolute inset-0 rounded-full bg-green-500/20 blur-xl" />
+                <CircleCheck 
+                  className="h-24 w-24 text-green-500 relative z-10 animate-bounce" 
+                  strokeWidth={1.5} 
+                />
               </motion.div>
-              <p className="text-[#E0AAFF] dark:text-[#C77DFF] text-center">
-                Password reset link has been sent to your email. Please check your inbox.
+              <p className="text-green-500 text-center font-medium">
+                Password reset link has been sent to your email
               </p>
               <p className="text-green-400 font-medium">
                 Redirecting to login in {countdown} seconds...
@@ -135,8 +139,7 @@ const ForgotPasswordForm = ({
                 type="button"
                 variant="outline"
                 onClick={() => navigate('/login')}
-                className="w-full sm:w-auto border-[#E0AAFF]/30 text-[#9D4EDD] hover:bg-[#9D4EDD]/10
-                         dark:border-[#9D4EDD]/30 dark:text-[#E0AAFF] dark:hover:bg-[#9D4EDD]/20
+                className="w-full sm:w-auto border-green-500/30 text-green-500 hover:bg-green-500/10
                          transition-all duration-300"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
