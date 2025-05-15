@@ -1,7 +1,4 @@
 
-import { eq } from 'drizzle-orm';
-import { db } from '@/lib/drizzle';
-import { profiles } from '@/db/schema';
 import { supabase } from '@/integrations/supabase/client';
 import type { ProfileData } from '@/types/profile';
 
@@ -17,25 +14,30 @@ export class AuthService {
       if (authError) throw authError;
       if (!authData.user) throw new Error('No user data returned');
 
-      // Then create the profile using Drizzle
-      const newProfile = await db.insert(profiles).values({
-        userId: authData.user.id,
-        firstName: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
-        lastName: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
-        displayName: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
-        username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
-        bio: profileData.bio || '',
-        profession: profileData.profession || '',
-        birthDate: profileData.birthdate || new Date(),
-        gender: profileData.gender || '',
-        height: profileData.height,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        lastSeenAt: new Date(),
-        isOnline: true
-      });
+      // Then create the profile using Supabase
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          id: authData.user.id,
+          firstName: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
+          lastName: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
+          displayName: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
+          username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
+          bio: profileData.bio || '',
+          profession: profileData.profession || '',
+          birthDate: profileData.birthdate || new Date(),
+          gender: profileData.gender || '',
+          height: profileData.height,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          lastSeenAt: new Date(),
+          isOnline: true
+        })
+        .select();
 
-      return { user: authData.user, profile: newProfile };
+      if (profileError) throw profileError;
+
+      return { user: authData.user, profile: profile[0] };
     } catch (error) {
       console.error('SignUp error:', error);
       throw error;
@@ -52,22 +54,27 @@ export class AuthService {
       if (authError) throw authError;
       if (!authData.user) throw new Error('No user data returned');
 
-      // Fetch the user's profile using Drizzle
-      const userProfile = await db
-        .select()
-        .from(profiles)
-        .where(eq(profiles.userId, authData.user.id))
-        .limit(1);
+      // Fetch the user's profile using Supabase
+      const { data: userProfile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', authData.user.id)
+        .single();
+
+      if (profileError) throw profileError;
 
       // Update last seen and online status
-      await db.update(profiles)
-        .set({ 
+      const { error: updateError } = await supabase
+        .from('profiles')
+        .update({ 
           lastSeenAt: new Date(),
           isOnline: true 
         })
-        .where(eq(profiles.userId, authData.user.id));
+        .eq('id', authData.user.id);
 
-      return { user: authData.user, profile: userProfile[0] };
+      if (updateError) throw updateError;
+
+      return { user: authData.user, profile: userProfile };
     } catch (error) {
       console.error('SignIn error:', error);
       throw error;
@@ -81,12 +88,13 @@ export class AuthService {
       
       // If there is a user, update their online status
       if (user) {
-        await db.update(profiles)
-          .set({ 
+        await supabase
+          .from('profiles')
+          .update({ 
             lastSeenAt: new Date(),
             isOnline: false 
           })
-          .where(eq(profiles.userId, user.id));
+          .eq('id', user.id);
       }
       
       // Then sign out
@@ -112,15 +120,21 @@ export class AuthService {
       }
 
       // Get profile from database
-      const userProfile = await db
-        .select()
-        .from(profiles)
-        .where(eq(profiles.userId, user.id))
-        .limit(1);
+      const { data: userProfile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) {
+        console.error('Profile fetch error:', profileError);
+        // If no profile exists yet, return just the user
+        return { user, profile: null };
+      }
 
       return {
         user,
-        profile: userProfile[0] || null
+        profile: userProfile
       };
     } catch (error) {
       console.error('Get current user error:', error);
@@ -135,8 +149,9 @@ export class AuthService {
       if (!user) throw new Error('User not authenticated');
 
       // Update the profile
-      await db.update(profiles)
-        .set({
+      const { error } = await supabase
+        .from('profiles')
+        .update({
           firstName: profileData.firstName || profileData.name?.split(' ')?.[0],
           lastName: profileData.lastName || profileData.name?.split(' ')?.[1],
           displayName: profileData.displayName || profileData.name,
@@ -147,8 +162,9 @@ export class AuthService {
           height: profileData.height,
           updatedAt: new Date()
         })
-        .where(eq(profiles.userId, user.id));
+        .eq('id', user.id);
 
+      if (error) throw error;
       return true;
     } catch (error) {
       console.error('Update profile error:', error);
