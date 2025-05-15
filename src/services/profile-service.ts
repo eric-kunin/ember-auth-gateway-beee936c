@@ -1,7 +1,4 @@
 
-import { eq } from 'drizzle-orm';
-import { db } from '@/lib/drizzle';
-import { profiles } from '@/db/schema';
 import { supabase } from '@/integrations/supabase/client';
 
 export type ProfileData = {
@@ -15,36 +12,61 @@ export type ProfileData = {
 export class ProfileService {
   // Get profile by ID
   static async getProfile(userId: string) {
-    return db.select().from(profiles).where(eq(profiles.id, userId)).limit(1);
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+      
+    if (error) throw error;
+    return data;
   }
 
   // Create or update profile
   static async upsertProfile(userId: string, data: ProfileData) {
-    // First try to find the profile
-    const existingProfile = await this.getProfile(userId);
-    
-    if (existingProfile.length > 0) {
-      // Update existing profile
-      return db
-        .update(profiles)
-        .set({
-          ...data,
-          updatedAt: new Date(),
-        })
-        .where(eq(profiles.id, userId));
-    } else {
-      // Create new profile
-      return db.insert(profiles).values({
-        id: userId,
-        ...data,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        isActive: true,
-      });
+    try {
+      // First try to find the profile
+      const { data: existingProfile } = await supabase
+        .from('profiles')
+        .select()
+        .eq('id', userId)
+        .single();
+      
+      if (existingProfile) {
+        // Update existing profile
+        const { error } = await supabase
+          .from('profiles')
+          .update({
+            ...data,
+            updatedAt: new Date(),
+          })
+          .eq('id', userId);
+          
+        if (error) throw error;
+        return existingProfile;
+      } else {
+        // Create new profile
+        const { data: newProfile, error } = await supabase
+          .from('profiles')
+          .insert({
+            id: userId,
+            ...data,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            isActive: true,
+          })
+          .select();
+          
+        if (error) throw error;
+        return newProfile[0];
+      }
+    } catch (error) {
+      console.error('Upsert profile error:', error);
+      throw error;
     }
   }
 
-  // Example of combining Supabase Auth with Drizzle ORM
+  // Get current user profile
   static async getCurrentUserProfile() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.user) {
@@ -52,7 +74,13 @@ export class ProfileService {
     }
     
     const userId = session.user.id;
-    const profile = await this.getProfile(userId);
-    return profile[0] || null;
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+    
+    if (error) throw error;
+    return data;
   }
 }

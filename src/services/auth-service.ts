@@ -67,7 +67,7 @@ export class AuthService {
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ 
-          lastSeenAt: new Date(),
+          last_seen_at: new Date(),
           isOnline: true 
         })
         .eq('id', authData.user.id);
@@ -91,7 +91,7 @@ export class AuthService {
         await supabase
           .from('profiles')
           .update({ 
-            lastSeenAt: new Date(),
+            last_seen_at: new Date(),
             isOnline: false 
           })
           .eq('id', user.id);
