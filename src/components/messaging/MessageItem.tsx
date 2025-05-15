@@ -55,7 +55,7 @@ export function MessageItem({
             className={cn(
               "rounded-lg px-4 py-3 flex items-center gap-3",
               isSender 
-                ? "bg-purple-600/90 text-white" 
+                ? "bg-purple-600/90 text-white dark:bg-purple-800" 
                 : "bg-gray-100 dark:bg-gray-800"
             )}
             whileHover={{ scale: 1.01 }}
@@ -75,10 +75,10 @@ export function MessageItem({
         ) : (
           <motion.div 
             className={cn(
-              "rounded-lg px-3 py-2.5 inline-block shadow-sm",
+              "rounded-lg px-3 py-2.5 inline-block shadow-md",
               isSender 
-                ? "bg-purple-600/90 text-white rounded-tr-none" 
-                : "bg-gray-100 dark:bg-gray-800 rounded-tl-none"
+                ? "bg-purple-600 text-white rounded-tr-none dark:bg-purple-700" 
+                : "bg-gray-100 dark:bg-gray-800 rounded-tl-none dark:text-white"
             )}
             whileHover={{ scale: 1.01 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -88,7 +88,7 @@ export function MessageItem({
         )}
         
         <span className={cn(
-          "text-xs mt-1 text-gray-500",
+          "text-xs mt-1 text-gray-500 dark:text-gray-400",
           isSender ? "text-right mr-1" : "text-left ml-1"
         )}>
           {formattedTime}

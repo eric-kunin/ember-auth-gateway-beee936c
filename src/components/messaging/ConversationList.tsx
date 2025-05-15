@@ -41,10 +41,10 @@ export function ConversationList({
       <div className="flex items-center justify-between p-4 border-b dark:border-gray-800">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">Chats</h2>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="rounded-full">
+          <Button variant="ghost" size="icon" className="rounded-full hover:bg-purple-100/50 dark:hover:bg-purple-900/20">
             <History className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="rounded-full">
+          <Button variant="ghost" size="icon" className="rounded-full hover:bg-purple-100/50 dark:hover:bg-purple-900/20">
             <Plus className="h-5 w-5" />
           </Button>
         </div>
@@ -53,10 +53,10 @@ export function ConversationList({
       {/* Search */}
       <div className="px-3 pt-3 pb-2">
         <div className="relative">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
           <Input
             placeholder="Search conversations"
-            className="pl-9 py-5 h-10 rounded-full bg-gray-100 dark:bg-gray-900 border-0 focus-visible:ring-1 focus-visible:ring-purple-400 dark:focus-visible:ring-purple-500"
+            className="pl-9 py-5 h-10 rounded-full bg-gray-100 dark:bg-gray-900 border-0 focus-visible:ring-1 focus-visible:ring-purple-400 dark:focus-visible:ring-purple-500 dark:text-white"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -82,9 +82,10 @@ export function ConversationList({
                   )}
                   onClick={() => onSelectConversation(conversation.id)}
                   whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
                 >
                   <div className="relative">
-                    <Avatar>
+                    <Avatar className="border-2 border-transparent hover:border-purple-400">
                       {conversation.recipientAvatar && (
                         <AvatarImage src={conversation.recipientAvatar} alt={conversation.recipientName} />
                       )}
@@ -98,7 +99,7 @@ export function ConversationList({
                       </AvatarFallback>
                     </Avatar>
                     {conversation.unreadCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-md">
                         {conversation.unreadCount}
                       </span>
                     )}

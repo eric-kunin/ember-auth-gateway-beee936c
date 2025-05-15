@@ -18,5 +18,5 @@ export interface ProfileData {
   smokingStatus?: string;
   drinkingStatus?: string;
   lookingFor?: string;
-  lookingForGender?: string;
+  lookingForGender?: "Male" | "Female" | "Other";
 }

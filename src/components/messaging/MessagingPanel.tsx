@@ -19,6 +19,7 @@ interface Conversation {
   unreadCount: number;
 }
 
+// Sample conversation data with updated avatars
 const SAMPLE_CONVERSATIONS: Conversation[] = [
   {
     id: "conv1",
@@ -33,7 +34,7 @@ const SAMPLE_CONVERSATIONS: Conversation[] = [
     id: "conv2",
     recipientId: "user2",
     recipientName: "Sarah Miller",
-    recipientAvatar: undefined,
+    recipientAvatar: "/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png",
     lastMessage: "The project deadline is approaching...",
     lastMessageDate: new Date(Date.now() - 1000 * 60 * 60),
     unreadCount: 0
@@ -42,7 +43,7 @@ const SAMPLE_CONVERSATIONS: Conversation[] = [
     id: "conv3",
     recipientId: "user3",
     recipientName: "David Chen",
-    recipientAvatar: undefined,
+    recipientAvatar: "/lovable-uploads/101c11e0-73f1-4140-b100-53896f884b88.png",
     lastMessage: "Can we schedule a meeting for...",
     lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 3),
     unreadCount: 3
@@ -231,7 +232,7 @@ export function MessagingPanel() {
       transition={{ duration: 0.3 }}
       className="w-full"
     >
-      <div className="h-[700px] overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-lg flex">
+      <div className="h-[700px] overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-lg flex bg-white dark:bg-gray-950">
         {/* Conversation list - left sidebar */}
         <div className="w-1/3 border-r border-gray-200 dark:border-gray-800">
           <ConversationList
