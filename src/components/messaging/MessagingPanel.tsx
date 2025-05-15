@@ -4,15 +4,28 @@ import { ConversationList } from "./ConversationList";
 import { ChatInterface } from "./ChatInterface";
 import { Card } from "@/components/ui/card";
 import { v4 as uuidv4 } from "uuid";
+import { motion } from "framer-motion";
 
 // Sample data for demo purposes
 const SAMPLE_USER_ID = "current-user";
 
-const SAMPLE_CONVERSATIONS = [
+// Update the conversation type to include recipientAvatar
+interface Conversation {
+  id: string;
+  recipientId: string;
+  recipientName: string;
+  recipientAvatar?: string;  // Add this property to fix the TypeScript error
+  lastMessage: string;
+  lastMessageDate: Date;
+  unreadCount: number;
+}
+
+const SAMPLE_CONVERSATIONS: Conversation[] = [
   {
     id: "conv1",
     recipientId: "user1",
     recipientName: "Sarah Johnson",
+    recipientAvatar: "/lovable-uploads/3e77111e-92e0-4c3f-90c6-ff7fc9c9a896.png",
     lastMessage: "When are we meeting up?",
     lastMessageDate: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
     unreadCount: 2
@@ -21,6 +34,7 @@ const SAMPLE_CONVERSATIONS = [
     id: "conv2",
     recipientId: "user2",
     recipientName: "Michael Chen",
+    recipientAvatar: undefined,
     lastMessage: "The project looks great!",
     lastMessageDate: new Date(Date.now() - 1000 * 60 * 60), // 1 hour ago
     unreadCount: 0
@@ -29,6 +43,7 @@ const SAMPLE_CONVERSATIONS = [
     id: "conv3",
     recipientId: "user3",
     recipientName: "Emily Davis",
+    recipientAvatar: undefined,
     lastMessage: "Thanks for your help yesterday.",
     lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
     unreadCount: 0
@@ -102,7 +117,7 @@ const SAMPLE_MESSAGES = {
 
 export function MessagingPanel() {
   const [selectedConversationId, setSelectedConversationId] = useState<string | null>("conv1");
-  const [conversations, setConversations] = useState(SAMPLE_CONVERSATIONS);
+  const [conversations, setConversations] = useState<Conversation[]>(SAMPLE_CONVERSATIONS);
   const [messages, setMessages] = useState(SAMPLE_MESSAGES);
   
   const selectedConversation = selectedConversationId
@@ -158,31 +173,37 @@ export function MessagingPanel() {
   };
   
   return (
-    <Card className="flex h-[600px] border border-theme-light/10 overflow-hidden">
-      <div className="w-1/3 border-r">
-        <ConversationList
-          conversations={conversations}
-          selectedConversationId={selectedConversationId}
-          onSelectConversation={handleSelectConversation}
-        />
-      </div>
-      
-      <div className="w-2/3">
-        {selectedConversation ? (
-          <ChatInterface
-            currentUserId={SAMPLE_USER_ID}
-            recipientId={selectedConversation.recipientId}
-            recipientName={selectedConversation.recipientName}
-            recipientAvatar={selectedConversation.recipientAvatar}
-            messages={currentMessages}
-            onSendMessage={handleSendMessage}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Card className="flex h-[600px] border border-theme-light/10 overflow-hidden rounded-xl shadow-xl bg-gradient-to-br from-white/80 to-purple-50/80 dark:from-gray-900/90 dark:to-purple-950/90 backdrop-blur-sm">
+        <div className="w-1/3 border-r border-purple-200/30 dark:border-purple-800/30">
+          <ConversationList
+            conversations={conversations}
+            selectedConversationId={selectedConversationId}
+            onSelectConversation={handleSelectConversation}
           />
-        ) : (
-          <div className="flex items-center justify-center h-full">
-            <p className="text-gray-500">Select a conversation to start messaging</p>
-          </div>
-        )}
-      </div>
-    </Card>
+        </div>
+        
+        <div className="w-2/3">
+          {selectedConversation ? (
+            <ChatInterface
+              currentUserId={SAMPLE_USER_ID}
+              recipientId={selectedConversation.recipientId}
+              recipientName={selectedConversation.recipientName}
+              recipientAvatar={selectedConversation.recipientAvatar}
+              messages={currentMessages}
+              onSendMessage={handleSendMessage}
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full bg-gradient-to-b from-purple-900/5 to-indigo-900/5 dark:from-purple-900/10 dark:to-indigo-900/10">
+              <p className="text-gray-500 dark:text-gray-400 italic">Select a conversation to start messaging</p>
+            </div>
+          )}
+        </div>
+      </Card>
+    </motion.div>
   );
 }
