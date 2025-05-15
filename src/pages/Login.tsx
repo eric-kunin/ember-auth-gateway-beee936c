@@ -1,51 +1,41 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LoginFormValues } from "@/components/login/schemas";
 import LoginCard from "@/components/login/LoginCard";
 import LoginBackground from "@/components/login/LoginBackground";
 
 const Login = () => {
-  const { toast } = useToast();
   const navigate = useNavigate();
+  const { signIn, isAuthenticated, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleEmailLogin = async (data: LoginFormValues) => {
     try {
       setIsLoading(true);
-      
-      // This is just a mockup without actual authentication
-      setTimeout(() => {
-        toast({
-          title: "Success!",
-          description: "You've successfully logged in.",
-        });
-        setIsLoading(false);
-        navigate("/dashboard");
-      }, 1500);
-      
+      await signIn(data.email, data.password);
+      // Navigate is handled by the useEffect above when isAuthenticated changes
     } catch (error: any) {
+      console.error("Login error:", error);
       setIsLoading(false);
-      toast({
-        variant: "destructive",
-        title: "Login Failed",
-        description: error.message || "An error occurred during login",
-      });
     }
   };
 
   const handleOAuthLogin = (provider: string) => {
     setIsLoading(true);
-    
-    // This is just a mockup without actual OAuth authentication
+    // This is a mockup - in a real implementation, you'd use Supabase OAuth
+    // Example: supabase.auth.signInWithOAuth({ provider: provider.toLowerCase() })
     setTimeout(() => {
-      toast({
-        title: `${provider} Login`,
-        description: `Logging in with ${provider}...`,
-      });
       setIsLoading(false);
       navigate("/dashboard");
     }, 1000);
@@ -54,6 +44,16 @@ const Login = () => {
   const handleToggleForgotPassword = () => {
     setShowForgotPassword(!showForgotPassword);
   };
+
+  if (loading) {
+    return (
+      <LoginBackground>
+        <div className="flex items-center justify-center h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+        </div>
+      </LoginBackground>
+    );
+  }
 
   return (
     <LoginBackground>

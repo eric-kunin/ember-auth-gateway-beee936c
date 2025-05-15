@@ -1,12 +1,11 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import SignupCard from "@/components/signup/SignupCard";
-import { AccountFormValues } from "@/components/signup/schemas";
-import { PersonalInfoFormValues } from "@/components/signup/schemas";
-import { signUpUser } from "@/services/supabase/auth-service";
+import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
+import { useAuth } from "@/hooks/useAuth";
 import LoginBackground from "@/components/login/LoginBackground";
 
 interface ProfileImage {
@@ -21,6 +20,14 @@ interface ProfileImage {
 const Signup = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { signUp, isAuthenticated, loading } = useAuth();
+  
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
   
   // Form states for persistence between steps
   const [accountData, setAccountData] = useState<AccountFormValues>({
@@ -92,50 +99,34 @@ const Signup = () => {
     setIsLoading(true);
     
     try {
-      // Combine all data for signup
-      const userData = {
-        email: accountData.email,
-        password: accountData.password,
-        confirmPassword: accountData.confirmPassword,
-        agreeToTerms: accountData.agreeToTerms,
+      // Combine data for profile creation
+      const completeProfileData = {
         name: personalData.name,
-        gender: personalData.gender,
+        firstName: personalData.name.split(' ')[0],
+        lastName: personalData.name.split(' ').slice(1).join(' '),
         birthdate: personalData.birthdate,
+        gender: personalData.gender,
         phone: personalData.phone,
-        ...profileData
+        bio: profileData.bio,
+        profession: profileData.profession,
+        eyeColor: profileData.eyeColor,
+        height: profileData.height,
+        religion: profileData.religion,
+        religiousLevel: profileData.religiousLevel,
+        smokingStatus: profileData.smokingStatus,
+        drinkingStatus: profileData.drinkingStatus,
+        lookingFor: profileData.lookingFor,
+        lookingForGender: profileData.lookingForGender,
       };
+
+      // Call auth service to sign up
+      await signUp(accountData.email, accountData.password, completeProfileData);
       
-      // Generate a mock user ID for testing purposes
-      const mockUserId = "12345678-1234-1234-1234-123456789012";
-      
-      // Mock image URLs and paths for testing
-      const imageUrls = profileImages.map(img => img.publicUrl || '');
-      const imagePaths = profileImages.map(img => img.filePath || '');
-      
-      // Show loading toast for better feedback
+      // Navigate is handled by useEffect when isAuthenticated changes
       toast({
-        title: "Creating your account...",
-        description: "This may take a moment if you added photos."
+        title: "Account Created!",
+        description: "Your account has been successfully created.",
       });
-      
-      // Call signup service with the images
-      try {
-        await signUpUser(userData, mockUserId, imageUrls, imagePaths);
-        
-        toast({
-          title: "Account Created!",
-          description: "Your account has been successfully created.",
-        });
-        
-        // Navigate to dashboard on success
-        navigate("/dashboard");
-      } catch (error: any) {
-        toast({
-          variant: "destructive",
-          title: "Signup Failed",
-          description: error.message || "An error occurred during signup.",
-        });
-      }
     } catch (error: any) {
       toast({
         variant: "destructive",
@@ -150,7 +141,8 @@ const Signup = () => {
   const handleOAuthSignup = (provider: string) => {
     setIsLoading(true);
     
-    // This is just a mockup without actual OAuth signup
+    // This would use Supabase OAuth in a real implementation
+    // Example: supabase.auth.signInWithOAuth({ provider: provider.toLowerCase() })
     setTimeout(() => {
       toast({
         title: `${provider} Signup`,
@@ -160,6 +152,16 @@ const Signup = () => {
       navigate("/dashboard");
     }, 1000);
   };
+
+  if (loading) {
+    return (
+      <LoginBackground>
+        <div className="flex items-center justify-center h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+        </div>
+      </LoginBackground>
+    );
+  }
 
   return (
     <LoginBackground>
