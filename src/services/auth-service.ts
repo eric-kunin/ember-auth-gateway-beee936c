@@ -30,8 +30,6 @@ export class AuthService {
           height: profileData.height,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-          last_seen_at: new Date().toISOString(),
-          is_online: true
         })
         .select();
 
@@ -148,18 +146,18 @@ export class AuthService {
       
       if (!user) throw new Error('User not authenticated');
 
-      // Update the profile with snake_case field names
+      // Update the profile with proper field names and types
       const { error } = await supabase
         .from('profiles')
         .update({
-          first_name: profileData.firstName || profileData.name?.split(' ')?.[0],
-          last_name: profileData.lastName || profileData.name?.split(' ')?.[1],
-          display_name: profileData.displayName || profileData.name,
-          bio: profileData.bio,
-          profession: profileData.profession,
-          birth_date: profileData.birthdate instanceof Date ? profileData.birthdate.toISOString() : undefined,
-          gender: profileData.gender || 'Other',
-          height: profileData.height,
+          ...(profileData.firstName && { first_name: profileData.firstName }),
+          ...(profileData.lastName && { last_name: profileData.lastName }),
+          ...(profileData.displayName && { display_name: profileData.displayName }),
+          ...(profileData.bio && { bio: profileData.bio }),
+          ...(profileData.profession && { profession: profileData.profession }),
+          ...(profileData.birthdate && { birth_date: profileData.birthdate.toISOString() }),
+          ...(profileData.gender && { gender: profileData.gender as "Male" | "Female" | "Other" }),
+          ...(profileData.height && { height: profileData.height }),
           updated_at: new Date().toISOString()
         })
         .eq('id', user.id);

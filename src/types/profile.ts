@@ -1,7 +1,7 @@
 
 export interface ProfileData {
   name?: string;
-  gender?: string;
+  gender?: "Male" | "Female" | "Other";
   birthdate?: Date;
   phone?: string;
   preferences?: Record<string, any>;

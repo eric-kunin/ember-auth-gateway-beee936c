@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 export type ProfileData = {
   name?: string;
-  gender?: string;
+  gender?: "Male" | "Female" | "Other";
   birthdate?: Date;
   phone?: string;
   preferences?: Record<string, any>;
@@ -33,27 +33,34 @@ export class ProfileService {
         .single();
       
       if (existingProfile) {
-        // Update existing profile
+        // Update existing profile with snake_case field names
         const { error } = await supabase
           .from('profiles')
           .update({
-            ...data,
-            updatedAt: new Date(),
+            ...(data.name && { display_name: data.name }),
+            ...(data.gender && { gender: data.gender }),
+            ...(data.birthdate && { birth_date: data.birthdate.toISOString() }),
+            ...(data.phone && { phone: data.phone }),
+            ...(data.preferences && { preferences: data.preferences }),
+            updated_at: new Date().toISOString(),
           })
           .eq('id', userId);
           
         if (error) throw error;
         return existingProfile;
       } else {
-        // Create new profile
+        // Create new profile with snake_case field names
         const { data: newProfile, error } = await supabase
           .from('profiles')
           .insert({
             id: userId,
-            ...data,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            isActive: true,
+            ...(data.name && { display_name: data.name }),
+            ...(data.gender && { gender: data.gender }),
+            ...(data.birthdate && { birth_date: data.birthdate.toISOString() }),
+            ...(data.phone && { phone: data.phone }),
+            ...(data.preferences && { preferences: data.preferences }),
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
           })
           .select();
           
