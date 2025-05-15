@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { MessagingPanel } from "@/components/messaging/MessagingPanel";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -29,21 +31,34 @@ const Dashboard = () => {
             </Button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-lg bg-white shadow-md border border-theme-light/20 transition-all duration-300 transform hover:translate-y-[-4px] hover:shadow-lg dark:bg-black/20 dark:backdrop-blur-md dark:border-white/10">
-              <h2 className="text-xl font-semibold text-theme-purple mb-4 dark:text-theme-accent">Welcome to Your Dashboard</h2>
-              <p className="text-gray-600 dark:text-gray-300">
-                This is a placeholder dashboard page. In a real application, you would see your content here.
-              </p>
-            </div>
+          <Tabs defaultValue="messages" className="w-full">
+            <TabsList className="mb-6">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="messages">Messages</TabsTrigger>
+            </TabsList>
             
-            <div className="p-6 rounded-lg bg-gradient-to-br from-theme-purple/10 to-theme-main/10 shadow-md border border-theme-light/20 transition-all duration-300 transform hover:translate-y-[-4px] hover:shadow-lg dark:from-theme-purple/20 dark:to-theme-main/20 dark:border-white/10">
-              <h2 className="text-xl font-semibold text-theme-accent mb-4 dark:text-theme-light">Account Status</h2>
-              <p className="text-gray-600 dark:text-gray-300">
-                You are currently logged in. This page is just a demonstration of successful authentication.
-              </p>
-            </div>
-          </div>
+            <TabsContent value="overview">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 rounded-lg bg-white shadow-md border border-theme-light/20 transition-all duration-300 transform hover:translate-y-[-4px] hover:shadow-lg dark:bg-black/20 dark:backdrop-blur-md dark:border-white/10">
+                  <h2 className="text-xl font-semibold text-theme-purple mb-4 dark:text-theme-accent">Welcome to Your Dashboard</h2>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    This is a placeholder dashboard page. In a real application, you would see your content here.
+                  </p>
+                </div>
+                
+                <div className="p-6 rounded-lg bg-gradient-to-br from-theme-purple/10 to-theme-main/10 shadow-md border border-theme-light/20 transition-all duration-300 transform hover:translate-y-[-4px] hover:shadow-lg dark:from-theme-purple/20 dark:to-theme-main/20 dark:border-white/10">
+                  <h2 className="text-xl font-semibold text-theme-accent mb-4 dark:text-theme-light">Account Status</h2>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    You are currently logged in. This page is just a demonstration of successful authentication.
+                  </p>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="messages">
+              <MessagingPanel />
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
 
