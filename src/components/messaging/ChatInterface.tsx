@@ -2,10 +2,17 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { MessageItem } from "./MessageItem";
-import { SendHorizontal, PaperclipIcon } from "lucide-react";
+import { 
+  PaperclipIcon, 
+  SendHorizontal, 
+  Phone, 
+  Video, 
+  MoreHorizontal,
+  Smile 
+} from "lucide-react";
 import { motion } from "framer-motion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Message {
   id: string;
@@ -13,6 +20,11 @@ interface Message {
   senderId: string;
   recipientId: string;
   sentAt: Date;
+  isFile?: boolean;
+  fileDetails?: {
+    name: string;
+    size: string;
+  };
 }
 
 interface ChatInterfaceProps {
@@ -20,6 +32,7 @@ interface ChatInterfaceProps {
   recipientId: string;
   recipientName: string;
   recipientAvatar?: string;
+  recipientStatus?: string;
   messages: Message[];
   onSendMessage: (content: string) => void;
 }
@@ -29,6 +42,7 @@ export function ChatInterface({
   recipientId,
   recipientName,
   recipientAvatar,
+  recipientStatus,
   messages,
   onSendMessage,
 }: ChatInterfaceProps) {
@@ -55,12 +69,36 @@ export function ChatInterface({
   };
 
   return (
-    <Card className="flex flex-col h-full border-theme-light/10 bg-gradient-to-b from-purple-900/10 to-indigo-900/10 dark:from-purple-900/20 dark:to-indigo-900/20 backdrop-blur-sm">
-      <CardHeader className="pb-2 border-b border-purple-200/20 dark:border-purple-800/20 bg-gradient-to-r from-purple-500/10 to-indigo-500/10">
-        <CardTitle className="text-lg font-semibold text-purple-900 dark:text-purple-200">{recipientName}</CardTitle>
-      </CardHeader>
+    <div className="flex flex-col h-full bg-white dark:bg-gray-950">
+      {/* Header */}
+      <header className="flex items-center justify-between px-4 py-3 border-b dark:border-gray-800">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-10 w-10">
+            {recipientAvatar && <AvatarImage src={recipientAvatar} alt={recipientName} />}
+            <AvatarFallback className="bg-purple-100 text-purple-600 dark:bg-purple-900/50 dark:text-purple-200">
+              {recipientName.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <h2 className="font-medium text-gray-800 dark:text-gray-200">{recipientName}</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{recipientStatus || "Last seen recently"}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" className="rounded-full text-gray-600 dark:text-gray-400">
+            <Phone className="h-5 w-5" />
+          </Button>
+          <Button variant="ghost" size="icon" className="rounded-full text-gray-600 dark:text-gray-400">
+            <Video className="h-5 w-5" />
+          </Button>
+          <Button variant="ghost" size="icon" className="rounded-full text-gray-600 dark:text-gray-400">
+            <MoreHorizontal className="h-5 w-5" />
+          </Button>
+        </div>
+      </header>
       
-      <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-white/5 dark:bg-gray-950">
         {messages.map((message) => (
           <MessageItem
             key={message.id}
@@ -69,6 +107,8 @@ export function ChatInterface({
             isSender={message.senderId === currentUserId}
             senderName={message.senderId === currentUserId ? "You" : recipientName}
             senderAvatar={message.senderId !== currentUserId ? recipientAvatar : undefined}
+            isFile={message.isFile}
+            fileDetails={message.fileDetails}
           />
         ))}
         {messages.length === 0 && (
@@ -76,16 +116,17 @@ export function ChatInterface({
             <p className="text-gray-500 dark:text-gray-400 italic">No messages yet. Start the conversation!</p>
           </div>
         )}
-      </CardContent>
+      </div>
       
-      <CardFooter className="border-t border-purple-200/20 dark:border-purple-800/20 p-3 bg-gradient-to-r from-purple-500/5 to-indigo-500/5">
+      {/* Message input */}
+      <div className="border-t dark:border-gray-800 p-3 bg-white dark:bg-gray-950">
         <div className="flex gap-2 w-full items-end">
           <Button 
-            variant="outline" 
+            variant="ghost" 
             size="icon" 
-            className="h-9 w-9 rounded-full border-purple-300 dark:border-purple-700 bg-white/10 dark:bg-black/10 text-purple-700 dark:text-purple-300"
+            className="h-9 w-9 rounded-full text-gray-600 dark:text-gray-400"
           >
-            <PaperclipIcon className="h-4 w-4" />
+            <PaperclipIcon className="h-5 w-5" />
             <span className="sr-only">Attach file</span>
           </Button>
           
@@ -93,22 +134,31 @@ export function ChatInterface({
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a message..."
-            className="min-h-[44px] resize-none rounded-2xl bg-white/80 dark:bg-gray-800/80 border-purple-200 dark:border-purple-900 focus:border-purple-400 focus:ring-purple-400"
+            placeholder="Write a message..."
+            className="min-h-[40px] max-h-[120px] resize-none rounded-full bg-gray-100 dark:bg-gray-900 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-gray-500"
           />
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="h-9 w-9 rounded-full text-gray-600 dark:text-gray-400"
+          >
+            <Smile className="h-5 w-5" />
+            <span className="sr-only">Add emoji</span>
+          </Button>
           
           <motion.div whileTap={{ scale: 0.9 }}>
             <Button 
               onClick={handleSendMessage} 
               disabled={!newMessage.trim() || isSending}
-              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-full h-10 w-10 p-0"
+              className="bg-purple-600 hover:bg-purple-700 rounded-full h-9 w-9 p-0"
             >
-              <SendHorizontal className="h-5 w-5" />
+              <SendHorizontal className="h-4 w-4" />
               <span className="sr-only">Send message</span>
             </Button>
           </motion.div>
         </div>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }

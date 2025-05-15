@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { ConversationList } from "./ConversationList";
 import { ChatInterface } from "./ChatInterface";
-import { Card } from "@/components/ui/card";
 import { v4 as uuidv4 } from "uuid";
 import { motion } from "framer-motion";
 
@@ -14,7 +13,7 @@ interface Conversation {
   id: string;
   recipientId: string;
   recipientName: string;
-  recipientAvatar?: string;  // Add this property to fix the TypeScript error
+  recipientAvatar?: string;
   lastMessage: string;
   lastMessageDate: Date;
   unreadCount: number;
@@ -24,29 +23,56 @@ const SAMPLE_CONVERSATIONS: Conversation[] = [
   {
     id: "conv1",
     recipientId: "user1",
-    recipientName: "Sarah Johnson",
+    recipientName: "Yong Tonghyon",
     recipientAvatar: "/lovable-uploads/3e77111e-92e0-4c3f-90c6-ff7fc9c9a896.png",
-    lastMessage: "When are we meeting up?",
-    lastMessageDate: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
+    lastMessage: "What makes it different from...",
+    lastMessageDate: new Date(Date.now() - 1000 * 60 * 5),
     unreadCount: 2
   },
   {
     id: "conv2",
     recipientId: "user2",
-    recipientName: "Michael Chen",
+    recipientName: "Sarah Miller",
     recipientAvatar: undefined,
-    lastMessage: "The project looks great!",
-    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60), // 1 hour ago
+    lastMessage: "The project deadline is approaching...",
+    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60),
     unreadCount: 0
   },
   {
     id: "conv3",
     recipientId: "user3",
-    recipientName: "Emily Davis",
+    recipientName: "David Chen",
     recipientAvatar: undefined,
-    lastMessage: "Thanks for your help yesterday.",
-    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 3), // 3 hours ago
+    lastMessage: "Can we schedule a meeting for...",
+    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 3),
+    unreadCount: 3
+  },
+  {
+    id: "conv4",
+    recipientId: "user4",
+    recipientName: "Emma Thompson",
+    recipientAvatar: undefined,
+    lastMessage: "I reviewed the proposal and...",
+    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 8),
     unreadCount: 0
+  },
+  {
+    id: "conv5",
+    recipientId: "user5",
+    recipientName: "James Wilson",
+    recipientAvatar: undefined,
+    lastMessage: "The client loved our presentation!",
+    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 24),
+    unreadCount: 0
+  },
+  {
+    id: "conv6",
+    recipientId: "user6",
+    recipientName: "Sophia Garcia",
+    recipientAvatar: undefined,
+    lastMessage: "Let's finalize the design tomorrow",
+    lastMessageDate: new Date(Date.now() - 1000 * 60 * 60 * 24),
+    unreadCount: 1
   }
 ];
 
@@ -57,60 +83,86 @@ const SAMPLE_MESSAGES = {
       content: "Hey, how's it going?",
       senderId: "user1",
       recipientId: SAMPLE_USER_ID,
-      sentAt: new Date(Date.now() - 1000 * 60 * 30) // 30 minutes ago
+      sentAt: new Date(Date.now() - 1000 * 60 * 30)
     },
     {
       id: "msg2",
       content: "Pretty good! Working on the new project.",
       senderId: SAMPLE_USER_ID,
       recipientId: "user1",
-      sentAt: new Date(Date.now() - 1000 * 60 * 25) // 25 minutes ago
+      sentAt: new Date(Date.now() - 1000 * 60 * 25)
     },
     {
       id: "msg3",
-      content: "That sounds interesting! Can you tell me more about it?",
+      content: "Have you seen the latest updates?",
       senderId: "user1",
       recipientId: SAMPLE_USER_ID,
-      sentAt: new Date(Date.now() - 1000 * 60 * 20) // 20 minutes ago
+      sentAt: new Date(Date.now() - 1000 * 60 * 20)
     },
     {
       id: "msg4",
-      content: "When are we meeting up?",
+      content: "Check this out https://short.ly/ghi82k",
       senderId: "user1",
       recipientId: SAMPLE_USER_ID,
-      sentAt: new Date(Date.now() - 1000 * 60 * 5) // 5 minutes ago
-    }
-  ],
-  "conv2": [
+      sentAt: new Date(Date.now() - 1000 * 60 * 15)
+    },
     {
       id: "msg5",
-      content: "I reviewed the designs.",
-      senderId: "user2",
+      isFile: true,
+      fileDetails: {
+        name: "CryptoCoin-Release.pdf",
+        size: "12 mb"
+      },
+      content: "CryptoCoin-Release.pdf",
+      senderId: "user1",
       recipientId: SAMPLE_USER_ID,
-      sentAt: new Date(Date.now() - 1000 * 60 * 120) // 2 hours ago
+      sentAt: new Date(Date.now() - 1000 * 60 * 10)
     },
     {
       id: "msg6",
-      content: "What did you think?",
+      content: "Nope. Can you please upload it here?",
       senderId: SAMPLE_USER_ID,
-      recipientId: "user2",
-      sentAt: new Date(Date.now() - 1000 * 60 * 115) // 1 hour 55 minutes ago
+      recipientId: "user1",
+      sentAt: new Date(Date.now() - 1000 * 60 * 5)
     },
     {
       id: "msg7",
-      content: "The project looks great!",
+      content: "Wait, I'm looking into it!",
+      senderId: SAMPLE_USER_ID,
+      recipientId: "user1",
+      sentAt: new Date(Date.now() - 1000 * 60 * 2)
+    },
+    {
+      id: "msg8",
+      content: "I checked it. Yep, that works!",
+      senderId: SAMPLE_USER_ID,
+      recipientId: "user1",
+      sentAt: new Date(Date.now() - 1000 * 60 * 1)
+    },
+  ],
+  "conv2": [
+    {
+      id: "msg9",
+      content: "The project deadline is approaching fast. Are we on track?",
       senderId: "user2",
       recipientId: SAMPLE_USER_ID,
-      sentAt: new Date(Date.now() - 1000 * 60 * 60) // 1 hour ago
+      sentAt: new Date(Date.now() - 1000 * 60 * 120)
+    },
+    {
+      id: "msg10",
+      content: "Yes, we should be able to finish everything by Friday.",
+      senderId: SAMPLE_USER_ID,
+      recipientId: "user2",
+      sentAt: new Date(Date.now() - 1000 * 60 * 115)
     }
   ],
   "conv3": [
     {
-      id: "msg8",
-      content: "Thanks for your help yesterday.",
+      id: "msg11",
+      content: "Can we schedule a meeting for tomorrow to discuss the new feature?",
       senderId: "user3",
       recipientId: SAMPLE_USER_ID,
-      sentAt: new Date(Date.now() - 1000 * 60 * 60 * 3) // 3 hours ago
+      sentAt: new Date(Date.now() - 1000 * 60 * 180)
     }
   ]
 };
@@ -174,12 +226,14 @@ export function MessagingPanel() {
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="w-full"
     >
-      <Card className="flex h-[600px] border border-theme-light/10 overflow-hidden rounded-xl shadow-xl bg-gradient-to-br from-white/80 to-purple-50/80 dark:from-gray-900/90 dark:to-purple-950/90 backdrop-blur-sm">
-        <div className="w-1/3 border-r border-purple-200/30 dark:border-purple-800/30">
+      <div className="h-[700px] overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-lg flex">
+        {/* Conversation list - left sidebar */}
+        <div className="w-1/3 border-r border-gray-200 dark:border-gray-800">
           <ConversationList
             conversations={conversations}
             selectedConversationId={selectedConversationId}
@@ -187,6 +241,7 @@ export function MessagingPanel() {
           />
         </div>
         
+        {/* Chat interface - right side */}
         <div className="w-2/3">
           {selectedConversation ? (
             <ChatInterface
@@ -194,16 +249,17 @@ export function MessagingPanel() {
               recipientId={selectedConversation.recipientId}
               recipientName={selectedConversation.recipientName}
               recipientAvatar={selectedConversation.recipientAvatar}
+              recipientStatus="Last seen recently"
               messages={currentMessages}
               onSendMessage={handleSendMessage}
             />
           ) : (
-            <div className="flex items-center justify-center h-full bg-gradient-to-b from-purple-900/5 to-indigo-900/5 dark:from-purple-900/10 dark:to-indigo-900/10">
+            <div className="flex items-center justify-center h-full bg-white dark:bg-gray-950">
               <p className="text-gray-500 dark:text-gray-400 italic">Select a conversation to start messaging</p>
             </div>
           )}
         </div>
-      </Card>
+      </div>
     </motion.div>
   );
 }
