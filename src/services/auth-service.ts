@@ -19,19 +19,19 @@ export class AuthService {
         .from('profiles')
         .insert({
           id: authData.user.id,
-          firstName: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
-          lastName: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
-          displayName: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
+          first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
+          last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
+          display_name: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
           username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
           bio: profileData.bio || '',
           profession: profileData.profession || '',
-          birthDate: profileData.birthdate || new Date(),
-          gender: profileData.gender || '',
+          birth_date: profileData.birthdate ? profileData.birthdate.toISOString() : new Date().toISOString(),
+          gender: profileData.gender || 'Other',
           height: profileData.height,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          lastSeenAt: new Date(),
-          isOnline: true
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          last_seen_at: new Date().toISOString(),
+          is_online: true
         })
         .select();
 
@@ -67,8 +67,8 @@ export class AuthService {
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ 
-          last_seen_at: new Date(),
-          isOnline: true 
+          last_seen_at: new Date().toISOString(),
+          is_online: true 
         })
         .eq('id', authData.user.id);
 
@@ -91,8 +91,8 @@ export class AuthService {
         await supabase
           .from('profiles')
           .update({ 
-            last_seen_at: new Date(),
-            isOnline: false 
+            last_seen_at: new Date().toISOString(),
+            is_online: false 
           })
           .eq('id', user.id);
       }
@@ -148,19 +148,19 @@ export class AuthService {
       
       if (!user) throw new Error('User not authenticated');
 
-      // Update the profile
+      // Update the profile with snake_case field names
       const { error } = await supabase
         .from('profiles')
         .update({
-          firstName: profileData.firstName || profileData.name?.split(' ')?.[0],
-          lastName: profileData.lastName || profileData.name?.split(' ')?.[1],
-          displayName: profileData.displayName || profileData.name,
+          first_name: profileData.firstName || profileData.name?.split(' ')?.[0],
+          last_name: profileData.lastName || profileData.name?.split(' ')?.[1],
+          display_name: profileData.displayName || profileData.name,
           bio: profileData.bio,
           profession: profileData.profession,
-          birthDate: profileData.birthdate instanceof Date ? profileData.birthdate : undefined,
-          gender: profileData.gender,
+          birth_date: profileData.birthdate instanceof Date ? profileData.birthdate.toISOString() : undefined,
+          gender: profileData.gender || 'Other',
           height: profileData.height,
-          updatedAt: new Date()
+          updated_at: new Date().toISOString()
         })
         .eq('id', user.id);
 
