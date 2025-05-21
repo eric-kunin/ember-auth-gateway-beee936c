@@ -1,3 +1,4 @@
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoFormSchema, PersonalInfoFormValues } from "./schemas";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { CalendarIcon, User, Phone } from "lucide-react";
+import { CalendarIcon, User, Phone, Male, Female, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Form,
@@ -27,24 +28,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ProfileImageUpload } from "./ProfileImageUpload";
-import { useState, useEffect } from "react";
-
-interface ProfileImage {
-  imageId?: string;
-  filePath: string;
-  publicUrl: string;
-  file?: File;
-  isUploading?: boolean;
-  isPrivate?: boolean;
-}
+import { useState } from "react";
 
 interface SignupPersonalInfoProps {
   defaultValues?: Partial<PersonalInfoFormValues>;
   isLoading: boolean;
-  onSubmit: (data: PersonalInfoFormValues, images?: ProfileImage[]) => void;
+  onSubmit: (data: PersonalInfoFormValues) => void;
   onBack: () => void;
-  initialImages?: ProfileImage[];
 }
 
 const SignupPersonalInfo = ({
@@ -56,15 +46,7 @@ const SignupPersonalInfo = ({
   isLoading,
   onSubmit,
   onBack,
-  initialImages = [],
 }: SignupPersonalInfoProps) => {
-  const [profileImages, setProfileImages] = useState<ProfileImage[]>(initialImages);
-  
-  useEffect(() => {
-    if (initialImages?.length > 0) {
-      setProfileImages(initialImages);
-    }
-  }, [initialImages]);
   
   const form = useForm<PersonalInfoFormValues>({
     resolver: zodResolver(personalInfoFormSchema),
@@ -72,17 +54,21 @@ const SignupPersonalInfo = ({
     mode: "onChange"
   });
 
-  const handleSubmit = (data: PersonalInfoFormValues) => {
-    onSubmit(data, profileImages);
-  };
-
   // Calculate a sensible default birth year (18 years ago)
   const defaultDate = new Date();
   defaultDate.setFullYear(defaultDate.getFullYear() - 18);
 
+  // Custom gender options with icons
+  const genderOptions = [
+    { value: "Male", label: "Male", icon: <Male className="mr-2 h-4 w-4" /> },
+    { value: "Female", label: "Female", icon: <Female className="mr-2 h-4 w-4" /> },
+    { value: "Other", label: "Other", icon: <Users className="mr-2 h-4 w-4" /> },
+    { value: "prefer-not-to-say", label: "Prefer not to say", icon: <Users className="mr-2 h-4 w-4" /> }
+  ];
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
         <FormField
           control={form.control}
           name="name"
@@ -131,10 +117,19 @@ const SignupPersonalInfo = ({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="Female" title="Select female gender">Female</SelectItem>
-                  <SelectItem value="Male" title="Select male gender">Male</SelectItem>
-                  <SelectItem value="Other" title="Select other gender identity">Other</SelectItem>
-                  <SelectItem value="prefer-not-to-say" title="Prefer not to disclose gender">Prefer not to say</SelectItem>
+                  {genderOptions.map((option) => (
+                    <SelectItem 
+                      key={option.value} 
+                      value={option.value} 
+                      title={`Select ${option.label.toLowerCase()} gender`}
+                      className="flex items-center"
+                    >
+                      <div className="flex items-center">
+                        {option.icon}
+                        <span>{option.label}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />
@@ -180,7 +175,7 @@ const SignupPersonalInfo = ({
                     defaultMonth={field.value || defaultDate}
                     disabled={(date) => date > new Date()}
                     initialFocus
-                    fromYear={1900}
+                    fromYear={new Date().getFullYear() - 100}
                     toYear={new Date().getFullYear()}
                   />
                 </PopoverContent>
@@ -216,14 +211,6 @@ const SignupPersonalInfo = ({
             </FormItem>
           )}
         />
-
-        <div className="pt-2">
-          <ProfileImageUpload 
-            onImagesChange={setProfileImages}
-            existingImages={initialImages}
-            disabled={isLoading}
-          />
-        </div>
 
         <div className="flex gap-2 pt-2">
           <Button

@@ -60,23 +60,33 @@ const Signup = () => {
     lookingForGender: "",
     languageIds: [] as number[]
   });
+
+  // New lifestyle data for step 4
+  const [lifestyleData, setLifestyleData] = useState({
+    hobbies: [] as string[],
+    pets: "",
+    exercise: "",
+    diet: ""
+  });
   
   // UI states
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   
-  const totalSteps = 3;
+  const totalSteps = 6; // Increased to 6 steps
   const progress = (currentStep / totalSteps) * 100;
 
   const handleNextStep = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
+      window.scrollTo(0, 0);
     }
   };
 
   const handlePrevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -85,14 +95,24 @@ const Signup = () => {
     handleNextStep();
   };
 
-  const handleSignupStep2 = (data: PersonalInfoFormValues, images: ProfileImage[] = []) => {
+  const handleSignupStep2 = (data: PersonalInfoFormValues) => {
     setPersonalData(data);
-    setProfileImages(images);
     handleNextStep();
   };
 
   const handleProfileDataChange = (data: any) => {
     setProfileData({...profileData, ...data});
+    handleNextStep();
+  };
+
+  const handleLifestyleDataChange = (data: any) => {
+    setLifestyleData({...lifestyleData, ...data});
+    handleNextStep();
+  };
+
+  const handlePhotoUpload = (images: ProfileImage[] = []) => {
+    setProfileImages(images);
+    handleNextStep();
   };
 
   const handleCompleteSignup = async () => {
@@ -105,7 +125,7 @@ const Signup = () => {
         firstName: personalData.name.split(' ')[0],
         lastName: personalData.name.split(' ').slice(1).join(' '),
         birthdate: personalData.birthdate,
-        gender: personalData.gender,
+        gender: personalData.gender as "Male" | "Female" | "Other", // Type assertion to fix TS error
         phone: personalData.phone,
         bio: profileData.bio,
         profession: profileData.profession,
@@ -116,7 +136,7 @@ const Signup = () => {
         smokingStatus: profileData.smokingStatus,
         drinkingStatus: profileData.drinkingStatus,
         lookingFor: profileData.lookingFor,
-        lookingForGender: profileData.lookingForGender,
+        lookingForGender: profileData.lookingForGender as "Male" | "Female" | "Other", // Type assertion to fix TS error
       };
 
       // Call auth service to sign up
@@ -176,11 +196,14 @@ const Signup = () => {
         accountData={accountData}
         personalData={personalData}
         profileData={profileData}
+        lifestyleData={lifestyleData}
         profileImages={profileImages}
         isLoading={isLoading}
         handleSignupStep1={handleSignupStep1}
         handleSignupStep2={handleSignupStep2}
         handleProfileDataChange={handleProfileDataChange}
+        handleLifestyleDataChange={handleLifestyleDataChange}
+        handlePhotoUpload={handlePhotoUpload}
         handlePrevStep={handlePrevStep}
         handleCompleteSignup={handleCompleteSignup}
         handleOAuthSignup={handleOAuthSignup}

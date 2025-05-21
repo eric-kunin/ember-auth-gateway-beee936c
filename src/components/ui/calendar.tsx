@@ -21,19 +21,31 @@ function Calendar({
   showOutsideDays = true,
   ...props
 }: CalendarProps) {
-  const [month, setMonth] = React.useState<Date>(new Date())
+  const [month, setMonth] = React.useState<Date>(
+    props.defaultMonth || new Date()
+  )
 
   // Function to handle month change
   const handleMonthChange = (newMonth: Date) => {
     setMonth(newMonth)
   }
 
+  // Generate years array going back at least 80 years
+  const currentYear = new Date().getFullYear()
+  const minYear = currentYear - 100 // Show 100 years back
+  const maxYear = currentYear - 18 // Default to 18 years ago
+  
+  const years = Array.from(
+    { length: currentYear - minYear + 1 },
+    (_, i) => currentYear - i
+  )
+
   return (
     <DayPicker
       month={month}
       onMonthChange={handleMonthChange}
       showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      className={cn("p-3 pointer-events-auto", className)} // Added pointer-events-auto
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -84,11 +96,6 @@ function Calendar({
             "December",
           ]
 
-          const years = Array.from(
-            { length: 10 },
-            (_, i) => new Date().getFullYear() - 5 + i
-          )
-
           return (
             <div className="flex justify-center items-center gap-1 py-2">
               <Select
@@ -122,7 +129,7 @@ function Calendar({
                 <SelectTrigger className="h-8 w-[80px]">
                   <SelectValue placeholder={displayMonth.getFullYear()} />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="max-h-[200px] overflow-y-auto">
                   {years.map((year) => (
                     <SelectItem key={year} value={year.toString()}>
                       {year}
