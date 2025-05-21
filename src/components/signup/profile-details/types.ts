@@ -16,3 +16,8 @@ export const profileDetailsSchema = z.object({
 });
 
 export type ProfileDetailsFormValues = z.infer<typeof profileDetailsSchema>;
+
+// Export types for proper type checking in the SignupSummary component
+export interface ProfileDetails extends ProfileDetailsFormValues {
+  languageIds?: number[];
+}

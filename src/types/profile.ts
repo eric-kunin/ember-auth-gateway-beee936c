@@ -18,7 +18,7 @@ export interface ProfileData {
   smokingStatus?: string;
   drinkingStatus?: string;
   lookingFor?: string;
-  lookingForGender?: "Male" | "Female" | "Other";
+  lookingForGender?: "Male" | "Female" | "Other" | "Both";
 }
 
 // Add this type for compatibility with the Supabase profile format
@@ -42,7 +42,7 @@ export interface SupabaseProfileData {
   interests?: string[];
   last_name?: string;
   looking_for?: string;
-  looking_for_gender?: "Male" | "Female" | "Other";
+  looking_for_gender?: "Male" | "Female" | "Other" | "Both";
   name?: string;
   occupation?: string;
   phone?: string;

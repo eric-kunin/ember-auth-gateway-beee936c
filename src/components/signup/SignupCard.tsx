@@ -1,4 +1,3 @@
-
 import React from "react";
 import SignupStepIndicator from "./SignupStepIndicator";
 import { Progress } from "@/components/ui/progress";
@@ -12,6 +11,7 @@ import { motion } from "framer-motion";
 import SignupLifestyleInfo from "./SignupLifestyleInfo";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
+import { ProfileImage } from "./summary/types";
 
 interface ProfileImage {
   imageId?: string;

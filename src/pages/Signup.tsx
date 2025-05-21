@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -7,6 +6,8 @@ import SignupCard from "@/components/signup/SignupCard";
 import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
 import { useAuth } from "@/hooks/useAuth";
 import LoginBackground from "@/components/login/LoginBackground";
+import { ProfileImage } from "@/components/signup/summary/types";
+import { ProfileDetails } from "@/components/signup/profile-details/types";
 
 interface ProfileImage {
   imageId?: string;
@@ -47,18 +48,17 @@ const Signup = () => {
   const [profileImages, setProfileImages] = useState<ProfileImage[]>([]);
   
   // Additional profile data
-  const [profileData, setProfileData] = useState({
+  const [profileData, setProfileData] = useState<ProfileDetails>({
     bio: "",
     profession: "",
     eyeColor: "",
-    height: undefined as number | undefined,
+    height: undefined,
     religion: "",
     religiousLevel: "",
     smokingStatus: "",
     drinkingStatus: "",
     lookingFor: "",
-    lookingForGender: "",
-    languageIds: [] as number[]
+    lookingForGender: ""
   });
 
   // New lifestyle data for step 4
@@ -125,7 +125,7 @@ const Signup = () => {
         firstName: personalData.name.split(' ')[0],
         lastName: personalData.name.split(' ').slice(1).join(' '),
         birthdate: personalData.birthdate,
-        gender: personalData.gender as "Male" | "Female" | "Other", // Type assertion to fix TS error
+        gender: personalData.gender as "Male" | "Female" | "Other",
         phone: personalData.phone,
         bio: profileData.bio,
         profession: profileData.profession,
@@ -136,7 +136,7 @@ const Signup = () => {
         smokingStatus: profileData.smokingStatus,
         drinkingStatus: profileData.drinkingStatus,
         lookingFor: profileData.lookingFor,
-        lookingForGender: profileData.lookingForGender as "Male" | "Female" | "Other", // Type assertion to fix TS error
+        lookingForGender: profileData.lookingForGender as "Male" | "Female" | "Other" | "Both",
       };
 
       // Call auth service to sign up
