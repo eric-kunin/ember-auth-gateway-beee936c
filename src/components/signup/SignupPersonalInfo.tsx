@@ -1,4 +1,3 @@
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoFormSchema, PersonalInfoFormValues } from "./schemas";
@@ -58,8 +57,9 @@ const SignupPersonalInfo = ({
   const defaultDate = new Date();
   defaultDate.setFullYear(defaultDate.getFullYear() - 18);
   
-  // Set minimum year (current year - 80)
-  const minYear = new Date().getFullYear() - 80;
+  // Set exact 80 years ago as minimum year
+  const currentYear = new Date().getFullYear();
+  const minYear = currentYear - 80;
 
   // Custom gender options with icons
   const genderOptions = [
@@ -179,7 +179,7 @@ const SignupPersonalInfo = ({
                     disabled={(date) => date > new Date()}
                     initialFocus
                     fromYear={minYear}
-                    toYear={new Date().getFullYear()}
+                    toYear={currentYear}
                   />
                 </PopoverContent>
               </Popover>

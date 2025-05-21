@@ -30,15 +30,15 @@ function Calendar({
     setMonth(newMonth)
   }
 
-  // Generate years array going back at least 80 years
+  // Generate years array with proper range
   const currentYear = new Date().getFullYear()
-  const minYear = currentYear - 100 // Show 100 years back
-  const maxYear = currentYear - 18 // Default to 18 years ago
+  const minYear = currentYear - 80 // Show exactly 80 years back
+  const maxYear = currentYear // Maximum is current year
   
   const years = Array.from(
     { length: currentYear - minYear + 1 },
     (_, i) => currentYear - i
-  )
+  ).filter(year => year >= minYear && year <= maxYear) // Ensure the range is correct
 
   return (
     <DayPicker
