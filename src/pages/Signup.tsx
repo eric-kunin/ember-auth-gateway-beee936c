@@ -6,17 +6,8 @@ import SignupCard from "@/components/signup/SignupCard";
 import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
 import { useAuth } from "@/hooks/useAuth";
 import LoginBackground from "@/components/login/LoginBackground";
-import { ProfileImage } from "@/components/signup/summary/types";
+import { ProfileImage as ProfileImageType } from "@/components/signup/summary/types";
 import { ProfileDetails } from "@/components/signup/profile-details/types";
-
-interface ProfileImage {
-  imageId?: string;
-  filePath: string;
-  publicUrl: string;
-  file?: File;
-  isUploading?: boolean;
-  isPrivate?: boolean;
-}
 
 const Signup = () => {
   const { toast } = useToast();
@@ -45,7 +36,7 @@ const Signup = () => {
     phone: ""
   });
 
-  const [profileImages, setProfileImages] = useState<ProfileImage[]>([]);
+  const [profileImages, setProfileImages] = useState<ProfileImageType[]>([]);
   
   // Additional profile data
   const [profileData, setProfileData] = useState<ProfileDetails>({
@@ -110,7 +101,7 @@ const Signup = () => {
     handleNextStep();
   };
 
-  const handlePhotoUpload = (images: ProfileImage[] = []) => {
+  const handlePhotoUpload = (images: ProfileImageType[] = []) => {
     setProfileImages(images);
     handleNextStep();
   };
@@ -127,16 +118,16 @@ const Signup = () => {
         birthdate: personalData.birthdate,
         gender: personalData.gender as "Male" | "Female" | "Other",
         phone: personalData.phone,
-        bio: profileData.bio,
-        profession: profileData.profession,
-        eyeColor: profileData.eyeColor,
-        height: profileData.height,
-        religion: profileData.religion,
-        religiousLevel: profileData.religiousLevel,
-        smokingStatus: profileData.smokingStatus,
-        drinkingStatus: profileData.drinkingStatus,
-        lookingFor: profileData.lookingFor,
-        lookingForGender: profileData.lookingForGender as "Male" | "Female" | "Other" | "Both",
+        bio: profileData.bio || "",
+        profession: profileData.profession || "",
+        eyeColor: profileData.eyeColor || "",
+        height: profileData.height ? Number(profileData.height) : undefined,
+        religion: profileData.religion || "",
+        religiousLevel: profileData.religiousLevel || "",
+        smokingStatus: profileData.smokingStatus || "",
+        drinkingStatus: profileData.drinkingStatus || "",
+        lookingFor: profileData.lookingFor || "",
+        lookingForGender: profileData.lookingForGender as "Male" | "Female" | "Other" | "Both" || "Both",
       };
 
       // Call auth service to sign up

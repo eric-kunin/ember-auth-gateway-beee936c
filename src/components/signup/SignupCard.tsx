@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import SignupLifestyleInfo from "./SignupLifestyleInfo";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
-import { ProfileImage } from "./summary/types";
+import { ProfileImage as ProfileImageType } from "./summary/types";
 
 interface ProfileImage {
   imageId?: string;
@@ -30,13 +30,13 @@ interface SignupCardProps {
   personalData: PersonalInfoFormValues;
   profileData: any;
   lifestyleData: any;
-  profileImages: ProfileImage[];
+  profileImages: ProfileImageType[];
   isLoading: boolean;
   handleSignupStep1: (data: AccountFormValues) => void;
   handleSignupStep2: (data: PersonalInfoFormValues) => void;
   handleProfileDataChange: (data: any) => void;
   handleLifestyleDataChange: (data: any) => void;
-  handlePhotoUpload: (images: ProfileImage[]) => void;
+  handlePhotoUpload: (images: ProfileImageType[]) => void;
   handlePrevStep: () => void;
   handleCompleteSignup: () => void;
   handleOAuthSignup: (provider: string) => void;
