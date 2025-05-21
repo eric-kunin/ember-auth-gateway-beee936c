@@ -384,18 +384,6 @@ const ProfileDetailsForm = ({
           />
         </div>
 
-        <div className="mt-6">
-          <div className="mb-4 p-4 bg-[#f8f2ff] dark:bg-[#240046]/80 rounded-lg">
-            <h4 className="font-medium text-[#240046] dark:text-white mb-2">Profile Summary</h4>
-            <div className="text-sm text-[#3B185F] dark:text-custom-lighter space-y-1">
-              <p><span className="font-semibold">Name:</span> {personalData.name}</p>
-              <p><span className="font-semibold">Gender:</span> {personalData.gender}</p>
-              <p><span className="font-semibold">Email:</span> (Protected)</p>
-              {personalData.phone && <p><span className="font-semibold">Phone:</span> {personalData.phone}</p>}
-            </div>
-          </div>
-        </div>
-
         <div className="flex gap-2 pt-2">
           <Button
             type="button"
@@ -417,7 +405,7 @@ const ProfileDetailsForm = ({
                 <span>Creating Account...</span>
               </div>
             ) : (
-              "Complete Sign Up"
+              "Next"
             )}
           </Button>
         </div>
