@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { CalendarIcon, User, Phone, Male, Female, Users } from "lucide-react";
+import { CalendarIcon, UserRound, Phone, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   Form,
@@ -57,11 +57,14 @@ const SignupPersonalInfo = ({
   // Calculate a sensible default birth year (18 years ago)
   const defaultDate = new Date();
   defaultDate.setFullYear(defaultDate.getFullYear() - 18);
+  
+  // Set minimum year (current year - 80)
+  const minYear = new Date().getFullYear() - 80;
 
   // Custom gender options with icons
   const genderOptions = [
-    { value: "Male", label: "Male", icon: <Male className="mr-2 h-4 w-4" /> },
-    { value: "Female", label: "Female", icon: <Female className="mr-2 h-4 w-4" /> },
+    { value: "Male", label: "Male", icon: <UserRound className="mr-2 h-4 w-4" /> },
+    { value: "Female", label: "Female", icon: <UserRound className="mr-2 h-4 w-4" /> },
     { value: "Other", label: "Other", icon: <Users className="mr-2 h-4 w-4" /> },
     { value: "prefer-not-to-say", label: "Prefer not to say", icon: <Users className="mr-2 h-4 w-4" /> }
   ];
@@ -78,7 +81,7 @@ const SignupPersonalInfo = ({
                 Full Name
               </FormLabel>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
+                <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
                 <FormControl>
                   <Input
                     placeholder="John Doe"
@@ -175,7 +178,7 @@ const SignupPersonalInfo = ({
                     defaultMonth={field.value || defaultDate}
                     disabled={(date) => date > new Date()}
                     initialFocus
-                    fromYear={new Date().getFullYear() - 100}
+                    fromYear={minYear}
                     toYear={new Date().getFullYear()}
                   />
                 </PopoverContent>

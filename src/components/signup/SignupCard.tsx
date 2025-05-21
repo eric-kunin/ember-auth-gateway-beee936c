@@ -124,6 +124,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
             isLoading={isLoading}
             onSubmit={handleProfileDataChange}
             onBack={handlePrevStep}
+            onComplete={handleCompleteSignup}
           />
         )}
 
