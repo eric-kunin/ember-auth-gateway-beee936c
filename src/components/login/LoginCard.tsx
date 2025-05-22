@@ -38,8 +38,8 @@ const LoginCard = ({
       transition={{ duration: 0.5 }}
     >
       <Card className="p-4 sm:p-8 rounded-2xl bg-[#10002B]/95 border-[#9D4EDD]/20 shadow-xl relative">
-        {/* Theme toggle positioned on the card */}
-        <div className="absolute top-3 right-4">
+        {/* Theme toggle positioned on the card - adjusted position */}
+        <div className="absolute top-[-12px] right-[7px]">
           <ThemeToggle />
         </div>
         
