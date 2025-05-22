@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface FormActionsProps {
   isLoading: boolean;
@@ -15,6 +16,7 @@ const FormActions = ({ isLoading, onBack }: FormActionsProps) => {
         variant="outline"
         className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30"
       >
+        <ArrowLeft className="mr-2 h-4 w-4" />
         Back
       </Button>
       <Button
@@ -29,7 +31,10 @@ const FormActions = ({ isLoading, onBack }: FormActionsProps) => {
             <span>Creating Account...</span>
           </div>
         ) : (
-          "Next"
+          <>
+            Next
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </>
         )}
       </Button>
     </div>

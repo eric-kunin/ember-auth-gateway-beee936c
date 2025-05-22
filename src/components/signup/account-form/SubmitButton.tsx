@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface SubmitButtonProps {
   isLoading: boolean;
@@ -16,6 +17,7 @@ const SubmitButton = ({ isLoading, isValid }: SubmitButtonProps) => {
       title="Continue to next step"
     >
       Next
+      <ArrowRight className="ml-2 h-4 w-4" />
     </Button>
   );
 };

@@ -60,7 +60,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
             <PopoverContent 
               className={cn(
                 "w-auto p-0 min-w-[280px] pointer-events-auto", 
-                isMobile ? "translate-x-[-15%]" : ""
+                isMobile ? "translate-x-[-20%]" : ""
               )} 
               align={isMobile ? "center" : "start"}
               side={isMobile ? "bottom" : undefined}
@@ -76,6 +76,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                 toYear={currentYear}
                 captionLayout="dropdown-buttons"
                 className="pointer-events-auto"
+                showOutsideDays={false}
               />
             </PopoverContent>
           </Popover>
