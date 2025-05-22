@@ -1,5 +1,6 @@
 
 import { motion } from "framer-motion";
+import { AccountFormValues, PersonalInfoFormValues } from "../schemas";
 
 // Animation variants for staggered animation
 export const container = {
@@ -31,3 +32,21 @@ export interface ProfileImage {
   isUploading?: boolean;
   isPrivate?: boolean;
 }
+
+// Adding the missing SignupSummaryProps interface
+export interface SignupSummaryProps {
+  accountData: AccountFormValues;
+  personalData: PersonalInfoFormValues;
+  profileData: any;
+  lifestyleData: any;
+  profileImages: ProfileImage[];
+  isLoading: boolean;
+  onBack: () => void;
+  onComplete: () => void;
+}
+
+// Adding the missing capitalize utility function
+export const capitalize = (str?: string): string => {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
