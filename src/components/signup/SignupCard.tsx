@@ -60,9 +60,9 @@ const SignupCard: React.FC<SignupCardProps> = ({
                 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                 transition-colors duration-300"
       style={{ 
-        minWidth: '320px', 
+        minWidth: '380px', // Increased from 320px to 380px
         width: 'max-content',
-        minHeight: '500px' // Adding minimum height for consistency
+        minHeight: '520px' // Slightly increased for better proportions
       }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
