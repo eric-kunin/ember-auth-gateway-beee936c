@@ -13,47 +13,47 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
       title="Lifestyle & Preferences"
       icon={<Heart className="h-4 w-4" />}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-5 pl-3">
-        <div className="space-y-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 pl-4">
+        <div className="space-y-4">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Ruler className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Ruler className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Height:</span> {lifestyleData.height ? `${lifestyleData.height} cm` : 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Church className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Church className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Religion:</span> {capitalize(lifestyleData.religion) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Cigarette className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Cigarette className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Smoking:</span> {capitalize(lifestyleData.smokingStatus) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <MessageCircle className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <MessageCircle className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Looking for:</span> {capitalize(lifestyleData.lookingFor)} {lifestyleData.lookingForGender ? `(${lifestyleData.lookingForGender})` : ''}
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-4">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Eye className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Eye className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Eye color:</span> {capitalize(lifestyleData.eyeColor) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Church className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Church className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Religious level:</span> {capitalize(lifestyleData.religiousLevel) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Wine className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Wine className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Drinking:</span> {capitalize(lifestyleData.drinkingStatus) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
-            <Users className="h-3 w-3 text-[#9D4EDD] mr-2.5 flex-shrink-0" />
+            <Users className="h-3.5 w-3.5 text-[#9D4EDD] mr-3 flex-shrink-0" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Interested in:</span> {lifestyleData.lookingForGender || 'Not provided'}
           </p>
         </div>
       </div>
 
       {lifestyleData.hobbies && lifestyleData.hobbies.length > 0 && (
-        <div className="mb-4 pl-4">
+        <div className="mb-5 pl-6">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter mb-2">
             <span className="text-[#9D4EDD] font-medium">Hobbies:</span>
           </p>
@@ -70,7 +70,7 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
         </div>
       )}
 
-      <div className="space-y-2.5 pl-4 mb-2">
+      <div className="space-y-3 pl-6 mb-2">
         {lifestyleData.pets && (
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
             <span className="text-[#9D4EDD] font-medium mr-1.5">Pets:</span> {capitalize(lifestyleData.pets) || 'Not provided'}

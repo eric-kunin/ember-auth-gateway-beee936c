@@ -101,7 +101,9 @@ const SignupPersonalInfo = ({
                   />
                 </FormControl>
               </div>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]">
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
@@ -143,7 +145,9 @@ const SignupPersonalInfo = ({
                   ))}
                 </SelectContent>
               </Select>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]">
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
@@ -227,7 +231,9 @@ const SignupPersonalInfo = ({
                   <ValidationFeedback message="Maximum 15 digits allowed" />
                 )}
               </div>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]">
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />

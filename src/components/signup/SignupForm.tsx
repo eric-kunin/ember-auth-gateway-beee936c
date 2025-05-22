@@ -92,7 +92,9 @@ const SignupForm = ({
                 </FormControl>
                 <ValidationIcon isValid={emailIsValid} showIcon={emailState.isDirty} />
               </div>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]">
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
@@ -137,7 +139,9 @@ const SignupForm = ({
                 <Info className="h-3 w-3 mt-0.5 shrink-0" />
                 <span>Password must have at least 8 characters with one uppercase letter and one number.</span>
               </div>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]">
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
@@ -178,7 +182,9 @@ const SignupForm = ({
                   )}
                 </button>
               </div>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]">
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
@@ -210,7 +216,9 @@ const SignupForm = ({
                       Terms of Service
                     </button>
                   </FormLabel>
-                  <FormMessage className="text-xs text-red-500" />
+                  <div className="h-5 min-h-[1.25rem]">
+                    <FormMessage className="text-xs text-red-500" />
+                  </div>
                 </div>
               </FormItem>
             )}
