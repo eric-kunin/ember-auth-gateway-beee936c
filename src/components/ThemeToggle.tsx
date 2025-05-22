@@ -33,7 +33,7 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={handleToggle}
-      className="absolute top-6 right-6 rounded-full w-10 h-10 flex items-center justify-center
+      className="rounded-full w-8 h-8 flex items-center justify-center
         backdrop-blur-xl 
         dark:bg-[#240046]/70 dark:hover:bg-[#240046]/90
         bg-white/60 hover:bg-white/80 transition-all duration-300
@@ -43,11 +43,11 @@ export function ThemeToggle() {
     >
       {theme === 'dark' ? 
         <Sun 
-          className={`h-5 w-5 text-yellow-300 transition-colors duration-300 
+          className={`h-4 w-4 text-yellow-300 transition-colors duration-300 
             ${animateIcon ? 'animate-sun' : ''}`} 
         /> : 
         <Moon 
-          className={`h-5 w-5 text-[#240046] transition-colors duration-300
+          className={`h-4 w-4 text-[#240046] transition-colors duration-300
             ${animateIcon ? 'animate-moon' : ''}`} 
         />
       }

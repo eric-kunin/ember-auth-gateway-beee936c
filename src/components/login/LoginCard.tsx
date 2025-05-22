@@ -7,6 +7,7 @@ import { LoginFormValues } from "@/components/login/schemas";
 import { LogIn, Users } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Card } from "@/components/ui/card";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface LoginCardProps {
   isLoading: boolean;
@@ -36,8 +37,13 @@ const LoginCard = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="p-4 sm:p-8 rounded-2xl bg-[#10002B]/95 border-[#9D4EDD]/20 shadow-xl">
-        <div className="text-center mb-6 sm:mb-8">
+      <Card className="p-4 sm:p-8 rounded-2xl bg-[#10002B]/95 border-[#9D4EDD]/20 shadow-xl relative">
+        {/* Theme toggle positioned on the card */}
+        <div className="absolute top-4 right-4">
+          <ThemeToggle />
+        </div>
+        
+        <div className="text-center mb-6 sm:mb-8 mt-4">
           <motion.div 
             className="flex items-center justify-center gap-2 mb-2"
             initial={{ opacity: 0, scale: 0.9 }}
