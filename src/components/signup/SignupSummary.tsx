@@ -1,5 +1,4 @@
 
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { SignupSummaryProps, container } from "./summary/types";
@@ -10,6 +9,7 @@ import PersonalSection from "./summary/PersonalSection";
 import ProfileDetailsSection from "./summary/ProfileDetailsSection";
 import LifestyleSection from "./summary/LifestyleSection";
 import SummaryActions from "./summary/SummaryActions";
+import SummarySection from "./summary/SummarySection";
 
 const SignupSummary = ({
   accountData,

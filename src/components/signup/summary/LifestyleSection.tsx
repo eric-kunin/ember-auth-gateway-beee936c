@@ -1,7 +1,7 @@
 
 import { Heart } from "lucide-react";
 import { capitalize } from "./types";
-import { SummarySection as Section } from "./SummarySectionProps";
+import { SummarySection } from "./SummarySection";
 
 interface LifestyleSectionProps {
   lifestyleData: any;
@@ -9,7 +9,7 @@ interface LifestyleSectionProps {
 
 const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
   return (
-    <Section 
+    <SummarySection 
       title="Lifestyle & Preferences"
       icon={<Heart className="h-4 w-4" />}
     >
@@ -70,7 +70,7 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
       <p className="text-sm text-[#3B185F] dark:text-custom-lighter mt-1">
         <span className="text-[#9D4EDD] font-medium">Diet:</span> {capitalize(lifestyleData.diet) || 'Not provided'}
       </p>
-    </Section>
+    </SummarySection>
   );
 };
 

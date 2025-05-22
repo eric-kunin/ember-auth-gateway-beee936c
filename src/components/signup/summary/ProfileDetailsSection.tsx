@@ -1,7 +1,7 @@
 
 import { Info } from "lucide-react";
 import { capitalize } from "./types";
-import { SummarySection as Section } from "./SummarySectionProps";
+import { SummarySection } from "./SummarySection";
 
 interface ProfileDetailsSectionProps {
   profileData: any;
@@ -9,7 +9,7 @@ interface ProfileDetailsSectionProps {
 
 const ProfileDetailsSection = ({ profileData }: ProfileDetailsSectionProps) => {
   return (
-    <Section 
+    <SummarySection 
       title="Profile Details"
       icon={<Info className="h-4 w-4" />}
     >
@@ -28,7 +28,7 @@ const ProfileDetailsSection = ({ profileData }: ProfileDetailsSectionProps) => {
           </p>
         </div>
       )}
-    </Section>
+    </SummarySection>
   );
 };
 

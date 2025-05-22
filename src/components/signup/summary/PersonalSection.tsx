@@ -2,7 +2,7 @@
 import { User } from "lucide-react";
 import { format } from "date-fns";
 import { PersonalInfoFormValues } from "../schemas";
-import { SummarySection as Section } from "./SummarySectionProps";
+import { SummarySection } from "./SummarySection";
 
 interface PersonalSectionProps {
   personalData: PersonalInfoFormValues;
@@ -10,7 +10,7 @@ interface PersonalSectionProps {
 
 const PersonalSection = ({ personalData }: PersonalSectionProps) => {
   return (
-    <Section 
+    <SummarySection 
       title="Personal Information"
       icon={<User className="h-4 w-4" />}
     >
@@ -32,7 +32,7 @@ const PersonalSection = ({ personalData }: PersonalSectionProps) => {
           </p>
         </div>
       </div>
-    </Section>
+    </SummarySection>
   );
 };
 

@@ -2,7 +2,7 @@
 import { Mail } from "lucide-react";
 import { AccountFormValues } from "../schemas";
 import { item } from "./types";
-import { SummarySection as Section } from "./SummarySectionProps";
+import { SummarySection } from "./SummarySection";
 
 interface AccountSectionProps {
   accountData: AccountFormValues;
@@ -10,14 +10,14 @@ interface AccountSectionProps {
 
 const AccountSection = ({ accountData }: AccountSectionProps) => {
   return (
-    <Section 
+    <SummarySection 
       title="Account Information"
       icon={<Mail className="h-4 w-4" />}
     >
       <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
         Email: {accountData.email}
       </p>
-    </Section>
+    </SummarySection>
   );
 };
 
