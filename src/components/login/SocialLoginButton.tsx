@@ -23,8 +23,8 @@ const SocialLoginButton = ({
   return (
     <Button
       variant="outline"
-      className="bg-[#f5efff]/90 dark:bg-[#240046]/40 hover:bg-[#e0d8eb] dark:hover:bg-[#240046]/60 
-                border-[#9D4EDD]/20 text-[#240046] dark:text-white
+      className="bg-[#240046]/40 hover:bg-[#240046]/60 
+                text-white border-[#9D4EDD]/20
                 transform transition-all duration-300 ease-in-out
                 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20
                 w-full sm:w-auto flex justify-center items-center py-2"

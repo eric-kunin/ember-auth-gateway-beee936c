@@ -17,10 +17,10 @@ const SocialLogin = ({ handleOAuthLogin, isLoading }: SocialLoginProps) => {
     <>
       <div className="relative my-6">
         <div className="absolute inset-0 flex items-center">
-          <Separator className="w-full bg-[#9D4EDD]/20 dark:bg-white/10" />
+          <Separator className="w-full bg-white/10" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white/90 dark:bg-[#10002B] px-2 text-[#240046] dark:text-custom-lighter transition-colors duration-300">
+          <span className="bg-[#10002B] px-2 text-custom-lighter">
             Or continue with
           </span>
         </div>
