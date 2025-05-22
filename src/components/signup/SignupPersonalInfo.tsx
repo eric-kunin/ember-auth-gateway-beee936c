@@ -42,7 +42,8 @@ const SignupPersonalInfo = ({
   defaultValues = {
     name: "",
     gender: "",
-    phone: "",
+    birthdate: undefined as unknown as Date,
+    phone: ""
   },
   isLoading,
   onSubmit,
@@ -177,7 +178,7 @@ const SignupPersonalInfo = ({
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 min-w-[320px]" align="start">
+                <PopoverContent className="w-auto p-0 min-w-[320px] pointer-events-auto" align="start">
                   <Calendar
                     mode="single"
                     selected={field.value}
@@ -187,10 +188,13 @@ const SignupPersonalInfo = ({
                     initialFocus
                     fromYear={minYear}
                     toYear={currentYear}
+                    className="pointer-events-auto"
                   />
                 </PopoverContent>
               </Popover>
-              <FormMessage className="text-xs text-red-500" />
+              <div className="h-5 min-h-[1.25rem]"> {/* Fixed height container for error message */}
+                <FormMessage className="text-xs text-red-500" />
+              </div>
             </FormItem>
           )}
         />
