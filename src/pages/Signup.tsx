@@ -1,7 +1,6 @@
 
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import SignupCard from "@/components/signup/SignupCard";
 import LoginBackground from "@/components/login/LoginBackground";
 import { useAuth } from "@/hooks/useAuth";
@@ -59,10 +58,6 @@ const Signup = () => {
 
   return (
     <LoginBackground>
-      <div className="absolute top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
-      
       <SignupCard 
         currentStep={currentStep}
         totalSteps={totalSteps}

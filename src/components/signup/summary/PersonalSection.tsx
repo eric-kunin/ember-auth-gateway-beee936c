@@ -15,7 +15,7 @@ const PersonalSection = ({ personalData }: PersonalSectionProps) => {
       icon={<User className="h-4 w-4" />}
     >
       <div className="grid grid-cols-2 gap-4 pl-4">
-        <div className="space-y-3">
+        <div className="space-y-3 pl-4">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
             <span className="text-[#9D4EDD] font-medium mr-1.5">Name:</span> {personalData.name}
           </p>

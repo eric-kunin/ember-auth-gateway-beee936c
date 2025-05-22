@@ -58,12 +58,9 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
               </FormControl>
             </PopoverTrigger>
             <PopoverContent 
-              className={cn(
-                "w-auto p-0 min-w-[280px] pointer-events-auto", 
-                isMobile ? "translate-x-[-20%]" : ""
-              )} 
-              align={isMobile ? "center" : "start"}
-              side={isMobile ? "bottom" : undefined}
+              className="w-auto p-0 dark:bg-[#240046] border-[#9D4EDD]/30 rounded-lg shadow-lg pointer-events-auto"
+              align="center"
+              sideOffset={5}
             >
               <Calendar
                 mode="single"
@@ -75,8 +72,12 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                 fromYear={minYear}
                 toYear={currentYear}
                 captionLayout="dropdown-buttons"
-                className="pointer-events-auto"
-                showOutsideDays={false}
+                className="rounded-md dark:bg-[#240046] pointer-events-auto"
+                styles={{
+                  month: { width: '100%' },
+                  caption_label: { color: 'white' },
+                  nav_button: { color: 'white' }
+                }}
               />
             </PopoverContent>
           </Popover>
