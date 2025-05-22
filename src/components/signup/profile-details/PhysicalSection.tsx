@@ -11,6 +11,16 @@ interface PhysicalSectionProps {
 }
 
 const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
+  // Define eye colors with their corresponding color values
+  const eyeColors = [
+    { value: "brown", label: "Brown", color: "#8B4513" },
+    { value: "blue", label: "Blue", color: "#0000FF" },
+    { value: "green", label: "Green", color: "#008000" },
+    { value: "hazel", label: "Hazel", color: "#A1782E" },
+    { value: "gray", label: "Gray", color: "#808080" },
+    { value: "other", label: "Other", color: "#F8F2FF" },
+  ];
+
   return (
     <div className="grid grid-cols-2 gap-4">
       <FormField
@@ -72,12 +82,17 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                <SelectItem value="brown">Brown</SelectItem>
-                <SelectItem value="blue">Blue</SelectItem>
-                <SelectItem value="green">Green</SelectItem>
-                <SelectItem value="hazel">Hazel</SelectItem>
-                <SelectItem value="gray">Gray</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
+                {eyeColors.map((eyeColor) => (
+                  <SelectItem key={eyeColor.value} value={eyeColor.value}>
+                    <div className="flex items-center justify-between w-full">
+                      <span>{eyeColor.label}</span>
+                      <span 
+                        className="h-4 w-4 rounded-full ml-2"
+                        style={{ backgroundColor: eyeColor.color }}
+                      />
+                    </div>
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             <FormMessage className="text-xs text-red-500" />
