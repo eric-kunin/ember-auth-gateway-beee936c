@@ -1,8 +1,7 @@
 
 import { Info } from "lucide-react";
-import { motion } from "framer-motion";
-import { item, capitalize } from "./types";
-import SummarySection from "./SummarySection";
+import { capitalize } from "./types";
+import { SummarySection as Section } from "./SummarySectionProps";
 
 interface ProfileDetailsSectionProps {
   profileData: any;
@@ -10,12 +9,10 @@ interface ProfileDetailsSectionProps {
 
 const ProfileDetailsSection = ({ profileData }: ProfileDetailsSectionProps) => {
   return (
-    <SummarySection className="bg-white/50 dark:bg-[#20003b]/50" variants={item}>
-      <h4 className="text-sm font-medium flex items-center text-[#240046] dark:text-white mb-3">
-        <Info className="h-4 w-4 mr-1 text-[#9D4EDD]" />
-        Profile Details
-      </h4>
-      
+    <Section 
+      title="Profile Details"
+      icon={<Info className="h-4 w-4" />}
+    >
       {profileData.bio && (
         <div className="mb-3">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
@@ -31,7 +28,7 @@ const ProfileDetailsSection = ({ profileData }: ProfileDetailsSectionProps) => {
           </p>
         </div>
       )}
-    </SummarySection>
+    </Section>
   );
 };
 

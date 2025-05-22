@@ -7,6 +7,8 @@ export interface SummarySectionProps {
   title: string;
   icon: ReactNode;
   children: ReactNode;
+  className?: string;
+  variants?: any;
 }
 
 export const SummarySection = ({ title, icon, children }: SummarySectionProps) => {

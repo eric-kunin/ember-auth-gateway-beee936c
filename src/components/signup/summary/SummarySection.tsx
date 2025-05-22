@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { SummarySectionProps } from "./types";
+import { SummarySectionProps } from "./SummarySectionProps";
 
 const SummarySection = ({ children, className, variants }: SummarySectionProps) => {
   return (
