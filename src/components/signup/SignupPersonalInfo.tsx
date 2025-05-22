@@ -1,3 +1,4 @@
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoFormSchema, PersonalInfoFormValues } from "./schemas";
@@ -28,6 +29,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useState } from "react";
+import ValidationFeedback from "./ValidationFeedback";
 
 interface SignupPersonalInfoProps {
   defaultValues?: Partial<PersonalInfoFormValues>;
@@ -68,6 +70,11 @@ const SignupPersonalInfo = ({
     { value: "Other", label: "Other", icon: <Users className="mr-2 h-4 w-4" /> },
     { value: "prefer-not-to-say", label: "Prefer not to say", icon: <Users className="mr-2 h-4 w-4" /> }
   ];
+
+  // Phone validation state
+  const phoneValue = form.watch("phone");
+  const phoneState = form.getFieldState("phone");
+  const phoneIsValid = phoneValue && !phoneState.invalid && phoneState.isDirty;
 
   return (
     <Form {...form}>
@@ -170,7 +177,7 @@ const SignupPersonalInfo = ({
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 min-w-[320px]" align="start">
                   <Calendar
                     mode="single"
                     selected={field.value}
@@ -202,13 +209,19 @@ const SignupPersonalInfo = ({
                   <Input
                     placeholder="+1 (555) 123-4567"
                     type="tel"
-                    className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                    maxLength={15} // Add max length of 15 characters
+                    className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                              text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                             pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                             pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
+                             ${phoneState.invalid && phoneState.isDirty ? 'border-red-500 dark:border-red-500 ring-1 ring-red-500' : ''}
+                             ${phoneIsValid ? 'border-green-500 dark:border-green-500 ring-1 ring-green-500' : ''}`}
                     disabled={isLoading}
                     {...field}
                   />
                 </FormControl>
+                {phoneValue && phoneValue.length > 0 && (
+                  <ValidationFeedback message="Maximum 15 digits allowed" />
+                )}
               </div>
               <FormMessage className="text-xs text-red-500" />
             </FormItem>

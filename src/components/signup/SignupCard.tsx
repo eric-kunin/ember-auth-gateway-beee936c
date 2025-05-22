@@ -1,3 +1,4 @@
+
 import React from "react";
 import SignupStepIndicator from "./SignupStepIndicator";
 import { Progress } from "@/components/ui/progress";
@@ -67,6 +68,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
                 bg-white/90 dark:bg-[#10002B]/95 shadow-xl
                 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                 transition-colors duration-300"
+      style={{ minWidth: '320px' }} // Ensure minimum width
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
