@@ -4,8 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, Trophy, Utensils, Cat } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Heart, Trophy, Utensils, Cat, Info, User, Clock } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -26,6 +25,14 @@ import { useState } from "react";
 
 // Schema for Lifestyle Information
 const lifestyleSchema = z.object({
+  height: z.number().min(100, "Height must be at least 100 cm").max(250, "Height must be at most 250 cm").optional().or(z.literal('')),
+  eyeColor: z.string().optional(),
+  religion: z.string().optional(),
+  religiousLevel: z.string().optional(),
+  smokingStatus: z.string().optional(),
+  drinkingStatus: z.string().optional(),
+  lookingFor: z.string().optional(),
+  lookingForGender: z.string().optional(),
   pets: z.string().optional(),
   exercise: z.string().optional(),
   diet: z.string().optional(),
@@ -42,6 +49,14 @@ interface SignupLifestyleInfoProps {
 
 const SignupLifestyleInfo = ({
   defaultValues = {
+    height: undefined,
+    eyeColor: "",
+    religion: "",
+    religiousLevel: "",
+    smokingStatus: "",
+    drinkingStatus: "",
+    lookingFor: "",
+    lookingForGender: "",
     pets: "",
     exercise: "",
     diet: "",
@@ -75,38 +90,305 @@ const SignupLifestyleInfo = ({
     setHobbies(hobbies.filter(h => h !== hobby));
   };
 
-  // Options for selects
-  const petOptions = [
-    { value: "dog", label: "Dog(s)" },
-    { value: "cat", label: "Cat(s)" },
-    { value: "fish", label: "Fish" },
-    { value: "bird", label: "Bird(s)" },
-    { value: "reptile", label: "Reptile(s)" },
-    { value: "other", label: "Other" },
-    { value: "none", label: "No Pets" },
-  ];
-
-  const exerciseOptions = [
-    { value: "never", label: "Never" },
-    { value: "rarely", label: "Rarely" },
-    { value: "sometimes", label: "Sometimes" },
-    { value: "often", label: "Often" },
-    { value: "daily", label: "Daily" },
-  ];
-
-  const dietOptions = [
-    { value: "omnivore", label: "Omnivore" },
-    { value: "vegetarian", label: "Vegetarian" },
-    { value: "vegan", label: "Vegan" },
-    { value: "pescatarian", label: "Pescatarian" },
-    { value: "keto", label: "Keto" },
-    { value: "paleo", label: "Paleo" },
-    { value: "other", label: "Other" },
-  ];
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5">
+        {/* Physical Attributes Section */}
+        <div>
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+            Physical Attributes
+          </h4>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="height"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Height (cm)
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Height in cm"
+                      className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                               text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                               h-11 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
+                      disabled={isLoading}
+                      {...field}
+                      onChange={event => field.onChange(event.target.value === '' ? undefined : Number(event.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="eyeColor"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Eye Color
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select eye color" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="brown">Brown</SelectItem>
+                      <SelectItem value="blue">Blue</SelectItem>
+                      <SelectItem value="green">Green</SelectItem>
+                      <SelectItem value="hazel">Hazel</SelectItem>
+                      <SelectItem value="gray">Gray</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        {/* Religious Information Section */}
+        <div>
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+            Religious Information
+          </h4>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="religion"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Religion
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select religion" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="orthodox">Orthodox</SelectItem>
+                      <SelectItem value="conservative">Conservative</SelectItem>
+                      <SelectItem value="reform">Reform</SelectItem>
+                      <SelectItem value="secular">Secular</SelectItem>
+                      <SelectItem value="traditional">Traditional</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="religiousLevel"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Religious Level
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select level" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="not religious">Not Religious</SelectItem>
+                      <SelectItem value="somewhat religious">Somewhat Religious</SelectItem>
+                      <SelectItem value="religious">Religious</SelectItem>
+                      <SelectItem value="very religious">Very Religious</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+        
+        {/* Habits Section */}
+        <div>
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+            Habits & Lifestyle
+          </h4>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="smokingStatus"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Smoking Status
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="non-smoker">Non-Smoker</SelectItem>
+                      <SelectItem value="occasional">Occasional</SelectItem>
+                      <SelectItem value="regular">Regular</SelectItem>
+                      <SelectItem value="quitting">Quitting</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="drinkingStatus"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Drinking Status
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="non-drinker">Non-Drinker</SelectItem>
+                      <SelectItem value="social">Social</SelectItem>
+                      <SelectItem value="regular">Regular</SelectItem>
+                      <SelectItem value="rarely">Rarely</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+        
+        {/* Preferences Section */}
+        <div>
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+            Preferences
+          </h4>
+          
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              control={form.control}
+              name="lookingFor"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Looking For
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select relationship type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="serious relationship">Serious Relationship</SelectItem>
+                      <SelectItem value="casual">Casual</SelectItem>
+                      <SelectItem value="friendship">Friendship</SelectItem>
+                      <SelectItem value="marriage">Marriage</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="lookingForGender"
+              render={({ field }) => (
+                <FormItem className="space-y-2">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                    Interested In
+                  </FormLabel>
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger 
+                        className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                                 text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
+                      >
+                        <SelectValue placeholder="Select gender preference" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                      <SelectItem value="Male">Men</SelectItem>
+                      <SelectItem value="Female">Women</SelectItem>
+                      <SelectItem value="Both">Both</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage className="text-xs text-red-500" />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        {/* Lifestyle Features */}
         <div className="space-y-2">
           <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center">
             <Heart className="mr-2 h-4 w-4 text-[#9D4EDD]" />
@@ -179,15 +461,14 @@ const SignupLifestyleInfo = ({
                     <SelectValue placeholder="Do you have pets?" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  {petOptions.map((option) => (
-                    <SelectItem 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))}
+                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                  <SelectItem value="dog">Dog(s)</SelectItem>
+                  <SelectItem value="cat">Cat(s)</SelectItem>
+                  <SelectItem value="fish">Fish</SelectItem>
+                  <SelectItem value="bird">Bird(s)</SelectItem>
+                  <SelectItem value="reptile">Reptile(s)</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                  <SelectItem value="none">No Pets</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />
@@ -217,15 +498,12 @@ const SignupLifestyleInfo = ({
                     <SelectValue placeholder="How often do you exercise?" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  {exerciseOptions.map((option) => (
-                    <SelectItem 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))}
+                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                  <SelectItem value="never">Never</SelectItem>
+                  <SelectItem value="rarely">Rarely</SelectItem>
+                  <SelectItem value="sometimes">Sometimes</SelectItem>
+                  <SelectItem value="often">Often</SelectItem>
+                  <SelectItem value="daily">Daily</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />
@@ -255,15 +533,14 @@ const SignupLifestyleInfo = ({
                     <SelectValue placeholder="What is your diet like?" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  {dietOptions.map((option) => (
-                    <SelectItem 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.label}
-                    </SelectItem>
-                  ))}
+                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                  <SelectItem value="omnivore">Omnivore</SelectItem>
+                  <SelectItem value="vegetarian">Vegetarian</SelectItem>
+                  <SelectItem value="vegan">Vegan</SelectItem>
+                  <SelectItem value="pescatarian">Pescatarian</SelectItem>
+                  <SelectItem value="keto">Keto</SelectItem>
+                  <SelectItem value="paleo">Paleo</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />

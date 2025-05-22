@@ -1,8 +1,8 @@
 
 import { motion } from "framer-motion";
 import { AccountFormValues, PersonalInfoFormValues } from "../schemas";
+import { ProfileImage } from "../SignupProfilePhotos";
 
-// Animation variants for staggered animation
 export const container = {
   hidden: { opacity: 0 },
   show: {
@@ -18,22 +18,6 @@ export const item = {
   show: { opacity: 1, y: 0 }
 };
 
-export interface SummarySectionProps {
-  children: React.ReactNode;
-  className?: string;
-  variants?: any;
-}
-
-export interface ProfileImage {
-  imageId?: string;
-  filePath: string;
-  publicUrl: string;
-  file?: File;
-  isUploading?: boolean;
-  isPrivate?: boolean;
-}
-
-// Adding the missing SignupSummaryProps interface
 export interface SignupSummaryProps {
   accountData: AccountFormValues;
   personalData: PersonalInfoFormValues;
@@ -45,8 +29,7 @@ export interface SignupSummaryProps {
   onComplete: () => void;
 }
 
-// Adding the missing capitalize utility function
-export const capitalize = (str?: string): string => {
+export function capitalize(str?: string): string {
   if (!str) return '';
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-};
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

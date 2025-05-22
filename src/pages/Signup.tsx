@@ -8,7 +8,6 @@ import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/s
 import { useAuth } from "@/hooks/useAuth";
 import LoginBackground from "@/components/login/LoginBackground";
 import { ProfileImage as ProfileImageType } from "@/components/signup/summary/types";
-import { ProfileDetails } from "@/components/signup/profile-details/types";
 
 const Signup = () => {
   const { toast } = useToast();
@@ -39,22 +38,22 @@ const Signup = () => {
 
   const [profileImages, setProfileImages] = useState<ProfileImageType[]>([]);
   
-  // Additional profile data
-  const [profileData, setProfileData] = useState<ProfileDetails>({
+  // Additional profile data - now with only bio and profession
+  const [profileData, setProfileData] = useState({
     bio: "",
-    profession: "",
+    profession: ""
+  });
+
+  // Lifestyle data now includes all the attributes moved from profile details
+  const [lifestyleData, setLifestyleData] = useState({
+    height: undefined as undefined | number,
     eyeColor: "",
-    height: undefined,
     religion: "",
     religiousLevel: "",
     smokingStatus: "",
     drinkingStatus: "",
     lookingFor: "",
-    lookingForGender: ""
-  });
-
-  // New lifestyle data for step 4
-  const [lifestyleData, setLifestyleData] = useState({
+    lookingForGender: "",
     hobbies: [] as string[],
     pets: "",
     exercise: "",
@@ -65,7 +64,7 @@ const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   
-  const totalSteps = 6; // Increased to 6 steps
+  const totalSteps = 6; // Remains as 6 steps
   const progress = (currentStep / totalSteps) * 100;
 
   const handleNextStep = () => {
@@ -121,14 +120,14 @@ const Signup = () => {
         phone: personalData.phone,
         bio: profileData.bio || "",
         profession: profileData.profession || "",
-        eyeColor: profileData.eyeColor || "",
-        height: profileData.height ? Number(profileData.height) : undefined,
-        religion: profileData.religion || "",
-        religiousLevel: profileData.religiousLevel || "",
-        smokingStatus: profileData.smokingStatus || "",
-        drinkingStatus: profileData.drinkingStatus || "",
-        lookingFor: profileData.lookingFor || "",
-        lookingForGender: profileData.lookingForGender as "Male" | "Female" | "Other" | "Both" || "Both",
+        eyeColor: lifestyleData.eyeColor || "",
+        height: lifestyleData.height ? Number(lifestyleData.height) : undefined,
+        religion: lifestyleData.religion || "",
+        religiousLevel: lifestyleData.religiousLevel || "",
+        smokingStatus: lifestyleData.smokingStatus || "",
+        drinkingStatus: lifestyleData.drinkingStatus || "",
+        lookingFor: lifestyleData.lookingFor || "",
+        lookingForGender: lifestyleData.lookingForGender as "Male" | "Female" | "Other" | "Both" || "Both",
       };
 
       // Call auth service to sign up

@@ -6,10 +6,6 @@ import { Form } from "@/components/ui/form";
 import { PersonalInfoFormValues } from "./schemas";
 import { ProfileDetailsFormValues, profileDetailsSchema } from "./profile-details/types";
 import BioSection from "./profile-details/BioSection";
-import PhysicalSection from "./profile-details/PhysicalSection";
-import ReligionSection from "./profile-details/ReligionSection";
-import HabitSection from "./profile-details/HabitSection";
-import PreferenceSection from "./profile-details/PreferenceSection";
 import FormActions from "./profile-details/FormActions";
 
 interface ProfileDetailsFormProps {
@@ -42,13 +38,15 @@ const ProfileDetailsForm = ({
 }: ProfileDetailsFormProps) => {
   const form = useForm<ProfileDetailsFormValues>({
     resolver: zodResolver(profileDetailsSchema),
-    defaultValues,
+    defaultValues: {
+      bio: defaultValues.bio || "",
+      profession: defaultValues.profession || ""
+    },
     mode: "onChange"
   });
 
   const handleSubmit = (data: ProfileDetailsFormValues) => {
     onSubmit(data);
-    onComplete();
   };
 
   return (
@@ -60,18 +58,6 @@ const ProfileDetailsForm = ({
 
         {/* Bio and Profession Section */}
         <BioSection form={form} isLoading={isLoading} />
-
-        {/* Physical Attributes Section */}
-        <PhysicalSection form={form} isLoading={isLoading} />
-
-        {/* Religious Information Section */}
-        <ReligionSection form={form} isLoading={isLoading} />
-
-        {/* Habits Section */}
-        <HabitSection form={form} isLoading={isLoading} />
-
-        {/* Preferences Section */}
-        <PreferenceSection form={form} isLoading={isLoading} />
 
         {/* Form Action Buttons */}
         <FormActions isLoading={isLoading} onBack={onBack} />
