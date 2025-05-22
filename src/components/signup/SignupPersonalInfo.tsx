@@ -196,7 +196,7 @@ const SignupPersonalInfo = ({
                   />
                 </PopoverContent>
               </Popover>
-              <div className="h-5 min-h-[1.25rem]"> {/* Fixed height container for error message */}
+              <div className="h-5 min-h-[1.25rem]">
                 <FormMessage className="text-xs text-red-500" />
               </div>
             </FormItem>
@@ -212,12 +212,12 @@ const SignupPersonalInfo = ({
                 Phone Number (Optional)
               </FormLabel>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
+                <Phone className="absolute left-3 top-2.5 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
                 <FormControl>
                   <Input
                     placeholder="+1 (555) 123-4567"
                     type="tel"
-                    maxLength={15} // Add max length of 15 characters
+                    maxLength={15}
                     className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                              text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                              pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
