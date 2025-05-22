@@ -388,12 +388,11 @@ const SignupLifestyleInfo = ({
           </div>
         </div>
 
-        {/* Lifestyle Features */}
         <div className="space-y-2">
-          <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center">
-            <Heart className="mr-2 h-4 w-4 text-[#9D4EDD]" />
-            Hobbies & Interests
-          </FormLabel>
+          {/* Hobbies & Interests section as a comment */}
+          <div className="text-sm text-gray-500 italic mb-2">
+            {/* Hobbies & Interests */}
+          </div>
           <div className="flex flex-wrap gap-2 mb-2">
             {hobbies.map((hobby) => (
               <Badge 
@@ -439,114 +438,120 @@ const SignupLifestyleInfo = ({
           </div>
         </div>
         
-        <FormField
-          control={form.control}
-          name="pets"
-          render={({ field }) => (
-            <FormItem className="space-y-2">
-              <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center">
-                <Cat className="mr-2 h-4 w-4 text-[#9D4EDD]" />
-                Pets
-              </FormLabel>
-              <Select
-                disabled={isLoading}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger 
-                    className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
-                             text-[#240046] dark:text-white transition-colors duration-300 focus:ring-[#9D4EDD]"
-                  >
-                    <SelectValue placeholder="Do you have pets?" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
-                  <SelectItem value="dog">Dog(s)</SelectItem>
-                  <SelectItem value="cat">Cat(s)</SelectItem>
-                  <SelectItem value="fish">Fish</SelectItem>
-                  <SelectItem value="bird">Bird(s)</SelectItem>
-                  <SelectItem value="reptile">Reptile(s)</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                  <SelectItem value="none">No Pets</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className="text-xs text-red-500" />
-            </FormItem>
-          )}
-        />
+        {/* Pets section as a comment */}
+        <div className="space-y-2">
+          <div className="text-sm text-gray-500 italic">
+            {/* Pets */}
+          </div>
+          <FormField
+            control={form.control}
+            name="pets"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <Select
+                  disabled={isLoading}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger 
+                      className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                               text-[#240046] dark:text-white transition-colors duration-300 focus:ring-[#9D4EDD]"
+                    >
+                      <SelectValue placeholder="Do you have pets?" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                    <SelectItem value="dog">Dog(s)</SelectItem>
+                    <SelectItem value="cat">Cat(s)</SelectItem>
+                    <SelectItem value="fish">Fish</SelectItem>
+                    <SelectItem value="bird">Bird(s)</SelectItem>
+                    <SelectItem value="reptile">Reptile(s)</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="none">No Pets</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
+        </div>
         
-        <FormField
-          control={form.control}
-          name="exercise"
-          render={({ field }) => (
-            <FormItem className="space-y-2">
-              <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center">
-                <Trophy className="mr-2 h-4 w-4 text-[#9D4EDD]" />
-                Exercise Frequency
-              </FormLabel>
-              <Select
-                disabled={isLoading}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger 
-                    className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
-                             text-[#240046] dark:text-white transition-colors duration-300 focus:ring-[#9D4EDD]"
-                  >
-                    <SelectValue placeholder="How often do you exercise?" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
-                  <SelectItem value="never">Never</SelectItem>
-                  <SelectItem value="rarely">Rarely</SelectItem>
-                  <SelectItem value="sometimes">Sometimes</SelectItem>
-                  <SelectItem value="often">Often</SelectItem>
-                  <SelectItem value="daily">Daily</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className="text-xs text-red-500" />
-            </FormItem>
-          )}
-        />
+        {/* Exercise Frequency as a comment */}
+        <div className="space-y-2">
+          <div className="text-sm text-gray-500 italic">
+            {/* Exercise Frequency */}
+          </div>
+          <FormField
+            control={form.control}
+            name="exercise"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <Select
+                  disabled={isLoading}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger 
+                      className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                               text-[#240046] dark:text-white transition-colors duration-300 focus:ring-[#9D4EDD]"
+                    >
+                      <SelectValue placeholder="How often do you exercise?" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                    <SelectItem value="never">Never</SelectItem>
+                    <SelectItem value="rarely">Rarely</SelectItem>
+                    <SelectItem value="sometimes">Sometimes</SelectItem>
+                    <SelectItem value="often">Often</SelectItem>
+                    <SelectItem value="daily">Daily</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
+        </div>
         
-        <FormField
-          control={form.control}
-          name="diet"
-          render={({ field }) => (
-            <FormItem className="space-y-2">
-              <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center">
-                <Utensils className="mr-2 h-4 w-4 text-[#9D4EDD]" />
-                Dietary Preference
-              </FormLabel>
-              <Select
-                disabled={isLoading}
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger 
-                    className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
-                             text-[#240046] dark:text-white transition-colors duration-300 focus:ring-[#9D4EDD]"
-                  >
-                    <SelectValue placeholder="What is your diet like?" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
-                  <SelectItem value="omnivore">Omnivore</SelectItem>
-                  <SelectItem value="vegetarian">Vegetarian</SelectItem>
-                  <SelectItem value="vegan">Vegan</SelectItem>
-                  <SelectItem value="pescatarian">Pescatarian</SelectItem>
-                  <SelectItem value="keto">Keto</SelectItem>
-                  <SelectItem value="paleo">Paleo</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage className="text-xs text-red-500" />
-            </FormItem>
-          )}
-        />
+        {/* Dietary Preference as a comment */}
+        <div className="space-y-2">
+          <div className="text-sm text-gray-500 italic">
+            {/* Dietary Preference */}
+          </div>
+          <FormField
+            control={form.control}
+            name="diet"
+            render={({ field }) => (
+              <FormItem className="space-y-2">
+                <Select
+                  disabled={isLoading}
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger 
+                      className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                               text-[#240046] dark:text-white transition-colors duration-300 focus:ring-[#9D4EDD]"
+                    >
+                      <SelectValue placeholder="What is your diet like?" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                    <SelectItem value="omnivore">Omnivore</SelectItem>
+                    <SelectItem value="vegetarian">Vegetarian</SelectItem>
+                    <SelectItem value="vegan">Vegan</SelectItem>
+                    <SelectItem value="pescatarian">Pescatarian</SelectItem>
+                    <SelectItem value="keto">Keto</SelectItem>
+                    <SelectItem value="paleo">Paleo</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-xs text-red-500" />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <div className="flex gap-2 pt-2">
           <Button
