@@ -1,5 +1,5 @@
 
-import { Heart } from "lucide-react";
+import { Heart, Ruler, Eye, Church, Cigarette, Wine } from "lucide-react";
 import { capitalize } from "./types";
 import { SummarySection } from "./SummarySection";
 
@@ -15,13 +15,15 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
         <div className="space-y-1">
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Ruler className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Height:</span> {lifestyleData.height ? `${lifestyleData.height} cm` : 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
             <span className="text-[#9D4EDD] font-medium">Religion:</span> {capitalize(lifestyleData.religion) || 'Not provided'}
           </p>
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Cigarette className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Smoking:</span> {capitalize(lifestyleData.smokingStatus) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
@@ -29,13 +31,16 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
           </p>
         </div>
         <div className="space-y-1">
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Eye className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Eye color:</span> {capitalize(lifestyleData.eyeColor) || 'Not provided'}
           </p>
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Church className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Religious level:</span> {capitalize(lifestyleData.religiousLevel) || 'Not provided'}
           </p>
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Wine className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Drinking:</span> {capitalize(lifestyleData.drinkingStatus) || 'Not provided'}
           </p>
         </div>

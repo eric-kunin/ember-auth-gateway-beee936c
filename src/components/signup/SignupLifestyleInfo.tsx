@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Heart, Trophy, Utensils, Cat, Info, User, Clock } from "lucide-react";
+import { Heart, Ruler, Eye, Church, Cigarette, Wine, Heart as LookingForIcon, Users, Cat, Dumbbell, UtensilsCrossed } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -95,7 +95,8 @@ const SignupLifestyleInfo = ({
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5">
         {/* Physical Attributes Section */}
         <div>
-          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3 flex items-center gap-2">
+            <Heart className="h-4 w-4 text-[#9D4EDD]" />
             Physical Attributes
           </h4>
           
@@ -105,7 +106,8 @@ const SignupLifestyleInfo = ({
               name="height"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
+                    <Ruler className="h-4 w-4 text-[#9D4EDD]" />
                     Height (cm)
                   </FormLabel>
                   <FormControl>
@@ -130,7 +132,8 @@ const SignupLifestyleInfo = ({
               name="eyeColor"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
+                    <Eye className="h-4 w-4 text-[#9D4EDD]" />
                     Eye Color
                   </FormLabel>
                   <Select
@@ -164,7 +167,8 @@ const SignupLifestyleInfo = ({
 
         {/* Religious Information Section */}
         <div>
-          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3 flex items-center gap-2">
+            <Church className="h-4 w-4 text-[#9D4EDD]" />
             Religious Information
           </h4>
           
@@ -241,7 +245,8 @@ const SignupLifestyleInfo = ({
         
         {/* Habits Section */}
         <div>
-          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3 flex items-center gap-2">
+            <Cigarette className="h-4 w-4 text-[#9D4EDD]" />
             Habits & Lifestyle
           </h4>
           
@@ -316,7 +321,8 @@ const SignupLifestyleInfo = ({
         
         {/* Preferences Section */}
         <div>
-          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3">
+          <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3 flex items-center gap-2">
+            <LookingForIcon className="h-4 w-4 text-[#9D4EDD]" />
             Preferences
           </h4>
           
@@ -388,11 +394,9 @@ const SignupLifestyleInfo = ({
           </div>
         </div>
 
+        {/* Hobbies & Interests section as a comment */}
         <div className="space-y-2">
-          {/* Hobbies & Interests section as a comment */}
-          <div className="text-sm text-gray-500 italic mb-2">
-            {/* Hobbies & Interests */}
-          </div>
+          {/* Hobbies & Interests */}
           <div className="flex flex-wrap gap-2 mb-2">
             {hobbies.map((hobby) => (
               <Badge 
@@ -440,9 +444,7 @@ const SignupLifestyleInfo = ({
         
         {/* Pets section as a comment */}
         <div className="space-y-2">
-          <div className="text-sm text-gray-500 italic">
-            {/* Pets */}
-          </div>
+          {/* Pets */}
           <FormField
             control={form.control}
             name="pets"
@@ -479,9 +481,7 @@ const SignupLifestyleInfo = ({
         
         {/* Exercise Frequency as a comment */}
         <div className="space-y-2">
-          <div className="text-sm text-gray-500 italic">
-            {/* Exercise Frequency */}
-          </div>
+          {/* Exercise Frequency */}
           <FormField
             control={form.control}
             name="exercise"
@@ -516,9 +516,7 @@ const SignupLifestyleInfo = ({
         
         {/* Dietary Preference as a comment */}
         <div className="space-y-2">
-          <div className="text-sm text-gray-500 italic">
-            {/* Dietary Preference */}
-          </div>
+          {/* Dietary Preference */}
           <FormField
             control={form.control}
             name="diet"
