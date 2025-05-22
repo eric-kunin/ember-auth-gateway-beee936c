@@ -13,15 +13,6 @@ import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
 import { ProfileImage } from "./summary/types";
 
-interface ProfileImage {
-  imageId?: string;
-  filePath: string;
-  publicUrl: string;
-  file?: File;
-  isUploading?: boolean;
-  isPrivate?: boolean;
-}
-
 interface SignupCardProps {
   currentStep: number;
   totalSteps: number;
