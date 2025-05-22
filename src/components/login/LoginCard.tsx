@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
@@ -97,7 +96,7 @@ const LoginCard = ({
       >
         <div className="mb-2">
           Don't have an account yet?{" "}
-          <a href="/signup" className="text-[#9D4EDD] dark:text-[#C77DFF] hover:text-white dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
+          <a href="/signup" className="text-[#9D4EDD] dark:text-[#C77DFF] hover:text-[#7B2CBF] dark:hover:text-[#E0AAFF] font-bold underline decoration-2 underline-offset-2 transition-all duration-300">
             Sign up
           </a>
         </div>
