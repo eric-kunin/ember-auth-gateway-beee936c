@@ -24,13 +24,25 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
             <FormControl>
               <Input
                 type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 placeholder="Height in cm"
                 className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                          text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                          h-11 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                 disabled={isLoading}
                 {...field}
-                onChange={event => field.onChange(event.target.value === '' ? undefined : Number(event.target.value))}
+                onInput={(e: React.FormEvent<HTMLInputElement>) => {
+                  // Remove any non-digit characters
+                  const input = e.currentTarget;
+                  input.value = input.value.replace(/\D/g, '');
+                }}
+                onChange={event => {
+                  // Convert to integer by removing decimal part
+                  const value = event.target.value;
+                  const intValue = value ? parseInt(value, 10) : undefined;
+                  field.onChange(intValue);
+                }}
               />
             </FormControl>
             <FormMessage className="text-xs text-red-500" />
