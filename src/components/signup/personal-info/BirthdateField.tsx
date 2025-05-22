@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Control } from "react-hook-form";
 import { PersonalInfoFormValues } from "../schemas";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface BirthdateFieldProps {
   control: Control<PersonalInfoFormValues>;
@@ -22,6 +23,8 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
   // Set exact 80 years ago as minimum year
   const currentYear = new Date().getFullYear();
   const minYear = currentYear - 80;
+  
+  const isMobile = useIsMobile();
 
   return (
     <FormField
@@ -54,7 +57,14 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 min-w-[320px] pointer-events-auto" align="start">
+            <PopoverContent 
+              className={cn(
+                "w-auto p-0 min-w-[280px] pointer-events-auto", 
+                isMobile ? "translate-x-[-15%]" : ""
+              )} 
+              align={isMobile ? "center" : "start"}
+              side={isMobile ? "bottom" : undefined}
+            >
               <Calendar
                 mode="single"
                 selected={field.value}
@@ -64,6 +74,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                 initialFocus
                 fromYear={minYear}
                 toYear={currentYear}
+                captionLayout="dropdown-buttons"
                 className="pointer-events-auto"
               />
             </PopoverContent>

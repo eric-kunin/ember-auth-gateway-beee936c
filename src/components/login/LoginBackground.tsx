@@ -16,7 +16,7 @@ const LoginBackground = ({ children }: LoginBackgroundProps) => {
       <main className="flex-1 flex items-center justify-center relative z-10">
         <BackgroundElements />
         {!isMobile && <UserCardsBackground />}
-        <div className="relative z-20 w-full flex justify-center items-center px-4">
+        <div className="relative z-20 w-full flex justify-center items-center px-2 sm:px-4">
           {children}
         </div>
       </main>

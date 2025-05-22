@@ -58,14 +58,14 @@ const SignupCard: React.FC<SignupCardProps> = ({
 
   return (
     <motion.div 
-      className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
+      className="relative z-10 w-full max-w-md p-3 sm:p-6 md:p-8 mx-auto sm:mx-4 my-6 sm:my-8 md:my-12 rounded-xl sm:rounded-2xl 
                 bg-white/90 dark:bg-[#10002B]/95 shadow-xl
                 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                 transition-colors duration-300"
       style={{ 
-        minWidth: isMobile ? 'auto' : '420px', 
-        width: isMobile ? '95%' : 'max-content',
-        minHeight: isMobile ? 'auto' : '520px'
+        width: isMobile ? '92%' : 'max-content',
+        minWidth: isMobile ? 'auto' : '380px',
+        maxWidth: isMobile ? '100%' : '420px',
       }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
