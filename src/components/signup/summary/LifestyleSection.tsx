@@ -1,5 +1,5 @@
 
-import { Heart, Ruler, Eye, Church, Cigarette, Wine } from "lucide-react";
+import { Heart, Ruler, Eye, Church, Cigarette, Wine, Users, MessageCircle } from "lucide-react";
 import { capitalize } from "./types";
 import { SummarySection } from "./SummarySection";
 
@@ -19,14 +19,16 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
             <Ruler className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Height:</span> {lifestyleData.height ? `${lifestyleData.height} cm` : 'Not provided'}
           </p>
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Church className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Religion:</span> {capitalize(lifestyleData.religion) || 'Not provided'}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
             <Cigarette className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Smoking:</span> {capitalize(lifestyleData.smokingStatus) || 'Not provided'}
           </p>
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <MessageCircle className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Looking for:</span> {capitalize(lifestyleData.lookingFor)} {lifestyleData.lookingForGender ? `(${lifestyleData.lookingForGender})` : ''}
           </p>
         </div>
@@ -42,6 +44,10 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
             <Wine className="h-3 w-3 text-[#9D4EDD] mr-1" />
             <span className="text-[#9D4EDD] font-medium">Drinking:</span> {capitalize(lifestyleData.drinkingStatus) || 'Not provided'}
+          </p>
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter flex items-center">
+            <Users className="h-3 w-3 text-[#9D4EDD] mr-1" />
+            <span className="text-[#9D4EDD] font-medium">Interested in:</span> {lifestyleData.lookingForGender || 'Not provided'}
           </p>
         </div>
       </div>
@@ -64,17 +70,23 @@ const LifestyleSection = ({ lifestyleData }: LifestyleSectionProps) => {
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-2">
+      {lifestyleData.pets && (
         <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
           <span className="text-[#9D4EDD] font-medium">Pets:</span> {capitalize(lifestyleData.pets) || 'Not provided'}
         </p>
+      )}
+      
+      {lifestyleData.exercise && (
         <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
           <span className="text-[#9D4EDD] font-medium">Exercise:</span> {capitalize(lifestyleData.exercise) || 'Not provided'}
         </p>
-      </div>
-      <p className="text-sm text-[#3B185F] dark:text-custom-lighter mt-1">
-        <span className="text-[#9D4EDD] font-medium">Diet:</span> {capitalize(lifestyleData.diet) || 'Not provided'}
-      </p>
+      )}
+      
+      {lifestyleData.diet && (
+        <p className="text-sm text-[#3B185F] dark:text-custom-lighter mt-1">
+          <span className="text-[#9D4EDD] font-medium">Diet:</span> {capitalize(lifestyleData.diet) || 'Not provided'}
+        </p>
+      )}
     </SummarySection>
   );
 };

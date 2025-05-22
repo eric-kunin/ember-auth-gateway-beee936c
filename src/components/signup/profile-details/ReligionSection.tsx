@@ -3,6 +3,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { UseFormReturn } from "react-hook-form";
 import { ProfileDetailsFormValues } from "./types";
+import { Church } from "lucide-react";
 
 interface ReligionSectionProps {
   form: UseFormReturn<ProfileDetailsFormValues>;
@@ -52,7 +53,8 @@ const ReligionSection = ({ form, isLoading }: ReligionSectionProps) => {
         name="religiousLevel"
         render={({ field }) => (
           <FormItem className="space-y-2">
-            <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+            <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
+              <Church className="h-4 w-4 text-[#9D4EDD]" />
               Religious Level
             </FormLabel>
             <Select

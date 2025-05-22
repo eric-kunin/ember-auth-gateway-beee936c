@@ -3,6 +3,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { UseFormReturn } from "react-hook-form";
 import { ProfileDetailsFormValues } from "./types";
+import { MessageCircle, Users } from "lucide-react";
 
 interface PreferenceSectionProps {
   form: UseFormReturn<ProfileDetailsFormValues>;
@@ -17,7 +18,8 @@ const PreferenceSection = ({ form, isLoading }: PreferenceSectionProps) => {
         name="lookingFor"
         render={({ field }) => (
           <FormItem className="space-y-2">
-            <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+            <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
+              <MessageCircle className="h-4 w-4 text-[#9D4EDD]" />
               Looking For
             </FormLabel>
             <Select
@@ -50,7 +52,8 @@ const PreferenceSection = ({ form, isLoading }: PreferenceSectionProps) => {
         name="lookingForGender"
         render={({ field }) => (
           <FormItem className="space-y-2">
-            <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
+            <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
+              <Users className="h-4 w-4 text-[#9D4EDD]" />
               Interested In
             </FormLabel>
             <Select
