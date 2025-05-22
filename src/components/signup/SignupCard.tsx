@@ -9,10 +9,11 @@ import ProfileDetailsForm from "@/components/signup/ProfileDetailsForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { motion } from "framer-motion";
-import SignupLifestyleInfo from "./SignupLifestyleInfo";
+import SignupLifestyleInfo from "./lifestyle-info/SignupLifestyleInfo";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
 import { ProfileImage } from "./summary/types";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SignupCardProps {
   currentStep: number;
@@ -53,6 +54,8 @@ const SignupCard: React.FC<SignupCardProps> = ({
   handleCompleteSignup,
   handleOAuthSignup,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div 
       className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
@@ -60,9 +63,9 @@ const SignupCard: React.FC<SignupCardProps> = ({
                 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                 transition-colors duration-300"
       style={{ 
-        minWidth: '420px', // Increased from 380px to 420px for even more width
-        width: 'max-content',
-        minHeight: '520px' // Maintaining the same height
+        minWidth: isMobile ? 'auto' : '420px', 
+        width: isMobile ? '95%' : 'max-content',
+        minHeight: isMobile ? 'auto' : '520px'
       }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}

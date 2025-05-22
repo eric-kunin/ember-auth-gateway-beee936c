@@ -26,7 +26,7 @@ const SocialLogin = ({ handleOAuthLogin, isLoading }: SocialLoginProps) => {
         </div>
       </div>
 
-      <div className={`grid ${isMobile ? 'grid-cols-1 gap-2' : 'grid-cols-3 gap-3'} mb-6`}>
+      <div className={`grid ${isMobile ? 'grid-cols-3 gap-2' : 'grid-cols-3 gap-3'} mb-6`}>
         <SocialLoginButton
           provider="GitHub"
           icon={Github}

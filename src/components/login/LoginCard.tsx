@@ -1,9 +1,11 @@
+
 import { motion } from "framer-motion";
 import LoginForm from "@/components/login/LoginForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import ForgotPasswordForm from "@/components/login/ForgotPasswordForm";
 import { LoginFormValues } from "@/components/login/schemas";
 import { LogIn, Users } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LoginCardProps {
   isLoading: boolean;
@@ -20,12 +22,18 @@ const LoginCard = ({
   handleOAuthLogin,
   handleToggleForgotPassword,
 }: LoginCardProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div 
       className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
                 bg-white/10 dark:bg-[#10002B]/80 shadow-xl backdrop-blur-md
                 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                 transition-colors duration-300"
+      style={{
+        minWidth: isMobile ? 'auto' : '380px',
+        width: isMobile ? '95%' : 'auto'
+      }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
