@@ -1,7 +1,6 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { PersonalInfoFormValues } from "./schemas";
 import { ProfileDetailsFormValues, profileDetailsSchema } from "./profile-details/types";
@@ -20,15 +19,7 @@ interface ProfileDetailsFormProps {
 const ProfileDetailsForm = ({
   defaultValues = {
     bio: "",
-    profession: "",
-    eyeColor: "",
-    height: undefined,
-    religion: "",
-    religiousLevel: "",
-    smokingStatus: "",
-    drinkingStatus: "",
-    lookingFor: "",
-    lookingForGender: ""
+    profession: ""
   },
   personalData,
   isLoading,

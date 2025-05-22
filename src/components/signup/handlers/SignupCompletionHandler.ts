@@ -1,0 +1,70 @@
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
+
+interface UseSignupCompletionProps {
+  accountData: AccountFormValues;
+  personalData: PersonalInfoFormValues;
+  profileData: any;
+  lifestyleData: any;
+}
+
+export const useSignupCompletion = ({
+  accountData,
+  personalData,
+  profileData,
+  lifestyleData
+}: UseSignupCompletionProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
+
+  const handleCompleteSignup = async () => {
+    setIsLoading(true);
+    
+    try {
+      // Combine data for profile creation
+      const completeProfileData = {
+        name: personalData.name,
+        firstName: personalData.name.split(' ')[0],
+        lastName: personalData.name.split(' ').slice(1).join(' '),
+        birthdate: personalData.birthdate,
+        gender: personalData.gender as "Male" | "Female" | "Other",
+        phone: personalData.phone,
+        bio: profileData.bio || "",
+        profession: profileData.profession || "",
+        eyeColor: lifestyleData.eyeColor || "",
+        height: lifestyleData.height ? Number(lifestyleData.height) : undefined,
+        religion: lifestyleData.religion || "",
+        religiousLevel: lifestyleData.religiousLevel || "",
+        smokingStatus: lifestyleData.smokingStatus || "",
+        drinkingStatus: lifestyleData.drinkingStatus || "",
+        lookingFor: lifestyleData.lookingFor || "",
+        lookingForGender: lifestyleData.lookingForGender as "Male" | "Female" | "Other" | "Both" || "Both",
+      };
+
+      // Call auth service to sign up
+      await signUp(accountData.email, accountData.password, completeProfileData);
+      
+      // Navigate is handled by useEffect when isAuthenticated changes
+      toast({
+        title: "Account Created!",
+        description: "Your account has been successfully created.",
+      });
+    } catch (error: any) {
+      toast({
+        variant: "destructive",
+        title: "Signup Failed",
+        description: error.message || "An error occurred during signup.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { handleCompleteSignup, isLoading };
+};

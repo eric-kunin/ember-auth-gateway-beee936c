@@ -1,4 +1,3 @@
-
 import React from "react";
 import SignupStepIndicator from "./SignupStepIndicator";
 import { Progress } from "@/components/ui/progress";
@@ -12,7 +11,7 @@ import { motion } from "framer-motion";
 import SignupLifestyleInfo from "./SignupLifestyleInfo";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
-import { ProfileImage as ProfileImageType } from "./summary/types";
+import { ProfileImage } from "./summary/types";
 
 interface ProfileImage {
   imageId?: string;
@@ -31,13 +30,13 @@ interface SignupCardProps {
   personalData: PersonalInfoFormValues;
   profileData: any;
   lifestyleData: any;
-  profileImages: ProfileImageType[];
+  profileImages: ProfileImage[];
   isLoading: boolean;
   handleSignupStep1: (data: AccountFormValues) => void;
   handleSignupStep2: (data: PersonalInfoFormValues) => void;
   handleProfileDataChange: (data: any) => void;
   handleLifestyleDataChange: (data: any) => void;
-  handlePhotoUpload: (images: ProfileImageType[]) => void;
+  handlePhotoUpload: (images: ProfileImage[]) => void;
   handlePrevStep: () => void;
   handleCompleteSignup: () => void;
   handleOAuthSignup: (provider: string) => void;
