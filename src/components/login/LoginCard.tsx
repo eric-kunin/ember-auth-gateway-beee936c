@@ -39,7 +39,7 @@ const LoginCard = ({
     >
       <Card className="p-4 sm:p-8 rounded-2xl bg-[#10002B]/95 border-[#9D4EDD]/20 shadow-xl relative">
         {/* Theme toggle positioned on the card - adjusted position */}
-        <div className="absolute top-[-12px] right-[7px]">
+        <div className="absolute top-[-12px] right-[22px]">
           <ThemeToggle />
         </div>
         
