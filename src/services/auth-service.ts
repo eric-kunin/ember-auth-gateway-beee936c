@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 
 // Define a simplified ProfileData interface to avoid circular references
@@ -25,29 +24,18 @@ interface ProfileData {
 export class AuthService {
   static async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Use rpc with a simple function to avoid type inference issues
-      const { data, error } = await supabase.rpc('check_email_exists', {
-        email_to_check: email
-      });
+      // Use count to check if email exists - this avoids complex type inference
+      const { count, error } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .eq('email', email);
       
       if (error) {
-        console.error('Error checking email with RPC:', error);
-        // Fallback to a manual check
-        try {
-          const result = await supabase
-            .from('profiles')
-            .select('id')
-            .eq('email', email)
-            .maybeSingle();
-          
-          return !!result.data;
-        } catch (fallbackError) {
-          console.error('Fallback email check also failed:', fallbackError);
-          return false;
-        }
+        console.error('Error checking email:', error);
+        return false;
       }
       
-      return !!data;
+      return (count || 0) > 0;
     } catch (error) {
       console.error('Error checking email:', error);
       return false;
