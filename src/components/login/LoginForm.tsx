@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,20 +55,20 @@ const LoginForm = ({
             name="email"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel className="text-white text-sm">
+                <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
                   Email
                 </FormLabel>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <FormControl>
                         <Input
                           placeholder="name@example.com"
                           type="email"
-                          className="bg-[#240046]/80 border-0 
-                                  text-white placeholder:text-white/60 
-                                  pl-10 h-11 sm:h-12 py-2 focus-visible:ring-[#9D4EDD]"
+                          className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/50 dark:border-0 
+                                  text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                                  pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                           disabled={isLoading}
                           title="Enter your email address"
                           {...field}
@@ -94,30 +93,30 @@ const LoginForm = ({
             render={({ field }) => (
               <FormItem className="space-y-2">
                 <div className="flex justify-between items-center flex-wrap">
-                  <FormLabel className="text-white text-sm">
+                  <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
                     Password
                   </FormLabel>
                   <motion.button
                     type="button"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-xs text-custom-lighter hover:text-white transition-colors"
+                    className="text-xs text-[#9D4EDD] dark:text-custom-lighter hover:text-[#7B2CBF] dark:hover:text-white transition-colors"
                     onClick={onForgotPassword}
                   >
                     Forgot password?
                   </motion.button>
                 </div>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-custom-lighter/70" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <FormControl>
                         <Input
                           type={showPassword ? "text" : "password"}
                           placeholder="password123"
-                          className="bg-[#240046]/80 border-0 
-                                  text-white placeholder:text-white/60 
-                                  pl-10 h-11 sm:h-12 py-2 focus-visible:ring-[#9D4EDD]"
+                          className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/50 dark:border-0 
+                                  text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                                  pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
                           disabled={isLoading}
                           title="Enter your password: password123"
                           {...field}
@@ -131,7 +130,7 @@ const LoginForm = ({
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] hover:text-[#C77DFF] transition-colors duration-300"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9D4EDD] dark:text-[#9D4EDD] hover:text-[#7B2CBF] dark:hover:text-[#C77DFF] transition-colors duration-300"
                     title={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? (
@@ -162,7 +161,7 @@ const LoginForm = ({
                   />
                 </FormControl>
                 <div className="space-y-0.5">
-                  <FormLabel className="text-xs sm:text-sm text-custom-lighter cursor-pointer">
+                  <FormLabel className="text-xs sm:text-sm text-[#3B185F] dark:text-custom-lighter transition-colors duration-300 cursor-pointer">
                     Remember me for 30 days
                   </FormLabel>
                 </div>
@@ -187,8 +186,8 @@ const LoginForm = ({
                   <span>Signing in...</span>
                 </div>
               ) : (
-                <div className="flex items-center justify-center w-full">
-                  <span>Sign In</span>
+                <div className="flex items-center">
+                  <span className="mr-1">Sign In</span>
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
               )}

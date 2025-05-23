@@ -11,7 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Forbidden from "./pages/Forbidden";
 import { UpdatePasswordForm } from "@/components/password/UpdatePasswordForm";
-import React from "react";
+import React from "react"; // Add explicit React import for hooks to work properly
 
 // Create the query client as a constant outside the component
 const queryClient = new QueryClient();

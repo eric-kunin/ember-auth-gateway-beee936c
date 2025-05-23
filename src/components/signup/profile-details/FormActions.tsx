@@ -1,6 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface FormActionsProps {
   isLoading: boolean;
@@ -14,15 +13,14 @@ const FormActions = ({ isLoading, onBack }: FormActionsProps) => {
         type="button"
         onClick={onBack}
         variant="outline"
-        className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30 group"
+        className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30"
       >
-        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-        <span>Back</span>
+        Back
       </Button>
       <Button
         type="submit"
         className="flex-1 bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-12 
-                 signin-button-hover transition-all duration-300 group"
+                 signin-button-hover transition-all duration-300"
         disabled={isLoading}
       >
         {isLoading ? (
@@ -31,10 +29,7 @@ const FormActions = ({ isLoading, onBack }: FormActionsProps) => {
             <span>Creating Account...</span>
           </div>
         ) : (
-          <>
-            <span>Next</span>
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </>
+          "Next"
         )}
       </Button>
     </div>

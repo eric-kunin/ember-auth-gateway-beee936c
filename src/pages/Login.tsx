@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { LoginFormValues } from "@/components/login/schemas";
 import LoginCard from "@/components/login/LoginCard";
 import LoginBackground from "@/components/login/LoginBackground";
@@ -56,7 +57,9 @@ const Login = () => {
 
   return (
     <LoginBackground>
-      {/* Theme toggle is now handled in LoginBackground */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
       
       <LoginCard 
         isLoading={isLoading}

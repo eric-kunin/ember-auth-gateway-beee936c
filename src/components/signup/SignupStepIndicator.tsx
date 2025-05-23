@@ -1,6 +1,5 @@
 
 import { FC } from "react";
-import { Check } from "lucide-react";
 
 interface SignupStepIndicatorProps {
   currentStep: number;
@@ -65,11 +64,7 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
                 transition-all duration-300 ease-in-out relative`}
               title={`Step ${step}: ${getStepLabel(step)}`}
             >
-              {step < currentStep ? (
-                <Check className="h-5 w-5 stroke-[3]" />
-              ) : (
-                <span>{step}</span>
-              )}
+              <span>{step}</span>
               {step === currentStep && (
                 <div className="absolute -inset-1 rounded-full border-2 border-green-300 dark:border-green-700 animate-pulse"></div>
               )}

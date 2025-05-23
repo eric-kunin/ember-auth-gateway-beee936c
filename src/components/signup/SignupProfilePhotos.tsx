@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ProfileImageUpload } from "./ProfileImageUpload";
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight, Camera, CheckCircle } from "lucide-react";
+import { Camera, CheckCircle } from "lucide-react";
 
 interface ProfileImage {
   imageId?: string;
@@ -85,7 +85,6 @@ const SignupProfilePhotos = ({
           className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30"
           title="Go back to previous step"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
         <Button
@@ -96,7 +95,6 @@ const SignupProfilePhotos = ({
           title="Continue to final step"
         >
           Next
-          <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
     </form>

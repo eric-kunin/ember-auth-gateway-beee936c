@@ -1,6 +1,5 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, CheckCircle } from "lucide-react";
 
 interface SummaryActionsProps {
   isLoading: boolean;
@@ -18,7 +17,6 @@ const SummaryActions = ({ isLoading, onBack, onComplete }: SummaryActionsProps) 
         className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30"
         title="Go back to previous step"
       >
-        <ArrowLeft className="mr-2 h-4 w-4" />
         Back
       </Button>
       <Button
@@ -35,10 +33,7 @@ const SummaryActions = ({ isLoading, onBack, onComplete }: SummaryActionsProps) 
             <span>Creating Account...</span>
           </div>
         ) : (
-          <>
-            Complete Signup
-            <CheckCircle className="ml-2 h-4 w-4" />
-          </>
+          "Complete Signup"
         )}
       </Button>
     </div>
