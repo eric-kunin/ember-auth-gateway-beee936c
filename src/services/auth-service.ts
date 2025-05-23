@@ -24,17 +24,15 @@ interface ProfileData {
 export class AuthService {
   static async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Use rpc with a simple function to avoid type inference issues
-      const { data, error } = await supabase.rpc('check_email_exists_simple', {
-        p_email: email
-      });
+      // Use auth.users table to check if email exists
+      const { data, error } = await supabase.auth.admin.listUsers();
       
       if (error) {
         console.error('Error checking email:', error);
         return false;
       }
       
-      return Boolean(data);
+      return data.users.some(user => user.email === email);
     } catch (error) {
       console.error('Error checking email:', error);
       return false;
