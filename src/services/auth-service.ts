@@ -1,6 +1,6 @@
-
 import { supabase } from '@/integrations/supabase/client';
 
+// Define a simplified ProfileData interface to avoid circular references
 interface ProfileData {
   firstName?: string;
   lastName?: string;
@@ -12,6 +12,13 @@ interface ProfileData {
   birthdate?: Date;
   gender?: 'Male' | 'Female' | 'Other';
   height?: number;
+  eyeColor?: string;
+  religion?: string;
+  religiousLevel?: string;
+  smokingStatus?: string;
+  drinkingStatus?: string;
+  lookingFor?: string;
+  lookingForGender?: 'Male' | 'Female' | 'Other' | 'Both';
 }
 
 export class AuthService {
@@ -59,7 +66,7 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
-      // Prepare profile data for database insertion
+      // Prepare profile data for database insertion with correct field names
       const dbProfileData = {
         id: authData.user.id,
         first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
@@ -192,23 +199,14 @@ export class AuthService {
     }
   }
 
-  static async updateProfile(profileData: {
-    firstName?: string;
-    lastName?: string;
-    displayName?: string;
-    bio?: string;
-    profession?: string;
-    birthdate?: Date;
-    gender?: 'Male' | 'Female' | 'Other';
-    height?: number;
-  }) {
+  static async updateProfile(profileData: ProfileData) {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) throw new Error('User not authenticated');
 
       // Prepare update data with proper field names and types
-      const updateData: any = {
+      const updateData: Record<string, any> = {
         updated_at: new Date().toISOString()
       };
 
@@ -218,8 +216,15 @@ export class AuthService {
       if (profileData.bio) updateData.bio = profileData.bio;
       if (profileData.profession) updateData.profession = profileData.profession;
       if (profileData.birthdate) updateData.birth_date = profileData.birthdate.toISOString();
-      if (profileData.gender) updateData.gender = profileData.gender as 'Male' | 'Female' | 'Other';
+      if (profileData.gender) updateData.gender = profileData.gender;
       if (profileData.height) updateData.height = profileData.height;
+      if (profileData.eyeColor) updateData.eye_color = profileData.eyeColor;
+      if (profileData.religion) updateData.religion = profileData.religion;
+      if (profileData.religiousLevel) updateData.religious_level = profileData.religiousLevel;
+      if (profileData.smokingStatus) updateData.smoking = profileData.smokingStatus;
+      if (profileData.drinkingStatus) updateData.drinking = profileData.drinkingStatus;
+      if (profileData.lookingFor) updateData.looking_for = profileData.lookingFor;
+      if (profileData.lookingForGender) updateData.looking_for_gender = profileData.lookingForGender;
 
       // Update the profile with proper field names and types
       const { error } = await supabase
