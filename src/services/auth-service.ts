@@ -1,4 +1,18 @@
+
 import { supabase } from '@/integrations/supabase/client';
+
+interface ProfileData {
+  firstName?: string;
+  lastName?: string;
+  name?: string;
+  displayName?: string;
+  username?: string;
+  bio?: string;
+  profession?: string;
+  birthdate?: Date;
+  gender?: 'Male' | 'Female' | 'Other';
+  height?: number;
+}
 
 export class AuthService {
   static async checkEmailExists(email: string): Promise<boolean> {
@@ -21,18 +35,7 @@ export class AuthService {
     }
   }
 
-  static async signUp(email: string, password: string, profileData: {
-    firstName?: string;
-    lastName?: string;
-    name?: string;
-    displayName?: string;
-    username?: string;
-    bio?: string;
-    profession?: string;
-    birthdate?: Date;
-    gender?: string;
-    height?: number;
-  }) {
+  static async signUp(email: string, password: string, profileData: ProfileData) {
     try {
       // Check if email already exists first
       const emailExists = await this.checkEmailExists(email);
@@ -56,24 +59,26 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
+      // Prepare profile data for database insertion
+      const dbProfileData = {
+        id: authData.user.id,
+        first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
+        last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
+        display_name: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
+        username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
+        bio: profileData.bio || '',
+        profession: profileData.profession || '',
+        birth_date: profileData.birthdate ? profileData.birthdate.toISOString() : new Date().toISOString(),
+        gender: (profileData.gender || 'Other') as 'Male' | 'Female' | 'Other',
+        height: profileData.height,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+
       // Then create the profile using Supabase
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
-        .insert({
-          id: authData.user.id,
-          email: email,
-          first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
-          last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
-          display_name: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
-          username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
-          bio: profileData.bio || '',
-          profession: profileData.profession || '',
-          birth_date: profileData.birthdate ? profileData.birthdate.toISOString() : new Date().toISOString(),
-          gender: profileData.gender || 'Other',
-          height: profileData.height,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        })
+        .insert(dbProfileData)
         .select();
 
       if (profileError) {
@@ -194,7 +199,7 @@ export class AuthService {
     bio?: string;
     profession?: string;
     birthdate?: Date;
-    gender?: string;
+    gender?: 'Male' | 'Female' | 'Other';
     height?: number;
   }) {
     try {
@@ -202,20 +207,24 @@ export class AuthService {
       
       if (!user) throw new Error('User not authenticated');
 
+      // Prepare update data with proper field names and types
+      const updateData: any = {
+        updated_at: new Date().toISOString()
+      };
+
+      if (profileData.firstName) updateData.first_name = profileData.firstName;
+      if (profileData.lastName) updateData.last_name = profileData.lastName;
+      if (profileData.displayName) updateData.display_name = profileData.displayName;
+      if (profileData.bio) updateData.bio = profileData.bio;
+      if (profileData.profession) updateData.profession = profileData.profession;
+      if (profileData.birthdate) updateData.birth_date = profileData.birthdate.toISOString();
+      if (profileData.gender) updateData.gender = profileData.gender as 'Male' | 'Female' | 'Other';
+      if (profileData.height) updateData.height = profileData.height;
+
       // Update the profile with proper field names and types
       const { error } = await supabase
         .from('profiles')
-        .update({
-          ...(profileData.firstName && { first_name: profileData.firstName }),
-          ...(profileData.lastName && { last_name: profileData.lastName }),
-          ...(profileData.displayName && { display_name: profileData.displayName }),
-          ...(profileData.bio && { bio: profileData.bio }),
-          ...(profileData.profession && { profession: profileData.profession }),
-          ...(profileData.birthdate && { birth_date: profileData.birthdate.toISOString() }),
-          ...(profileData.gender && { gender: profileData.gender }),
-          ...(profileData.height && { height: profileData.height }),
-          updated_at: new Date().toISOString()
-        })
+        .update(updateData)
         .eq('id', user.id);
 
       if (error) throw error;
