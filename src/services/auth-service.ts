@@ -1,18 +1,31 @@
-
 import { supabase } from '@/integrations/supabase/client';
-import type { ProfileData } from '@/types/profile';
 
 export class AuthService {
-  static async signUp(email: string, password: string, profileData: ProfileData) {
+  static async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Check if email already exists first
-      const { data: existingProfile } = await supabase
+      const { data, error } = await supabase
         .from('profiles')
         .select('id')
         .eq('email', email)
         .single();
+      
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
+        console.error('Error checking email:', error);
+        return false;
+      }
+      
+      return !!data; // Returns true if email exists
+    } catch (error) {
+      console.error('Error checking email:', error);
+      return false;
+    }
+  }
 
-      if (existingProfile) {
+  static async signUp(email: string, password: string, profileData: any) {
+    try {
+      // Check if email already exists first
+      const emailExists = await this.checkEmailExists(email);
+      if (emailExists) {
         throw new Error('An account with this email already exists. Please use a different email or try signing in.');
       }
 
@@ -163,7 +176,7 @@ export class AuthService {
     }
   }
 
-  static async updateProfile(profileData: ProfileData) {
+  static async updateProfile(profileData: any) {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       
@@ -179,7 +192,7 @@ export class AuthService {
           ...(profileData.bio && { bio: profileData.bio }),
           ...(profileData.profession && { profession: profileData.profession }),
           ...(profileData.birthdate && { birth_date: profileData.birthdate.toISOString() }),
-          ...(profileData.gender && { gender: profileData.gender as "Male" | "Female" | "Other" }),
+          ...(profileData.gender && { gender: profileData.gender }),
           ...(profileData.height && { height: profileData.height }),
           updated_at: new Date().toISOString()
         })

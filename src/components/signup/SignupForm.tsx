@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { accountFormSchema, AccountFormValues } from "./schemas";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TermsNotice from "./TermsNotice";
 import EmailField from "./account-form/EmailField";
 import PasswordField from "./account-form/PasswordField";
 import TermsCheckbox from "./account-form/TermsCheckbox";
 import SubmitButton from "./account-form/SubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { supabase } from "@/integrations/supabase/client";
+import { AuthService } from "@/services/auth-service";
 
 interface SignupFormProps {
   defaultValues?: Partial<AccountFormValues>;
@@ -37,25 +37,39 @@ const SignupForm = ({
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
 
-  const checkEmailExists = async (email: string): Promise<boolean> => {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', email)
-        .single();
-      
-      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
-        console.error('Error checking email:', error);
-        return false;
-      }
-      
-      return !!data; // Returns true if email exists
-    } catch (error) {
-      console.error('Error checking email:', error);
-      return false;
+  // Watch email field for immediate validation
+  const watchedEmail = form.watch("email");
+
+  // Debounced email validation
+  useEffect(() => {
+    if (!watchedEmail || !watchedEmail.includes("@")) {
+      setEmailError(null);
+      return;
     }
-  };
+
+    const timeoutId = setTimeout(async () => {
+      setIsCheckingEmail(true);
+      try {
+        const emailExists = await AuthService.checkEmailExists(watchedEmail);
+        if (emailExists) {
+          setEmailError('This email is already registered. Please use a different email address or try signing in.');
+          form.setError("email", {
+            type: "manual",
+            message: "Email already exists"
+          });
+        } else {
+          setEmailError(null);
+          form.clearErrors("email");
+        }
+      } catch (error) {
+        console.error('Error checking email:', error);
+      } finally {
+        setIsCheckingEmail(false);
+      }
+    }, 1000); // 1 second debounce
+
+    return () => clearTimeout(timeoutId);
+  }, [watchedEmail, form]);
 
   const handleSubmit = async (data: AccountFormValues) => {
     // Reset any previous email error
@@ -63,8 +77,8 @@ const SignupForm = ({
     setIsCheckingEmail(true);
     
     try {
-      // Check if email already exists
-      const emailExists = await checkEmailExists(data.email);
+      // Final check if email already exists
+      const emailExists = await AuthService.checkEmailExists(data.email);
       
       if (emailExists) {
         setEmailError('This email is already registered. Please use a different email address or try signing in.');
@@ -90,7 +104,11 @@ const SignupForm = ({
           </Alert>
         )}
         
-        <EmailField control={form.control} isLoading={isLoading || isCheckingEmail} />
+        <EmailField 
+          control={form.control} 
+          isLoading={isLoading || isCheckingEmail} 
+          isCheckingEmail={isCheckingEmail}
+        />
         
         <PasswordField 
           control={form.control} 
@@ -115,7 +133,7 @@ const SignupForm = ({
         
         <SubmitButton 
           isLoading={isLoading || isCheckingEmail} 
-          isValid={form.formState.isValid}
+          isValid={form.formState.isValid && !emailError}
           loadingText={isCheckingEmail ? "Checking email..." : "Creating account..."}
         />
         
