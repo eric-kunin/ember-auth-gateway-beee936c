@@ -25,18 +25,21 @@ interface ProfileData {
 export class AuthService {
   static async checkEmailExists(email: string): Promise<boolean> {
     try {
-      const { data, error } = await supabase
+      // Use a simple query with explicit typing to avoid deep type inference
+      const result = await supabase
         .from('profiles')
         .select('id')
         .eq('email', email)
-        .maybeSingle();
+        .limit(1);
       
-      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
+      const { data, error } = result;
+      
+      if (error) {
         console.error('Error checking email:', error);
         return false;
       }
       
-      return !!data; // Returns true if email exists
+      return Array.isArray(data) && data.length > 0;
     } catch (error) {
       console.error('Error checking email:', error);
       return false;
