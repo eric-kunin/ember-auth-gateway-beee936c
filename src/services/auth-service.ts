@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 
 // Define a simplified ProfileData interface to avoid circular references
@@ -32,7 +33,9 @@ export class AuthService {
         return false;
       }
       
-      return data.users.some(user => user.email === email);
+      // Explicitly check the users array with proper typing
+      const users = data?.users || [];
+      return users.some((user: any) => user.email === email);
     } catch (error) {
       console.error('Error checking email:', error);
       return false;
