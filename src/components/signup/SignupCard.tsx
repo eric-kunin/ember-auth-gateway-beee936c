@@ -14,7 +14,6 @@ import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
 import { ProfileImage } from "./summary/types";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface SignupCardProps {
   currentStep: number;
@@ -72,11 +71,6 @@ const SignupCard: React.FC<SignupCardProps> = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Theme toggle positioned consistently with login page */}
-      <div className="absolute top-[-20px] right-[-20px] z-50">
-        <ThemeToggle />
-      </div>
-      
       <div className="text-center mb-2">
         <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">
           Create an Account

@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { SummarySectionProps } from "./SummarySectionProps";
 import { item } from "./types";
@@ -17,7 +16,7 @@ export const SummarySection = ({ title, icon, children, className, variants = it
             {title}
           </h4>
         </div>
-        <div className="space-y-2 pl-4">
+        <div className="space-y-2 pl-7">
           {children}
         </div>
       </motion.div>

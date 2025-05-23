@@ -56,6 +56,8 @@ const Login = () => {
 
   return (
     <LoginBackground>
+      {/* Theme toggle is now handled in LoginBackground */}
+      
       <LoginCard 
         isLoading={isLoading}
         showForgotPassword={showForgotPassword}
