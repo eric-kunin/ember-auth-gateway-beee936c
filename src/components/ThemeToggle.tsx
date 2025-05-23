@@ -33,7 +33,7 @@ export function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={handleToggle}
-      className="absolute top-4 right-4 rounded-full w-10 h-10 flex items-center justify-center
+      className="rounded-full w-11 h-11 flex items-center justify-center
         backdrop-blur-xl 
         dark:bg-[#240046]/70 dark:hover:bg-[#240046]/90
         bg-white/60 hover:bg-white/80 transition-all duration-300

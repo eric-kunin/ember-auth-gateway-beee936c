@@ -9,10 +9,12 @@ import ProfileDetailsForm from "@/components/signup/ProfileDetailsForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { motion } from "framer-motion";
-import SignupLifestyleInfo from "./SignupLifestyleInfo";
+import SignupLifestyleInfo from "./lifestyle-info/SignupLifestyleInfo";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
 import { ProfileImage } from "./summary/types";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface SignupCardProps {
   currentStep: number;
@@ -53,21 +55,28 @@ const SignupCard: React.FC<SignupCardProps> = ({
   handleCompleteSignup,
   handleOAuthSignup,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <motion.div 
-      className="relative z-10 w-full max-w-md p-4 sm:p-8 mx-2 sm:mx-4 my-8 sm:my-12 rounded-2xl 
+      className="relative z-10 w-full max-w-md p-3 sm:p-6 md:p-8 mx-auto sm:mx-4 my-6 sm:my-8 md:my-12 rounded-xl sm:rounded-2xl 
                 bg-white/90 dark:bg-[#10002B]/95 shadow-xl
                 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20
                 transition-colors duration-300"
       style={{ 
-        minWidth: '420px', // Increased from 380px to 420px for even more width
-        width: 'max-content',
-        minHeight: '520px' // Maintaining the same height
+        width: isMobile ? '92%' : 'max-content',
+        minWidth: isMobile ? 'auto' : '380px',
+        maxWidth: isMobile ? '100%' : '420px',
       }}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      {/* Theme toggle positioned consistently with login page */}
+      <div className="absolute top-[-20px] right-[-20px] z-50">
+        <ThemeToggle />
+      </div>
+      
       <div className="text-center mb-2">
         <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">
           Create an Account

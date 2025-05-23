@@ -2,18 +2,21 @@
 import { ReactNode } from "react";
 import BackgroundElements from "@/components/login/BackgroundElements";
 import UserCardsBackground from "@/components/login/UserCardsBackground";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LoginBackgroundProps {
   children: ReactNode;
 }
 
 const LoginBackground = ({ children }: LoginBackgroundProps) => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="min-h-screen w-full flex flex-col bg-[#1E0B36] transition-colors duration-300 overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#f8f9fa] via-[#e9ecef] to-[#dee2e6] dark:bg-gradient-to-br dark:from-[#0B0205] dark:via-[#10002B] dark:to-[#1E0B36] transition-colors duration-300 overflow-hidden">
       <main className="flex-1 flex items-center justify-center relative z-10">
         <BackgroundElements />
-        <UserCardsBackground />
-        <div className="relative z-20">
+        {!isMobile && <UserCardsBackground />}
+        <div className="relative z-20 w-full flex justify-center items-center px-2 sm:px-4">
           {children}
         </div>
       </main>
