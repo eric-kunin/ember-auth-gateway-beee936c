@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 
 // Define a simplified ProfileData interface to avoid circular references
@@ -24,18 +25,19 @@ interface ProfileData {
 export class AuthService {
   static async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Use count to check if email exists - this avoids complex type inference
-      const { count, error } = await supabase
+      // Simple check using basic select to avoid type inference issues
+      const { data, error } = await supabase
         .from('profiles')
-        .select('*', { count: 'exact', head: true })
-        .eq('email', email);
+        .select('id')
+        .eq('email', email)
+        .limit(1);
       
       if (error) {
         console.error('Error checking email:', error);
         return false;
       }
       
-      return (count || 0) > 0;
+      return (data && data.length > 0);
     } catch (error) {
       console.error('Error checking email:', error);
       return false;
