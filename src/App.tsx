@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Forbidden from "./pages/Forbidden";
+import VerifyAccount from "./pages/VerifyAccount";
 import { UpdatePasswordForm } from "@/components/password/UpdatePasswordForm";
 import React from "react";
 
@@ -28,6 +29,7 @@ const App = () => {
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/verify-account" element={<VerifyAccount />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/forbidden" element={<Forbidden />} />
               <Route path="/update-password" element={

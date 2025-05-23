@@ -50,11 +50,14 @@ export const useSignupCompletion = ({
       // Call auth service to sign up
       await signUp(accountData.email, accountData.password, completeProfileData);
       
-      // Navigate is handled by useEffect when isAuthenticated changes
+      // Redirect to verification page instead of relying on useEffect
       toast({
         title: "Account Created!",
-        description: "Your account has been successfully created.",
+        description: "Please verify your email to continue.",
       });
+      
+      // Navigate to verification page with email param
+      navigate(`/verify-account?email=${encodeURIComponent(accountData.email)}`);
     } catch (error: any) {
       toast({
         variant: "destructive",
