@@ -4,6 +4,7 @@ import LoginBackground from "@/components/login/LoginBackground";
 import PendingVerificationState from "@/components/verify/PendingVerificationState";
 import SuccessVerificationState from "@/components/verify/SuccessVerificationState";
 import ErrorVerificationState from "@/components/verify/ErrorVerificationState";
+import VerificationProgress from "@/components/verify/VerificationProgress";
 import { useVerification } from "@/hooks/useVerification";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -30,7 +31,9 @@ const VerifyAccount = () => {
             transition={{ duration: 0.3 }}
           >
             <Card className="w-full p-6 mx-auto bg-white/90 dark:bg-[#10002B]/95 border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20 rounded-xl shadow-xl backdrop-blur-sm">
-              <div className="flex flex-col items-center justify-center text-center space-y-6">
+              <VerificationProgress currentState={verificationState} />
+              
+              <div className="flex flex-col items-center justify-center text-center space-y-6 mt-6">
                 {verificationState === "pending" && (
                   <PendingVerificationState
                     email={email}
