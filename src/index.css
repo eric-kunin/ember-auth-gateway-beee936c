@@ -97,28 +97,28 @@
   }
 }
 
-/* Update the auth gradient to use the new darker colors */
-.auth-gradient {
-  background: linear-gradient(135deg, #0B0205 0%, #10002B 40%, #240046 70%, #2C1B47 100%);
-}
-
-.auth-card {
-  backdrop-filter: blur(16px);
-  background: rgba(16, 0, 43, 0.2); /* Darker background with more transparency */
-  border: 1px solid rgba(157, 78, 221, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-/* Light mode specific styling */
+/* Light mode auth gradient - restored to previous version */
 html.light .auth-gradient {
-  background: linear-gradient(135deg, #fcfaff 0%, #f0e6ff 40%, #e4d3ff 70%, #d9b8ff 100%);
+  background: linear-gradient(135deg, #fcfcfc 0%, #f8f6ff 40%, #f0ebff 70%, #e8e0ff 100%);
 }
 
 html.light .auth-card {
   backdrop-filter: blur(16px);
   background: rgba(255, 255, 255, 0.85); 
   border: 1px solid rgba(157, 78, 221, 0.2);
-  box-shadow: 0 8px 32px rgba(157, 78, 221, 0.2);
+  box-shadow: 0 8px 32px rgba(157, 78, 221, 0.15);
+}
+
+/* Dark mode auth styling - keeping as is */
+.auth-gradient {
+  background: linear-gradient(135deg, #0B0205 0%, #10002B 40%, #240046 70%, #2C1B47 100%);
+}
+
+.auth-card {
+  backdrop-filter: blur(16px);
+  background: rgba(16, 0, 43, 0.2); 
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* Global animation for theme transition */
