@@ -24,27 +24,18 @@ interface ProfileData {
 export class AuthService {
   static async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Use rpc call to avoid complex type inference
-      const { data, error } = await supabase.rpc('check_email_exists', { 
-        email_to_check: email 
-      });
+      // Use a simple count query to avoid complex type inference
+      const { count, error } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .eq('email', email);
       
       if (error) {
         console.error('Error checking email:', error);
-        // Fallback to simple check if RPC doesn't exist
-        try {
-          const { count } = await supabase
-            .from('profiles')
-            .select('*', { count: 'exact', head: true })
-            .eq('email', email);
-          return (count ?? 0) > 0;
-        } catch (fallbackError) {
-          console.error('Fallback email check failed:', fallbackError);
-          return false;
-        }
+        return false;
       }
       
-      return !!data;
+      return (count ?? 0) > 0;
     } catch (error) {
       console.error('Error checking email:', error);
       return false;
