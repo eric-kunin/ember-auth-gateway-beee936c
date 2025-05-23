@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 
 export class AuthService {
@@ -21,7 +22,7 @@ export class AuthService {
     }
   }
 
-  static async signUp(email: string, password: string, profileData: any) {
+  static async signUp(email: string, password: string, profileData: Record<string, any>) {
     try {
       // Check if email already exists first
       const emailExists = await this.checkEmailExists(email);
@@ -176,7 +177,7 @@ export class AuthService {
     }
   }
 
-  static async updateProfile(profileData: any) {
+  static async updateProfile(profileData: Record<string, any>) {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       
