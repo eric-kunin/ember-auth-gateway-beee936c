@@ -1,10 +1,11 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 273 78% 98%;
+    --background: 240 100% 98%;
     --foreground: 267 72% 3%;
 
     --card: 0 0% 100%;
@@ -111,12 +112,12 @@
 
 /* Light mode specific styling */
 html.light .auth-gradient {
-  background: linear-gradient(135deg, #f5efff 0%, #e8d8ff 40%, #d8c8ff 70%, #c9a7ff 100%);
+  background: linear-gradient(135deg, #f8f8ff 0%, #f0f0ff 40%, #e8e6ff 70%, #e0d8ff 100%);
 }
 
 html.light .auth-card {
   backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.9); 
+  background: rgba(255, 255, 255, 0.8); 
   border: 1px solid rgba(157, 78, 221, 0.15);
   box-shadow: 0 8px 32px rgba(157, 78, 221, 0.15);
 }
