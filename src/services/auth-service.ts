@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 
 // Define a simplified ProfileData interface to avoid circular references
@@ -28,7 +29,7 @@ export class AuthService {
         .from('profiles')
         .select('id')
         .eq('email', email)
-        .single();
+        .maybeSingle();
       
       if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
         console.error('Error checking email:', error);
@@ -86,7 +87,8 @@ export class AuthService {
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .insert(dbProfileData)
-        .select();
+        .select()
+        .single();
 
       if (profileError) {
         // If profile creation fails, clean up the auth user
@@ -94,7 +96,7 @@ export class AuthService {
         throw profileError;
       }
 
-      return { user: authData.user, profile: profile[0] };
+      return { user: authData.user, profile: profile };
     } catch (error) {
       console.error('SignUp error:', error);
       throw error;
