@@ -5,13 +5,21 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { MessagingPanel } from "@/components/messaging/MessagingPanel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useAuth } from "@/hooks/useAuth";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { signOut } = useAuth();
   
-  const handleLogout = () => {
-    // In a real app, this would handle actual logout logic
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Even if logout fails, redirect to login page
+      navigate("/login");
+    }
   };
   
   return (
