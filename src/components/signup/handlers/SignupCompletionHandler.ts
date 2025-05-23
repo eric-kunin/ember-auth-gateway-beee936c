@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
-import { supabase } from "@/integrations/supabase/client";
 
 interface UseSignupCompletionProps {
   accountData: AccountFormValues;
@@ -28,35 +27,6 @@ export const useSignupCompletion = ({
     setIsLoading(true);
     
     try {
-      // Check if email already exists before proceeding with signup
-      const { data: existingUsers, error: checkError } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', accountData.email)
-        .limit(1);
-      
-      if (checkError) {
-        console.error('Error checking email:', checkError);
-        toast({
-          variant: "destructive",
-          title: "Signup Failed",
-          description: "Error verifying email availability. Please try again.",
-        });
-        setIsLoading(false);
-        return;
-      }
-      
-      // If email exists, show error and stop signup process
-      if (existingUsers && existingUsers.length > 0) {
-        toast({
-          variant: "destructive",
-          title: "Email Already Registered",
-          description: "This email is already registered. Please use a different email or try logging in.",
-        });
-        setIsLoading(false);
-        return;
-      }
-      
       // Combine data for profile creation
       const completeProfileData = {
         name: personalData.name,
@@ -74,13 +44,13 @@ export const useSignupCompletion = ({
         smokingStatus: lifestyleData.smokingStatus || "",
         drinkingStatus: lifestyleData.drinkingStatus || "",
         lookingFor: lifestyleData.lookingFor || "",
-        lookingForGender: lifestyleData.lookingForGender || "Both",
+        lookingForGender: (lifestyleData.lookingForGender || "Both") as "Male" | "Female" | "Other" | "Both",
       };
 
-      // Call auth service to sign up
+      // Call auth service to sign up - this will handle email validation server-side
       await signUp(accountData.email, accountData.password, completeProfileData);
       
-      // Redirect to verification page instead of relying on useEffect
+      // Redirect to verification page
       toast({
         title: "Account Created!",
         description: "Please verify your email to continue.",

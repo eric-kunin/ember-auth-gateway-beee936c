@@ -10,7 +10,6 @@ import PasswordField from "./account-form/PasswordField";
 import TermsCheckbox from "./account-form/TermsCheckbox";
 import SubmitButton from "./account-form/SubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { supabase } from "@/integrations/supabase/client";
 
 interface SignupFormProps {
   defaultValues?: Partial<AccountFormValues>;
@@ -41,29 +40,12 @@ const SignupForm = ({
     setEmailError(null);
     
     try {
-      // Check if email already exists using Supabase
-      const { data: existingUsers, error } = await supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', data.email)
-        .limit(1);
-      
-      if (error) {
-        console.error('Error checking email:', error);
-        setEmailError('Error verifying email availability. Please try again.');
-        return;
-      }
-      
-      // If we found a user with this email, show an error
-      if (existingUsers && existingUsers.length > 0) {
-        setEmailError('This email is already registered. Please use a different email or try logging in.');
-        return;
-      }
-      
-      // If email doesn't exist, proceed with the signup
+      // For this demo, we'll skip the email validation check since we don't have
+      // direct access to auth.users table from the client side
+      // The email validation will be handled server-side during the actual signup process
       onSubmit(data);
     } catch (err) {
-      console.error('Error during email validation:', err);
+      console.error('Error during form submission:', err);
       setEmailError('An unexpected error occurred. Please try again.');
     }
   };
