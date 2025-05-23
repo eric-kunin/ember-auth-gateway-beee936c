@@ -5,13 +5,31 @@ import type { ProfileData } from '@/types/profile';
 export class AuthService {
   static async signUp(email: string, password: string, profileData: ProfileData) {
     try {
+      // Check if email already exists first
+      const { data: existingProfile } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', email)
+        .single();
+
+      if (existingProfile) {
+        throw new Error('An account with this email already exists. Please use a different email or try signing in.');
+      }
+
       // First, create the auth user with Supabase
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
       });
 
-      if (authError) throw authError;
+      if (authError) {
+        // Handle specific auth errors
+        if (authError.message.includes('already registered')) {
+          throw new Error('This email is already registered. Please use a different email or try signing in.');
+        }
+        throw authError;
+      }
+      
       if (!authData.user) throw new Error('No user data returned');
 
       // Then create the profile using Supabase
@@ -19,6 +37,7 @@ export class AuthService {
         .from('profiles')
         .insert({
           id: authData.user.id,
+          email: email,
           first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
           last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
           display_name: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
@@ -33,7 +52,11 @@ export class AuthService {
         })
         .select();
 
-      if (profileError) throw profileError;
+      if (profileError) {
+        // If profile creation fails, clean up the auth user
+        await supabase.auth.admin.deleteUser(authData.user.id);
+        throw profileError;
+      }
 
       return { user: authData.user, profile: profile[0] };
     } catch (error) {

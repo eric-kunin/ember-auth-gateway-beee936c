@@ -10,6 +10,7 @@ import PasswordField from "./account-form/PasswordField";
 import TermsCheckbox from "./account-form/TermsCheckbox";
 import SubmitButton from "./account-form/SubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { supabase } from "@/integrations/supabase/client";
 
 interface SignupFormProps {
   defaultValues?: Partial<AccountFormValues>;
@@ -34,19 +35,49 @@ const SignupForm = ({
   });
   
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [isCheckingEmail, setIsCheckingEmail] = useState(false);
+
+  const checkEmailExists = async (email: string): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', email)
+        .single();
+      
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found" error
+        console.error('Error checking email:', error);
+        return false;
+      }
+      
+      return !!data; // Returns true if email exists
+    } catch (error) {
+      console.error('Error checking email:', error);
+      return false;
+    }
+  };
 
   const handleSubmit = async (data: AccountFormValues) => {
     // Reset any previous email error
     setEmailError(null);
+    setIsCheckingEmail(true);
     
     try {
-      // For this demo, we'll skip the email validation check since we don't have
-      // direct access to auth.users table from the client side
-      // The email validation will be handled server-side during the actual signup process
+      // Check if email already exists
+      const emailExists = await checkEmailExists(data.email);
+      
+      if (emailExists) {
+        setEmailError('This email is already registered. Please use a different email address or try signing in.');
+        setIsCheckingEmail(false);
+        return;
+      }
+      
+      setIsCheckingEmail(false);
       onSubmit(data);
     } catch (err) {
       console.error('Error during form submission:', err);
       setEmailError('An unexpected error occurred. Please try again.');
+      setIsCheckingEmail(false);
     }
   };
 
@@ -59,7 +90,7 @@ const SignupForm = ({
           </Alert>
         )}
         
-        <EmailField control={form.control} isLoading={isLoading} />
+        <EmailField control={form.control} isLoading={isLoading || isCheckingEmail} />
         
         <PasswordField 
           control={form.control} 
@@ -82,7 +113,11 @@ const SignupForm = ({
           <TermsCheckbox control={form.control} isLoading={isLoading} />
         </div>
         
-        <SubmitButton isLoading={isLoading} isValid={form.formState.isValid} />
+        <SubmitButton 
+          isLoading={isLoading || isCheckingEmail} 
+          isValid={form.formState.isValid}
+          loadingText={isCheckingEmail ? "Checking email..." : "Creating account..."}
+        />
         
         <TermsNotice />
       </form>

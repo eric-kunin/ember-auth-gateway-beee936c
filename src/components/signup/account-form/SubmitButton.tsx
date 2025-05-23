@@ -1,23 +1,20 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 
 interface SubmitButtonProps {
   isLoading: boolean;
   isValid: boolean;
+  loadingText?: string;
 }
 
-const SubmitButton = ({ isLoading, isValid }: SubmitButtonProps) => {
+const SubmitButton = ({ isLoading, isValid, loadingText = "Creating account..." }: SubmitButtonProps) => {
   return (
-    <Button
-      type="submit"
-      className="w-full bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white border-0 h-11 sm:h-12 
-               signin-button-hover transition-all duration-300 group"
+    <Button 
+      type="submit" 
+      className="w-full h-11 sm:h-12 bg-[#9D4EDD] hover:bg-[#7B2CBF] dark:bg-[#9D4EDD] dark:hover:bg-[#C77DFF] text-white font-semibold rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       disabled={isLoading || !isValid}
-      title="Continue to next step"
     >
-      <span>Next</span>
-      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+      {isLoading ? loadingText : "Next"}
     </Button>
   );
 };
