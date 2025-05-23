@@ -80,9 +80,9 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                   caption_label: "text-sm font-medium text-[#240046] dark:text-white",
                   caption_dropdowns: "flex justify-center gap-1",
                   dropdown: "relative z-10",
-                  dropdown_month: "text-sm rounded-md bg-[#f0e6ff] dark:bg-[#10002B] border border-[#E0AAFF]/50 dark:border-[#9D4EDD]/30 py-1 pl-2 pr-8 text-[#240046] dark:text-white",
-                  dropdown_year: "text-sm rounded-md bg-[#f0e6ff] dark:bg-[#10002B] border border-[#E0AAFF]/50 dark:border-[#9D4EDD]/30 py-1 pl-2 pr-8 text-[#240046] dark:text-white",
-                  dropdown_icon: "absolute right-2 top-[50%] translate-y-[-50%] size-4 text-[#240046] dark:text-white",
+                  dropdown_month: "text-sm rounded-md bg-[#2C1B47] dark:bg-[#10002B] border border-[#9D4EDD]/50 dark:border-[#9D4EDD]/30 py-1 pl-2 pr-8 text-white",
+                  dropdown_year: "text-sm rounded-md bg-[#2C1B47] dark:bg-[#10002B] border border-[#9D4EDD]/50 dark:border-[#9D4EDD]/30 py-1 pl-2 pr-8 text-white",
+                  dropdown_icon: "absolute right-2 top-[50%] translate-y-[-50%] size-4 text-white",
                   nav: "space-x-1 flex items-center",
                   nav_button: cn(
                     "h-7 w-7 bg-transparent p-0 opacity-70 hover:opacity-100 text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20 border border-[#E0AAFF]/30 dark:border-[#9D4EDD]/30 rounded-md"
