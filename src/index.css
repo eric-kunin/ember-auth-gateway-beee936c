@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    --background: 221 70% 95%;
-    --foreground: 267 72% 3%;
+    --background: 210 20% 98%;
+    --foreground: 220 20% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 267 72% 3%;
+    --card-foreground: 220 20% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 267 72% 3%;
+    --popover-foreground: 220 20% 10%;
 
-    /* Updated color values for light mode */
-    --primary: 273 72% 35%;
+    /* Updated color values for light mode - blue theme */
+    --primary: 220 70% 40%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 273 57% 90%;
-    --secondary-foreground: 267 62% 20%;
+    --secondary: 220 30% 96%;
+    --secondary-foreground: 220 40% 20%;
 
-    --muted: 273 57% 90%;
-    --muted-foreground: 267 12% 40%;
+    --muted: 220 30% 96%;
+    --muted-foreground: 220 20% 40%;
 
-    --accent: 271 60% 35%;
+    --accent: 220 70% 50%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 267 30% 85%;
-    --input: 267 30% 85%;
-    --ring: 273 40% 42%;
+    --border: 220 20% 85%;
+    --input: 220 20% 85%;
+    --ring: 220 70% 50%;
 
     --radius: 0.75rem;
 
@@ -97,20 +97,28 @@
   }
 }
 
-/* Update the auth gradient to use blue-themed colors */
-.auth-gradient {
-  background: linear-gradient(135deg, #e6f0ff 0%, #d9e5ff 40%, #cfe0ff 70%, #c2d6ff 100%);
-}
-
+/* Light mode auth gradient - restored to blue theme */
 html.light .auth-gradient {
-  background: linear-gradient(135deg, #e6f0ff 0%, #d9e5ff 40%, #cfe0ff 70%, #c2d6ff 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 40%, #dee2e6 70%, #cfd8dc 100%);
 }
 
 html.light .auth-card {
   backdrop-filter: blur(16px);
   background: rgba(255, 255, 255, 0.85); 
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(66, 153, 225, 0.2);
+  box-shadow: 0 8px 32px rgba(66, 153, 225, 0.15);
+}
+
+/* Dark mode auth styling - keeping as is */
+.auth-gradient {
+  background: linear-gradient(135deg, #0B0205 0%, #10002B 40%, #240046 70%, #2C1B47 100%);
+}
+
+.auth-card {
+  backdrop-filter: blur(16px);
+  background: rgba(16, 0, 43, 0.2); 
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* Global animation for theme transition */

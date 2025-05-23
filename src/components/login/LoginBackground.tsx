@@ -12,7 +12,7 @@ const LoginBackground = ({ children }: LoginBackgroundProps) => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:bg-[#1E0B36] transition-colors duration-300 overflow-hidden">
+    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#f8f9fa] via-[#e9ecef] to-[#dee2e6] dark:bg-gradient-to-br dark:from-[#0B0205] dark:via-[#10002B] dark:to-[#1E0B36] transition-colors duration-300 overflow-hidden">
       <main className="flex-1 flex items-center justify-center relative z-10">
         <BackgroundElements />
         {!isMobile && <UserCardsBackground />}
