@@ -10,6 +10,7 @@ import PasswordField from "./account-form/PasswordField";
 import TermsCheckbox from "./account-form/TermsCheckbox";
 import SubmitButton from "./account-form/SubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { supabase } from "@/integrations/supabase/client";
 
 interface SignupFormProps {
   defaultValues?: Partial<AccountFormValues>;
