@@ -74,7 +74,7 @@ export const useSignupCompletion = ({
         smokingStatus: lifestyleData.smokingStatus || "",
         drinkingStatus: lifestyleData.drinkingStatus || "",
         lookingFor: lifestyleData.lookingFor || "",
-        lookingForGender: lifestyleData.lookingForGender as "Male" | "Female" | "Other" | "Both" || "Both",
+        lookingForGender: lifestyleData.lookingForGender || "Both",
       };
 
       // Call auth service to sign up
