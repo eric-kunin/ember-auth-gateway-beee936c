@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
+import { supabase } from "@/integrations/supabase/client";
 
 interface UseSignupCompletionProps {
   accountData: AccountFormValues;
@@ -27,6 +28,35 @@ export const useSignupCompletion = ({
     setIsLoading(true);
     
     try {
+      // Check if email already exists before proceeding with signup
+      const { data: existingUsers, error: checkError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', accountData.email)
+        .limit(1);
+      
+      if (checkError) {
+        console.error('Error checking email:', checkError);
+        toast({
+          variant: "destructive",
+          title: "Signup Failed",
+          description: "Error verifying email availability. Please try again.",
+        });
+        setIsLoading(false);
+        return;
+      }
+      
+      // If email exists, show error and stop signup process
+      if (existingUsers && existingUsers.length > 0) {
+        toast({
+          variant: "destructive",
+          title: "Email Already Registered",
+          description: "This email is already registered. Please use a different email or try logging in.",
+        });
+        setIsLoading(false);
+        return;
+      }
+      
       // Combine data for profile creation
       const completeProfileData = {
         name: personalData.name,
