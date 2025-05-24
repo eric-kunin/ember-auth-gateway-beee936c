@@ -169,4 +169,15 @@ export const users = [
     photoCount: 2,
     interests: ["coffee", "music", "books"]
   },
+  {
+    id: 16,
+    nickname: "תותחית",
+    age: 28,
+    rating: 3.8,
+    location: "Herzliya",
+    imageUrl: "https://i.pinimg.com/736x/14/f8/b7/14f8b7dfab972d997a6caf68aa5ee457.jpg",
+    verified: true,
+    photoCount: 2,
+    interests: ["coffee", "music", "books"]
+  }
 ];
