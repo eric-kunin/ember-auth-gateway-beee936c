@@ -17,6 +17,8 @@ import {
   Sun
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 import logo2 from '../assets/images/logo2.png';
 import { useTheme } from './ThemeProvider';
 
@@ -35,6 +37,19 @@ const Tooltip = ({ text }) => (
 
 const ProfileDropdown = ({ isOpen, onClose }) => {
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
+  
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate("/login");
+      onClose();
+    } catch (error) {
+      console.error("Logout error:", error);
+      navigate("/login");
+    }
+  };
   
   return (
     <AnimatePresence>
@@ -78,7 +93,7 @@ const ProfileDropdown = ({ isOpen, onClose }) => {
             </button>
             <div className="my-1 border-t border-[#A367B1]/20"></div>
             <button 
-              onClick={() => {}} 
+              onClick={handleLogout}
               className="w-full px-4 py-2 text-red-400 hover:bg-[#A367B1]/20 flex items-center gap-2 text-sm"
             >
               <LogOut className="w-4 h-4" />
