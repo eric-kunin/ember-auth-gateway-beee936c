@@ -149,14 +149,15 @@ const DatingFilter: React.FC = () => {
       {/* Filters Go Here */}
     {/* Insert full filter JSX from the old version here (FilterSection, inputs, buttons) */}
 
-        <div className="w-full max-w-3xl mx-auto bg-gradient-to-br from-[#0B0205] via-[#2C1B47] to-[#0B0205] rounded-2xl shadow-xl overflow-hidden" dir="rtl">
+        <div className="w-full max-w-6xl mx-auto bg-gradient-to-br from-[#0B0205] via-[#2C1B47] to-[#0B0205] rounded-2xl shadow-xl overflow-hidden" dir="rtl">
         
-        {/* Header with Filter Icon */}
+        {/* Filter Panel Header */}
         <div className="px-6 py-4 border-b border-white/10">
         <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
             <Filter className="w-5 h-5 text-[#FFD1E3]" />
             <h2 className="text-white font-medium">סינון</h2>
+            
             </div>
             <button
             onClick={() => setIsOpen(!isOpen)}
@@ -169,22 +170,65 @@ const DatingFilter: React.FC = () => {
             )}
             </button>
         </div>
-        
-        {/* Filter Summary - only show when collapsed */}
         {!isOpen && (
-            <motion.div
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="mt-2 text-sm text-white/70"
-            >
-            {selectedGender && `מחפש/ת: ${genders.find(g => g.value === selectedGender)?.label}`}
-            {ageRange[0] !== 18 || ageRange[1] !== 80 ? ` | גיל: ${ageRange[0]}-${ageRange[1]}` : ''}
-            {selectedRegion ? ` | איזור: ${selectedRegion}` : ''}
-            </motion.div>
+        <motion.div 
+            initial={{ opacity: 0, y: -5 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className="mt-4 px-4" 
+        > 
+            <div className="">
+              <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm">
+                {/* Gender */} 
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60 text-base">מין:</span>
+                  <span className="text-white font-medium bg-pink-500/20 px-2 py-1 rounded-full text-xs">
+                    {'אישה'}
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
+
+                {/* Looking for */} 
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">מחפש/ת:</span>
+                  <span className="text-white font-medium bg-blue-500/20 px-2 py-1 rounded-full text-xs">
+                    {selectedGender === 'female' ? 'גבר' : 
+                     selectedGender === 'male' ? 'אישה' : 
+                     selectedGender === 'both' ? 'שניהם' : 
+                     selectedGender === 'another' ? 'אחר' : 'הכל'}
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
+
+                {/* Age range */}
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">גילאים:</span>
+                  <span className="text-white font-medium bg-purple-500/20 px-2 py-1 rounded-full text-xs">
+                    {ageRange[0]} - {ageRange[1]}
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
+                
+                {/* Region */}
+                <div className="flex items-center gap-2">
+                  <span className="text-white/60">איזור:</span>
+                  <span className="text-white font-medium bg-green-500/20 px-2 py-1 rounded-full text-xs">
+                    {selectedRegion || 'כל הארץ'}
+                  </span>
+                </div>
+              </div>
+            </div>
+        </motion.div> 
         )}
         </div>
 
-      {/* Basic Search Bar */}
+      {isOpen && (<>
+        {/* Basic Search Bar */}
       <div className="p-6 space-y-4">
 
         {/* Nickname Search */}
@@ -237,6 +281,7 @@ const DatingFilter: React.FC = () => {
           </div>
         </div>
       </div>
+      </>)}
 
       {/* Collapsible Sections */}
       <div className="divide-y divide-white/10">
