@@ -1,4 +1,3 @@
-// src/components/chat/ChatInterface.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   MoreHorizontal, 
@@ -1018,10 +1017,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               variant="ghost"
               size="icon"
               className="absolute top-4 right-4 text-white hover:bg-white/20 rounded-full"
-              onClick={(e) => {
-                e.stopPropagation();
-                setImagePreview(null);
-              }}
+              onClick={() => setImagePreview(null)}
             >
               <X className="h-6 w-6" />
             </Button>

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   MessageSquare, 
@@ -17,7 +18,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo2 from '../assets/images/logo2.png';
-import { useTheme } from '../hooks/use-theme';
+import { useTheme } from './ThemeProvider';
 
 const Tooltip = ({ text }) => (
   <motion.div 
