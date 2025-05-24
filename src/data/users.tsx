@@ -135,5 +135,38 @@ export const users = [
       verified: false,
       photoCount: 2,
       interests: ["coffee", "music", "camera"]
-    }
+    },
+  {
+    id: 13,
+    nickname: "Queen",
+    age: 24,
+    rating: 3.6,
+    location: "Herzliya",
+    imageUrl: "https://i.pinimg.com/736x/9a/3f/bb/9a3fbb58ccf83a181add3e6e18c895ce.jpg",
+    verified: true,
+    photoCount: 3,
+    interests: ["coffee", "music", "books"]
+  },
+  {
+    id: 14,
+    nickname: "Cray",
+    age: 25,
+    rating: 4.1,
+    location: "Herzliya",
+    imageUrl: "https://i.pinimg.com/736x/d4/57/71/d45771822f97fb8c5e6d2f5d80e9bc49.jpg",
+    verified: true,
+    photoCount: 2,
+    interests: ["coffee", "music", "books"]
+  },
+  {
+    id: 15,
+    nickname: "JustSmoke",
+    age: 27,
+    rating: 5.0,
+    location: "Herzliya",
+    imageUrl: "https://i.pinimg.com/736x/74/48/dd/7448dd7822f7146ced77f72fad6529b1.jpg",
+    verified: true,
+    photoCount: 2,
+    interests: ["coffee", "music", "books"]
+  },
 ];
