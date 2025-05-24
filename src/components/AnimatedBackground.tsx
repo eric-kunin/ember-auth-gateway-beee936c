@@ -24,7 +24,7 @@ const icons = generateIcons(200);
 
 const AnimatedBackground = () => {
   return (
-    <div className="animated-bg">
+    <div className="animated-bg absolute inset-0 -z-10">
       {icons.map(({ id, Icon, delay, duration, left, top, size, rotateSpeed, rotateDirection }) => (
         <motion.div
           key={id}

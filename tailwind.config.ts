@@ -1,6 +1,6 @@
 
 import type { Config } from "tailwindcss";
-
+import animatePlugin from "tailwindcss-animate";
 export default {
   darkMode: ["class"],
   content: [
@@ -108,8 +108,12 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      }
+      },
+      zIndex: {
+        '-10': '-10',
+        '60': '60',
+        },
     }
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animatePlugin],
 } satisfies Config;

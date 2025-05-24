@@ -111,7 +111,7 @@ const Header = () => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="w-full bg-gradient-to-r from-[#0B0205] via-[#2C1B47] to-[#0B0205] border-b border-[#A367B1]/20">
+    <div className="w-full z-10 relative bg-gradient-to-r from-[#0B0205] via-[#2C1B47] to-[#0B0205] border-b border-[#A367B1]/20">
       <div className="w-full max-w-[1400px] mx-auto px-12 py-4">
         <div className="flex items-center">
           {/* Left - Logo */}
