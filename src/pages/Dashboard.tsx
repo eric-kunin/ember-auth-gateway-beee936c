@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Header from "@/components/Header";
-import HorizontalDatingFilter from "@/components/filter/HorizontalDatingFilter";
+import DatingFilter from "@/components/filter/DatingFilter";
 import DatingProfilesGrid from "@/components/DatingGridProfiles";
 import React from "react";
 
@@ -28,7 +28,7 @@ const Dashboard = () => {
       <AnimatedBackground />
       <Header />
       <main className="flex-1 flex flex-col items-center">
-        <HorizontalDatingFilter />
+        <DatingFilter />
         <DatingProfilesGrid />
       </main>
     </div>
