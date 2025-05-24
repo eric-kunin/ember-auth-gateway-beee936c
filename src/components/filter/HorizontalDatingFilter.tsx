@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Search, Filter } from 'lucide-react';
+import { ChevronDown, Search, Filter, Triangle } from 'lucide-react';
 
 interface FilterState {
   gender: string;
@@ -45,32 +45,50 @@ const HorizontalDatingFilter: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto" dir="rtl">
+    <div className="w-full max-w-6xl mx-auto px-4 py-6" dir="rtl">
       {/* Main Header */}
-      <div className="text-center mb-6">
-        <h2 className="text-3xl font-bold text-white mb-4">
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center mb-8"
+      >
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-white via-pink-200 to-purple-200 bg-clip-text text-transparent mb-2">
           מצא את ההתאמה המושלמת שלך
         </h2>
-      </div>
+        <p className="text-white/60 text-lg">גלה את האהבה האמיתית כאן</p>
+      </motion.div>
 
-      {/* Horizontal Filter Container */}
-      <div className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+      {/* Enhanced Filter Container */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden"
+        style={{
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)'
+        }}
+      >
         {/* Top Row - Main Controls */}
-        <div className="flex items-center p-4 gap-4">
-          {/* Filter Dropdown */}
+        <div className="flex items-center p-6 gap-4 bg-gradient-to-r from-gray-50 to-white">
+          {/* Filter Dropdown with Triangle */}
           <div className="relative">
-            <button
+            <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-colors min-w-[200px] justify-between"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border-2 border-blue-100 hover:border-blue-200 transition-all duration-300 min-w-[250px] justify-between group shadow-sm"
             >
-              <span className="text-gray-700 text-sm">{getFilterSummary()}</span>
-              <motion.div
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <ChevronDown className="w-4 h-4 text-gray-500" />
-              </motion.div>
-            </button>
+              <div className="flex items-center gap-2">
+                <motion.div
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Triangle className="w-4 h-4 text-blue-600 fill-current" />
+                </motion.div>
+                <span className="text-gray-700 font-medium text-sm">{getFilterSummary()}</span>
+              </div>
+              <Filter className="w-4 h-4 text-blue-500 group-hover:text-blue-600 transition-colors" />
+            </motion.button>
           </div>
 
           {/* Gender Dropdown */}
@@ -78,7 +96,7 @@ const HorizontalDatingFilter: React.FC = () => {
             <select
               value={filters.seeking}
               onChange={(e) => setFilters(prev => ({ ...prev, seeking: e.target.value }))}
-              className="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 text-gray-700 text-sm min-w-[120px] appearance-none"
+              className="px-4 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border-2 border-purple-100 text-gray-700 font-medium text-sm min-w-[140px] appearance-none hover:border-purple-200 focus:border-purple-300 focus:outline-none transition-all duration-300 shadow-sm"
             >
               <option value="">מחפש/ת</option>
               {genderOptions.map(option => (
@@ -87,12 +105,12 @@ const HorizontalDatingFilter: React.FC = () => {
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+            <ChevronDown className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-purple-500 pointer-events-none" />
           </div>
 
           {/* Age Range Display */}
-          <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 min-w-[120px]">
-            <span className="text-gray-700 text-sm">
+          <div className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border-2 border-emerald-100 min-w-[140px] shadow-sm">
+            <span className="text-gray-700 font-medium text-sm">
               גילאים: {filters.ageRange[1]} - {filters.ageRange[0]}
             </span>
           </div>
@@ -102,7 +120,7 @@ const HorizontalDatingFilter: React.FC = () => {
             <select
               value={filters.location}
               onChange={(e) => setFilters(prev => ({ ...prev, location: e.target.value }))}
-              className="px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 text-gray-700 text-sm min-w-[100px] appearance-none"
+              className="px-4 py-3 bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl border-2 border-orange-100 text-gray-700 font-medium text-sm min-w-[120px] appearance-none hover:border-orange-200 focus:border-orange-300 focus:outline-none transition-all duration-300 shadow-sm"
             >
               <option value="">איזור</option>
               {locationOptions.map(option => (
@@ -111,7 +129,7 @@ const HorizontalDatingFilter: React.FC = () => {
                 </option>
               ))}
             </select>
-            <ChevronDown className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+            <ChevronDown className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-orange-500 pointer-events-none" />
           </div>
 
           {/* Search Input */}
@@ -121,15 +139,19 @@ const HorizontalDatingFilter: React.FC = () => {
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
               placeholder="חיפוש"
-              className="w-full px-4 py-2 bg-gray-50 rounded-lg border border-gray-200 text-gray-700 text-sm"
+              className="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-slate-50 rounded-xl border-2 border-gray-200 text-gray-700 font-medium text-sm hover:border-gray-300 focus:border-blue-300 focus:outline-none transition-all duration-300 shadow-sm"
             />
           </div>
 
           {/* Search Button */}
-          <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+          <motion.button 
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center gap-2 font-medium shadow-lg hover:shadow-xl"
+          >
             <Search className="w-4 h-4" />
             <span className="text-sm">חיפוש</span>
-          </button>
+          </motion.button>
         </div>
 
         {/* Expandable Filter Section */}
@@ -139,60 +161,105 @@ const HorizontalDatingFilter: React.FC = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className="overflow-hidden border-t border-gray-200"
             >
-              <div className="p-6 bg-gray-50 space-y-6">
+              <div className="p-8 bg-gradient-to-br from-gray-50 via-white to-blue-50 space-y-8">
                 {/* Detailed Filter Options */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {/* Gender Selection */}
-                  <div className="space-y-3">
-                    <h3 className="font-medium text-gray-700">מין:</h3>
-                    <div className="space-y-2">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="space-y-4"
+                  >
+                    <h3 className="font-semibold text-gray-800 text-lg flex items-center gap-2">
+                      <div className="w-2 h-6 bg-gradient-to-b from-purple-500 to-pink-500 rounded-full"></div>
+                      מין:
+                    </h3>
+                    <div className="space-y-3">
                       {genderOptions.map(option => (
-                        <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                        <motion.label 
+                          key={option.value} 
+                          className="flex items-center gap-3 cursor-pointer group"
+                          whileHover={{ x: 5 }}
+                        >
                           <input
                             type="radio"
                             name="gender"
                             value={option.value}
                             checked={filters.gender === option.value}
                             onChange={(e) => setFilters(prev => ({ ...prev, gender: e.target.value }))}
-                            className="text-blue-600"
+                            className="w-4 h-4 text-purple-600 border-2 border-gray-300 focus:ring-purple-500"
                           />
-                          <span className="text-gray-700">{option.label}</span>
-                        </label>
+                          <span className="text-gray-700 font-medium group-hover:text-purple-600 transition-colors">
+                            {option.label}
+                          </span>
+                        </motion.label>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Seeking Selection */}
-                  <div className="space-y-3">
-                    <h3 className="font-medium text-gray-700">מחפש/ת:</h3>
-                    <div className="space-y-2">
+                  <motion.div 
+                    initial={{ opacity: 0, x: 0 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="space-y-4"
+                  >
+                    <h3 className="font-semibold text-gray-800 text-lg flex items-center gap-2">
+                      <div className="w-2 h-6 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full"></div>
+                      מחפש/ת:
+                    </h3>
+                    <div className="space-y-3">
                       {genderOptions.map(option => (
-                        <label key={option.value} className="flex items-center gap-2 cursor-pointer">
+                        <motion.label 
+                          key={option.value} 
+                          className="flex items-center gap-3 cursor-pointer group"
+                          whileHover={{ x: 5 }}
+                        >
                           <input
                             type="radio"
                             name="seeking"
                             value={option.value}
                             checked={filters.seeking === option.value}
                             onChange={(e) => setFilters(prev => ({ ...prev, seeking: e.target.value }))}
-                            className="text-blue-600"
+                            className="w-4 h-4 text-blue-600 border-2 border-gray-300 focus:ring-blue-500"
                           />
-                          <span className="text-gray-700">{option.label}</span>
-                        </label>
+                          <span className="text-gray-700 font-medium group-hover:text-blue-600 transition-colors">
+                            {option.label}
+                          </span>
+                        </motion.label>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Age Range */}
-                  <div className="space-y-3">
-                    <h3 className="font-medium text-gray-700">גילאים:</h3>
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="space-y-4"
+                  >
+                    <h3 className="font-semibold text-gray-800 text-lg flex items-center gap-2">
+                      <div className="w-2 h-6 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full"></div>
+                      גילאים:
+                    </h3>
                     <div className="space-y-4">
-                      <div className="text-sm text-gray-600">
+                      <div className="text-sm text-gray-600 font-medium text-center">
                         {filters.ageRange[1]} - {filters.ageRange[0]}
                       </div>
-                      <div className="relative">
+                      <div className="relative px-2">
+                        <div className="h-2 bg-gray-200 rounded-full relative overflow-hidden">
+                          <div 
+                            className="absolute h-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all duration-300"
+                            style={{
+                              left: `${((filters.ageRange[0] - 18) / (80 - 18)) * 100}%`,
+                              right: `${100 - ((filters.ageRange[1] - 18) / (80 - 18)) * 100}%`
+                            }}
+                          />
+                        </div>
                         <input
                           type="range"
                           min={18}
@@ -202,7 +269,7 @@ const HorizontalDatingFilter: React.FC = () => {
                             ...prev, 
                             ageRange: [parseInt(e.target.value), Math.max(parseInt(e.target.value) + 1, prev.ageRange[1])] 
                           }))}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          className="absolute top-0 w-full h-2 appearance-none bg-transparent cursor-pointer"
                         />
                         <input
                           type="range"
@@ -213,17 +280,17 @@ const HorizontalDatingFilter: React.FC = () => {
                             ...prev, 
                             ageRange: [Math.min(prev.ageRange[0], parseInt(e.target.value) - 1), parseInt(e.target.value)] 
                           }))}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer absolute top-0"
+                          className="absolute top-0 w-full h-2 appearance-none bg-transparent cursor-pointer"
                         />
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </div>
   );
 };
