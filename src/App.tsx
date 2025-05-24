@@ -49,3 +49,29 @@ const App = () => {
 };
 
 export default App;
+
+
+// import React from 'react';
+// import AnimatedBackground from './components/AnimatedBackground';
+// import DatingFilter from './components/DatingFilter';
+// import DatingProfileCard from './components/DatingProfileCard';
+// import Header from './components/Header';
+// import DatingProfilesGrid from './components/DatingGridProfiles';
+// import Slidebar from './components/Slidebar';
+// import ChatInterface from './components/ChatInterface';
+
+
+// function App() {
+//   return (
+//     <div className="relative w-full min-h-screen flex flex-col items-center justify-center">
+//       <AnimatedBackground />
+//       <Header/>
+//       <DatingFilter />
+//       <DatingProfilesGrid />
+//       {/* <ChatInterface/> */}
+//       {/* <Slidebar/> */}
+//     </div>
+//   );
+// }
+
+// export default App;
