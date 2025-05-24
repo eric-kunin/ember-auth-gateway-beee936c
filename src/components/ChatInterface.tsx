@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   MoreHorizontal, 
@@ -1052,6 +1053,8 @@ interface ChatListProps {
 }
 
 export const ChatList: React.FC<ChatListProps> = ({ currentUser, chats, onSelectChat }) => {
+  const [searchValue, setSearchValue] = useState('');
+
   return (
     <div className="h-full flex flex-col bg-white rounded-lg overflow-hidden shadow-xl" dir="rtl">
       <div className="bg-[#392467] text-white p-4">
@@ -1061,6 +1064,8 @@ export const ChatList: React.FC<ChatListProps> = ({ currentUser, chats, onSelect
       <div className="px-4 py-3 border-b border-gray-200">
         <div className="relative">
           <Input
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             placeholder="חפש בשיחות..."
             className="pr-8 border-[#A367B1]/30 focus-visible:ring-[#5D3587]"
           />
