@@ -154,66 +154,72 @@ const DatingFilter: React.FC = () => {
             {/* Filter Panel Header */}
             <div className="px-6 py-4 border-b border-white/10">
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                <Filter className="w-5 h-5 text-[#FFD1E3]" />
-                <h2 className="text-white font-medium">סינון</h2>
+<div className="flex items-center justify-between">
+  {/* Left: Icon + Title */}
+  <div className="flex items-center gap-3">
+    <Filter className="w-5 h-5 text-[#FFD1E3]" />
+    <h2 className="text-white font-medium">סינון</h2>
+  </div>
+
+
+</div>
+
+{/* Center: Filter Summary when collapsed */}
+{!isOpen && (
+  <motion.div
+    initial={{ opacity: 0, y: -5 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="mt-8 lg:mt-0 w-full flex justify-center"
+  >
+    <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm">
+      {/* Gender */}
+      <div className="flex items-center gap-2">
+        <span className="text-white/60 text-base">מין:</span>
+        <span className="text-white font-medium bg-pink-500/20 px-2 py-1 rounded-full text-xs">
+          {'אישה'}
+        </span>
+      </div>
+
+      {/* Divider */}
+      <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
+
+      {/* Looking for */}
+      <div className="flex items-center gap-2">
+        <span className="text-white/60">מחפש/ת:</span>
+        <span className="text-white font-medium bg-blue-500/20 px-2 py-1 rounded-full text-xs">
+          {selectedGender === 'female' ? 'גבר' :
+           selectedGender === 'male' ? 'אישה' :
+           selectedGender === 'both' ? 'שניהם' :
+           selectedGender === 'another' ? 'אחר' : 'הכל'}
+        </span>
+      </div>
+
+      {/* Divider */}
+      <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
+
+      {/* Age range */}
+      <div className="flex items-center gap-2">
+        <span className="text-white/60">גילאים:</span>
+        <span className="text-white font-medium bg-purple-500/20 px-2 py-1 rounded-full text-xs">
+          {ageRange[0]} - {ageRange[1]}
+        </span>
+      </div>
+
+      {/* Divider */}
+      <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
+
+      {/* Region */}
+      <div className="flex items-center gap-2">
+        <span className="text-white/60">איזור:</span>
+        <span className="text-white font-medium bg-green-500/20 px-2 py-1 rounded-full text-xs">
+          {selectedRegion || 'כל הארץ'}
+        </span>
+      </div>
+    </div>
+  </motion.div>
+)}
+
                 
-                {!isOpen && (
-            <motion.div 
-                initial={{ opacity: 0, y: -5 }} 
-                animate={{ opacity: 1, y: 0 }} 
-                className="mt-0 mr-8 px-8" 
-            > 
-                <div className="">
-                <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm">
-                    {/* Gender */} 
-                    <div className="flex items-center gap-2">
-                    <span className="text-white/60 text-base">מין:</span>
-                    <span className="text-white font-medium bg-pink-500/20 px-2 py-1 rounded-full text-xs">
-                        {'אישה'}
-                    </span>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
-
-                    {/* Looking for */} 
-                    <div className="flex items-center gap-2">
-                    <span className="text-white/60">מחפש/ת:</span>
-                    <span className="text-white font-medium bg-blue-500/20 px-2 py-1 rounded-full text-xs">
-                        {selectedGender === 'female' ? 'גבר' : 
-                        selectedGender === 'male' ? 'אישה' : 
-                        selectedGender === 'both' ? 'שניהם' : 
-                        selectedGender === 'another' ? 'אחר' : 'הכל'}
-                    </span>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
-
-                    {/* Age range */}
-                    <div className="flex items-center gap-2">
-                    <span className="text-white/60">גילאים:</span>
-                    <span className="text-white font-medium bg-purple-500/20 px-2 py-1 rounded-full text-xs">
-                        {ageRange[0]} - {ageRange[1]}
-                    </span>
-                    </div>
-
-                    {/* Divider */}
-                    <div className="w-px h-4 bg-white/20 hidden sm:block"></div>
-                    
-                    {/* Region */}
-                    <div className="flex items-center gap-2">
-                    <span className="text-white/60">איזור:</span>
-                    <span className="text-white font-medium bg-green-500/20 px-2 py-1 rounded-full text-xs">
-                        {selectedRegion || 'כל הארץ'}
-                    </span>
-                    </div>
-                </div>
-                </div>
-            </motion.div> 
-            )}
-                </div>
                 <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-white/70 hover:text-white transition-colors"
