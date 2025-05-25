@@ -1,21 +1,33 @@
+
 import React, { useEffect, useState } from "react";
 import UserCard from "@/components/login/UserCard";
 import { users } from "@/data/sampleUsers";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const UserCardsBackground: React.FC = () => {
   const [shuffledUsers, setShuffledUsers] = useState(users);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const shuffled = [...users].sort(() => 0.5 - Math.random());
-    setShuffledUsers(shuffled.slice(0, 24)); // Limit to 48 cards
-  }, []);
+    // Show fewer cards on mobile to improve performance and avoid overcrowding
+    const cardCount = isMobile ? 12 : 24;
+    setShuffledUsers(shuffled.slice(0, cardCount));
+  }, [isMobile]);
 
   return (
-    <div className="absolute  z-10 pointer-events-none overflow-hidden" dir="rtl">
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-x-4 gap-y-1 p-4 w-full h-full">
-
+    <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden" dir="rtl">
+      <div className={`
+        grid gap-x-2 gap-y-1 p-2 w-full h-full
+        ${isMobile 
+          ? 'grid-cols-2 sm:grid-cols-3' 
+          : 'grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8'
+        }
+      `}>
         {shuffledUsers.map((user) => (
-          <div key={user.id} className="min-w-[90px] h-[265px]">
+          <div key={user.id} className={`
+            ${isMobile ? 'min-w-[80px] h-[200px]' : 'min-w-[90px] h-[265px]'}
+          `}>
             <UserCard
               nickname={user.nickname}
               age={user.age}
