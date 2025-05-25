@@ -2,6 +2,8 @@
 import { ReactNode } from "react";
 import BackgroundElements from "@/components/login/BackgroundElements";
 import UserCardsBackground from "@/components/login/UserCardsBackground";
+import LoginHeader from "@/components/login/LoginHeader";
+import LoginFooter from "@/components/login/LoginFooter";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LoginBackgroundProps {
@@ -13,9 +15,11 @@ const LoginBackground = ({ children }: LoginBackgroundProps) => {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#f8f4ff] via-[#f0e6ff] to-[#e8d5ff] dark:bg-[#1E0B36] transition-colors duration-300 overflow-hidden">
+      <LoginHeader />
+      
       <main className="flex-1 flex items-center justify-center relative">
         {/* ✅ Fullscreen cards grid in background */}
-{!isMobile && <UserCardsBackground/>}
+        {!isMobile && <UserCardsBackground/>}
         {/* ✅ Background gradient below everything */}
         <BackgroundElements />
 
@@ -23,8 +27,9 @@ const LoginBackground = ({ children }: LoginBackgroundProps) => {
         <div className="relative z-20 w-full flex justify-center items-center px-2 sm:px-4">
             {children}
         </div>
-        </main>
+      </main>
 
+      <LoginFooter />
     </div>
   );
 };
