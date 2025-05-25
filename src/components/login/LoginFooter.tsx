@@ -1,52 +1,67 @@
 
 import { Link } from "react-router-dom";
-import { Heart, Shield, Users, Mail } from "lucide-react";
+import { Heart, Shield, Users, Mail, Star, Award, Globe } from "lucide-react";
 
 const LoginFooter = () => {
   return (
-    <footer className="w-full mt-auto bg-gradient-to-r from-white/5 to-transparent backdrop-blur-sm border-t border-white/10">
-      <div className="container mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="w-full mt-auto bg-gradient-to-br from-[#0B0205]/95 via-[#240046]/90 to-[#0B0205]/95 
+                     backdrop-blur-lg border-t border-purple-300/20">
+      <div className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo and Description */}
           <div className="md:col-span-1">
-            <div className="flex items-center mb-4">
-              <img 
-                src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
-                alt="Logo" 
-                className="h-8 w-8 object-contain drop-shadow-lg"
-              />
-              <span className="ml-2 text-lg font-bold text-white">AkhlaDate</span>
+            <div className="flex items-center mb-6">
+              <div className="p-2 rounded-xl bg-gradient-to-br from-[#9D4EDD] to-[#C77DFF] shadow-xl">
+                <img 
+                  src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
+                  alt="Logo" 
+                  className="h-6 w-6 object-contain drop-shadow-lg"
+                />
+              </div>
+              <span className="ml-3 text-lg font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                AkhlaDate
+              </span>
             </div>
-            <p className="text-white/70 text-sm leading-relaxed">
+            <p className="text-purple-200/80 text-sm leading-relaxed mb-4">
               פלטפורמת הכרויות מובילה למציאת קשרים אמיתיים ומשמעותיים. 
               הצטרפו לקהילה של אלפי רווקים המחפשים אהבה אמיתית.
             </p>
+            <div className="flex items-center gap-2 text-xs text-purple-300/70">
+              <Award className="w-4 h-4" />
+              <span>מאומת ובטוח</span>
+            </div>
           </div>
 
           {/* About Us */}
           <div>
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Heart className="w-4 h-4 text-[#FFD1E3]" />
+            <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
+              <div className="p-1.5 rounded-lg bg-gradient-to-br from-pink-400 to-pink-500">
+                <Heart className="w-3 h-3 text-white" />
+              </div>
               אודותינו
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
-                <Link to="/about" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/about" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                               hover:translate-x-1 block hover:scale-105">
                   הסיפור שלנו
                 </Link>
               </li>
               <li>
-                <Link to="/team" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/team" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                               hover:translate-x-1 block hover:scale-105">
                   הצוות שלנו
                 </Link>
               </li>
               <li>
-                <Link to="/careers" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/careers" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                 hover:translate-x-1 block hover:scale-105">
                   קריירה
                 </Link>
               </li>
               <li>
-                <Link to="/press" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/press" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                               hover:translate-x-1 block hover:scale-105">
                   עיתונות
                 </Link>
               </li>
@@ -55,28 +70,34 @@ const LoginFooter = () => {
 
           {/* Safety & Support */}
           <div>
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-[#FFD1E3]" />
+            <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
+              <div className="p-1.5 rounded-lg bg-gradient-to-br from-green-400 to-green-500">
+                <Shield className="w-3 h-3 text-white" />
+              </div>
               בטיחות ותמיכה
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
-                <Link to="/safety" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/safety" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                 hover:translate-x-1 block hover:scale-105">
                   מדיניות בטיחות
                 </Link>
               </li>
               <li>
-                <Link to="/community-guidelines" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/community-guidelines" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                                         hover:translate-x-1 block hover:scale-105">
                   כללי קהילה
                 </Link>
               </li>
               <li>
-                <Link to="/help" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/help" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                hover:translate-x-1 block hover:scale-105">
                   מרכז עזרה
                 </Link>
               </li>
               <li>
-                <Link to="/report" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/report" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                 hover:translate-x-1 block hover:scale-105">
                   דיווח על בעיה
                 </Link>
               </li>
@@ -85,28 +106,34 @@ const LoginFooter = () => {
 
           {/* Contact & Legal */}
           <div>
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-[#FFD1E3]" />
+            <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
+              <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-400 to-blue-500">
+                <Mail className="w-3 h-3 text-white" />
+              </div>
               צור קשר ומשפטי
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               <li>
-                <Link to="/contact" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/contact" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                   hover:translate-x-1 block hover:scale-105">
                   צור קשר
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/privacy" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                   hover:translate-x-1 block hover:scale-105">
                   מדיניות פרטיות
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/terms" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                 hover:translate-x-1 block hover:scale-105">
                   תנאי שימוש
                 </Link>
               </li>
               <li>
-                <Link to="/cookies" className="text-white/70 hover:text-white transition-colors text-sm">
+                <Link to="/cookies" className="text-purple-200/70 hover:text-white transition-all duration-300 text-sm
+                                   hover:translate-x-1 block hover:scale-105">
                   מדיניות עוגיות
                 </Link>
               </li>
@@ -115,20 +142,26 @@ const LoginFooter = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-white/10 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <div className="flex items-center gap-2">
-              <Users className="w-4 h-4 text-[#FFD1E3]" />
-              <span className="text-white/70 text-sm">למעלה מ-100,000 משתמשים פעילים</span>
+        <div className="border-t border-purple-300/20 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <div className="flex items-center gap-6 mb-6 md:mb-0">
+            <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-300/20">
+              <Users className="w-4 h-4 text-purple-300" />
+              <span className="text-purple-200/80 text-sm font-medium">למעלה מ-100,000 משתמשים פעילים</span>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gradient-to-r from-green-500/20 to-blue-500/20 border border-green-300/20">
+              <Globe className="w-4 h-4 text-green-300" />
+              <span className="text-purple-200/80 text-sm font-medium">זמין בכל הארץ</span>
             </div>
           </div>
           
-          <div className="text-center md:text-left">
-            <p className="text-white/70 text-sm">
+          <div className="text-center md:text-right">
+            <p className="text-purple-200/70 text-sm mb-1">
               © 2025 AkhlaDate. כל הזכויות שמורות.
             </p>
-            <p className="text-white/50 text-xs mt-1">
-              נבנה באהבה בישראל 🇮🇱
+            <p className="text-purple-300/60 text-xs flex items-center justify-center md:justify-end gap-1">
+              <span>נבנה באהבה בישראל</span>
+              <span className="text-sm">🇮🇱</span>
+              <Star className="w-3 h-3 text-yellow-400 ml-1" />
             </p>
           </div>
         </div>
