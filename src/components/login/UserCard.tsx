@@ -1,58 +1,89 @@
-
-import { Card } from "@/components/ui/card";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { MapPin, CheckCircle } from "lucide-react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { BadgeCheck, Camera, MapPin, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface UserCardProps {
   nickname: string;
   age: number;
+  rating: number;
   location: string;
   imageUrl: string;
   verified: boolean;
-  className?: string;
+  photoCount: number;
+  interests: string[];
+  simplified?: boolean;
 }
 
-const UserCard = ({
+const UserCard: React.FC<UserCardProps> = ({
   nickname,
   age,
+  rating,
   location,
   imageUrl,
   verified,
-  className = "",
-}: UserCardProps) => {
+  photoCount,
+  interests,
+  simplified = false
+}) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ scale: 1.05 }}
-      className={className}
-    >
-      <Card className="relative overflow-hidden bg-white/5 dark:bg-[#2D1657]/40 backdrop-blur-sm 
-                    border-[#E0AAFF]/10 dark:border-[#9D4EDD]/20 p-4 hover:shadow-2xl transition-all duration-300">
+    <div className="w-full" dir="rtl">
+      <div className="backdrop-blur-xl bg-white/10 rounded-3xl overflow-hidden shadow-2xl relative">
         <div className="relative">
-          <Avatar className="w-full h-32 rounded-lg">
-            <AvatarImage src={imageUrl} alt={nickname} className="object-cover" />
-            <AvatarFallback className="text-2xl bg-[#9D4EDD]/30">{nickname[0]}</AvatarFallback>
-          </Avatar>
-          
-          {verified && (
-            <div className="absolute top-2 right-2 bg-white/90 dark:bg-[#1E0B36]/80 p-1 rounded-full">
-              <CheckCircle className="h-4 w-4 text-[#9D4EDD]" />
-            </div>
-          )}
-        </div>
-        
-        <div className="mt-3 text-center">
-          <h3 className="font-medium text-white truncate">{nickname}, {age}</h3>
-          <div className="flex items-center justify-center gap-1 text-[#E0AAFF] text-sm mt-1">
-            <MapPin className="h-3 w-3 text-[#9D4EDD]" />
-            <span className="truncate">{location}</span>
+          {/* Profile Image */}
+          <motion.img
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.5 }}
+            src={imageUrl}
+            alt="Profile"
+            className="w-full h-[255px] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#392467]/90 to-transparent" />
+
+          {/* Profile Info */}
+          <div className="absolute bottom-0 right-0 left-0 p-4 text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex flex-col gap-2"
+            >
+              {/* Rating & Photo Count */}
+              {!simplified && (
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 text-white fill-white" />
+                    <span className="text-sm">{rating}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Camera className="w-4 h-4 text-white" />
+                    <span className="text-sm">{photoCount}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Age, Nickname */}
+<div className="text-lg font-bold flex items-center gap-1">
+  <h2 className="truncate">{nickname},</h2>
+  <span>{age}</span>
+  
+</div>
+
+{/* Divider Line */}
+<div className="w-2/3 ml-auto">
+  <hr className="border-t border-black/60" />
+</div>
+
+{/* Location */}
+<div className="flex items-center gap-1 text-white text-sm mt-1">
+  <MapPin className="w-4 h-4 text-red-500" />
+  <span>{location}</span>
+</div>
+
+            </motion.div>
           </div>
         </div>
-      </Card>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
