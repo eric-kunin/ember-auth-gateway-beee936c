@@ -15,21 +15,7 @@ const LoginBackground = ({ children }: LoginBackgroundProps) => {
     <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#f8f4ff] via-[#f0e6ff] to-[#e8d5ff] dark:bg-[#1E0B36] transition-colors duration-300 overflow-hidden">
       <main className="flex-1 flex items-center justify-center relative">
         {/* ✅ Fullscreen cards grid in background */}
-{!isMobile && (
-  <div className="absolute inset-0 z-10 pointer-events-none">
-    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 p-4 w-full h-full">
-      {Array.from({ length: 24 }).map((_, index) => (
-        <div
-          key={index}
-          className="bg-white/10 backdrop-blur-sm rounded-xl h-80 min-w-[100px] shadow-md border border-white/20"
-        />
-      ))}
-    </div>
-  </div>
-)}
-
-
-
+{!isMobile && <UserCardsBackground/>}
         {/* ✅ Background gradient below everything */}
         <BackgroundElements />
 
