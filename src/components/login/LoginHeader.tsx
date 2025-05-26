@@ -1,4 +1,6 @@
+
 import { Link } from "react-router-dom";
+import logo2 from "@/assets/images/logo2.png";
 
 const LoginHeader = () => {
   return (
@@ -9,7 +11,7 @@ const LoginHeader = () => {
         <Link to="/" className="flex items-center group">
           <div className="p-2 rounded-xl bg-gradient-to-br from-[#9D4EDD] to-[#C77DFF] shadow-xl">
             <img 
-              src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
+              src={logo2}
               alt="Logo" 
               className="h-8 w-8 object-contain drop-shadow-lg"
             />
