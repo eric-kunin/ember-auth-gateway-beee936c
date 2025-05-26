@@ -4,7 +4,8 @@ import { Heart, Shield, Users, Mail, Star, Award, Globe } from "lucide-react";
 
 const LoginFooter = () => {
   return (
-    <footer className="w-full mt-auto backdrop-blur-lg border-t border-purple-300/20">
+    <footer className="w-full mt-auto bg-gradient-to-br from-[#0B0205]/95 via-[#240046]/90 to-[#0B0205]/95 
+                     backdrop-blur-lg border-t border-purple-300/20">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo and Description */}
