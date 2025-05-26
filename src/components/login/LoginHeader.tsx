@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const LoginHeader = () => {
   return (
     <header className="w-full py-6 px-6 flex justify-between items-center z-50 
-                     bg-gradient-to-r from-[#0B0205]/95 via-[#240046]/90 to-[#0B0205]/95 
                      backdrop-blur-lg border-b border-purple-300/20 shadow-lg">
       <div className="flex items-center">
         <Link to="/" className="flex items-center group">
