@@ -32,12 +32,16 @@ const Dashboard = () => {
       <header className="w-full py-4 px-6 flex justify-between items-center z-50 bg-gradient-to-r from-white/5 to-transparent backdrop-blur-sm border-b border-white/10">
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
-              alt="Logo" 
-              className="h-10 w-10 object-contain drop-shadow-lg"
-            />
-            <span className="ml-2 text-lg font-bold text-white dark:text-white">AkhlaDate</span>
+            <div className="p-2 rounded-xl bg-gradient-to-br from-[#9D4EDD] to-[#C77DFF] shadow-xl">
+              <img 
+                src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
+                alt="Logo" 
+                className="h-8 w-8 object-contain drop-shadow-lg"
+              />
+            </div>
+            <span className="ml-3 text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+              AkhlaDate
+            </span>
           </Link>
         </div>
         <div className="flex items-center gap-4">

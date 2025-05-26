@@ -142,7 +142,7 @@ const LoginFooter = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-purple-300/20 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+        <div className="border-t border-purple-300/20 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-center">
           <div className="flex flex-col md:flex-row items-center gap-6 mb-6 md:mb-0">
             <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-300/20">
               <Users className="w-4 h-4 text-purple-300" />
@@ -154,11 +154,11 @@ const LoginFooter = () => {
             </div>
           </div>
           
-          <div className="text-center md:text-right">
+          <div className="text-center">
             <p className="text-purple-200/70 text-sm mb-1">
               © 2025 AkhlaDate. כל הזכויות שמורות.
             </p>
-            <p className="text-purple-300/60 text-xs flex items-center justify-center md:justify-end gap-1">
+            <p className="text-purple-300/60 text-xs flex items-center justify-center gap-1">
               <span>נבנה באהבה בישראל</span>
               <span className="text-sm">🇮🇱</span>
               <Star className="w-3 h-3 text-yellow-400 ml-1" />
