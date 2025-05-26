@@ -39,8 +39,8 @@ const UserCard: React.FC<UserCardProps> = ({
           {isOnline && (
             <div className="absolute top-3 right-3 z-10">
               <div className="relative">
-                <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
-                <div className="absolute top-0 left-0 w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
+                <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>
+                <div className="absolute top-0 left-0 w-3 h-3 bg-emerald-300 rounded-full animate-ping"></div>
               </div>
             </div>
           )}
