@@ -8,6 +8,7 @@ import DatingProfilesGrid from "@/components/DatingGridProfiles";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link } from "react-router-dom";
 import React from "react";
+import logo from "@/assets/images/logo.png";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Dashboard = () => {
           <Link to="/" className="flex items-center">
             <div className="p-2 rounded-xl bg-gradient-to-br from-[#9D4EDD] to-[#C77DFF] shadow-xl">
               <img 
-                src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
+                src={logo}
                 alt="Logo" 
                 className="h-8 w-8 object-contain drop-shadow-lg"
               />
