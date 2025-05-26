@@ -8,15 +8,15 @@ const LoginHeader = () => {
                      backdrop-blur-lg border-b border-purple-300/20 shadow-lg">
       <div className="flex items-center">
         <Link to="/" className="flex items-center group">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-[#9D4EDD] to-[#C77DFF] shadow-xl">
+          <div className="">
             <img 
-              src="/lovable-uploads/ce632b31-2764-479a-b377-2e93484bb8f1.png" 
+              src="../../src/assets/images/logo2.png" 
               alt="Logo" 
-              className="h-8 w-8 object-contain drop-shadow-lg"
+              className="h-14 w-14 object-contain drop-shadow-lg" // ⬅️ bigger logo
             />
           </div>
           <span className="ml-3 text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-            AkhlaDate
+            AKHLADATE
           </span>
         </Link>
       </div>
