@@ -1,5 +1,3 @@
-
-// Sample user data with Israeli names and locations
 export const users = [
   {
     id: 1,
@@ -193,6 +191,7 @@ export const users = [
     photoCount: 2,
     interests: ["coffee", "music", "books"]
   },
+  // Extra random users (17-24) with fake images and random data
   {
     id: 17,
     nickname: "דנה",
@@ -290,3 +289,187 @@ export const users = [
     interests: ["coffee", "music", "books"]
   }
 ];
+
+
+// // I am intentionally using a fake imgURL.
+
+
+// // Sample user data with Israeli names and locations
+// export const users = [
+//   {
+//     id: 1,
+//     nickname: "שרה",
+//     age: 21,
+//     rating: 4.8,
+//     location: "תל אביב",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 4,
+//     interests: ["music", "coffee", "books"]
+//   },
+//   {
+//     id: 2,
+//     nickname: "רחל",
+//     age: 23,
+//     rating: 4.6,
+//     location: "ירושלים",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 6,
+//     interests: ["coffee", "books", "camera"]
+//   },
+//   {
+//     id: 3,
+//     nickname: "מיכל",
+//     age: 19,
+//     rating: 4.9,
+//     location: "חיפה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 3,
+//     interests: ["music", "camera", "coffee"]
+//   },
+//   {
+//     id: 4,
+//     nickname: "נועה",
+//     age: 27,
+//     rating: 4.7,
+//     location: "רמת גן",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 5,
+//     interests: ["books", "coffee", "music"]
+//   },
+//   {
+//     id: 5,
+//     nickname: "יעל",
+//     age: 31,
+//     rating: 4.5,
+//     location: "באר שבע",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 4,
+//     interests: ["camera", "music", "books"]
+//   },
+//   {
+//     id: 6,
+//     nickname: "אביגיל",
+//     age: 18,
+//     rating: 4.2,
+//     location: "נתניה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 7,
+//     interests: ["coffee", "camera", "books"]
+//   },
+//   {
+//     id: 7,
+//     nickname: "תמר",
+//     age: 20,
+//     rating: 3.8,
+//     location: "פתח תקווה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 5,
+//     interests: ["music", "books", "camera"]
+//   },
+//   {
+//     id: 8,
+//     nickname: "הדר",
+//     age: 22,
+//     rating: 4.7,
+//     location: "הרצליה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 3,
+//     interests: ["coffee", "music", "camera"]
+//   },
+//   {
+//     id: 9,
+//     nickname: "רוניקה",
+//     age: 22,
+//     rating: 4.1,
+//     location: "אשדוד",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "camera"]
+//   },
+//   {
+//     id: 10,
+//     nickname: "יולי777",
+//     age: 26,
+//     rating: 3.8,
+//     location: "רמלה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "camera"]
+//   },
+//   {
+//     id: 11,
+//     nickname: "אורית24",
+//     age: 31,
+//     rating: 4.4,
+//     location: "פתח תקווה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "camera"]
+//   },
+//   {
+//     id: 12,
+//     nickname: "4משחקילדים",
+//     age: 23,
+//     rating: 3.7,
+//     location: "פתח תקווה",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: false,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "camera"]
+//   },
+//   {
+//     id: 13,
+//     nickname: "Queen",
+//     age: 24,
+//     rating: 3.6,
+//     location: "Herzliya",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 3,
+//     interests: ["coffee", "music", "books"]
+//   },
+//   {
+//     id: 14,
+//     nickname: "Cray",
+//     age: 25,
+//     rating: 4.1,
+//     location: "Herzliya",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "books"]
+//   },
+//   {
+//     id: 15,
+//     nickname: "JustSmoke",
+//     age: 27,
+//     rating: 5.0,
+//     location: "Herzliya",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "books"]
+//   },
+//   {
+//     id: 16,
+//     nickname: "תותחית",
+//     age: 28,
+//     rating: 3.8,
+//     location: "Herzliya",
+//     imageUrl: "https://i.pinimg.com/736x/2b/a5/a3/2ba5a3d3e3d07750989e9cb9b3c4ea50.jpg",
+//     verified: true,
+//     photoCount: 2,
+//     interests: ["coffee", "music", "books"]
+//   }
+// ];
