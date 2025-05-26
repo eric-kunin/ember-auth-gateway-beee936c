@@ -1,10 +1,11 @@
-
 import { Link } from "react-router-dom";
 import { Heart, Shield, Users, Mail, Star, Award, Globe } from "lucide-react";
 
 const LoginFooter = () => {
   return (
-    <footer className="w-full mt-auto backdrop-blur-lg border-t border-purple-300/20">
+    <footer className="w-full mt-auto 
+                     bg-gradient-to-br from-[#fcfaff] via-[#f5eeff] to-[#efe5ff] dark:from-[#0B0205] dark:via-[#10002B] dark:to-black
+                     backdrop-blur-lg border-t border-purple-300/20 transition-colors duration-500">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo and Description */}
