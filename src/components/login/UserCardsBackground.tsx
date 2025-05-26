@@ -38,6 +38,7 @@ const UserCardsBackground: React.FC = () => {
               verified={user.verified}
               interests={[]}
               simplified
+              isOnline={Math.random() > 0.3}
             />
           </div>
         ))}

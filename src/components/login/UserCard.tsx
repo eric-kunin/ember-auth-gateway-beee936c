@@ -14,6 +14,7 @@ interface UserCardProps {
   photoCount: number;
   interests: string[];
   simplified?: boolean;
+  isOnline?: boolean;
 }
 
 const UserCard: React.FC<UserCardProps> = ({
@@ -25,7 +26,8 @@ const UserCard: React.FC<UserCardProps> = ({
   verified,
   photoCount,
   interests,
-  simplified = false
+  simplified = false,
+  isOnline = false
 }) => {
   const isMobile = useIsMobile();
 
@@ -33,6 +35,16 @@ const UserCard: React.FC<UserCardProps> = ({
     <div className="w-full" dir="rtl">
       <div className="backdrop-blur-xl bg-white/10 rounded-3xl overflow-hidden shadow-2xl relative">
         <div className="relative">
+          {/* Online Status Ping - Top Left */}
+          {isOnline && (
+            <div className="absolute top-3 left-3 z-10">
+              <div className="relative">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="absolute top-0 left-0 w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
+              </div>
+            </div>
+          )}
+
           {/* Profile Image */}
           <motion.img
             initial={{ scale: 1.1 }}
