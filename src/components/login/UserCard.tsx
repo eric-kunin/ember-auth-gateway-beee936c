@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BadgeCheck, Camera, MapPin, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -32,9 +31,9 @@ const UserCard: React.FC<UserCardProps> = ({
   const isMobile = useIsMobile();
 
   return (
-    <div className="w-full" dir="rtl">
-      <div className="backdrop-blur-xl bg-white/10 rounded-3xl overflow-hidden shadow-2xl relative">
-        <div className="relative">
+    <div className="w-full h-full" dir="rtl">
+      <div className="h-full backdrop-blur-xl bg-white/10 rounded-3xl overflow-hidden shadow-2xl relative flex flex-col">
+        <div className="relative h-full w-full">
           {/* Online Status Ping - Top Right */}
           {isOnline && (
             <div className="absolute top-3 right-3 z-10">
@@ -52,7 +51,7 @@ const UserCard: React.FC<UserCardProps> = ({
             transition={{ duration: 0.5 }}
             src={imageUrl}
             alt="Profile"
-            className={`w-full object-cover ${isMobile ? 'h-[180px]' : 'h-[255px]'}`}
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#392467]/90 to-transparent" />
 
@@ -84,7 +83,7 @@ const UserCard: React.FC<UserCardProps> = ({
                 {verified && <BadgeCheck className={`text-emerald-400 ${isMobile ? 'w-3 h-3' : 'w-4 h-4'}`} />}
               </div>
 
-              {/* Divider Line */}
+              {/* Divider */}
               <div className="w-2/3 ml-auto">
                 <hr className="border-t border-black/60" />
               </div>
