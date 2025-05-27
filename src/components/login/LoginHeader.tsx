@@ -3,25 +3,32 @@ import { Link } from "react-router-dom";
 
 const LoginHeader = () => {
   return (
-    <header className="w-full py-6 px-6 flex justify-between items-center z-50 
-                     bg-gradient-to-r from-[#0B0205]/95 via-[#240046]/90 to-[#0B0205]/95 
-                     backdrop-blur-lg border-b border-purple-300/20 shadow-lg">
-      <div className="flex items-center">
-        <Link to="/" className="flex items-center group">
-          <div className="">
-            <img 
-              src="../../src/assets/images/logo2.png" 
-              alt="Logo" 
-              className="h-14 w-14 object-contain drop-shadow-lg" // ⬅️ bigger logo
-            />
-          </div>
-          <span className="ml-3 text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-            AKHLADATE
-          </span>
-        </Link>
-      </div>
+    // <header className="w-full py-6 px-6 flex justify-between items-center z-50 
+    //                  bg-gradient-to-r from-[#0B0205]/95 via-[#240046]/90 to-[#0B0205]/95 
+    //                  backdrop-blur-lg border-b border-purple-300/20 shadow-lg">
+    <header className="w-full py-1 px-6 flex justify-between items-center z-50 
+                   bg-transparent border-b border-purple-300/20 shadow-none backdrop-blur-none">
+      <div className="flex items-center gap-4">
+  <Link to="/" className="flex items-center group">
+    <img 
+      src="../../src/assets/images/logo2.png" 
+      alt="Logo" 
+      className="h-14 w-14 object-contain drop-shadow-lg"
+    />
+    <span className="ml-3 text-xl font-bold bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+      AKHLADATE
+    </span>
+  </Link>
+
+  {/* New phrase */}
+  <span className="hidden lg:inline-block text-sm text-purple-100 font-medium ml-6">
+  מצא את החיבור שלך עם הודעה חינמית ראשונה 💜
+</span>
+
+</div>
+
       
-      <nav className="hidden md:flex items-center gap-8">
+      {/* <nav className="hidden md:flex items-center gap-8">
         <Link 
           to="/about" 
           className="text-purple-100 hover:text-white transition-all duration-300 text-sm font-medium 
@@ -58,7 +65,7 @@ const LoginHeader = () => {
         >
           צור קשר
         </Link>
-      </nav>
+      </nav> */}
 
       <div className="flex items-center gap-4">
         <Link 
@@ -69,13 +76,15 @@ const LoginHeader = () => {
           התחברות
         </Link>
         <Link 
-          to="/signup" 
-          className="px-6 py-2.5 bg-gradient-to-r from-[#9D4EDD] to-[#C77DFF] hover:from-[#7B2CBF] hover:to-[#9D4EDD] 
-                   text-white rounded-xl transition-all duration-300 text-sm font-semibold 
-                   shadow-lg hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
-        >
-          הרשמה
-        </Link>
+  to="/signup" 
+  className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
+             hover:border-[#C77DFF] hover:text-[#C77DFF]
+             bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
+             shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
+>
+  הרשמה
+</Link>
+
       </div>
     </header>
   );
