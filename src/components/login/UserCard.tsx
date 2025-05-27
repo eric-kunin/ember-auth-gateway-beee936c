@@ -32,7 +32,7 @@ const UserCard: React.FC<UserCardProps> = ({
 
   return (
     <div className="w-full h-full" dir="rtl">
-      <div className="h-full backdrop-blur-xl bg-white/10 rounded-3xl overflow-hidden shadow-2xl relative flex flex-col">
+      <div className="h-full backdrop-blur-xl bg-white/10 rounded-3xl overflow-hidden shadow relative flex flex-col">
         <div className="relative h-full w-full">
           {/* Online Status Ping - Top Right */}
           {isOnline && (
