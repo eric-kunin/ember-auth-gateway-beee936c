@@ -1,7 +1,7 @@
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { UserRound } from "lucide-react";
+import { UserRound, EyeOff } from "lucide-react";
 import { Control } from "react-hook-form";
 import { ProfileDetailsFormValues } from "./types";
 
@@ -17,14 +17,19 @@ const NameField = ({ control, isLoading }: NameFieldProps) => {
       name="name"
       render={({ field }) => (
         <FormItem className="space-y-2">
-          <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300">
-            Full Name
+          <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-2">
+            <UserRound className="h-4 w-4 text-[#9D4EDD]" />
+            Full Name (Optional)
+            <EyeOff className="h-3 w-3 text-[#9D4EDD]/60" />
+            <span className="text-xs text-[#9D4EDD]/70 dark:text-[#E0AAFF]/70 font-normal">
+              Will not be displayed
+            </span>
           </FormLabel>
           <div className="relative">
             <UserRound className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
             <FormControl>
               <Input
-                placeholder="John Doe"
+                placeholder="John Doe (optional)"
                 className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                          text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                          pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"

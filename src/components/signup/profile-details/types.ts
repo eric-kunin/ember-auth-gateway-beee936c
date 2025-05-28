@@ -2,7 +2,7 @@
 import { z } from "zod";
 
 export const profileDetailsSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().optional(),
   bio: z.string().optional(),
   profession: z.string().optional(),
   height: z.number().optional(),
