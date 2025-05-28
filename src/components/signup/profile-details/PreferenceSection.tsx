@@ -73,6 +73,7 @@ const PreferenceSection = ({ form, isLoading }: PreferenceSectionProps) => {
                 <SelectItem value="Male">Men</SelectItem>
                 <SelectItem value="Female">Women</SelectItem>
                 <SelectItem value="Both">Both</SelectItem>
+                <SelectItem value="Other">Other</SelectItem>
               </SelectContent>
             </Select>
             <FormMessage className="text-xs text-red-500" />
