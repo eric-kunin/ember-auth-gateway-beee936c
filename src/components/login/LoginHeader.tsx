@@ -1,14 +1,13 @@
-
 import { Link } from "react-router-dom";
 import logo2 from "../../assets/images/logo2.png";
 
 const LoginHeader = () => {
   return (
     <header className="w-full py-1 px-6 flex justify-between items-center z-50 
-                   bg-transparent dark:bg-transparent 
-                   backdrop-blur-md dark:backdrop-blur-md
-                   border-b border-purple-300/20 
-                   shadow-md shadow-purple-500/5">
+                      dark:bg-transparent 
+                      backdrop-blur-md dark:backdrop-blur-none
+                      border-b border-purple-300/30 dark:border-purple-300/20 
+                      shadow-sm dark:shadow-none">
       <div className="flex items-center gap-4">
         <Link to="/" className="flex items-center group">
           <img 
@@ -17,16 +16,15 @@ const LoginHeader = () => {
             className="h-14 w-14 object-contain drop-shadow-lg"
           />
           <span className="ml-3 text-xl font-bold bg-gradient-to-r 
-                         from-gray-800 to-purple-600 dark:from-white dark:to-purple-200 
-                         bg-clip-text text-transparent">
+                          from-gray-800 to-purple-600 dark:from-white dark:to-purple-200 
+                          bg-clip-text text-transparent">
             AKHLADATE
           </span>
         </Link>
 
-        {/* New phrase */}
         <span className="hidden lg:inline-block text-sm 
-                       text-purple-700 dark:text-purple-100 
-                       font-medium ml-6">
+                        text-purple-700 dark:text-purple-100 
+                        font-medium ml-6">
           מצא את החיבור שלך עם הודעה חינמית ראשונה 💜
         </span>
       </div>

@@ -11,7 +11,7 @@ const UserCardsBackground: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute inset-2 z-10 pointer-events-none overflow-hidden" dir="rtl">
+    <div className="absolute inset-2 -z-5 pointer-events-none overflow-hidden" dir="rtl">
       <div
         className={`
           grid w-full h-full p-2
