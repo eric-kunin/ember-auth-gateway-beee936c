@@ -5,10 +5,10 @@ import logo2 from "../../assets/images/logo2.png";
 const LoginHeader = () => {
   return (
     <header className="w-full py-1 px-6 flex justify-between items-center z-50 
-                    dark:bg-transparent 
-                   backdrop-blur-md dark:backdrop-blur-none
-                   border-b border-purple-300/30 dark:border-purple-300/20 
-                   shadow-sm dark:shadow-none">
+                   bg-transparent dark:bg-transparent 
+                   backdrop-blur-md dark:backdrop-blur-md
+                   border-b border-purple-300/20 
+                   shadow-md shadow-purple-500/5">
       <div className="flex items-center gap-4">
         <Link to="/" className="flex items-center group">
           <img 
