@@ -9,7 +9,8 @@ import ProfileDetailsForm from "@/components/signup/ProfileDetailsForm";
 import SocialLogin from "@/components/login/SocialLogin";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { motion } from "framer-motion";
-import SignupLifestyleInfo from "./lifestyle-info/SignupLifestyleInfo";
+import SignupLifestyleInfo1 from "./lifestyle-info/SignupLifestyleInfo1";
+import SignupLifestyleInfo2 from "./lifestyle-info/SignupLifestyleInfo2";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
 import { ProfileImage } from "./summary/types";
@@ -24,12 +25,15 @@ interface SignupCardProps {
   personalData: PersonalInfoFormValues;
   profileData: any;
   lifestyleData: any;
+  lifestyleData1: any;
+  lifestyleData2: any;
   profileImages: ProfileImage[];
   isLoading: boolean;
   handleSignupStep1: (data: AccountFormValues) => void;
   handleSignupStep2: (data: PersonalInfoFormValues) => void;
   handleProfileDataChange: (data: any) => void;
-  handleLifestyleDataChange: (data: any) => void;
+  handleLifestyleData1Change: (data: any) => void;
+  handleLifestyleData2Change: (data: any) => void;
   handlePhotoUpload: (images: ProfileImage[]) => void;
   handlePrevStep: () => void;
   handleCompleteSignup: () => void;
@@ -44,12 +48,15 @@ const SignupCard: React.FC<SignupCardProps> = ({
   personalData,
   profileData,
   lifestyleData,
+  lifestyleData1,
+  lifestyleData2,
   profileImages,
   isLoading,
   handleSignupStep1,
   handleSignupStep2,
   handleProfileDataChange,
-  handleLifestyleDataChange,
+  handleLifestyleData1Change,
+  handleLifestyleData2Change,
   handlePhotoUpload,
   handlePrevStep,
   handleCompleteSignup,
@@ -98,7 +105,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 0.3 }}
-        className="w-full" // Ensure consistent width
+        className="w-full"
       >
         {currentStep === 1 && (
           <>
@@ -136,15 +143,24 @@ const SignupCard: React.FC<SignupCardProps> = ({
         )}
 
         {currentStep === 4 && (
-          <SignupLifestyleInfo
-            defaultValues={lifestyleData}
+          <SignupLifestyleInfo1
+            defaultValues={lifestyleData1}
             isLoading={isLoading}
-            onSubmit={handleLifestyleDataChange}
+            onSubmit={handleLifestyleData1Change}
             onBack={handlePrevStep}
           />
         )}
 
         {currentStep === 5 && (
+          <SignupLifestyleInfo2
+            defaultValues={lifestyleData2}
+            isLoading={isLoading}
+            onSubmit={handleLifestyleData2Change}
+            onBack={handlePrevStep}
+          />
+        )}
+
+        {currentStep === 6 && (
           <SignupProfilePhotos
             isLoading={isLoading}
             onSubmit={handlePhotoUpload}
@@ -153,7 +169,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
           />
         )}
 
-        {currentStep === 6 && (
+        {currentStep === 7 && (
           <SignupSummary
             accountData={accountData}
             personalData={personalData}

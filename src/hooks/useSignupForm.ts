@@ -27,12 +27,16 @@ export const useSignupForm = () => {
     profession: ""
   });
 
-  // Lifestyle data now includes all the attributes moved from profile details
-  const [lifestyleData, setLifestyleData] = useState({
+  // First lifestyle data - Physical and Religious info
+  const [lifestyleData1, setLifestyleData1] = useState({
     height: undefined as undefined | number,
     eyeColor: "",
     religion: "",
     religiousLevel: "",
+  });
+
+  // Second lifestyle data - Habits and Preferences
+  const [lifestyleData2, setLifestyleData2] = useState({
     smokingStatus: "",
     drinkingStatus: "",
     lookingFor: "",
@@ -47,7 +51,7 @@ export const useSignupForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   
-  const totalSteps = 6; // Remains as 6 steps
+  const totalSteps = 7; // Now 7 steps: Account, Personal, Profile, Lifestyle1, Lifestyle2, Photos, Summary
   const progress = (currentStep / totalSteps) * 100;
 
   const handleNextStep = () => {
@@ -79,8 +83,13 @@ export const useSignupForm = () => {
     handleNextStep();
   };
 
-  const handleLifestyleDataChange = (data: any) => {
-    setLifestyleData({...lifestyleData, ...data});
+  const handleLifestyleData1Change = (data: any) => {
+    setLifestyleData1({...lifestyleData1, ...data});
+    handleNextStep();
+  };
+
+  const handleLifestyleData2Change = (data: any) => {
+    setLifestyleData2({...lifestyleData2, ...data});
     handleNextStep();
   };
 
@@ -89,11 +98,19 @@ export const useSignupForm = () => {
     handleNextStep();
   };
 
+  // Combine lifestyle data for backward compatibility
+  const lifestyleData = {
+    ...lifestyleData1,
+    ...lifestyleData2
+  };
+
   return {
     accountData,
     personalData,
     profileData,
     lifestyleData,
+    lifestyleData1,
+    lifestyleData2,
     profileImages,
     isLoading,
     setIsLoading,
@@ -105,7 +122,8 @@ export const useSignupForm = () => {
     handleSignupStep1,
     handleSignupStep2,
     handleProfileDataChange,
-    handleLifestyleDataChange,
+    handleLifestyleData1Change,
+    handleLifestyleData2Change,
     handlePhotoUpload
   };
 };

@@ -18,6 +18,8 @@ const Signup = () => {
     personalData,
     profileData,
     lifestyleData,
+    lifestyleData1,
+    lifestyleData2,
     profileImages,
     currentStep,
     totalSteps,
@@ -25,7 +27,8 @@ const Signup = () => {
     handleSignupStep1,
     handleSignupStep2,
     handleProfileDataChange,
-    handleLifestyleDataChange,
+    handleLifestyleData1Change,
+    handleLifestyleData2Change,
     handlePhotoUpload,
     handlePrevStep,
   } = useSignupForm();
@@ -66,12 +69,15 @@ const Signup = () => {
         personalData={personalData}
         profileData={profileData}
         lifestyleData={lifestyleData}
+        lifestyleData1={lifestyleData1}
+        lifestyleData2={lifestyleData2}
         profileImages={profileImages}
         isLoading={isLoading}
         handleSignupStep1={handleSignupStep1}
         handleSignupStep2={handleSignupStep2}
         handleProfileDataChange={handleProfileDataChange}
-        handleLifestyleDataChange={handleLifestyleDataChange}
+        handleLifestyleData1Change={handleLifestyleData1Change}
+        handleLifestyleData2Change={handleLifestyleData2Change}
         handlePhotoUpload={handlePhotoUpload}
         handlePrevStep={handlePrevStep}
         handleCompleteSignup={handleCompleteSignup}
