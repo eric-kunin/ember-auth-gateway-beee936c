@@ -15,7 +15,7 @@ const AccountSection = ({ accountData }: AccountSectionProps) => {
       icon={<Mail className="h-4 w-4" />}
     >
       <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
-        Email: {accountData.email}
+        <span className="text-[#9D4EDD] font-bold mr-1.5">Email:</span> {accountData.email}
       </p>
     </SummarySection>
   );

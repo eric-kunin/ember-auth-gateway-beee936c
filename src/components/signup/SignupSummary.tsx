@@ -6,7 +6,6 @@ import SummaryHeader from "./summary/SummaryHeader";
 import PhotosSection from "./summary/PhotosSection";
 import AccountSection from "./summary/AccountSection";
 import PersonalSection from "./summary/PersonalSection";
-import LifestyleSection from "./summary/LifestyleSection";
 import SummaryActions from "./summary/SummaryActions";
 
 const SignupSummary = ({
@@ -39,9 +38,6 @@ const SignupSummary = ({
 
         {/* Personal Information */}
         <PersonalSection personalData={personalData} profileData={profileData} />
-
-        {/* Lifestyle Info */}
-        <LifestyleSection lifestyleData={lifestyleData} />
       </motion.div>
 
       <SummaryActions 
