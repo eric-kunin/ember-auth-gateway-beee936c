@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Upload, X, ImagePlus, Loader2, Lock, Unlock } from "lucide-react";
@@ -358,7 +357,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
   // Render images
   const renderImages = () => {
     return images.map((image, index) => (
-      <Card key={image.filePath || index} className="relative overflow-hidden h-32 group">
+      <Card key={image.filePath || index} className="relative overflow-hidden aspect-square group">
         <img 
           src={image.publicUrl} 
           alt={`Profile ${index + 1}`}
@@ -426,7 +425,7 @@ export const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({
         
         {images.length < MAX_PROFILE_IMAGES && (
           <Card 
-            className={`flex items-center justify-center h-32 border-dashed cursor-pointer
+            className={`flex items-center justify-center aspect-square border-dashed cursor-pointer
                        ${isDragging ? 'bg-[#9D4EDD]/20 border-[#9D4EDD]' : ''}
                        ${disabled || isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:border-[#9D4EDD]'}
                        transition-colors`}
