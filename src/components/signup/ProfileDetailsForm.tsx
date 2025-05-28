@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { PersonalInfoFormValues } from "./schemas";
 import { ProfileDetailsFormValues, profileDetailsSchema } from "./profile-details/types";
+import NameField from "./profile-details/NameField";
 import BioSection from "./profile-details/BioSection";
 import FormActions from "./profile-details/FormActions";
 
@@ -18,6 +19,7 @@ interface ProfileDetailsFormProps {
 
 const ProfileDetailsForm = ({
   defaultValues = {
+    name: "",
     bio: "",
     profession: ""
   },
@@ -30,6 +32,7 @@ const ProfileDetailsForm = ({
   const form = useForm<ProfileDetailsFormValues>({
     resolver: zodResolver(profileDetailsSchema),
     defaultValues: {
+      name: defaultValues.name || "",
       bio: defaultValues.bio || "",
       profession: defaultValues.profession || ""
     },
@@ -46,6 +49,9 @@ const ProfileDetailsForm = ({
         <h3 className="text-lg font-medium text-[#240046] dark:text-white mb-4">
           Complete your profile
         </h3>
+
+        {/* Name Field */}
+        <NameField control={form.control} isLoading={isLoading} />
 
         {/* Bio and Profession Section */}
         <BioSection form={form} isLoading={isLoading} />

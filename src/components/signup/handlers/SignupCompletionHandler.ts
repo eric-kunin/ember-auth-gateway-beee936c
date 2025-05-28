@@ -29,9 +29,9 @@ export const useSignupCompletion = ({
     try {
       // Combine data for profile creation
       const completeProfileData = {
-        name: personalData.name,
-        firstName: personalData.name.split(' ')[0],
-        lastName: personalData.name.split(' ').slice(1).join(' '),
+        name: profileData.name,
+        firstName: profileData.name.split(' ')[0],
+        lastName: profileData.name.split(' ').slice(1).join(' '),
         birthdate: personalData.birthdate,
         gender: personalData.gender as "Male" | "Female" | "Other",
         bio: profileData.bio || "",

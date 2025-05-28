@@ -20,9 +20,8 @@ export const accountFormSchema = z.object({
 
 export type AccountFormValues = z.infer<typeof accountFormSchema>;
 
-// Schema for step 2 - Personal information
+// Schema for step 2 - Personal information (now without name)
 export const personalInfoFormSchema = z.object({
-  name: z.string().min(2, "Name is required"),
   nickname: z.string().min(2, "Nickname is required"),
   gender: z.string().min(1, "Please select a gender"),
   birthdate: z.date({
@@ -31,7 +30,3 @@ export const personalInfoFormSchema = z.object({
 });
 
 export type PersonalInfoFormValues = z.infer<typeof personalInfoFormSchema>;
-
-// Schema for step 3 - Additional Information (if needed in the future)
-// export const additionalInfoFormSchema = z.object({});
-// export type AdditionalInfoFormValues = z.infer<typeof additionalInfoFormSchema>;

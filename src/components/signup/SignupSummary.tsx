@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { SignupSummaryProps, container } from "./summary/types";
@@ -40,7 +39,7 @@ const SignupSummary = ({
         <AccountSection accountData={accountData} />
 
         {/* Personal Information */}
-        <PersonalSection personalData={personalData} />
+        <PersonalSection personalData={personalData} profileData={profileData} />
 
         {/* Profile Details */}
         <ProfileDetailsSection profileData={profileData} />
