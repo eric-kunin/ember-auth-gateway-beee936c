@@ -34,7 +34,6 @@ export const useSignupCompletion = ({
         lastName: personalData.name.split(' ').slice(1).join(' '),
         birthdate: personalData.birthdate,
         gender: personalData.gender as "Male" | "Female" | "Other",
-        phone: personalData.phone,
         bio: profileData.bio || "",
         profession: profileData.profession || "",
         eyeColor: lifestyleData.eyeColor || "",
