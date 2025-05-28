@@ -97,9 +97,9 @@ const SignupForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-0">
         {emailError && (
-          <Alert variant="destructive" className="py-2">
+          <Alert variant="destructive" className="py-1">
             <AlertDescription>{emailError}</AlertDescription>
           </Alert>
         )}
@@ -127,7 +127,7 @@ const SignupForm = ({
           placeholder="••••••••"
         />
         
-        <div className="pt-2">
+        <div className="pt-0">
           <TermsCheckbox control={form.control} isLoading={isLoading} />
         </div>
         
