@@ -30,7 +30,7 @@ const PhoneField = ({ control, isLoading }: PhoneFieldProps) => {
               <Phone className="absolute left-3 top-2.5 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
               <FormControl>
                 <Input
-                  placeholder="+1 (555) 123-4567"
+                  placeholder="+972 (05) 12345678"
                   type="tel"
                   maxLength={15}
                   className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
