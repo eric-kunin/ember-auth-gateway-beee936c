@@ -1,4 +1,6 @@
+
 import { Link } from "react-router-dom";
+import logo2 from "../../assets/images/logo2.png";
 
 const LoginHeader = () => {
   return (
@@ -10,7 +12,7 @@ const LoginHeader = () => {
       <div className="flex items-center gap-4">
         <Link to="/" className="flex items-center group">
           <img 
-            src="../../src/assets/images/logo2.png" 
+            src={logo2} 
             alt="Logo" 
             className="h-14 w-14 object-contain drop-shadow-lg"
           />

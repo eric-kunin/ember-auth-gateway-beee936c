@@ -1,5 +1,13 @@
+
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
+import UserCardsBackground from "./UserCardsBackground";
+import LoginHeader from "./LoginHeader";
+import LoginFooter from "./LoginFooter";
+
+interface LoginBackgroundProps {
+  children: React.ReactNode;
+}
 
 const BackgroundElements = () => {
   const isMobile = useIsMobile();
@@ -37,7 +45,6 @@ const BackgroundElements = () => {
           bgDark: "dark:bg-[#9D4EDD]/10",
         },
         {
-          // 🔴 New RED Circle in Top-Center
           className: `top-[-80px] left-1/2 -translate-x-1/2 ${isMobile ? "w-40 h-40" : "w-72 h-72"}`,
           bgLight: "bg-[#ffcccc]/40",
           bgDark: "dark:bg-[#ff4d6d]/20",
@@ -73,4 +80,20 @@ const BackgroundElements = () => {
   );
 };
 
-export default BackgroundElements;
+const LoginBackground = ({ children }: LoginBackgroundProps) => {
+  return (
+    <div className="min-h-screen w-full flex flex-col bg-[#f9f4ff] dark:bg-[#0B0205] transition-colors duration-1000">
+      <LoginHeader />
+      
+      <div className="flex-1 relative flex items-center justify-center">
+        <BackgroundElements />
+        <UserCardsBackground />
+        {children}
+      </div>
+      
+      <LoginFooter />
+    </div>
+  );
+};
+
+export default LoginBackground;

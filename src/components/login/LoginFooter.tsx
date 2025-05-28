@@ -1,4 +1,6 @@
+
 import { Link } from "react-router-dom";
+import logo2 from "../../assets/images/logo2.png";
 
 const LoginFooter = () => {
   return (
@@ -52,7 +54,7 @@ const LoginFooter = () => {
             © 2025 כל הזכויות שמורות ל <span className="font-semibold">AKHLADATE</span>
           </span>
           <img 
-            src="../../src/assets/images/logo2.png" 
+            src={logo2} 
             alt="Logo" 
             className="h-4 w-4 object-contain drop-shadow-sm"
           />
