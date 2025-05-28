@@ -1,72 +1,76 @@
+import { useIsMobile } from "@/hooks/use-mobile";
+import { motion } from "framer-motion";
 
-// import { ReactNode } from "react";
-// import BackgroundElements from "@/components/login/BackgroundElements";
-// import UserCardsBackground from "@/components/login/UserCardsBackground";
-// import LoginHeader from "@/components/login/LoginHeader";
-// import LoginFooter from "@/components/login/LoginFooter";
+const BackgroundElements = () => {
+  const isMobile = useIsMobile();
 
-// interface LoginBackgroundProps {
-//   children: ReactNode;
-// }
-
-// const LoginBackground = ({ children }: LoginBackgroundProps) => {
-//   return (
-//     <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#f8f4ff] via-[#f0e6ff] to-[#e8d5ff] dark:bg-[#1E0B36] transition-colors duration-300 overflow-hidden">
-//       <BackgroundElements />
-//       <LoginHeader />
-      
-//       <main className="flex-1 flex items-center justify-center relative">
-        
-//         {/* ✅ Fullscreen cards grid in background - now always visible */}
-//         <UserCardsBackground />
-//         {/* ✅ Background gradient below everything */}
-        
-
-//         {/* ✅ Actual content above */}
-//         <div className="relative z-20 w-full flex justify-center items-center px-2 sm:px-4">
-//             {children}
-//         </div>
-//       </main>
-//         {/* ✅ Footer with links */}
-//       <LoginFooter />
-//     </div>
-//   );
-// };
-
-// export default LoginBackground;
-
-import { ReactNode } from "react";
-import BackgroundElements from "@/components/login/BackgroundElements";
-import UserCardsBackground from "@/components/login/UserCardsBackground";
-import LoginHeader from "@/components/login/LoginHeader";
-import LoginFooter from "@/components/login/LoginFooter";
-
-interface LoginBackgroundProps {
-  children: ReactNode;
-}
-
-const LoginBackground = ({ children }: LoginBackgroundProps) => {
   return (
-    <div className="min-h-screen w-full flex flex-col relative overflow-hidden">
-      {/* ✅ Background elements now take full control */}
-      <BackgroundElements />
+    <div className="absolute inset-0 overflow-hidden z-0 transition-colors duration-1000 ease-in-out">
+      {/* Gradient Background */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-[#f9f4ff] via-[#f4e9ff] to-[#ebdbff] dark:from-[#0B0205] dark:via-[#10002B] dark:to-black duration-1000"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      />
 
-      {/* ✅ Header */}
-      <LoginHeader />
+      {/* Animated Circles */}
+      {[
+        {
+          className: `-top-20 -left-20 ${isMobile ? "w-64 h-64" : "w-96 h-96"}`,
+          bgLight: "bg-[#d8b4ff]/30",
+          bgDark: "dark:bg-[#240046]/20",
+        },
+        {
+          className: `top-1/4 right-1/4 ${isMobile ? "w-48 h-48" : "w-72 h-72"} ${isMobile ? "hidden sm:block" : ""}`,
+          bgLight: "bg-[#c7a0ff]/25",
+          bgDark: "dark:bg-[#3B185F]/15",
+        },
+        {
+          className: `bottom-10 right-10 ${isMobile ? "w-40 h-40" : "w-64 h-64"}`,
+          bgLight: "bg-[#b088ff]/20",
+          bgDark: "dark:bg-[#2C1B47]/25",
+        },
+        {
+          className: `bottom-1/3 left-1/3 w-48 h-48 ${isMobile ? "hidden sm:block" : ""}`,
+          bgLight: "bg-[#d9a6ff]/25",
+          bgDark: "dark:bg-[#9D4EDD]/10",
+        },
+        {
+          // 🔴 New RED Circle in Top-Center
+          className: `top-[-80px] left-1/2 -translate-x-1/2 ${isMobile ? "w-40 h-40" : "w-72 h-72"}`,
+          bgLight: "bg-[#ffcccc]/40",
+          bgDark: "dark:bg-[#ff4d6d]/20",
+        },
+      ].map(({ className, bgLight, bgDark }, i) => (
+        <motion.div
+          key={i}
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, delay: i * 0.1, ease: "easeOut" }}
+          className={`absolute rounded-full blur-3xl ${className} ${bgLight} ${bgDark} transition-colors duration-1000`}
+        />
+      ))}
 
-      {/* ✅ Main Content */}
-      <main className="flex-1 flex items-center justify-center relative z-10">
-        <UserCardsBackground />
-        <div className="relative z-20 w-full flex justify-center items-center px-2 sm:px-4">
-          {children}
-        </div>
-      </main>
-
-      {/* ✅ Footer */}
-      <LoginFooter />
+      {/* Extra depth - only on desktop */}
+      {!isMobile && (
+        <>
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+            className="absolute top-1/2 left-1/4 w-60 h-60 rounded-full bg-[#bc95ff]/20 dark:bg-[#470D82]/15 blur-3xl transition-colors duration-1000"
+          />
+          <motion.div
+            initial={{ scale: 0.6, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.6 }}
+            className="absolute bottom-1/4 right-1/3 w-40 h-40 rounded-full bg-[#e4c6ff]/30 dark:bg-[#7B2CBF]/10 blur-3xl transition-colors duration-1000"
+          />
+        </>
+      )}
     </div>
   );
 };
 
-export default LoginBackground;
-
+export default BackgroundElements;

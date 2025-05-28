@@ -37,7 +37,7 @@ const LoginCard = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <Card className="p-4 sm:p-8 rounded-2xl bg-white/95 dark:bg-[#10002B]/95 border-purple-200/50 dark:border-[#9D4EDD]/20 shadow-xl relative">
+      <Card className="p-4 sm:p-8 rounded-2xl bg-white/95 dark:bg-[#10002B]/95 border-purple-200/50 dark:border-[#9D4EDD]/20 shadow-xl relative duration-300">
         {/* Theme toggle positioned on the card */}
         <div className="absolute top-[-20px] right-[-20px]">
           <ThemeToggle />
