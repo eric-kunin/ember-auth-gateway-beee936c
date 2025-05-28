@@ -20,15 +20,15 @@ const PersonalSection = ({ personalData }: PersonalSectionProps) => {
             <span className="text-[#9D4EDD] font-medium mr-1.5">Name:</span> {personalData.name}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
-            <span className="text-[#9D4EDD] font-medium mr-1.5">Gender:</span> {personalData.gender}
+            <span className="text-[#9D4EDD] font-medium mr-1.5">Nickname:</span> {personalData.nickname}
           </p>
         </div>
         <div className="space-y-3">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
-            <span className="text-[#9D4EDD] font-medium mr-1.5">Birthdate:</span> {personalData.birthdate ? format(personalData.birthdate, 'PPP') : 'Not provided'}
+            <span className="text-[#9D4EDD] font-medium mr-1.5">Gender:</span> {personalData.gender}
           </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
-            <span className="text-[#9D4EDD] font-medium mr-1.5">Phone:</span> {personalData.phone || 'Not provided'}
+            <span className="text-[#9D4EDD] font-medium mr-1.5">Birthdate:</span> {personalData.birthdate ? format(personalData.birthdate, 'PPP') : 'Not provided'}
           </p>
         </div>
       </div>

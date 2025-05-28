@@ -41,6 +41,10 @@ const EmailField = ({ control, isLoading, isCheckingEmail = false }: EmailFieldP
                               ${isCheckingEmail ? 'border-yellow-500 dark:border-yellow-500 ring-1 ring-yellow-500' : ''}`}
                   disabled={isLoading}
                   {...field}
+                  onChange={(e) => {
+                    // Preserve exact user input without any modifications
+                    field.onChange(e.target.value);
+                  }}
                 />
               </FormControl>
               <ValidationIcon 

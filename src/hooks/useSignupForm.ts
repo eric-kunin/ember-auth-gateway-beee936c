@@ -14,9 +14,9 @@ export const useSignupForm = () => {
   
   const [personalData, setPersonalData] = useState<PersonalInfoFormValues>({
     name: "",
+    nickname: "",
     gender: "",
     birthdate: undefined as unknown as Date,
-    phone: ""
   });
 
   const [profileImages, setProfileImages] = useState<ProfileImage[]>([]);

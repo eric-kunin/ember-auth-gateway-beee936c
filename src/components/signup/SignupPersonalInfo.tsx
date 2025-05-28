@@ -4,9 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { personalInfoFormSchema, PersonalInfoFormValues } from "./schemas";
 import { Form } from "@/components/ui/form";
 import NameField from "./personal-info/NameField";
+import NicknameField from "./personal-info/NicknameField";
 import GenderField from "./personal-info/GenderField";
 import BirthdateField from "./personal-info/BirthdateField";
-import PhoneField from "./personal-info/PhoneField";
 import FormButtons from "./personal-info/FormButtons";
 
 interface SignupPersonalInfoProps {
@@ -19,9 +19,9 @@ interface SignupPersonalInfoProps {
 const SignupPersonalInfo = ({
   defaultValues = {
     name: "",
+    nickname: "",
     gender: "",
     birthdate: undefined as unknown as Date,
-    phone: ""
   },
   isLoading,
   onSubmit,
@@ -38,9 +38,9 @@ const SignupPersonalInfo = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
         <NameField control={form.control} isLoading={isLoading} />
+        <NicknameField control={form.control} isLoading={isLoading} />
         <GenderField control={form.control} isLoading={isLoading} />
         <BirthdateField control={form.control} isLoading={isLoading} />
-        <PhoneField control={form.control} isLoading={isLoading} />
         <FormButtons isLoading={isLoading} onBack={onBack} />
       </form>
     </Form>
