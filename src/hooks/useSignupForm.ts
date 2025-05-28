@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
-import { ProfileImage } from "@/components/signup/summary/types";
+import { ProfileImage } from "@/components/signup/image-upload/types";
 
 export const useSignupForm = () => {
   // Form states for persistence between steps

@@ -3,15 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ProfileImageUpload } from "./ProfileImageUpload";
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Camera, CheckCircle } from "lucide-react";
-
-interface ProfileImage {
-  imageId?: string;
-  filePath: string;
-  publicUrl: string;
-  file?: File;
-  isUploading?: boolean;
-  isPrivate?: boolean;
-}
+import { ProfileImage } from "./image-upload/types";
 
 interface SignupProfilePhotosProps {
   isLoading: boolean;

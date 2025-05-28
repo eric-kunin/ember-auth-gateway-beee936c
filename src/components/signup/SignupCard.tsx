@@ -13,7 +13,7 @@ import SignupLifestyleInfo1 from "./lifestyle-info/SignupLifestyleInfo1";
 import SignupLifestyleInfo2 from "./lifestyle-info/SignupLifestyleInfo2";
 import SignupProfilePhotos from "./SignupProfilePhotos";
 import SignupSummary from "./SignupSummary";
-import { ProfileImage } from "./summary/types";
+import { ProfileImage } from "./image-upload/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
