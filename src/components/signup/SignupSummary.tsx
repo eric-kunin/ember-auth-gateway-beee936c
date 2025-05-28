@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
 import { SignupSummaryProps, container } from "./summary/types";
@@ -5,10 +6,8 @@ import SummaryHeader from "./summary/SummaryHeader";
 import PhotosSection from "./summary/PhotosSection";
 import AccountSection from "./summary/AccountSection";
 import PersonalSection from "./summary/PersonalSection";
-import ProfileDetailsSection from "./summary/ProfileDetailsSection";
 import LifestyleSection from "./summary/LifestyleSection";
 import SummaryActions from "./summary/SummaryActions";
-import SummarySection from "./summary/SummarySection";
 
 const SignupSummary = ({
   accountData,
@@ -40,9 +39,6 @@ const SignupSummary = ({
 
         {/* Personal Information */}
         <PersonalSection personalData={personalData} profileData={profileData} />
-
-        {/* Profile Details */}
-        <ProfileDetailsSection profileData={profileData} />
 
         {/* Lifestyle Info */}
         <LifestyleSection lifestyleData={lifestyleData} />
