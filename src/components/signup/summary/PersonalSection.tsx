@@ -1,5 +1,5 @@
 
-import { User, EyeOff } from "lucide-react";
+import { User, EyeOff, Mail } from "lucide-react";
 import { format } from "date-fns";
 import { PersonalInfoFormValues, BirthdateFormValues } from "../schemas";
 import { SummarySection } from "./SummarySection";
@@ -28,6 +28,11 @@ const PersonalSection = ({ personalData, profileData }: PersonalSectionProps) =>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
             <span className="text-[#9D4EDD] font-medium mr-1.5">Nickname:</span> {personalData.nickname}
           </p>
+          <div className="flex items-center text-sm text-[#3B185F] dark:text-custom-lighter">
+            <Mail className="h-4 w-4 text-[#9D4EDD] mr-1.5" />
+            <span className="text-[#9D4EDD] font-medium mr-1.5">Username:</span> 
+            <span>{personalData.username}</span>
+          </div>
         </div>
         <div className="space-y-3">
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
