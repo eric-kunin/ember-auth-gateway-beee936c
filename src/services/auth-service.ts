@@ -42,46 +42,6 @@ export class AuthService {
     }
   }
 
-  static async checkUsernameExists(username: string): Promise<boolean> {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('username')
-        .eq('username', username)
-        .single();
-
-      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
-        console.error('Error checking username:', error);
-        return false;
-      }
-
-      return !!data;
-    } catch (error) {
-      console.error('Error checking username:', error);
-      return false;
-    }
-  }
-
-  static async generateUniqueUsername(baseUsername: string): Promise<string> {
-    // First try the exact nickname as provided by user
-    const isExisting = await this.checkUsernameExists(baseUsername);
-    
-    if (!isExisting) {
-      return baseUsername;
-    }
-
-    // If it exists, try adding numbers starting from 1
-    let counter = 1;
-    let candidateUsername = `${baseUsername}${counter}`;
-    
-    while (await this.checkUsernameExists(candidateUsername)) {
-      counter++;
-      candidateUsername = `${baseUsername}${counter}`;
-    }
-    
-    return candidateUsername;
-  }
-
   static async signUp(email: string, password: string, profileData: ProfileData) {
     try {
       // Check if email already exists first
@@ -106,9 +66,12 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
-      // Create username from nickname, preserving user's exact input
+      // Create username from nickname instead of email
       const baseUsername = profileData.nickname || profileData.name?.split(' ')?.[0] || 'user';
-      const username = await this.generateUniqueUsername(baseUsername);
+      // Remove non-alphanumeric characters and convert to lowercase
+      const cleanUsername = baseUsername.toLowerCase().replace(/[^a-z0-9]/g, '');
+      // Add random suffix to ensure uniqueness
+      const username = cleanUsername + '_' + Math.random().toString(36).substring(2, 7);
 
       // Prepare profile data for database insertion with correct field names
       const dbProfileData = {
@@ -116,7 +79,7 @@ export class AuthService {
         first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
         last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
         display_name: profileData.nickname || profileData.displayName || profileData.name || baseUsername,
-        username: username, // Use the generated unique username
+        username: username, // Use the username created from nickname
         bio: profileData.bio || '',
         profession: profileData.profession || '',
         birth_date: profileData.birthdate ? profileData.birthdate.toISOString() : new Date().toISOString(),
