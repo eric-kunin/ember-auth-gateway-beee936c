@@ -1,6 +1,7 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Gift } from "lucide-react";
 import { birthdateFormSchema, BirthdateFormValues } from "./schemas";
 import { Form } from "@/components/ui/form";
 import BirthdateField from "./personal-info/BirthdateField";
@@ -31,6 +32,11 @@ const SignupBirthdate = ({
   return (
     <div className="space-y-4">
       <div className="text-center mb-6">
+        <div className="flex justify-center mb-4">
+          <div className="w-16 h-16 bg-gradient-to-br from-[#9D4EDD] to-[#7B2CBF] rounded-full flex items-center justify-center shadow-lg">
+            <Gift className="w-8 h-8 text-white" />
+          </div>
+        </div>
         <h2 className="text-lg font-semibold text-[#240046] dark:text-white mb-2">
           When is your birthday?
         </h2>
