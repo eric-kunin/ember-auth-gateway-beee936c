@@ -40,6 +40,25 @@ const BackgroundElements = () => {
           {/* Extra color elements for richness - more subtle in light mode */}
           <div className="absolute top-1/3 right-10 w-36 h-36 rounded-full bg-gradient-to-bl from-[#f0a3c7]/30 to-[#b894ff]/25 dark:bg-[#240046]/10 blur-3xl transition-colors duration-[2000ms]"></div>
           <div className="absolute bottom-20 left-1/2 w-44 h-44 rounded-full bg-gradient-to-tr from-[#d1b3ff]/40 to-[#9b7aff]/25 dark:bg-[#470D82]/15 blur-3xl transition-colors duration-[2000ms]"></div>
+          
+          {/* NEW LIGHT MODE GRADIENT CIRCLES */}
+          <div className="absolute top-1/5 left-2/3 w-56 h-56 rounded-full bg-gradient-to-br from-[#e8d5ff]/50 to-[#c7a6ff]/35 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-1/5 right-2/3 w-48 h-48 rounded-full bg-gradient-to-tl from-[#f3e8ff]/55 to-[#dcc4ff]/40 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-2/3 left-1/5 w-40 h-40 rounded-full bg-gradient-to-tr from-[#f0d9ff]/45 to-[#d4b3ff]/30 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-1/6 right-1/5 w-38 h-38 rounded-full bg-gradient-to-bl from-[#ecd7ff]/40 to-[#c9a6ff]/28 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-1/6 left-1/6 w-42 h-42 rounded-full bg-gradient-to-r from-[#f5ebff]/48 to-[#e0c7ff]/32 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-3/4 right-1/6 w-34 h-34 rounded-full bg-gradient-to-tl from-[#ead9ff]/42 to-[#d2b8ff]/28 dark:opacity-0 blur-xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-2/5 right-1/2 w-50 h-50 rounded-full bg-gradient-to-br from-[#f8e6ff]/45 to-[#ddc4ff]/35 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-1/8 left-1/3 w-46 h-46 rounded-full bg-gradient-to-bl from-[#f1deff]/50 to-[#d6b8ff]/38 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+        </>
+      )}
+      
+      {/* Additional mobile-friendly light mode circles */}
+      {isMobile && (
+        <>
+          <div className="absolute top-1/3 right-1/5 w-32 h-32 rounded-full bg-gradient-to-br from-[#e8d5ff]/45 to-[#c7a6ff]/30 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-36 h-36 rounded-full bg-gradient-to-tl from-[#f3e8ff]/50 to-[#dcc4ff]/35 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-3/5 left-1/6 w-28 h-28 rounded-full bg-gradient-to-tr from-[#f0d9ff]/40 to-[#d4b3ff]/25 dark:opacity-0 blur-xl transition-all duration-[2000ms]"></div>
         </>
       )}
     </div>
