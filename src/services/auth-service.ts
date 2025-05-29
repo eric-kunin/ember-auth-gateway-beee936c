@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 
 // Define a simplified ProfileData interface to avoid circular references
@@ -8,6 +7,7 @@ interface ProfileData {
   name?: string;
   displayName?: string;
   username?: string;
+  nickname?: string; // Add nickname field
   bio?: string;
   profession?: string;
   birthdate?: Date;
@@ -42,6 +42,46 @@ export class AuthService {
     }
   }
 
+  static async checkUsernameExists(username: string): Promise<boolean> {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('username')
+        .eq('username', username)
+        .single();
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
+        console.error('Error checking username:', error);
+        return false;
+      }
+
+      return !!data;
+    } catch (error) {
+      console.error('Error checking username:', error);
+      return false;
+    }
+  }
+
+  static async generateUniqueUsername(baseUsername: string): Promise<string> {
+    // First try the exact nickname as provided by user
+    const isExisting = await this.checkUsernameExists(baseUsername);
+    
+    if (!isExisting) {
+      return baseUsername;
+    }
+
+    // If it exists, try adding numbers starting from 1
+    let counter = 1;
+    let candidateUsername = `${baseUsername}${counter}`;
+    
+    while (await this.checkUsernameExists(candidateUsername)) {
+      counter++;
+      candidateUsername = `${baseUsername}${counter}`;
+    }
+    
+    return candidateUsername;
+  }
+
   static async signUp(email: string, password: string, profileData: ProfileData) {
     try {
       // Check if email already exists first
@@ -66,13 +106,17 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
+      // Create username from nickname, preserving user's exact input
+      const baseUsername = profileData.nickname || profileData.name?.split(' ')?.[0] || 'user';
+      const username = await this.generateUniqueUsername(baseUsername);
+
       // Prepare profile data for database insertion with correct field names
       const dbProfileData = {
         id: authData.user.id,
         first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
         last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
-        display_name: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
-        username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
+        display_name: profileData.nickname || profileData.displayName || profileData.name || baseUsername,
+        username: username, // Use the generated unique username
         bio: profileData.bio || '',
         profession: profileData.profession || '',
         birth_date: profileData.birthdate ? profileData.birthdate.toISOString() : new Date().toISOString(),
@@ -214,6 +258,7 @@ export class AuthService {
       if (profileData.firstName) updateData.first_name = profileData.firstName;
       if (profileData.lastName) updateData.last_name = profileData.lastName;
       if (profileData.displayName) updateData.display_name = profileData.displayName;
+      if (profileData.nickname) updateData.display_name = profileData.nickname; // Use nickname for display_name
       if (profileData.bio) updateData.bio = profileData.bio;
       if (profileData.profession) updateData.profession = profileData.profession;
       if (profileData.birthdate) updateData.birth_date = profileData.birthdate.toISOString();
