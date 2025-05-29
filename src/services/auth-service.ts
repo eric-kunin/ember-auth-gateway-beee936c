@@ -1,3 +1,4 @@
+
 import { supabase } from '@/integrations/supabase/client';
 
 // Define a simplified ProfileData interface to avoid circular references
@@ -7,7 +8,6 @@ interface ProfileData {
   name?: string;
   displayName?: string;
   username?: string;
-  nickname?: string; // Add nickname field
   bio?: string;
   profession?: string;
   birthdate?: Date;
@@ -66,20 +66,13 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
-      // Create username from nickname instead of email
-      const baseUsername = profileData.nickname || profileData.name?.split(' ')?.[0] || 'user';
-      // Remove non-alphanumeric characters and convert to lowercase
-      const cleanUsername = baseUsername.toLowerCase().replace(/[^a-z0-9]/g, '');
-      // Add random suffix to ensure uniqueness
-      const username = cleanUsername + '_' + Math.random().toString(36).substring(2, 7);
-
       // Prepare profile data for database insertion with correct field names
       const dbProfileData = {
         id: authData.user.id,
         first_name: profileData.firstName || profileData.name?.split(' ')?.[0] || '',
         last_name: profileData.lastName || profileData.name?.split(' ')?.[1] || '',
-        display_name: profileData.nickname || profileData.displayName || profileData.name || baseUsername,
-        username: username, // Use the username created from nickname
+        display_name: profileData.displayName || profileData.name || authData.user.email?.split('@')[0] || 'User',
+        username: profileData.username || authData.user.email?.split('@')[0] || 'user_' + Math.random().toString(36).substring(2, 7),
         bio: profileData.bio || '',
         profession: profileData.profession || '',
         birth_date: profileData.birthdate ? profileData.birthdate.toISOString() : new Date().toISOString(),
@@ -221,7 +214,6 @@ export class AuthService {
       if (profileData.firstName) updateData.first_name = profileData.firstName;
       if (profileData.lastName) updateData.last_name = profileData.lastName;
       if (profileData.displayName) updateData.display_name = profileData.displayName;
-      if (profileData.nickname) updateData.display_name = profileData.nickname; // Use nickname for display_name
       if (profileData.bio) updateData.bio = profileData.bio;
       if (profileData.profession) updateData.profession = profileData.profession;
       if (profileData.birthdate) updateData.birth_date = profileData.birthdate.toISOString();

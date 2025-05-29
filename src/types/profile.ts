@@ -9,7 +9,6 @@ export interface ProfileData {
   displayName?: string;
   firstName?: string;
   lastName?: string;
-  nickname?: string; // Add nickname field
   bio?: string;
   profession?: string;
   height?: number;
