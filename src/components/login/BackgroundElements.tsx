@@ -50,15 +50,30 @@ const BackgroundElements = () => {
           <div className="absolute top-3/4 right-1/6 w-34 h-34 rounded-full bg-gradient-to-tl from-[#ead9ff]/42 to-[#d2b8ff]/28 dark:opacity-0 blur-xl transition-all duration-[2000ms]"></div>
           <div className="absolute bottom-2/5 right-1/2 w-50 h-50 rounded-full bg-gradient-to-br from-[#f8e6ff]/45 to-[#ddc4ff]/35 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
           <div className="absolute top-1/8 left-1/3 w-46 h-46 rounded-full bg-gradient-to-bl from-[#f1deff]/50 to-[#d6b8ff]/38 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          
+          {/* NEW ROSE-700 THEMED CIRCLES FOR LIGHT MODE */}
+          <div className="absolute top-1/10 right-1/3 w-52 h-52 rounded-full bg-gradient-to-br from-rose-700/30 to-rose-400/20 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-1/10 left-2/5 w-44 h-44 rounded-full bg-gradient-to-tl from-rose-600/25 to-pink-300/30 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-2/5 right-1/6 w-38 h-38 rounded-full bg-gradient-to-tr from-rose-500/35 to-[#e8d5ff]/25 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-3/5 left-1/8 w-46 h-46 rounded-full bg-gradient-to-bl from-rose-400/40 to-purple-200/30 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-4/5 left-3/5 w-40 h-40 rounded-full bg-gradient-to-r from-rose-700/25 to-rose-300/35 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-1/7 left-1/7 w-36 h-36 rounded-full bg-gradient-to-tl from-rose-600/30 to-[#f0d9ff]/25 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-1/7 right-1/7 w-42 h-42 rounded-full bg-gradient-to-br from-rose-500/28 to-pink-200/32 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-3/7 right-2/5 w-48 h-48 rounded-full bg-gradient-to-bl from-rose-700/22 to-rose-400/28 dark:opacity-0 blur-3xl transition-all duration-[2000ms]"></div>
         </>
       )}
       
-      {/* Additional mobile-friendly light mode circles */}
+      {/* Additional mobile-friendly light mode circles with rose colors */}
       {isMobile && (
         <>
           <div className="absolute top-1/3 right-1/5 w-32 h-32 rounded-full bg-gradient-to-br from-[#e8d5ff]/45 to-[#c7a6ff]/30 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
           <div className="absolute bottom-1/4 left-1/4 w-36 h-36 rounded-full bg-gradient-to-tl from-[#f3e8ff]/50 to-[#dcc4ff]/35 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
           <div className="absolute top-3/5 left-1/6 w-28 h-28 rounded-full bg-gradient-to-tr from-[#f0d9ff]/40 to-[#d4b3ff]/25 dark:opacity-0 blur-xl transition-all duration-[2000ms]"></div>
+          
+          {/* Rose-themed mobile circles */}
+          <div className="absolute top-1/5 right-1/4 w-30 h-30 rounded-full bg-gradient-to-br from-rose-600/35 to-pink-300/25 dark:opacity-0 blur-2xl transition-all duration-[2000ms]"></div>
+          <div className="absolute bottom-2/5 left-1/5 w-34 h-34 rounded-full bg-gradient-to-tl from-rose-500/30 to-rose-300/35 dark:opacity-0 blur-xl transition-all duration-[2000ms]"></div>
+          <div className="absolute top-4/5 right-1/6 w-26 h-26 rounded-full bg-gradient-to-tr from-rose-700/25 to-[#e8d5ff]/30 dark:opacity-0 blur-xl transition-all duration-[2000ms]"></div>
         </>
       )}
     </div>
