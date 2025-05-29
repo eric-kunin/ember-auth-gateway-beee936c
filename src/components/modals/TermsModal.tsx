@@ -1,4 +1,3 @@
-
 import {
   Dialog,
   DialogContent,
@@ -26,10 +25,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-4 top-4 z-10 h-8 w-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center"
+          className="absolute left-4 top-4 z-50 h-8 w-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
           onClick={onClose}
         >
-          <X className="h-4 w-4" />
+          <X className="h-4 w-4 text-gray-600 dark:text-gray-300" />
           <span className="sr-only">סגור</span>
         </Button>
         
