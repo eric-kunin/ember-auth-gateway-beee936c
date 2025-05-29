@@ -13,6 +13,7 @@ export const useSignupForm = () => {
   
   const [personalData, setPersonalData] = useState<PersonalInfoFormValues>({
     nickname: "",
+    username: "",
     gender: "",
     birthdate: undefined as unknown as Date,
   });

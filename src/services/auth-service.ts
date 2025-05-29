@@ -63,7 +63,7 @@ export class AuthService {
   }
 
   static async generateUniqueUsername(baseUsername: string): Promise<string> {
-    // First try the exact nickname as provided by user
+    // First try the exact username as provided by user
     const isExisting = await this.checkUsernameExists(baseUsername);
     
     if (!isExisting) {
@@ -106,8 +106,8 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
-      // Use the exact nickname without any manipulation
-      const baseUsername = profileData.nickname || profileData.name?.split(' ')?.[0] || 'user';
+      // Use the exact username provided by the user, with fallback logic
+      const baseUsername = profileData.username || profileData.nickname || profileData.name?.split(' ')?.[0] || 'user';
       const username = await this.generateUniqueUsername(baseUsername);
 
       // Prepare profile data for database insertion with correct field names
@@ -259,6 +259,7 @@ export class AuthService {
       if (profileData.lastName) updateData.last_name = profileData.lastName;
       if (profileData.displayName) updateData.display_name = profileData.displayName;
       if (profileData.nickname) updateData.display_name = profileData.nickname; // Use nickname for display_name
+      if (profileData.username) updateData.username = profileData.username;
       if (profileData.bio) updateData.bio = profileData.bio;
       if (profileData.profession) updateData.profession = profileData.profession;
       if (profileData.birthdate) updateData.birth_date = profileData.birthdate.toISOString();

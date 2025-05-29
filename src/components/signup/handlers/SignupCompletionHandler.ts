@@ -33,6 +33,7 @@ export const useSignupCompletion = ({
         firstName: profileData.name.split(' ')[0],
         lastName: profileData.name.split(' ').slice(1).join(' '),
         nickname: personalData.nickname, // Pass the nickname from personal data
+        username: personalData.username, // Pass the username from personal data
         birthdate: personalData.birthdate,
         gender: personalData.gender as "Male" | "Female" | "Other",
         bio: profileData.bio || "",
