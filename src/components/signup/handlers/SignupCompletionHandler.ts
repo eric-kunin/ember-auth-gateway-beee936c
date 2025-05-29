@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
+import { AccountFormValues, PersonalInfoFormValues, BirthdateFormValues } from "@/components/signup/schemas";
 
 interface UseSignupCompletionProps {
   accountData: AccountFormValues;
-  personalData: PersonalInfoFormValues;
+  personalData: PersonalInfoFormValues & BirthdateFormValues;
   profileData: any;
   lifestyleData: any;
 }

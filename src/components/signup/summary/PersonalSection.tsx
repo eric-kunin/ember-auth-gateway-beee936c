@@ -1,11 +1,11 @@
 
 import { User, EyeOff } from "lucide-react";
 import { format } from "date-fns";
-import { PersonalInfoFormValues } from "../schemas";
+import { PersonalInfoFormValues, BirthdateFormValues } from "../schemas";
 import { SummarySection } from "./SummarySection";
 
 interface PersonalSectionProps {
-  personalData: PersonalInfoFormValues;
+  personalData: PersonalInfoFormValues & BirthdateFormValues;
   profileData: { name: string; bio: string; profession: string };
 }
 

@@ -1,12 +1,23 @@
 
 import { motion } from "framer-motion";
-import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
+import { AccountFormValues, PersonalInfoFormValues, BirthdateFormValues } from "./schemas";
 import { SignupSummaryProps, container } from "./summary/types";
 import SummaryHeader from "./summary/SummaryHeader";
 import PhotosSection from "./summary/PhotosSection";
 import AccountSection from "./summary/AccountSection";
 import PersonalSection from "./summary/PersonalSection";
 import SummaryActions from "./summary/SummaryActions";
+
+interface UpdatedSignupSummaryProps {
+  accountData: AccountFormValues;
+  personalData: PersonalInfoFormValues & BirthdateFormValues;
+  profileData: any;
+  lifestyleData: any;
+  profileImages: any[];
+  isLoading: boolean;
+  onBack: () => void;
+  onComplete: () => void;
+}
 
 const SignupSummary = ({
   accountData,
@@ -17,7 +28,7 @@ const SignupSummary = ({
   isLoading,
   onBack,
   onComplete,
-}: SignupSummaryProps) => {
+}: UpdatedSignupSummaryProps) => {
   return (
     <div className="space-y-6">
       <SummaryHeader />
