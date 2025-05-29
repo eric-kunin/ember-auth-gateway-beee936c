@@ -22,7 +22,9 @@ export type AccountFormValues = z.infer<typeof accountFormSchema>;
 
 // Schema for step 2 - Personal information (now without name)
 export const personalInfoFormSchema = z.object({
-  nickname: z.string().min(2, "Nickname is required"),
+  nickname: z.string()
+    .min(2, "Nickname must be at least 2 characters")
+    .max(15, "Nickname must be 15 characters or less"),
   gender: z.string().min(1, "Please select a gender"),
   birthdate: z.date({
     required_error: "Please select a date of birth",
