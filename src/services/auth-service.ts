@@ -106,7 +106,7 @@ export class AuthService {
       
       if (!authData.user) throw new Error('No user data returned');
 
-      // Create username from nickname, preserving user's exact input
+      // Use the exact nickname without any manipulation
       const baseUsername = profileData.nickname || profileData.name?.split(' ')?.[0] || 'user';
       const username = await this.generateUniqueUsername(baseUsername);
 
