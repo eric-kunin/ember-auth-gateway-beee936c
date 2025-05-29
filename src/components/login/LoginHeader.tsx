@@ -35,19 +35,8 @@ const LoginHeader = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        {isSignupPage ? (
-          <Link 
-            to="/login" 
-            className="text-purple-700 dark:text-purple-100 
-                     hover:text-purple-900 dark:hover:text-white 
-                     transition-all duration-300 text-sm font-medium 
-                     px-4 py-2 rounded-lg 
-                     hover:bg-purple-100/50 dark:hover:bg-white/10 
-                     hover:scale-105"
-          >
-            התחברות
-          </Link>
-        ) : (
+        {/* Always show התחברות button unless on signup page */}
+        {!isSignupPage && (
           <Link 
             to="/login" 
             className="text-purple-700 dark:text-purple-100 
@@ -61,25 +50,16 @@ const LoginHeader = () => {
           </Link>
         )}
         
-        {isLoginPage ? (
+        {/* Show הרשמה button only when on login page or signup page */}
+        {(isLoginPage || isSignupPage) && (
           <Link 
-            to="/signup" 
+            to={isSignupPage ? "/login" : "/signup"}
             className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
                      hover:border-[#C77DFF] hover:text-[#C77DFF]
                      bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
                      shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
           >
-            הרשמה
-          </Link>
-        ) : (
-          <Link 
-            to="/signup" 
-            className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
-                     hover:border-[#C77DFF] hover:text-[#C77DFF]
-                     bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
-                     shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
-          >
-            הרשמה
+            {isSignupPage ? "התחברות" : "הרשמה"}
           </Link>
         )}
       </div>
