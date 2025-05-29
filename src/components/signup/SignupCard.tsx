@@ -4,10 +4,11 @@ import SignupStepIndicator from "./SignupStepIndicator";
 import { Progress } from "@/components/ui/progress";
 import SignupForm from "@/components/signup/SignupForm";
 import SignupPersonalInfo from "@/components/signup/SignupPersonalInfo";
+import SignupBirthdate from "@/components/signup/SignupBirthdate";
 import SignupComplete from "@/components/signup/SignupComplete";
 import ProfileDetailsForm from "@/components/signup/ProfileDetailsForm";
 import SocialLogin from "@/components/login/SocialLogin";
-import { AccountFormValues, PersonalInfoFormValues } from "./schemas";
+import { AccountFormValues, PersonalInfoFormValues, BirthdateFormValues } from "./schemas";
 import { motion } from "framer-motion";
 import SignupLifestyleInfo1 from "./lifestyle-info/SignupLifestyleInfo1";
 import SignupLifestyleInfo2 from "./lifestyle-info/SignupLifestyleInfo2";
@@ -22,7 +23,8 @@ interface SignupCardProps {
   totalSteps: number;
   progress: number;
   accountData: AccountFormValues;
-  personalData: PersonalInfoFormValues;
+  personalData: PersonalInfoFormValues & BirthdateFormValues;
+  birthdateData: BirthdateFormValues;
   profileData: any;
   lifestyleData: any;
   lifestyleData1: any;
@@ -31,6 +33,7 @@ interface SignupCardProps {
   isLoading: boolean;
   handleSignupStep1: (data: AccountFormValues) => void;
   handleSignupStep2: (data: PersonalInfoFormValues) => void;
+  handleSignupStep3: (data: BirthdateFormValues) => void;
   handleProfileDataChange: (data: any) => void;
   handleLifestyleData1Change: (data: any) => void;
   handleLifestyleData2Change: (data: any) => void;
@@ -46,6 +49,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
   progress,
   accountData,
   personalData,
+  birthdateData,
   profileData,
   lifestyleData,
   lifestyleData1,
@@ -54,6 +58,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
   isLoading,
   handleSignupStep1,
   handleSignupStep2,
+  handleSignupStep3,
   handleProfileDataChange,
   handleLifestyleData1Change,
   handleLifestyleData2Change,
@@ -132,6 +137,15 @@ const SignupCard: React.FC<SignupCardProps> = ({
         )}
 
         {currentStep === 3 && (
+          <SignupBirthdate
+            defaultValues={birthdateData}
+            isLoading={isLoading}
+            onSubmit={handleSignupStep3}
+            onBack={handlePrevStep}
+          />
+        )}
+
+        {currentStep === 4 && (
           <ProfileDetailsForm
             defaultValues={profileData}
             personalData={personalData}
@@ -142,7 +156,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
           />
         )}
 
-        {currentStep === 4 && (
+        {currentStep === 5 && (
           <SignupLifestyleInfo1
             defaultValues={lifestyleData1}
             isLoading={isLoading}
@@ -151,7 +165,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
           />
         )}
 
-        {currentStep === 5 && (
+        {currentStep === 6 && (
           <SignupLifestyleInfo2
             defaultValues={lifestyleData2}
             isLoading={isLoading}
@@ -160,7 +174,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
           />
         )}
 
-        {currentStep === 6 && (
+        {currentStep === 7 && (
           <SignupProfilePhotos
             isLoading={isLoading}
             onSubmit={handlePhotoUpload}
@@ -169,7 +183,7 @@ const SignupCard: React.FC<SignupCardProps> = ({
           />
         )}
 
-        {currentStep === 7 && (
+        {currentStep === 8 && (
           <SignupSummary
             accountData={accountData}
             personalData={personalData}

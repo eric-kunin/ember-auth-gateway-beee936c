@@ -16,6 +16,7 @@ const Signup = () => {
   const {
     accountData,
     personalData,
+    birthdateData,
     profileData,
     lifestyleData,
     lifestyleData1,
@@ -26,6 +27,7 @@ const Signup = () => {
     progress,
     handleSignupStep1,
     handleSignupStep2,
+    handleSignupStep3,
     handleProfileDataChange,
     handleLifestyleData1Change,
     handleLifestyleData2Change,
@@ -35,9 +37,15 @@ const Signup = () => {
 
   const { handleOAuthSignup } = useOAuthSignupHandler();
   
+  // Combine personal and birthdate data for completion
+  const combinedPersonalData = {
+    ...personalData,
+    ...birthdateData
+  };
+  
   const { handleCompleteSignup, isLoading } = useSignupCompletion({
     accountData,
-    personalData,
+    personalData: combinedPersonalData,
     profileData,
     lifestyleData
   });
@@ -66,7 +74,8 @@ const Signup = () => {
         totalSteps={totalSteps}
         progress={progress}
         accountData={accountData}
-        personalData={personalData}
+        personalData={combinedPersonalData}
+        birthdateData={birthdateData}
         profileData={profileData}
         lifestyleData={lifestyleData}
         lifestyleData1={lifestyleData1}
@@ -75,6 +84,7 @@ const Signup = () => {
         isLoading={isLoading}
         handleSignupStep1={handleSignupStep1}
         handleSignupStep2={handleSignupStep2}
+        handleSignupStep3={handleSignupStep3}
         handleProfileDataChange={handleProfileDataChange}
         handleLifestyleData1Change={handleLifestyleData1Change}
         handleLifestyleData2Change={handleLifestyleData2Change}

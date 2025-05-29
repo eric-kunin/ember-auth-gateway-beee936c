@@ -1,5 +1,6 @@
+
 import { useState } from "react";
-import { AccountFormValues, PersonalInfoFormValues } from "@/components/signup/schemas";
+import { AccountFormValues, PersonalInfoFormValues, BirthdateFormValues } from "@/components/signup/schemas";
 import { ProfileImage } from "@/components/signup/image-upload/types";
 
 export const useSignupForm = () => {
@@ -15,6 +16,9 @@ export const useSignupForm = () => {
     nickname: "",
     username: "",
     gender: "",
+  });
+
+  const [birthdateData, setBirthdateData] = useState<BirthdateFormValues>({
     birthdate: undefined as unknown as Date,
   });
 
@@ -51,7 +55,7 @@ export const useSignupForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   
-  const totalSteps = 7; // Now 7 steps: Account, Personal, Profile, Lifestyle1, Lifestyle2, Photos, Summary
+  const totalSteps = 8; // Now 8 steps: Account, Personal, Birthdate, Profile, Lifestyle1, Lifestyle2, Photos, Summary
   const progress = (currentStep / totalSteps) * 100;
 
   const handleNextStep = () => {
@@ -75,6 +79,11 @@ export const useSignupForm = () => {
 
   const handleSignupStep2 = (data: PersonalInfoFormValues) => {
     setPersonalData(data);
+    handleNextStep();
+  };
+
+  const handleSignupStep3 = (data: BirthdateFormValues) => {
+    setBirthdateData(data);
     handleNextStep();
   };
 
@@ -107,6 +116,7 @@ export const useSignupForm = () => {
   return {
     accountData,
     personalData,
+    birthdateData,
     profileData,
     lifestyleData,
     lifestyleData1,
@@ -121,6 +131,7 @@ export const useSignupForm = () => {
     handlePrevStep,
     handleSignupStep1,
     handleSignupStep2,
+    handleSignupStep3,
     handleProfileDataChange,
     handleLifestyleData1Change,
     handleLifestyleData2Change,

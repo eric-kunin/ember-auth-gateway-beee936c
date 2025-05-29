@@ -6,7 +6,6 @@ import { Form } from "@/components/ui/form";
 import NicknameField from "./personal-info/NicknameField";
 import UsernameField from "./personal-info/UsernameField";
 import GenderField from "./personal-info/GenderField";
-import BirthdateField from "./personal-info/BirthdateField";
 import FormButtons from "./personal-info/FormButtons";
 
 interface SignupPersonalInfoProps {
@@ -21,7 +20,6 @@ const SignupPersonalInfo = ({
     nickname: "",
     username: "",
     gender: "",
-    birthdate: undefined as unknown as Date,
   },
   isLoading,
   onSubmit,
@@ -36,11 +34,10 @@ const SignupPersonalInfo = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <NicknameField control={form.control} isLoading={isLoading} />
         <UsernameField control={form.control} isLoading={isLoading} />
         <GenderField control={form.control} isLoading={isLoading} />
-        <BirthdateField control={form.control} isLoading={isLoading} />
         <FormButtons isLoading={isLoading} onBack={onBack} />
       </form>
     </Form>

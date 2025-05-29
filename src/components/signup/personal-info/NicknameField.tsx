@@ -1,7 +1,7 @@
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { AtSign } from "lucide-react";
+import { User } from "lucide-react";
 import { Control } from "react-hook-form";
 import { PersonalInfoFormValues } from "../schemas";
 
@@ -26,15 +26,15 @@ const NicknameField = ({ control, isLoading }: NicknameFieldProps) => {
               Nickname
             </FormLabel>
             <div className="relative">
-              <AtSign className="absolute left-3 top-2.5 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
+              <User className="absolute left-3 top-2.5 h-5 w-5 text-[#9D4EDD]/70 dark:text-custom-lighter/70 transition-colors duration-300" />
               <FormControl>
                 <Input
-                  placeholder="Enter your nickname"
+                  placeholder="e.g. Dani King (will display on card)"
                   type="text"
                   maxLength={15}
                   className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                            text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-                           pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
+                           pl-10 h-10 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
                            ${nicknameState.invalid && nicknameState.isDirty ? 'border-red-500 dark:border-red-500 ring-1 ring-red-500' : ''}
                            ${nicknameIsValid ? 'border-green-500 dark:border-green-500 ring-1 ring-green-500' : ''}`}
                   disabled={isLoading}

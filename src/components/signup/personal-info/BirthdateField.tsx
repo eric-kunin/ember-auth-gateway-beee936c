@@ -18,10 +18,10 @@ import {
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { PersonalInfoFormValues } from "../schemas";
+import { BirthdateFormValues } from "../schemas";
 
 interface BirthdateFieldProps {
-  control: Control<PersonalInfoFormValues>;
+  control: Control<BirthdateFormValues>;
   isLoading: boolean;
 }
 
