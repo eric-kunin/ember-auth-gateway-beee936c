@@ -27,11 +27,12 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
     switch (step) {
       case 1: return "Account";
       case 2: return "Basic";
-      case 3: return "Profile";
-      case 4: return "Physical";
-      case 5: return "Lifestyle";
-      case 6: return "Photos";
-      case 7: return "Summary";
+      case 3: return "Birthday";
+      case 4: return "Profile";
+      case 5: return "Physical";
+      case 6: return "Lifestyle";
+      case 7: return "Photos";
+      case 8: return "Summary";
       default: return step.toString();
     }
   };
