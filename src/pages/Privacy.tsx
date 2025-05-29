@@ -22,7 +22,7 @@ const Privacy = () => {
           </div>
 
           {/* Back to home link */}
-          <div className="mb-8">
+          <div className="mb-8" dir="ltr">
             <Link 
               to="/login" 
               className="inline-flex items-center gap-2 text-[#C77DFF] hover:text-white transition-colors"
