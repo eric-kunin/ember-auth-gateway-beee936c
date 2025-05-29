@@ -35,8 +35,34 @@ const LoginHeader = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* Always show התחברות button unless on signup page */}
-        {!isSignupPage && (
+        {/* On signup page, show התחברות button */}
+        {isSignupPage && (
+          <Link 
+            to="/login" 
+            className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
+                     hover:border-[#C77DFF] hover:text-[#C77DFF]
+                     bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
+                     shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
+          >
+            התחברות
+          </Link>
+        )}
+        
+        {/* On login page, show הרשמה button */}
+        {isLoginPage && (
+          <Link 
+            to="/signup"
+            className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
+                     hover:border-[#C77DFF] hover:text-[#C77DFF]
+                     bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
+                     shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
+          >
+            הרשמה
+          </Link>
+        )}
+
+        {/* On other pages (like footer pages), show התחברות button */}
+        {!isLoginPage && !isSignupPage && (
           <Link 
             to="/login" 
             className="text-purple-700 dark:text-purple-100 
@@ -47,19 +73,6 @@ const LoginHeader = () => {
                      hover:scale-105"
           >
             התחברות
-          </Link>
-        )}
-        
-        {/* Show הרשמה button only when on login page or signup page */}
-        {(isLoginPage || isSignupPage) && (
-          <Link 
-            to={isSignupPage ? "/login" : "/signup"}
-            className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
-                     hover:border-[#C77DFF] hover:text-[#C77DFF]
-                     bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
-                     shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
-          >
-            {isSignupPage ? "התחברות" : "הרשמה"}
           </Link>
         )}
       </div>
