@@ -21,33 +21,33 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
   
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] p-0 overflow-hidden">
-        {/* Custom close button */}
+      <DialogContent className="max-w-2xl max-h-[80vh] p-0 overflow-hidden [&>button]:hidden" dir="rtl">
+        {/* Custom close button positioned for RTL */}
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-4 top-4 z-10 h-8 w-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="absolute left-4 top-4 z-10 h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
           onClick={onClose}
         >
-          <X className="h-5 w-5" />
-          <span className="sr-only">Close</span>
+          <X className="h-6 w-6" />
+          <span className="sr-only">סגור</span>
         </Button>
         
-        <DialogHeader className="p-6 pb-4">
-          <DialogTitle className="flex items-center gap-3 text-xl font-bold">
+        <DialogHeader className="p-6 pb-4 text-right">
+          <DialogTitle className="flex items-center justify-end gap-3 text-xl font-bold">
             {isTerms ? (
               <>
-                <FileText className="h-6 w-6 text-blue-600" />
                 תקנון השימוש
+                <FileText className="h-6 w-6 text-blue-600" />
               </>
             ) : (
               <>
-                <Shield className="h-6 w-6 text-green-600" />
                 מדיניות פרטיות
+                <Shield className="h-6 w-6 text-green-600" />
               </>
             )}
           </DialogTitle>
-          <DialogDescription className="text-sm text-gray-600 dark:text-gray-400">
+          <DialogDescription className="text-sm text-gray-600 dark:text-gray-400 text-right">
             {isTerms 
               ? "התנאים וההגבלות לשימוש באפליקציה"
               : "מדיניות הפרטיות והגנת המידע שלנו"
@@ -56,14 +56,14 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
         </DialogHeader>
         
         <ScrollArea className="px-6 pb-6 max-h-[60vh]">
-          <div className="space-y-4 text-sm leading-relaxed">
+          <div className="space-y-4 text-sm leading-relaxed text-right">
             {isTerms ? (
               // Terms of Service Content
               <>
                 <section>
-                  <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                    <FileText className="h-4 w-4" />
+                  <h3 className="font-semibold text-lg mb-2 flex items-center justify-end gap-2">
                     1. קבלת התנאים
+                    <FileText className="h-4 w-4" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
                     השימוש באפליקציה מהווה הסכמה מלאה לתנאים המפורטים כאן. אם אינך מסכים לתנאים אלו, אנא הפסק את השימוש באפליקציה.
@@ -122,9 +122,9 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
               // Privacy Policy Content
               <>
                 <section>
-                  <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
-                    <Shield className="h-4 w-4" />
+                  <h3 className="font-semibold text-lg mb-2 flex items-center justify-end gap-2">
                     1. איסוף מידע
+                    <Shield className="h-4 w-4" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300">
                     אנו אוספים מידע שאתה מספק בעת ההרשמה: שם, גיל, מיקום, תמונות ומידע נוסף לצורך יצירת הפרופיל.
