@@ -30,6 +30,7 @@ const NameField = ({ control, isLoading }: NameFieldProps) => {
             <FormControl>
               <Input
                 placeholder="John Doe (optional)"
+                maxLength={20}
                 className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                          text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                          pl-10 h-11 sm:h-12 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"

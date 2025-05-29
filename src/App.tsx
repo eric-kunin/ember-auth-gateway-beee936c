@@ -11,6 +11,10 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Forbidden from "./pages/Forbidden";
 import VerifyAccount from "./pages/VerifyAccount";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
 import { UpdatePasswordForm } from "@/components/password/UpdatePasswordForm";
 import React from "react";
 
@@ -32,6 +36,10 @@ const App = () => {
               <Route path="/verify-account" element={<VerifyAccount />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/forbidden" element={<Forbidden />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
               <Route path="/update-password" element={
                 <div className="min-h-screen w-full flex flex-col bg-[#1E0B36] transition-colors duration-300">
                   <main className="flex-1 flex items-center justify-center">
@@ -49,29 +57,3 @@ const App = () => {
 };
 
 export default App;
-
-
-// import React from 'react';
-// import AnimatedBackground from './components/AnimatedBackground';
-// import DatingFilter from './components/DatingFilter';
-// import DatingProfileCard from './components/DatingProfileCard';
-// import Header from './components/Header';
-// import DatingProfilesGrid from './components/DatingGridProfiles';
-// import Slidebar from './components/Slidebar';
-// import ChatInterface from './components/ChatInterface';
-
-
-// function App() {
-//   return (
-//     <div className="relative w-full min-h-screen flex flex-col items-center justify-center">
-//       <AnimatedBackground />
-//       <Header/>
-//       <DatingFilter />
-//       <DatingProfilesGrid />
-//       {/* <ChatInterface/> */}
-//       {/* <Slidebar/> */}
-//     </div>
-//   );
-// }
-
-// export default App;

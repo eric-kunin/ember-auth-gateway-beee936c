@@ -9,9 +9,10 @@ const Footer = () => {
           <p className="text-sm text-custom-lighter">© 2025 AkhlaDate. All rights reserved.</p>
         </div>
         <div className="flex gap-6">
-          <Link to="/privacy" className="text-sm text-custom-lighter hover:text-white transition-colors">Privacy Policy</Link>
-          <Link to="/terms" className="text-sm text-custom-lighter hover:text-white transition-colors">Terms of Service</Link>
-          <Link to="/contact" className="text-sm text-custom-lighter hover:text-white transition-colors">Contact Us</Link>
+          <Link to="/privacy" className="text-sm text-custom-lighter hover:text-white transition-colors">מדיניות פרטיות</Link>
+          <Link to="/terms" className="text-sm text-custom-lighter hover:text-white transition-colors">תקנון השימוש</Link>
+          <Link to="/about" className="text-sm text-custom-lighter hover:text-white transition-colors">אודותינו</Link>
+          <Link to="/contact" className="text-sm text-custom-lighter hover:text-white transition-colors">צור קשר</Link>
         </div>
       </div>
     </footer>

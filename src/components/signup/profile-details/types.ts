@@ -2,7 +2,9 @@
 import { z } from "zod";
 
 export const profileDetailsSchema = z.object({
-  name: z.string().optional(),
+  name: z.string()
+    .max(20, "Name must be 20 characters or less")
+    .optional(),
   bio: z.string().optional(),
   profession: z.string().optional(),
   height: z.number().optional(),
