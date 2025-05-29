@@ -25,9 +25,6 @@ const PersonalSection = ({ personalData, profileData }: PersonalSectionProps) =>
               <span>Will not be shown until you allow it to be shown to others</span>
             </div>
           </div>
-          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
-            <span className="text-[#9D4EDD] font-medium mr-1.5">Nickname:</span> {personalData.nickname}
-          </p>
           <div className="flex items-center text-sm text-[#3B185F] dark:text-custom-lighter">
             <Mail className="h-4 w-4 text-[#9D4EDD] mr-1.5" />
             <span className="text-[#9D4EDD] font-medium mr-1.5">Username:</span> 
@@ -35,6 +32,9 @@ const PersonalSection = ({ personalData, profileData }: PersonalSectionProps) =>
           </div>
         </div>
         <div className="space-y-3">
+          <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
+            <span className="text-[#9D4EDD] font-medium mr-1.5">Nickname:</span> {personalData.nickname}
+          </p>
           <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
             <span className="text-[#9D4EDD] font-medium mr-1.5">Gender:</span> {personalData.gender}
           </p>
