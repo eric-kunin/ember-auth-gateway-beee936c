@@ -26,7 +26,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-4 top-4 z-10 h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          className="absolute right-4 top-4 z-10 h-10 w-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
           onClick={onClose}
         >
           <X className="h-6 w-6" />
