@@ -1,11 +1,14 @@
 
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart, Users, Shield, Zap } from "lucide-react";
-import Footer from "@/components/layout/Footer";
+import LoginHeader from "@/components/login/LoginHeader";
+import LoginFooter from "@/components/login/LoginFooter";
 
 const About = () => {
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-[#1E0B36] via-[#240046] to-[#10002B] text-white">
+    <div className="min-h-screen w-full flex flex-col bg-black text-white" dir="rtl">
+      <LoginHeader />
+      
       <div className="flex-1 container mx-auto px-6 py-12">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -13,7 +16,7 @@ const About = () => {
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#C77DFF] to-[#E0AAFF] bg-clip-text text-transparent">
               אודותינו
             </h1>
-            <p className="text-xl text-custom-lighter">
+            <p className="text-xl text-white/70">
               ברוכים הבאים לאתר ההכרויות החינמי של ישראל
             </p>
           </div>
@@ -21,7 +24,7 @@ const About = () => {
           {/* Back to home link */}
           <div className="mb-8">
             <Link 
-              to="/" 
+              to="/login" 
               className="inline-flex items-center gap-2 text-[#C77DFF] hover:text-white transition-colors"
             >
               <ArrowRight className="h-4 w-4 rotate-180" />
@@ -33,7 +36,7 @@ const About = () => {
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 space-y-8">
             <section>
               <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">המשימה שלנו</h2>
-              <p className="text-custom-lighter leading-relaxed">
+              <p className="text-white/70 leading-relaxed">
                 AkhlaDate נוסד במטרה לחבר בין לבבות בישראל ולספק פלטפורמה בטוחה, חינמית ונגישה 
                 לכל מי שמחפש אהבה אמיתית. אנו מאמינים שכל אדם ראוי למצוא את בן או בת הזוג שלו, 
                 ללא תלות במצב הכלכלי או הרקע החברתי.
@@ -49,7 +52,7 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">חינמי לגמרי</h3>
-                    <p className="text-custom-lighter">כל התכונות באתר זמינות בחינם, ללא עלויות נסתרות.</p>
+                    <p className="text-white/70">כל התכונות באתר זמינות בחינם, ללא עלויות נסתרות.</p>
                   </div>
                 </div>
 
@@ -59,7 +62,7 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">בטיחות מקסימלית</h3>
-                    <p className="text-custom-lighter">מערכת אבטחה מתקדמת להגנה על הפרטיות והבטיחות שלכם.</p>
+                    <p className="text-white/70">מערכת אבטחה מתקדמת להגנה על הפרטיות והבטיחות שלכם.</p>
                   </div>
                 </div>
 
@@ -69,7 +72,7 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">קהילה ישראלית</h3>
-                    <p className="text-custom-lighter">מתמחים בהתאמות לקהל הישראלי עם הבנה של התרבות המקומית.</p>
+                    <p className="text-white/70">מתמחים בהתאמות לקהל הישראלי עם הבנה של התרבות המקומית.</p>
                   </div>
                 </div>
 
@@ -79,7 +82,7 @@ const About = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-2">טכנולוגיה מתקדמת</h3>
-                    <p className="text-custom-lighter">אלגוריתמי התאמה חכמים למציאת ההתאמה המושלמת עבורכם.</p>
+                    <p className="text-white/70">אלגוריתמי התאמה חכמים למציאת ההתאמה המושלמת עבורכם.</p>
                   </div>
                 </div>
               </div>
@@ -87,7 +90,7 @@ const About = () => {
 
             <section>
               <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">הסיפור שלנו</h2>
-              <p className="text-custom-lighter leading-relaxed">
+              <p className="text-white/70 leading-relaxed">
                 AkhlaDate נוסד בשנת 2025 על ידי צוות של מפתחים ומעצבים ישראלים שהבינו שיש צורך 
                 באתר הכרויות אמיתי וחינמי בישראל. אנו מאמינים שאהבה לא צריכה לעלות כסף, 
                 ושכל אדם ראוי למצוא את האושר שלו.
@@ -96,7 +99,7 @@ const About = () => {
 
             <section>
               <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">הערכים שלנו</h2>
-              <ul className="space-y-3 text-custom-lighter">
+              <ul className="space-y-3 text-white/70">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-[#C77DFF] rounded-full"></div>
                   <span>כבוד וכבוד הדדי בין כל המשתמשים</span>
@@ -118,7 +121,8 @@ const About = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      
+      <LoginFooter />
     </div>
   );
 };
