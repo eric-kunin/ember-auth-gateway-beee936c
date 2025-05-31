@@ -12,26 +12,35 @@ import { Button } from "@/components/ui/button";
 interface TermsModalProps {
   isOpen: boolean;
   onClose: () => void;
-  type: 'terms' | 'privacy';
+  type: "terms" | "privacy";
 }
 
 const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
-  const isTerms = type === 'terms';
-  
+  const isTerms = type === "terms";
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] p-0 overflow-hidden [&>button]:hidden" dir="rtl">
-        {/* Custom close button positioned for RTL */}
+      <DialogContent
+        className="max-w-2xl max-h-[80vh] p-0 overflow-hidden 
+                   [&>div>button]:opacity-0 
+                   [&>div>button]:pointer-events-none"
+        dir="rtl"
+      >
+        {/* ✅ Custom Close Button (top right) */}
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-4 top-4 z-50 h-8 w-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+          className="absolute right-3 top-3 z-50 h-10 w-10 rounded-full 
+                     hover:bg-gray-200 dark:hover:bg-gray-800 
+                     flex items-center justify-center 
+                     shadow-lg border border-gray-300 dark:border-gray-700 
+                     bg-white dark:bg-gray-900"
           onClick={onClose}
         >
-          <X className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+          <X className="h-7 w-7 text-gray-700 dark:text-gray-200" />
           <span className="sr-only">סגור</span>
         </Button>
-        
+
         <DialogHeader className="p-6 pb-4 text-right">
           <DialogTitle className="flex items-center justify-end gap-3 text-xl font-bold">
             {isTerms ? (
@@ -47,17 +56,18 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
             )}
           </DialogTitle>
           <DialogDescription className="text-sm text-gray-600 dark:text-gray-400 text-right">
-            {isTerms 
+            {isTerms
               ? "התנאים וההגבלות לשימוש באפליקציה"
-              : "מדיניות הפרטיות והגנת המידע שלנו"
-            }
+              : "מדיניות הפרטיות והגנת המידע שלנו"}
           </DialogDescription>
         </DialogHeader>
-        
+
         <ScrollArea className="px-6 pb-6 max-h-[60vh]">
-          <div className="space-y-6 text-sm leading-relaxed text-right" dir="rtl">
+          <div
+            className="space-y-6 text-sm leading-relaxed text-right"
+            dir="rtl"
+          >
             {isTerms ? (
-              // Terms of Service Content
               <>
                 <section>
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-end gap-2">
@@ -85,10 +95,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <FileText className="h-5 w-5 text-blue-600" />
                   </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside">
-                    <li className="text-right">המשתמש מתחייב לספק מידע אמיתי ומדויק</li>
-                    <li className="text-right">גיל מינימלי לשימוש: 18 שנים</li>
-                    <li className="text-right">אסור ליצור יותר מחשבון אחד לכל משתמש</li>
-                    <li className="text-right">המשתמש אחראי לשמירה על סודיות הסיסמה</li>
+                    <li>המשתמש מתחייב לספק מידע אמיתי ומדויק</li>
+                    <li>גיל מינימלי לשימוש: 18 שנים</li>
+                    <li>אסור ליצור יותר מחשבון אחד לכל משתמש</li>
+                    <li>המשתמש אחראי לשמירה על סודיות הסיסמה</li>
                   </ul>
                 </section>
 
@@ -98,10 +108,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <Shield className="h-5 w-5 text-green-600" />
                   </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside">
-                    <li className="text-right">יש להתנהג בכבוד ובהגינות כלפי משתמשים אחרים</li>
-                    <li className="text-right">אסור לפרסם תוכן פוגעני, מטעה או לא חוקי</li>
-                    <li className="text-right">אסור להציק או לפגוע במשתמשים אחרים</li>
-                    <li className="text-right">יש לשמור על ערכי הצניעות והמסורת</li>
+                    <li>יש להתנהג בכבוד ובהגינות כלפי משתמשים אחרים</li>
+                    <li>אסור לפרסם תוכן פוגעני, מטעה או לא חוקי</li>
+                    <li>אסור להציק או לפגוע במשתמשים אחרים</li>
+                    <li>יש לשמור על ערכי הצניעות והמסורת</li>
                   </ul>
                 </section>
 
@@ -136,7 +146,6 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
               </>
             ) : (
-              // Privacy Policy Content
               <>
                 <section>
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-end gap-2">
@@ -154,10 +163,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <FileText className="h-5 w-5 text-blue-600" />
                   </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside">
-                    <li className="text-right">הצגת הפרופיל למשתמשים אחרים</li>
-                    <li className="text-right">שיפור השירות והתאמת המלצות</li>
-                    <li className="text-right">תקשורת בנוגע לשירות</li>
-                    <li className="text-right">מניעת הונאות ושמירה על האבטחה</li>
+                    <li>הצגת הפרופיל למשתמשים אחרים</li>
+                    <li>שיפור השירות והתאמת המלצות</li>
+                    <li>תקשורת בנוגע לשירות</li>
+                    <li>מניעת הונאות ושמירה על האבטחה</li>
                   </ul>
                 </section>
 
@@ -187,10 +196,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <Shield className="h-5 w-5 text-green-600" />
                   </h3>
                   <ul className="space-y-2 text-gray-700 dark:text-gray-300 list-disc list-inside">
-                    <li className="text-right">עיון במידע האישי שלך</li>
-                    <li className="text-right">תיקון או עדכון מידע</li>
-                    <li className="text-right">מחיקת החשבון והמידע</li>
-                    <li className="text-right">הגבלת השימוש במידע</li>
+                    <li>עיון במידע האישי שלך</li>
+                    <li>תיקון או עדכון מידע</li>
+                    <li>מחיקת החשבון והמידע</li>
+                    <li>הגבלת השימוש במידע</li>
                   </ul>
                 </section>
 
