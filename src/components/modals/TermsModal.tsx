@@ -88,25 +88,42 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
         </Button>
 
         <DialogHeader className="p-6 pb-4 text-right">
-          <DialogTitle className="flex items-center justify-center gap-3 text-2xl font-bold text-purple-400">
-            {isTerms ? (
-              <>
-                תקנון השימוש
-                <FileText className="h-6 w-6 text-blue-600" />
-              </>
-            ) : (
-              <>
-                מדיניות פרטיות
-                <Shield className="h-6 w-6 text-green-600" />
-              </>
-            )}
-          </DialogTitle>
-          <DialogDescription className="text-sm text-gray-600 dark:text-gray-400 text-right">
-            {isTerms
-              ? "התנאים וההגבלות לשימוש באפליקציה"
-              : "מדיניות הפרטיות והגנת המידע שלנו"}
-          </DialogDescription>
-        </DialogHeader>
+  <DialogTitle>
+    <div className={`flex items-center justify-center gap-3 text-2xl font-bold 
+                    text-purple-500 dark:text-purple-300 
+                    transition-colors duration-300 
+                    hover:${isTerms ? 'text-blue-600' : 'text-green-400'} dark:hover:${isTerms ? 'text-blue-400' : 'text-green-400'}`}>
+      {isTerms ? (
+        <>
+          תקנון השימוש
+          <FileText className="h-6 w-6 text-blue-600 transition-transform duration-300 hover:scale-110" />
+        </>
+      ) : (
+        <>
+          מדיניות פרטיות
+          <Shield className="h-6 w-6 text-green-600 transition-transform duration-300 hover:scale-110" />
+        </>
+      )}
+    </div>
+  </DialogTitle>
+
+  <DialogDescription className="text-sm text-gray-600 dark:text-gray-400 text-right">
+    {isTerms
+      ? "התנאים וההגבלות לשימוש באפליקציה"
+      : "מדיניות הפרטיות והגנת המידע שלנו"}
+  </DialogDescription>
+  {/* <Button
+  className="mt-4 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+  onClick={() =>
+    scrollAreaRef.current?.querySelector("#section-7")?.scrollIntoView({ behavior: "smooth" })
+  }
+>
+  קפוץ לסעיף 7
+</Button> */}
+
+</DialogHeader>
+
+
 
         <ScrollArea className="px-6 pb-6 max-h-[60vh]">
           <div
@@ -117,8 +134,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
               <>
                 {/* Terms Content with Staggered Animation */}
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-100">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-blue-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
                     1. קבלת התנאים
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -129,24 +146,24 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-200">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-green-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
                     2. תיאור השירות
                     <Heart className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    AkhlaDate היא פלטפורמה לכרות היכרויות המיועדת לציבור הדתי. השירות מאפשר למשתמשים ליצור פרופיל, לחפש אחר בני זוג פוטנציאליים ולקיים תקשורת.
+                    "AKHLADATE" היא פלטפורמה לכרות היכרויות המיועדת לציבור הדתי. השירות מאפשר למשתמשים ליצור פרופיל, לחפש אחר בני זוג פוטנציאליים ולקיים תקשורת.
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
                     הפלטפורמה מיועדת למי שמחפש יחסים רציניים ומחויבים תוך שמירה על ערכי הדת והמסורת.
                   </p>
                 </section>
 
-                <section className="animate-in slide-in-from-right-4 duration-700 delay-300">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-blue-600">
-                    <Users className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
+                <section id="section-3" className="animate-in slide-in-from-right-4 duration-700 delay-300">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
                     3. הרשמה וחשבון משתמש
+                    <Users className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
@@ -155,7 +172,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>גיל מינימלי לשימוש באפליקציה: 18 שנים</span>
+                      <span>גיל מינימלי לשימוש באפליקציה: +18 שנים</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
@@ -169,10 +186,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-400">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-green-600">
-                    <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
                     4. כללי התנהגות
+                    <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
@@ -195,8 +212,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-500">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-blue-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
                     5. זכויות יוצרים ותוכן
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -209,8 +226,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-600">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-yellow-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-yellow-600 dark:hover:text-yellow-400">
                     6. הגבלת אחריות
                     <Shield className="h-5 w-5 text-yellow-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -222,9 +239,9 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                   </p>
                 </section>
 
-                <section className="animate-in slide-in-from-right-4 duration-700 delay-700">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-indigo-600">
+                <section id="section-7" className="animate-in slide-in-from-right-4 duration-700 delay-700">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-indigo-600 dark:hover:text-indigo-400">
                     7. שינויים בתנאים
                     <FileText className="h-5 w-5 text-indigo-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -240,8 +257,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
               <>
 {/* Privacy Policy Content with Staggered Animation */}
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-100">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-300 text-right
-                               transition-colors duration-300 hover:text-green-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
+                               transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
                     1. איסוף מידע
                     <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -254,8 +271,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-200">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-300 text-right
-                               transition-colors duration-300 hover:text-blue-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
+                               transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
                     2. שימוש במידע
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -280,8 +297,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-300">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-300 text-right
-                               transition-colors duration-300 hover:text-green-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
+                               transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
                     3. שיתוף מידע
                     <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -294,8 +311,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-400">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-300 text-right
-                               transition-colors duration-300 hover:text-blue-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
+                               transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
                     4. אבטחת מידע
                     <Lock className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -308,26 +325,26 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-500">
-                <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-300 text-right
-                transition-colors duration-300 hover:text-green-600">
+                <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
+                transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
                     5. זכויותיך
                     <Shield className="h-5 w-5 text-green-500" />
                 </h3>
 
                 <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-right">
-                    <li className="flex items-center justify-start gap-2">
+                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-blue-500 rounded-full" />
                     <span>עיון במידע האישי שלך השמור במערכת</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2">
+                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-yellow-500 rounded-full" />
                     <span>תיקון או עדכון מידע שאינו מדויק</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2">
+                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-red-500 rounded-full" />
                     <span>מחיקת החשבון והמידע שלך לחלוטין</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2">
+                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-purple-500 rounded-full" />
                     <span>הגבלת השימוש במידע לצרכים ספציפיים</span>
                     </li>
@@ -335,8 +352,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-600">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-200
-                               transition-colors duration-300 hover:text-orange-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
+                               transition-colors duration-300 hover:text-orange-600 dark:hover:text-orange-400">
                     6. עוגיות (Cookies)
                     <FileText className="h-5 w-5 text-orange-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -349,8 +366,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-700">
-                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start text-purple-300 text-right gap-2
-                               transition-colors duration-300 hover:text-indigo-600">
+                  <h3 className="font-semibold text-lg mb-3 flex items-center justify-start text-purple-400 dark:text-purple-200 text-right gap-2
+                               transition-colors duration-300 hover:text-indigo-600 dark:hover:text-indigo-400">
                     7. יצירת קשר
                     <Mail className="h-5 w-5 text-indigo-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
@@ -365,6 +382,30 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
             )}
           </div>
         </ScrollArea>
+        {showScrollTop && (
+  <>
+    {/* Scroll to Bottom Button */}
+    <Button
+      variant="secondary"
+      size="icon"
+      className="fixed right-6 bottom-6 z-50 h-12 w-12 rounded-full
+                 shadow-lg border border-gray-300 dark:border-gray-700
+                 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm
+                 transition-all duration-300 ease-in-out
+                 hover:scale-110 hover:bg-green-50 dark:hover:bg-green-900/20
+                 animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
+      onClick={() => {
+        if (scrollAreaRef.current) {
+          scrollAreaRef.current.scrollTo({ top: scrollAreaRef.current.scrollHeight, behavior: "smooth" });
+        }
+      }}
+    >
+      <ChevronUp className="rotate-180 h-6 w-6 text-green-600 transition-transform duration-300 hover:scale-110" />
+      <span className="sr-only">גלול לתחתית</span>
+    </Button>
+  </>
+)}
+
       </DialogContent>
     </Dialog>
   );
