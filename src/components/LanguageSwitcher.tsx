@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
@@ -39,25 +40,19 @@ const LanguageSwitcher = () => {
       {/* Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-md shadow-sm border dark:border-[#3B185F] border-[#E0AAFF]/30 
-        bg-white dark:bg-[#240046] hover:bg-[#f1e8ff] dark:hover:bg-[#3C096C] 
-        transition-all duration-200 min-w-[100px] justify-between"
+        className="flex items-center gap-2 px-3 py-2 rounded-md border transition-all duration-300 min-w-[100px] justify-between
+        shadow-sm dark:border-[#3B185F] border-[#E0AAFF]/30 bg-white dark:bg-[#240046] 
+        hover:bg-[#f3eaff] dark:hover:bg-[#3C096C] hover:shadow-lg dark:hover:shadow-purple-900/50 hover:scale-[1.03]"
       >
-        {/* Flag and Language - Responsive */}
         <div className="flex items-center gap-2">
           <span className={`fi fi-${currentLanguage.countryCode} fis rounded-full w-5 h-5`}></span>
-
-          {/* Show full name on md+ screens */}
           <span className="hidden md:block font-medium text-[#240046] dark:text-white">
             {currentLanguage.name}
           </span>
-
-          {/* Show short code on small screens */}
           <span className="block md:hidden font-medium text-[#240046] dark:text-white">
             {currentLanguage.short}
           </span>
         </div>
-
         <svg
           className={`w-4 h-4 text-[#7B2CBF] dark:text-[#E0AAFF] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
@@ -68,27 +63,37 @@ const LanguageSwitcher = () => {
         </svg>
       </button>
 
-      {/* Dropdown */}
-      {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 rounded-lg shadow-lg border border-[#E0AAFF]/30 dark:border-[#3B185F] bg-white dark:bg-[#1E0B36] overflow-hidden">
-          <div className="grid grid-cols-2 gap-0">
-            {languages.map((lang, index) => (
-              <button
-                key={lang.code}
-                onClick={() => handleLanguageSelect(lang.code)}
-                className={`flex items-center gap-3 px-4 py-3 text-left transition-colors duration-150
-                  ${i18n.language === lang.code ? 'bg-[#E0AAFF]/30 dark:bg-[#3C096C] text-[#5A189A] dark:text-[#C77DFF]' : 'text-[#240046] dark:text-white'}
-                  hover:bg-[#E0AAFF]/20 dark:hover:bg-[#5A189A]/20
-                  ${index % 2 === 1 ? 'border-l border-[#E0AAFF]/20 dark:border-[#3B185F]' : ''}
-                  ${index >= 2 ? 'border-t border-[#E0AAFF]/20 dark:border-[#3B185F]' : ''}`}
-              >
-                <span className={`fi fi-${lang.countryCode} fis rounded-full w-5 h-5`}></span>
-                <span className="font-medium truncate">{lang.name}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      {/* Dropdown - animated */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="absolute right-0 mt-2 w-64 rounded-lg shadow-xl border border-[#E0AAFF]/30 dark:border-[#3B185F] bg-white dark:bg-[#1E0B36] overflow-hidden"
+          >
+            <div className="grid grid-cols-2 gap-0">
+              {languages.map((lang, index) => (
+                <button
+                  key={lang.code}
+                  onClick={() => handleLanguageSelect(lang.code)}
+                  className={`flex items-center gap-3 px-4 py-3 text-left transition-all duration-200 group
+                    ${i18n.language === lang.code
+                      ? 'bg-[#E0AAFF]/30 dark:bg-[#3C096C] text-[#5A189A] dark:text-[#C77DFF]'
+                      : 'text-[#240046] dark:text-white'}
+                    hover:bg-[#E0AAFF]/20 dark:hover:bg-[#5A189A]/20 hover:shadow-md hover:scale-[1.02]
+                    ${index % 2 === 1 ? 'border-l border-[#E0AAFF]/20 dark:border-[#3B185F]' : ''}
+                    ${index >= 2 ? 'border-t border-[#E0AAFF]/20 dark:border-[#3B185F]' : ''}`}
+                >
+                  <span className={`fi fi-${lang.countryCode} fis rounded-full w-5 h-5`}></span>
+                  <span className="font-medium truncate">{lang.name}</span>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

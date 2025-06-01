@@ -39,13 +39,13 @@ const LoginCard = ({
     >
       <Card className="p-4 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#10002B]/95 border-purple-200/50 dark:border-[#9D4EDD]/20 shadow-xl relative duration-300">
         {/* Theme toggle positioned on the card */}
-        <div className="absolute top-[-20px] left-[-20px]">
+        <div className="absolute top-[-20px] left-[-20px] z-50">
           <ThemeToggle />
         </div>
-        <div className="absolute top-[-20px] right-[-20px]">
-    <LanguageSwitcher />
-  </div>
-        
+        <div className="absolute top-[-20px] right-[-20px] z-50">
+            <LanguageSwitcher />
+        </div>
+            
         <div className="text-center mb-6 sm:mb-8 mt-4">
           <motion.div 
             className="flex items-center justify-center gap-2 mb-2"
