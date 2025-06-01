@@ -7,6 +7,7 @@ import { LogIn, Users } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Card } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 interface LoginCardProps {
   isLoading: boolean;
@@ -41,6 +42,9 @@ const LoginCard = ({
         <div className="absolute top-[-20px] right-[-20px]">
           <ThemeToggle />
         </div>
+        {/* <div className="absolute bottom-[-20px] left-[-20px]">
+    <LanguageSwitcher />
+  </div> */}
         
         <div className="text-center mb-6 sm:mb-8 mt-4">
           <motion.div 

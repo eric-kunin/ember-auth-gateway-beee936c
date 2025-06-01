@@ -17,6 +17,9 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import { UpdatePasswordForm } from "@/components/password/UpdatePasswordForm";
 import React from "react";
+import LanguageSwitcher from "./components/LanguageSwitcher";
+import 'flag-icons/css/flag-icons.min.css';
+import "./i18n"; // Import i18n configuration
 
 // Create the query client as a constant outside the component
 const queryClient = new QueryClient();
@@ -29,6 +32,10 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
+          {/* <div className="p-4 flex justify-center fixed top-0 left-0 right-0 z-60">
+  <LanguageSwitcher />
+</div> */}
+
             <Routes>
               <Route path="/" element={<Navigate to="/login" replace />} />
               <Route path="/login" element={<Login />} />

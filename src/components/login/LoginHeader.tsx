@@ -1,6 +1,6 @@
-
 import { Link, useLocation } from "react-router-dom";
 import logo2 from "../../assets/images/logo2.png";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 const LoginHeader = () => {
   const location = useLocation();
@@ -13,6 +13,7 @@ const LoginHeader = () => {
                       backdrop-blur-md dark:backdrop-blur-none
                       border-b border-purple-300/30 dark:border-purple-300/20 
                       shadow-sm dark:shadow-none" dir="rtl">
+      {/* Left: Logo + Tagline */}
       <div className="flex items-center gap-4">
         <Link to="/" className="flex items-center group">
           <img 
@@ -34,8 +35,14 @@ const LoginHeader = () => {
         </span>
       </div>
 
+      {/* Right: Language + Auth Buttons */}
       <div className="flex items-center gap-4">
-        {/* On signup page, show התחברות button */}
+        {/* Language Switcher (always visible) */}
+        <div className="block sm:block">
+          <LanguageSwitcher />
+        </div>
+
+        {/* Auth buttons */}
         {isSignupPage && (
           <Link 
             to="/login" 
@@ -47,8 +54,7 @@ const LoginHeader = () => {
             התחברות
           </Link>
         )}
-        
-        {/* On login page, show הרשמה button */}
+
         {isLoginPage && (
           <Link 
             to="/signup"
@@ -61,7 +67,6 @@ const LoginHeader = () => {
           </Link>
         )}
 
-        {/* On other pages (like footer pages), show התחברות button */}
         {!isLoginPage && !isSignupPage && (
           <Link 
             to="/login" 
