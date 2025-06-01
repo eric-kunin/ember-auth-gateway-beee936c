@@ -41,60 +41,42 @@ const LoginHeader = () => {
 
         {/* Auth buttons */}
         {isSignupPage && (
-          <Link
-            to="/login"
-            className="px-4 py-2 border border-[#9D4EDD] text-[#9D4EDD] 
-                       hover:border-[#C77DFF] hover:text-[#C77DFF]
-                       rounded-xl text-sm font-semibold transition-all duration-300"
+          <Link 
+            to="/login" 
+            className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
+                     hover:border-[#C77DFF] hover:text-[#C77DFF]
+                     bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
+                     shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
           >
             התחברות
           </Link>
         )}
 
         {isLoginPage && (
-          <Link
+          <Link 
             to="/signup"
-            className="px-4 py-2 border border-[#9D4EDD] text-[#9D4EDD] 
-                       hover:border-[#C77DFF] hover:text-[#C77DFF]
-                       rounded-xl text-sm font-semibold transition-all duration-300"
+            className="px-6 py-2.5 border border-[#9D4EDD] text-[#9D4EDD] 
+                     hover:border-[#C77DFF] hover:text-[#C77DFF]
+                     bg-transparent rounded-xl transition-all duration-300 text-sm font-semibold 
+                     shadow-none hover:shadow-purple-500/30 hover:scale-105 hover:-translate-y-0.5"
           >
             הרשמה
           </Link>
         )}
 
         {!isLoginPage && !isSignupPage && (
-          <Link
-            to="/login"
-            className="px-4 py-2 text-purple-700 dark:text-purple-100 
-                       hover:text-purple-900 dark:hover:text-white 
-                       rounded-lg text-sm font-medium transition-all duration-300"
+          <Link 
+            to="/login" 
+            className="text-purple-700 dark:text-purple-100 
+                     hover:text-purple-900 dark:hover:text-white 
+                     transition-all duration-300 text-sm font-medium 
+                     px-4 py-2 rounded-lg 
+                     hover:bg-purple-100/50 dark:hover:bg-white/10 
+                     hover:scale-105"
           >
             התחברות
           </Link>
         )}
-      </div>
-
-      {/* Centered logo + text */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2  sm:static sm:translate-x-0 sm:translate-y-0 flex items-center gap-2">
-        <Link to="/" className="flex items-center group">
-          <img
-            src={logo2}
-            alt="Logo"
-            className="h-10 w-10 object-contain drop-shadow-md"
-          />
-          <span
-            className="ml-2 text-xl font-bold bg-gradient-to-r 
-                       from-gray-800 to-purple-600 dark:from-white dark:to-purple-200 
-                       bg-clip-text text-transparent"
-          >
-            AKHLADATE
-          </span>
-        </Link>
-      </div>
-
-      {/* Language switcher top-right */}
-      <div className="absolute top-2 right-4 sm:static sm:order-2">
-        <LanguageSwitcher />
       </div>
     </header>
   );
