@@ -28,7 +28,11 @@
   "footerContact": "צור קשר",
   "footerAbout": "אודותינו",
   "footerRights": "כל הזכויות שמורות ל",
-  "footerCopyright": "© 2025 כל הזכויות שמורות ל "
+  "footerCopyright": "© 2025 כל הזכויות שמורות ל ",
+
+    "_header": "Header page translations for Hebrew",
+    "signUp": "הרשמה",
+    "headerTagline": "מצא את החיבור שלך עם הודעה חינמית ראשונה 💜"
 
 
 }
