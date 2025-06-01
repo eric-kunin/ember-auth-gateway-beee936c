@@ -37,10 +37,7 @@ const LoginHeader = () => {
 
       {/* Right: Language + Auth Buttons */}
       <div className="flex items-center gap-4">
-        {/* Language Switcher (always visible) */}
-        <div className="block sm:block">
-          <LanguageSwitcher />
-        </div>
+
 
         {/* Auth buttons */}
         {isSignupPage && (
