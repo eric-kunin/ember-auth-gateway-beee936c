@@ -20,5 +20,15 @@
   "signInTitle": "התחבר לחשבון שלך",
   "emailPlaceholder": "name@example.com",
   "passwordPlaceholder": "סיסמה123",
-  "tooltipContentPassword": "הזן את הסיסמה שלך: סיסמה123"
+  "tooltipContentPassword": "הזן את הסיסמה שלך: סיסמה123",
+
+    "_footer": "Footer page translations for Hebrew",
+    "footerPrivacy": "פרטיות",
+  "footerTerms": "תנאים",
+  "footerContact": "צור קשר",
+  "footerAbout": "אודותינו",
+  "footerRights": "כל הזכויות שמורות ל",
+  "footerCopyright": "© 2025 כל הזכויות שמורות ל "
+
+
 }
