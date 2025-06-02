@@ -32,7 +32,11 @@
 
   "_header": "Header page translations for English",
   "signUp": "Sign Up",
-  "headerTagline": "Find your connection with a free first message 💜"
+  "headerTagline": "Find your connection with a free first message 💜",
 
+  "_LoginCard": "Login page translations for English",
+  "signInTitleCard": "Sign in to continue",
+  "findConnections": "Find new connections",
+  "noAccount": "Don't have an account yet?"
 
 }

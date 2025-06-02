@@ -26,7 +26,34 @@ const LoginHeader = () => {
           direction === "ltr" ? "flex-row-reverse" : "flex-row"
         }`}
       >
-        {/* Logo + Brand */}
+        {direction === "ltr" ? ( <>
+                {/* Tagline (always on outer side of logo) */}
+        <span
+          className="hidden lg:inline-block text-sm 
+                     text-purple-700 dark:text-purple-100 
+                     font-medium whitespace-nowrap"
+        >
+          {t("headerTagline")}
+        </span> 
+                    {/* Logo + Brand */}
+        <Link to="/" className="flex items-center group">
+          <img
+            src={logo2}
+            alt="Logo"
+            className="h-14 w-14 object-contain drop-shadow-lg"
+          />
+          <span className="mx-3 text-xl font-bold bg-gradient-to-r 
+                           from-gray-800 to-purple-600 dark:from-white dark:to-purple-200 
+                           bg-clip-text text-transparent">
+            AKHLADATE
+          </span>
+        </Link>
+
+
+        </>) : (<>
+        
+        
+        
         <Link to="/" className="flex items-center group">
           <img
             src={logo2}
@@ -47,7 +74,11 @@ const LoginHeader = () => {
                      font-medium whitespace-nowrap"
         >
           {t("headerTagline")}
-        </span>
+        </span> 
+
+
+        </>)}
+
       </div>
 
       {/* 🔐 Auth Buttons */}

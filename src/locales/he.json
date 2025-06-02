@@ -32,7 +32,13 @@
 
     "_header": "Header page translations for Hebrew",
     "signUp": "הרשמה",
-    "headerTagline": "מצא את החיבור שלך עם הודעה חינמית ראשונה 💜"
+    "headerTagline": "מצא את החיבור שלך עם הודעה חינמית ראשונה 💜",
+
+
+    "_LoginCard": "Login page translations for Hebrew",
+    "signInTitleCard": "התחבר כדי להמשיך",
+    "findConnections": "מצא חיבורים חדשים",
+    "noAccount": "אין לך חשבון עדיין?"
 
 
 }
