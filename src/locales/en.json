@@ -20,15 +20,5 @@
   "signInTitle": "Sign in to your account",
   "emailPlaceholder": "name@example.com",
   "passwordPlaceholder": "password123",
-  "tooltipContentPassword": "Enter your password: password123",
-
-  "_footer": "Footer page translations for English",
-  "footerPrivacy": "Privacy",
-  "footerTerms": "Terms",
-  "footerContact": "Contact",
-  "footerAbout": "About",
-  "footerRights": "All rights reserved to",
-  "footerCopyright": "© 2025 All rights reserved to "
-
-
+  "tooltipContentPassword": "Enter your password: password123"
 }

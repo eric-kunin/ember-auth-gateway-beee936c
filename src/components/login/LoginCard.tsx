@@ -8,6 +8,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Card } from "@/components/ui/card";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import LanguageSwitcher from "../LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 interface LoginCardProps {
   isLoading: boolean;
@@ -25,6 +26,9 @@ const LoginCard = ({
   handleToggleForgotPassword,
 }: LoginCardProps) => {
   const isMobile = useIsMobile();
+  const { t, i18n } = useTranslation();
+  const isHebrew = i18n.language === "he";
+  const direction = isHebrew ? "rtl" : "ltr";
 
   return (
     <motion.div
@@ -38,14 +42,14 @@ const LoginCard = ({
       transition={{ duration: 0.5 }}
     >
       <Card className="p-4 sm:p-8 rounded-3xl bg-white/95 dark:bg-[#10002B]/95 border-purple-200/50 dark:border-[#9D4EDD]/20 shadow-xl relative duration-300">
-        {/* Theme toggle positioned on the card */}
+
         <div className="absolute top-[-20px] left-[-20px] z-50">
           <ThemeToggle />
         </div>
         <div className="absolute top-[-20px] right-[-20px] z-50">
-            <LanguageSwitcher />
+          <LanguageSwitcher />
         </div>
-            
+
         <div className="text-center mb-6 sm:mb-8 mt-4">
           <motion.div 
             className="flex items-center justify-center gap-2 mb-2"
@@ -53,25 +57,38 @@ const LoginCard = ({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.3 }}
           >
+            {direction === "rtl" ? (<>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white">
+              {t("signInTitleCard")}
+            </h1>
+            <LogIn className="w-6 h-6 text-[#240046] dark:text-white" />
+            </>) : (<>
             <LogIn className="w-6 h-6 text-[#240046] dark:text-white" />
             <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white">
-              Sign in to continue
-            </h1>
+              {t("signInTitleCard")}
+            </h1></>)}
           </motion.div>
-          
+
           <motion.div
             className="flex items-center justify-center gap-2 mt-3"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.3 }}
           >
+            {direction === "rtl" ? (<>
+            <p className="text-md sm:text-lg text-[#7B2CBF] dark:text-custom-light font-semibold">
+              {t("findConnections")}
+            </p>
+            <Users className="w-5 h-5 text-[#7B2CBF] dark:text-custom-light" />
+            </>) : (<>
             <Users className="w-5 h-5 text-[#7B2CBF] dark:text-custom-light" />
             <p className="text-md sm:text-lg text-[#7B2CBF] dark:text-custom-light font-semibold">
-              Find new connections
+              {t("findConnections")}
             </p>
+            </>)}
           </motion.div>
         </div>
-        
+
         {showForgotPassword ? (
           <motion.div
             initial={{ opacity: 0, x: 50 }}
@@ -103,7 +120,7 @@ const LoginCard = ({
             />
           </motion.div>
         )}
-        
+
         <motion.div 
           className="text-center mt-4 text-sm text-[#7B2CBF] dark:text-custom-light"
           initial={{ opacity: 0 }}
@@ -111,9 +128,9 @@ const LoginCard = ({
           transition={{ delay: 0.5, duration: 0.5 }}
         >
           <div className="mb-2">
-            Don't have an account yet?{" "}
+            {t("noAccount")}{" "}
             <a href="/signup" className="text-[#9D4EDD] hover:text-[#7B2CBF] dark:text-[#C77DFF] dark:hover:text-[#E0AAFF] font-bold underline decoration-2 underline-offset-2 transition-all duration-300">
-              Sign up
+              {t("signUp")}
             </a>
           </div>
         </motion.div>
