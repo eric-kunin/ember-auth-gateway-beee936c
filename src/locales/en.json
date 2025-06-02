@@ -20,5 +20,25 @@
   "signInTitle": "Sign in to your account",
   "emailPlaceholder": "name@example.com",
   "passwordPlaceholder": "password123",
-  "tooltipContentPassword": "Enter your password: password123"
+  "tooltipContentPassword": "Enter your password: password123",
+
+  "_footer": "Footer page translations for English",
+  "footerPrivacy": "Privacy",
+  "footerTerms": "Terms",
+  "footerContact": "Contact",
+  "footerAbout": "About",
+  "footerRights": "All rights reserved to",
+
+  "footerCopyright": "© 2025 All rights reserved to ",
+
+  "_header": "Header page translations for English",
+  "signUp": "Sign Up",
+  "headerTagline": "Find your connection with a free first message 💜",
+
+  "_LoginCard": "Login page translations for English",
+  "signInTitleCard": "Sign in to continue",
+  "findConnections": "Find new connections",
+  "noAccount": "Don't have an account yet?"
+
+
 }
