@@ -11,6 +11,7 @@ import TermsCheckbox from "./account-form/TermsCheckbox";
 import SubmitButton from "./account-form/SubmitButton";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { AuthService } from "@/services/auth-service";
+import { useTranslation } from "react-i18next";
 
 interface SignupFormProps {
   defaultValues?: Partial<AccountFormValues>;
@@ -33,6 +34,10 @@ const SignupForm = ({
     defaultValues,
     mode: "onChange"
   });
+
+  const { t, i18n } = useTranslation();
+    const isHebrew = i18n.language === "he";
+    const direction = isHebrew ? "rtl" : "ltr";
   
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
@@ -114,7 +119,7 @@ const SignupForm = ({
           control={form.control} 
           isLoading={isLoading} 
           name="password"
-          label="Password"
+          label={t("password", "Password")}
           placeholder="••••••••"
           showPasswordRequirements={true}
         />
@@ -123,7 +128,7 @@ const SignupForm = ({
           control={form.control} 
           isLoading={isLoading}
           name="confirmPassword"
-          label="Confirm Password"
+          label={t("confirmPassword", "Confirm Password")}
           placeholder="••••••••"
         />
         

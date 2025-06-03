@@ -2,6 +2,7 @@
   "_comment": "Login page translations for Hebrew",
   "email": "אימייל",
   "password": "סיסמה",
+  "confirmPassword": "אשר סיסמה",
   "signIn": "התחבר",
   "signingIn": "מתחבר...",
   "forgotPassword": "שכחת סיסמה?",
@@ -48,6 +49,41 @@
 
   "providerGitHub": "גיטהאב",
   "providerGoogle": "גוגל",
-  "providerFacebook": "פייסבוק"
+  "providerFacebook": "פייסבוק",
 
+  "_SignupCard": "Signup page translations for English",
+    "signupCard": {
+    "title": "צור חשבון",
+    "subtitle": "הירשם כדי להתחיל",
+    "already_have_account": "כבר יש לך חשבון?",
+    "sign_in": "התחבר"
+  },
+
+  "_SignupStepIndicator": "Signup steps translations for Hebrew",
+  "signupSteps": {
+  "step": "שלב",
+  "account": "חשבון",
+  "basic": "בסיסי",
+  "birthday": "תאריך לידה",
+  "profile": "פרופיל",
+  "physical": "פיזי",
+  "lifestyle": "אורח חיים",
+  "photos": "תמונות",
+  "summary": "סיכום"
+    },
+
+  "_SubmitButtom": "Signup form translations for Hebrew",
+    "submitButton": {
+        "next": "הבא",
+        "nextIn" : "הבא ב",
+        "previous": "הקודם",
+        "submit": "שלח",
+        "save": "שמור",
+        "continue": "המשך",
+        "loading": "טוען...",
+        "success": "הצלחה",
+        "error": "שגיאה",
+        "creating_account": "יוצר חשבון...",
+  "enter_details": "אנא הזן את הפרטים שלך"
+    }
 }

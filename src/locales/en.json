@@ -2,6 +2,7 @@
   "_comment": "Login page translations for English",
   "email": "Email",
   "password": "Password",
+  "confirmPassword": "Confirm Password",
   "signIn": "Sign In",
   "signingIn": "Signing in...",
   "forgotPassword": "Forgot password?",
@@ -49,7 +50,44 @@
   
   "providerGitHub": "GitHub",
   "providerGoogle": "Google",
-  "providerFacebook": "Facebook"
+  "providerFacebook": "Facebook",
 
+    "_SignupCard": "Signup page translations for English",
+    "signupCard": {
+    "title": "Create an Account",
+    "subtitle": "Sign up to get started",
+    "already_have_account": "Already have an account?",
+    "sign_in": "Sign in"
+  },
+
+    "_SignupStepIndicator": "Signup steps translations for English",
+  "signupSteps": {
+  "step": "Step",
+  "account": "Account",
+  "basic": "Basic",
+  "birthday": "Birthday",
+  "profile": "Profile",
+  "physical": "Physical",
+  "lifestyle": "Lifestyle",
+  "photos": "Photos",
+  "summary": "Summary" 
+  }, 
+
+  "_SubmitButton": "Signup form translations for English",
+"submitButton": {
+  "next": "Next",
+  "nextIn": "Next in",
+  "previous": "Previous",
+  "submit": "Submit",
+  "save": "Save",
+  "continue": "Continue",
+  "loading": "Loading...",
+  "success": "Success",
+  "error": "Error",
+  "creating_account": "Creating account...",
+  "enter_details": "Please enter your details"
+}
 
 }
+
+

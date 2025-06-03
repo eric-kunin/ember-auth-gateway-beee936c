@@ -18,6 +18,7 @@ import { ProfileImage } from "./image-upload/types";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import LanguageSwitcher from "../LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 interface SignupCardProps {
   currentStep: number;
@@ -69,6 +70,9 @@ const SignupCard: React.FC<SignupCardProps> = ({
   handleOAuthSignup,
 }) => {
   const isMobile = useIsMobile();
+  const { t, i18n } = useTranslation();
+    const isHebrew = i18n.language === "he";
+    const direction = isHebrew ? "rtl" : "ltr";
 
   return (
     <motion.div 
@@ -99,10 +103,10 @@ const SignupCard: React.FC<SignupCardProps> = ({
       
       <div className="text-center mb-2">
         <h1 className="text-xl sm:text-2xl font-bold text-[#240046] dark:text-white mb-1 transition-colors duration-300">
-          Create an Account
+          {t("signupCard.title")}
         </h1>
         <p className="text-sm sm:text-base text-[#3B185F] dark:text-custom-lighter transition-colors duration-300">
-          Sign up to get started
+          {t("signupCard.subtitle")}
         </p>
       </div>
       
@@ -206,9 +210,9 @@ const SignupCard: React.FC<SignupCardProps> = ({
       </motion.div>
       
       <div className="text-center mt-4 text-sm text-[#3B185F] dark:text-custom-light transition-colors duration-300">
-        Already have an account?{" "}
+        {t("signupCard.already_have_account")}{" "}
         <a href="/login" className="text-[#9D4EDD] dark:text-[#C77DFF] hover:text-[#7B2CBF] dark:hover:text-white transition-colors font-bold underline decoration-2 underline-offset-2">
-          Sign in
+          {t("signupCard.sign_in")}
         </a>
       </div>
     </motion.div>
