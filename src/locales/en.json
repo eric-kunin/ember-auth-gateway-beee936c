@@ -38,7 +38,18 @@
   "_LoginCard": "Login page translations for English",
   "signInTitleCard": "Sign in to continue",
   "findConnections": "Find new connections",
-  "noAccount": "Don't have an account yet?"
+  "noAccount": "Don't have an account yet?",
+
+  "_SocialLogin": "Social login translations for English",
+  "continueWith": "Or continue with",
+
+  "_SocialLoginButton" : "Social login button translations for English",
+  "loginWith": "Login with",
+
+  
+  "providerGitHub": "GitHub",
+  "providerGoogle": "Google",
+  "providerFacebook": "Facebook"
 
 
 }

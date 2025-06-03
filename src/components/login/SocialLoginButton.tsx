@@ -1,7 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useTranslation } from "react-i18next";
 
 interface SocialLoginButtonProps {
   provider: string;
@@ -19,7 +19,10 @@ const SocialLoginButton = ({
   iconColor
 }: SocialLoginButtonProps) => {
   const isMobile = useIsMobile();
-  
+  const { t, i18n } = useTranslation();
+  const isHebrew = i18n.language === "he";
+  const direction = isHebrew ? "rtl" : "ltr";
+
   return (
     <Button
       variant="outline"
@@ -37,9 +40,9 @@ const SocialLoginButton = ({
       type="button"
       onClick={() => onClick(provider)}
       disabled={disabled}
-      title={`Login with ${provider}`}
+      title={t("loginWith") + " " + provider} // translated title
+      dir={direction} // set direction
     >
-      {/* Icon with animated bounce on hover */}
       <span className="transition-transform duration-300 ease-out group-hover:animate-bounce">
         {typeof Icon === "function" && Icon.displayName ? (
           <Icon className="h-5 w-5" color={iconColor || undefined} />
@@ -47,9 +50,12 @@ const SocialLoginButton = ({
           <Icon className="h-5 w-5" color={iconColor || undefined} />
         )}
       </span>
-      {/* Show provider name (only on desktop) */}
       {!isMobile && (
-        <span className="ml-2 transition-colors duration-300">{provider}</span>
+        <span
+          className={`transition-colors duration-300 ${isHebrew ? "mr-2" : "ml-2"}`}
+        >
+          {provider}
+        </span>
       )}
       {isMobile && <span className="sr-only">{provider}</span>}
     </Button>

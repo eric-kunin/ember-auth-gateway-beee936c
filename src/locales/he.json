@@ -38,7 +38,16 @@
     "_LoginCard": "Login page translations for Hebrew",
     "signInTitleCard": "התחבר כדי להמשיך",
     "findConnections": "מצא חיבורים חדשים",
-    "noAccount": "אין לך חשבון עדיין?"
+    "noAccount": "אין לך חשבון עדיין?",
 
+  "_SocialLogin": "Social login translations for English",
+  "continueWith": "או להמשיך עם",
+
+  "_SocialLoginButton" : "Social login button translations for English",
+  "loginWith": "התחברות באמצעות",
+
+  "providerGitHub": "גיטהאב",
+  "providerGoogle": "גוגל",
+  "providerFacebook": "פייסבוק"
 
 }
