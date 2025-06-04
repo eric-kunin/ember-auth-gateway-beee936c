@@ -13,6 +13,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Shield, FileText, X, ChevronUp, Heart, Users, Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface TermsModalProps {
   isOpen: boolean;
@@ -21,6 +22,9 @@ interface TermsModalProps {
 }
 
 const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
+    const { t, i18n } = useTranslation();
+        const isHebrew = i18n.language === "he";
+        const direction = isHebrew ? "rtl" : "ltr";
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -58,14 +62,15 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-        className={`max-w-2xl max-h-[85vh] p-0 overflow-hidden 
-          [&>div>button]:opacity-0 [&>div>button]:pointer-events-none
-          transition-all duration-300 ease-in-out
-          ${isClosing ? "scale-95 opacity-0" : "scale-100 opacity-100"}
-          animate-in fade-in-0 zoom-in-95 duration-300
-          data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95`}
-        dir="rtl"
-      >
+
+  className={`max-w-2xl max-h-[85vh] p-0 overflow-hidden 
+    [&>div>button]:opacity-0 [&>div>button]:pointer-events-none
+    transition-all duration-300 ease-in-out
+    ${isClosing ? "scale-95 opacity-0" : "scale-100 opacity-100"}
+    animate-in fade-in-0 zoom-in-95 duration-300
+    data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95`}
+>
+
         {/* ✅ Animated Close Button */}
         <Button
           variant="ghost"
@@ -96,7 +101,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     hover:${isTerms ? 'text-blue-600' : 'text-green-400'} dark:hover:${isTerms ? 'text-blue-400' : 'text-green-400'}`}>
       {isTerms ? (
         <>
-          {t("termsModal.term.title")}
+          {t("termsModal.terms.title")}
           <FileText className="h-6 w-6 text-blue-600 transition-transform duration-300 hover:scale-110" />
         </>
       ) : (
@@ -110,8 +115,8 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
 
   <DialogDescription className="text-sm text-gray-600 dark:text-gray-400 text-right">
     {isTerms
-      ? "התנאים וההגבלות לשימוש באפליקציה"
-      : "מדיניות הפרטיות והגנת המידע שלנו"}
+      ? t("termsModal.terms.description")
+      : t("termsModal.privacy.description")}
   </DialogDescription>
   {/* <Button
   className="mt-4 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
@@ -137,51 +142,49 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-100">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
-                    1. קבלת התנאים
+                    1. {t("termsModal.terms.sections.1.title")}
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    השימוש באפליקציה מהווה הסכמה מלאה לתנאים המפורטים כאן. אם אינך מסכים לתנאים אלו, אנא הפסק את השימוש באפליקציה.
-                    התנאים נועדו להבטיח שימוש בטוח ונעים לכל המשתמשים ולשמור על הערכים הדתיים והמוסריים של הקהילה.
-                  </p>
+                    {t("termsModal.terms.sections.1.content")}</p>
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-200">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
-                    2. תיאור השירות
+                    2. {t("termsModal.terms.sections.2.title")}
                     <Heart className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    "AKHLADATE" היא פלטפורמה לכרות היכרויות המיועדת לציבור הדתי. השירות מאפשר למשתמשים ליצור פרופיל, לחפש אחר בני זוג פוטנציאליים ולקיים תקשורת.
+                    {t("termsModal.terms.sections.2.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    הפלטפורמה מיועדת למי שמחפש יחסים רציניים ומחויבים תוך שמירה על ערכי הדת והמסורת.
+                    {t("termsModal.terms.sections.2.content.1")}
                   </p>
                 </section>
 
                 <section id="section-3" className="animate-in slide-in-from-right-4 duration-700 delay-300">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
-                    3. הרשמה וחשבון משתמש
+                    3. {t("termsModal.terms.sections.3.title")}
                     <Users className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span>המשתמש מתחייב לספק מידע אמיתי ומדויק בהליך ההרשמה</span>
+                      <span>{t("termsModal.terms.sections.3.items.0")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>גיל מינימלי לשימוש באפליקציה: +18 שנים</span>
+                      <span>{t("termsModal.terms.sections.3.items.1")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span>אסור ליצור יותר מחשבון אחד לכל משתמש</span>
+                      <span>{t("termsModal.terms.sections.3.items.2")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span>המשתמש אחראי לשמירה על סודיות הסיסמה ופרטי הגישה</span>
+                      <span>{t("termsModal.terms.sections.3.items.3")}</span>
                     </li>
                   </ul>
                 </section>
@@ -189,25 +192,25 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-400">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
-                    4. כללי התנהגות
+                    4. {t("termsModal.terms.sections.4.title")}
                     <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300">
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span>יש להתנהג בכבוד ובהגינות כלפי משתמשים אחרים</span>
+                      <span>{t("termsModal.terms.sections.4.items.0")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span>אסור לפרסם תוכן פוגעני, מטעה או לא חוקי</span>
+                      <span>{t("termsModal.terms.sections.4.items.1")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                      <span>אסור להציק או לפגוע במשתמשים אחרים בכל צורה שהיא</span>
+                      <span>{t("termsModal.terms.sections.4.items.2")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                      <span>יש לשמור על ערכי הצניעות והמסורת בכל התקשורת</span>
+                      <span>{t("termsModal.terms.sections.4.items.3")}</span>
                     </li>
                   </ul>
                 </section>
@@ -215,42 +218,42 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-500">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
-                    5. זכויות יוצרים ותוכן
+                    5. {t("termsModal.terms.sections.5.title")}
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    כל התוכן באפליקציה מוגן בזכויות יוצרים. המשתמש מעניק רישיון להשתמש בתוכן שהוא מעלה לצורך הפעלת השירות.
+                    {t("termsModal.terms.sections.5.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    המשתמש מתחייב שהתוכן שהוא מעלה אינו מפר זכויות יוצרים של אחרים ושהוא בבעלותו המלאה.
+                    {t("termsModal.terms.sections.5.content.1")}
                   </p>
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-600">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-yellow-600 dark:hover:text-yellow-400">
-                    6. הגבלת אחריות
+                    6. {t("termsModal.terms.sections.6.title")}
                     <Shield className="h-5 w-5 text-yellow-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    החברה אינה אחראית לתוצאות השימוש באפליקציה, לרבות היכרויות, פגישות או יחסים שנוצרים באמצעותה.
+                    {t("termsModal.terms.sections.6.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    המשתמש נושא באחריות המלאה להתנהלותו ולהחלטותיו בעת השימוש בשירות.
+                    {t("termsModal.terms.sections.6.content.0")}
                   </p>
                 </section>
 
                 <section id="section-7" className="animate-in slide-in-from-right-4 duration-700 delay-700">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-indigo-600 dark:hover:text-indigo-400">
-                    7. שינויים בתנאים
+                    7. {t("termsModal.terms.sections.7.title")}
                     <FileText className="h-5 w-5 text-indigo-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    החברה שומרת לעצמה את הזכות לעדכן את התנאים מעת לעת. המשתמשים יקבלו הודעה על שינויים מהותיים.
+                    {t("termsModal.terms.sections.7.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    המשך השימוש באפליקציה לאחר קבלת ההודעה מהווה הסכמה לתנאים המעודכנים.
+                    {t("termsModal.terms.sections.7.content.1")}
                   </p>
                 </section>
               </>
@@ -260,39 +263,39 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-100">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
                                transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
-                    1. איסוף מידע
+                    1. {t("termsModal.privacy.sections.1.title")}
                     <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    אנו אוספים מידע שאתה מספק בעת ההרשמה: שם, גיל, מיקום, תמונות ומידע נוסף לצורך יצירת הפרופיל.
+                    {t("termsModal.privacy.sections.1.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    כמו כן, אנו עשויים לאסוף מידע טכני כגון כתובת IP, סוג הדפדפן ונתוני שימוש באפליקציה.
+                    {t("termsModal.privacy.sections.1.content.1")}
                   </p>
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-200">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
                                transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
-                    2. שימוש במידע
+                    2. {t("termsModal.privacy.sections.2.title")}
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-right">
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span>הצגת הפרופיל למשתמשים אחרים במערכת</span>
+                      <span>{t("termsModal.privacy.sections.2.items.0")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>שיפור השירות והתאמת המלצות אישיות</span>
+                      <span>{t("termsModal.privacy.sections.2.items.1")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                      <span>תקשורת בנוגע לשירות ועדכונים חשובים</span>
+                      <span>{t("termsModal.privacy.sections.2.items.2")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span>מניעת הונאות ושמירה על האבטחה</span>
+                      <span>{t("termsModal.privacy.sections.2.items.3")}</span>
                     </li>
                   </ul>
                 </section>
@@ -300,54 +303,54 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-300">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
                                transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
-                    3. שיתוף מידע
+                    3. {t("termsModal.privacy.sections.3.title")}
                     <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    איננו משתפים מידע אישי עם צדדים שלישיים, למעט במקרים הנדרשים על פי חוק או לצורך הפעלת השירות.
+                    {t("termsModal.privacy.sections.3.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    במקרים חריגים בהם נידרש לשתף מידע, נעשה זאת בהתאם לדרישות החוק ותוך הגנה מקסימלית על הפרטיות.
+                    {t("termsModal.privacy.sections.3.content.1")}
                   </p>
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-400">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
                                transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
-                    4. אבטחת מידע
+                    4. {t("termsModal.privacy.sections.4.title")}
                     <Lock className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    אנו נוקטים באמצעי אבטחה מתקדמים להגנה על המידע שלך, כולל הצפנה ואימות דו-שלבי.
+                    {t("termsModal.privacy.sections.4.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    השרתים שלנו מוגנים בטכנולוגיות אבטחה מתקדמות ונמצאים במרכזי נתונים מאובטחים.
+                    {t("termsModal.privacy.sections.4.content.1")}
                   </p>
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-500">
                 <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-purple-400 dark:text-purple-200 text-right
                 transition-colors duration-300 hover:text-green-600 dark:hover:text-green-400">
-                    5. זכויותיך
+                    5. {t("termsModal.privacy.sections.5.title")}
                     <Shield className="h-5 w-5 text-green-500" />
                 </h3>
 
                 <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-right">
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                    <span>עיון במידע האישי שלך השמור במערכת</span>
+                    <span>{t("termsModal.privacy.sections.5.items.0")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-yellow-500 rounded-full" />
-                    <span>תיקון או עדכון מידע שאינו מדויק</span>
+                    <span>{t("termsModal.privacy.sections.5.items.1")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-red-500 rounded-full" />
-                    <span>מחיקת החשבון והמידע שלך לחלוטין</span>
+                    <span>{t("termsModal.privacy.sections.5.items.2")}</span>
                     </li>
                     <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
                     <div className="w-2 h-2 bg-purple-500 rounded-full" />
-                    <span>הגבלת השימוש במידע לצרכים ספציפיים</span>
+                    <span>{t("termsModal.privacy.sections.5.items.3")}</span>
                     </li>
                 </ul>
                 </section>
@@ -355,28 +358,28 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-600">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-orange-600 dark:hover:text-orange-400">
-                    6. עוגיות (Cookies)
+                    6. {t("termsModal.privacy.sections.6.title")}
                     <FileText className="h-5 w-5 text-orange-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    אנו משתמשים בעוגיות לשיפור חוויית המשתמש, שמירת העדפות ואנליטיקה.
+                    {t("termsModal.privacy.sections.6.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    ניתן להגדיר את הדפדפן לחסום עוגיות, אך הדבר עלול להשפיע על תפקוד האפליקציה.
+                    {t("termsModal.privacy.sections.6.content.1")}
                   </p>
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-700">
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start text-purple-400 dark:text-purple-200 text-right gap-2
                                transition-colors duration-300 hover:text-indigo-600 dark:hover:text-indigo-400">
-                    7. יצירת קשר
+                    7. {t("termsModal.privacy.sections.7.title")}
                     <Mail className="h-5 w-5 text-indigo-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 mb-3">
-                    לשאלות בנוגע לפרטיות, ניתן לפנות אלינו בכתובת: privacy@akhladate.com
+                    {t("termsModal.privacy.sections.7.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    אנו מתחייבים לענות על פניות בתוך 48 שעות ולטפל בכל בקשה בצורה מקצועית ומהירה.
+                    {t("termsModal.privacy.sections.7.content.1")}
                   </p>
                 </section>
               </>
@@ -402,7 +405,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
       }}
     >
       <ChevronUp className="rotate-180 h-6 w-6 text-green-600 transition-transform duration-300 hover:scale-110" />
-      <span className="sr-only">גלול לתחתית</span>
+      <span className="sr-only">{t("scrollToBottom")}</span>
     </Button>
   </>
 )}

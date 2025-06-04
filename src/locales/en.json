@@ -116,7 +116,11 @@
         },
         "2": {
           "title": "Service Description",
-          "content": "AKHLADATE is a dating platform designed for the religious public. The service allows users to create a profile, search for potential partners and communicate."
+          "content": [
+          "AKHLADATE is a dating platform designed for the religious public. The service allows users to create a profile, search for potential partners and communicate.",
+          "The platform is designed for those looking for serious and committed relationships while maintaining religious and traditional values."
+        ]
+        
         },
         "3": {
           "title": "Registration and User Account",
@@ -138,15 +142,18 @@
         },
         "5": {
           "title": "Copyright and Content",
-          "content": "All content in the app is copyright protected. The user grants a license to use the content they upload for the purpose of operating the service."
+          "content": ["All content in the app is copyright protected. The user grants a license to use the content they upload for the purpose of operating the service.",
+          "The user warrants that the content he uploads does not infringe the copyrights of others and that it is his full property."]
         },
         "6": {
           "title": "Limitation of Liability",
-          "content": "The company is not responsible for the results of using the app, including dates, meetings or relationships formed through it."
+          "content": ["The company is not responsible for the results of using the app, including dates, meetings or relationships formed through it.",
+        "The user bears full responsibility for his behavior and decisions when using the service."]
         },
         "7": {
           "title": "Changes to Terms",
-          "content": "The company reserves the right to update the terms from time to time. Users will be notified of material changes."
+          "content": ["The company reserves the right to update the terms from time to time. Users will be notified of material changes.",
+          "Continued use of the application after receiving the notification constitutes agreement to the updated terms."]
         }
       }
     },
@@ -156,7 +163,9 @@
       "sections": {
         "1": {
           "title": "Information Collection",
-          "content": "We collect information you provide during registration: name, age, location, photos and additional information for profile creation."
+          "content": ["We collect information you provide during registration: name, age, location, photos and additional information for profile creation.",
+            "We may also collect technical information such as IP address, browser type, and application usage data."
+        ]
         },
         "2": {
           "title": "Information Use",
@@ -169,11 +178,14 @@
         },
         "3": {
           "title": "Information Sharing",
-          "content": "We do not share personal information with third parties, except as required by law or for the operation of the service."
+          "content": ["We do not share personal information with third parties, except as required by law or for the operation of the service.",
+            "In exceptional cases where we are required to share information, we will do so in accordance with legal requirements and with maximum protection of privacy."
+        ]
         },
         "4": {
           "title": "Data Security",
-          "content": "We employ advanced security measures to protect your information, including encryption and two-factor authentication."
+          "content": ["We employ advanced security measures to protect your information, including encryption and two-factor authentication.",
+          "Our servers are protected by advanced security technologies and are located in secure data centers."]
         },
         "5": {
           "title": "Your Rights",
@@ -186,11 +198,15 @@
         },
         "6": {
           "title": "Cookies",
-          "content": "We use cookies to improve user experience, save preferences and for analytics."
+          "content": ["We use cookies to improve user experience, save preferences and for analytics.",
+            "You can set your browser to block cookies, but this may affect the functionality of the application."
+        ]
         },
         "7": {
           "title": "Contact Us",
-          "content": "For privacy questions, you can contact us at: privacy@akhladate.com"
+          "content": ["For privacy questions, you can contact us at: privacy@akhladate.com",
+            "We commit to responding to inquiries within 48 hours and handling every request professionally and quickly."
+        ]
         }
       }
     },
