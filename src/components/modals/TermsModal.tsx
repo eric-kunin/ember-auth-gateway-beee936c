@@ -25,6 +25,10 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
     const { t, i18n } = useTranslation();
         const isHebrew = i18n.language === "he";
         const direction = isHebrew ? "rtl" : "ltr";
+        const textAlignClass = direction === "rtl" ? "text-right" : "text-left";
+        const hoverTranslateClass = direction === "rtl" ? "hover:-translate-x-1" : "hover:translate-x-1";
+
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -62,7 +66,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent
-
+        dir={direction}
   className={`max-w-2xl max-h-[85vh] p-0 overflow-hidden 
     [&>div>button]:opacity-0 [&>div>button]:pointer-events-none
     transition-all duration-300 ease-in-out
@@ -113,7 +117,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
     </div>
   </DialogTitle>
 
-  <DialogDescription className="text-sm text-gray-600 dark:text-gray-400 text-right">
+  <DialogDescription className={`text-sm text-gray-600 dark:text-gray-400 text-right ${textAlignClass}`} dir={direction}>
     {isTerms
       ? t("termsModal.terms.description")
       : t("termsModal.privacy.description")}
@@ -131,21 +135,19 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
 
 
 
-        <ScrollArea className="px-6 pb-6 max-h-[60vh]">
-          <div
-            className="space-y-6 text-sm leading-relaxed text-right"
-            dir="rtl"
-          >
+        <ScrollArea className="px-6 pb-6 max-h-[60vh]" dir={direction}>
+          <div className={`space-y-6 text-sm leading-relaxed ${textAlignClass}`} dir={direction}>
+
             {isTerms ? (
               <>
                 {/* Terms Content with Staggered Animation */}
-                <section className="animate-in slide-in-from-right-4 duration-700 delay-100">
+                <section className="animate-in slide-in-from-right-4 duration-700 delay-100" dir={direction}>
                   <h3 className="font-semibold text-lg mb-3 flex items-center justify-start gap-2 text-right text-purple-400 dark:text-purple-200
                                transition-colors duration-300 hover:text-blue-600 dark:hover:text-blue-400">
                     1. {t("termsModal.terms.sections.1.title")}
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
-                  <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
+                  <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300" dir={direction}>
                     {t("termsModal.terms.sections.1.content")}</p>
                 </section>
 
@@ -170,23 +172,24 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <Users className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300">
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span>{t("termsModal.terms.sections.3.items.0")}</span>
-                    </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>{t("termsModal.terms.sections.3.items.1")}</span>
-                    </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
-                      <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                      <span>{t("termsModal.terms.sections.3.items.2")}</span>
-                    </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                      <span>{t("termsModal.terms.sections.3.items.3")}</span>
-                    </li>
-                  </ul>
+  <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}`}>
+    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+    <span>{t("termsModal.terms.sections.3.items.0")}</span>
+  </li>
+  <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}`}>
+    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+    <span>{t("termsModal.terms.sections.3.items.1")}</span>
+  </li>
+  <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}`}>
+    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+    <span>{t("termsModal.terms.sections.3.items.2")}</span>
+  </li>
+  <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}`}>
+    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+    <span>{t("termsModal.terms.sections.3.items.3")}</span>
+  </li>
+</ul>
+
                 </section>
 
                 <section className="animate-in slide-in-from-right-4 duration-700 delay-400">
@@ -196,19 +199,19 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <Shield className="h-5 w-5 text-green-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300">
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span>{t("termsModal.terms.sections.4.items.0")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                       <span>{t("termsModal.terms.sections.4.items.1")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                       <span>{t("termsModal.terms.sections.4.items.2")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                       <span>{t("termsModal.terms.sections.4.items.3")}</span>
                     </li>
@@ -239,7 +242,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     {t("termsModal.terms.sections.6.content.0")}
                   </p>
                   <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">
-                    {t("termsModal.terms.sections.6.content.0")}
+                    {t("termsModal.terms.sections.6.content.1")}
                   </p>
                 </section>
 
@@ -281,19 +284,19 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     <FileText className="h-5 w-5 text-blue-600 transition-transform duration-300 hover:scale-110" />
                   </h3>
                   <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-right">
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span>{t("termsModal.privacy.sections.2.items.0")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span>{t("termsModal.privacy.sections.2.items.1")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                       <span>{t("termsModal.privacy.sections.2.items.2")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                       <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                       <span>{t("termsModal.privacy.sections.2.items.3")}</span>
                     </li>
@@ -336,19 +339,19 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                 </h3>
 
                 <ul className="space-y-3 text-gray-700 dark:text-gray-300 text-right">
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                     <div className="w-2 h-2 bg-blue-500 rounded-full" />
                     <span>{t("termsModal.privacy.sections.5.items.0")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                     <div className="w-2 h-2 bg-yellow-500 rounded-full" />
                     <span>{t("termsModal.privacy.sections.5.items.1")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                     <div className="w-2 h-2 bg-red-500 rounded-full" />
                     <span>{t("termsModal.privacy.sections.5.items.2")}</span>
                     </li>
-                    <li className="flex items-center justify-start gap-2 transition-transform duration-300 hover:-translate-x-1">
+                    <li className={`flex items-center justify-start gap-2 transition-transform duration-300 ${hoverTranslateClass}}`}>
                     <div className="w-2 h-2 bg-purple-500 rounded-full" />
                     <span>{t("termsModal.privacy.sections.5.items.3")}</span>
                     </li>
