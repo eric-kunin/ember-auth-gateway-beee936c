@@ -1,10 +1,10 @@
-
 import { FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Control } from "react-hook-form";
 import { AccountFormValues } from "../schemas";
 import { useState } from "react";
 import TermsModal from "../../modals/TermsModal";
+import { useTranslation } from "react-i18next";
 
 interface TermsCheckboxProps {
   control: Control<AccountFormValues>;
@@ -12,12 +12,16 @@ interface TermsCheckboxProps {
 }
 
 const TermsCheckbox = ({ control, isLoading }: TermsCheckboxProps) => {
-  const [modalState, setModalState] = useState<{ isOpen: boolean; type: 'terms' | 'privacy' | null }>({
+  const { t } = useTranslation();
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    type: "terms" | "privacy" | null;
+  }>({
     isOpen: false,
-    type: null
+    type: null,
   });
 
-  const openModal = (type: 'terms' | 'privacy') => {
+  const openModal = (type: "terms" | "privacy") => {
     setModalState({ isOpen: true, type });
   };
 
@@ -31,7 +35,7 @@ const TermsCheckbox = ({ control, isLoading }: TermsCheckboxProps) => {
         control={control}
         name="agreeToTerms"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md">
+          <FormItem className="flex flex-row items-start space-x-3 rtl:space-x-reverse space-y-0 rounded-md">
             <FormControl>
               <Checkbox
                 checked={field.value}
@@ -42,21 +46,21 @@ const TermsCheckbox = ({ control, isLoading }: TermsCheckboxProps) => {
             </FormControl>
             <div className="space-y-2 leading-none">
               <div className="text-sm text-[#3B185F] dark:text-[#E0AAFF] transition-colors duration-300">
-                I agree to the{' '}
+                {t("termsCheckbox.agreePrefix")}{" "}
                 <button
                   type="button"
                   className="underline decoration-1 underline-offset-2 text-[#9D4EDD] dark:text-[#C77DFF] hover:text-[#7B2CBF] dark:hover:text-white cursor-pointer transition-colors duration-200 font-medium"
-                  onClick={() => openModal('terms')}
+                  onClick={() => openModal("terms")}
                 >
-                  Terms of Service
-                </button>
-                {' and '}
+                  {t("termsCheckbox.terms")}
+                </button>{" "}
+                {t("termsCheckbox.and")}{" "}
                 <button
                   type="button"
                   className="underline decoration-1 underline-offset-2 text-[#9D4EDD] dark:text-[#C77DFF] hover:text-[#7B2CBF] dark:hover:text-white cursor-pointer transition-colors duration-200 font-medium"
-                  onClick={() => openModal('privacy')}
+                  onClick={() => openModal("privacy")}
                 >
-                  Privacy Policy
+                  {t("termsCheckbox.privacy")}
                 </button>
               </div>
               <div className="h-5 min-h-[1.25rem] space-y-2">
@@ -68,7 +72,7 @@ const TermsCheckbox = ({ control, isLoading }: TermsCheckboxProps) => {
       />
 
       {modalState.type && (
-        <TermsModal 
+        <TermsModal
           isOpen={modalState.isOpen}
           onClose={closeModal}
           type={modalState.type}

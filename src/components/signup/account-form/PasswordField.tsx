@@ -100,7 +100,7 @@ const PasswordField = ({
                             </button>
                         </div>
                         {showPasswordRequirements && (
-                            <ValidationFeedback message="Password must have at least 8 characters with one uppercase letter and one number." />
+                            <ValidationFeedback message={t("passwordField.message")} />
                         )}
                         <div className="h-5 min-h-[1.25rem]">
                             <FormMessage className="text-xs text-red-500" />

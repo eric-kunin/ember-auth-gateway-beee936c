@@ -85,5 +85,22 @@
         "error": "שגיאה",
         "creating_account": "יוצר חשבון...",
   "enter_details": "אנא הזן את הפרטים שלך"
-    }
+    },
+"_PasswordField": "Password field translations for Hebrew",
+  "passwordField": {
+    "message": "הסיסמה חייבת להכיל לפחות 8 תווים עם אות גדולה אחת ומספר אחד."
+  }, 
+
+  "_TempsNotice": "Terms notice translations for Hebrew",
+  "termsNotice": {
+    "agreement": "על ידי הרשמה, הנך מסכים לתנאי השירות ולמדיניות הפרטיות שלנו"
+  },
+
+  "_TermsCheckbox": "Terms of Service translations for Hebrew",
+    "termsCheckbox": {
+    "agreePrefix": "אני מסכים ל",
+    "terms": "תנאי השירות",
+    "privacy": "מדיניות הפרטיות",
+    "and": "ו"
+  }
 }
