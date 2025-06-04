@@ -102,7 +102,102 @@
     "terms": "Terms of Service",
     "privacy": "Privacy Policy",
     "and": "and"
+  },
+
+  "termsModal": {
+    "close": "Close",
+    "terms": {
+      "title": "Terms of Use",
+      "description": "The terms and conditions for using the app",
+      "sections": {
+        "1": {
+          "title": "Acceptance of Terms",
+          "content": "Using the app constitutes full acceptance of these terms. If you do not agree to these terms, please discontinue use of the app. These terms are designed to ensure safe and pleasant use for all users and to maintain the religious and moral values of the community."
+        },
+        "2": {
+          "title": "Service Description",
+          "content": "AKHLADATE is a dating platform designed for the religious public. The service allows users to create a profile, search for potential partners and communicate."
+        },
+        "3": {
+          "title": "Registration and User Account",
+          "items": [
+            "The user undertakes to provide true and accurate information during registration",
+            "Minimum age for using the app: 18+ years",
+            "It is forbidden to create more than one account per user",
+            "The user is responsible for maintaining password confidentiality and access details"
+          ]
+        },
+        "4": {
+          "title": "Code of Conduct",
+          "items": [
+            "Behave respectfully and decently towards other users",
+            "Do not publish offensive, misleading or illegal content",
+            "Do not harass or harm other users in any way",
+            "Maintain modesty and traditional values in all communication"
+          ]
+        },
+        "5": {
+          "title": "Copyright and Content",
+          "content": "All content in the app is copyright protected. The user grants a license to use the content they upload for the purpose of operating the service."
+        },
+        "6": {
+          "title": "Limitation of Liability",
+          "content": "The company is not responsible for the results of using the app, including dates, meetings or relationships formed through it."
+        },
+        "7": {
+          "title": "Changes to Terms",
+          "content": "The company reserves the right to update the terms from time to time. Users will be notified of material changes."
+        }
+      }
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Our privacy and data protection policy",
+      "sections": {
+        "1": {
+          "title": "Information Collection",
+          "content": "We collect information you provide during registration: name, age, location, photos and additional information for profile creation."
+        },
+        "2": {
+          "title": "Information Use",
+          "items": [
+            "Displaying the profile to other users in the system",
+            "Improving the service and personalizing recommendations",
+            "Communication regarding the service and important updates",
+            "Preventing fraud and maintaining security"
+          ]
+        },
+        "3": {
+          "title": "Information Sharing",
+          "content": "We do not share personal information with third parties, except as required by law or for the operation of the service."
+        },
+        "4": {
+          "title": "Data Security",
+          "content": "We employ advanced security measures to protect your information, including encryption and two-factor authentication."
+        },
+        "5": {
+          "title": "Your Rights",
+          "items": [
+            "Access your personal information stored in the system",
+            "Correct or update inaccurate information",
+            "Delete your account and information completely",
+            "Limit the use of information for specific purposes"
+          ]
+        },
+        "6": {
+          "title": "Cookies",
+          "content": "We use cookies to improve user experience, save preferences and for analytics."
+        },
+        "7": {
+          "title": "Contact Us",
+          "content": "For privacy questions, you can contact us at: privacy@akhladate.com"
+        }
+      }
+    },
+    "scrollToBottom": "Scroll to bottom"
   }
+
+
 
 }
 

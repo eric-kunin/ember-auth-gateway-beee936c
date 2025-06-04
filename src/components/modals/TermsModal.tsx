@@ -12,6 +12,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Shield, FileText, X, ChevronUp, Heart, Users, Lock, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { t } from "i18next";
 
 interface TermsModalProps {
   isOpen: boolean;
@@ -84,7 +85,7 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
             transition-all duration-300 ease-in-out
             group-hover:text-red-600 dark:group-hover:text-red-400
             group-hover:scale-110" />
-          <span className="sr-only">סגור</span>
+          <span className="sr-only">{t("close")}</span>
         </Button>
 
         <DialogHeader className="p-6 pb-4 text-right">
@@ -95,12 +96,12 @@ const TermsModal = ({ isOpen, onClose, type }: TermsModalProps) => {
                     hover:${isTerms ? 'text-blue-600' : 'text-green-400'} dark:hover:${isTerms ? 'text-blue-400' : 'text-green-400'}`}>
       {isTerms ? (
         <>
-          תקנון השימוש
+          {t("termsModal.term.title")}
           <FileText className="h-6 w-6 text-blue-600 transition-transform duration-300 hover:scale-110" />
         </>
       ) : (
         <>
-          מדיניות פרטיות
+          {t("termsModal.privacy.title")}
           <Shield className="h-6 w-6 text-green-600 transition-transform duration-300 hover:scale-110" />
         </>
       )}
