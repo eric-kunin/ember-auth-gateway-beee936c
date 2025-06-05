@@ -1,8 +1,20 @@
-
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Control } from "react-hook-form";
 import { PersonalInfoFormValues } from "../schemas";
+import { useTranslation } from "react-i18next";
 
 interface GenderFieldProps {
   control: Control<PersonalInfoFormValues>;
@@ -10,43 +22,65 @@ interface GenderFieldProps {
 }
 
 const GenderField = ({ control, isLoading }: GenderFieldProps) => {
+  const { t, i18n } = useTranslation();
+  const isHebrew = i18n.language === "he";
+  const direction = isHebrew ? "rtl" : "ltr";
+  const alignmentClass = isHebrew ? "text-end" : "text-start";
+
   return (
     <FormField
       control={control}
       name="gender"
       render={({ field, fieldState }) => {
-        const genderIsValid = field.value && !fieldState.invalid && fieldState.isDirty;
+        const genderIsValid =
+          field.value && !fieldState.invalid && fieldState.isDirty;
 
         return (
-          <FormItem className="space-y-2">
+          <FormItem className="space-y-2" dir={direction}>
             <FormLabel className="text-sm text-[#240046] dark:text-white transition-colors duration-300">
-              Gender
+              {t("gender")}
             </FormLabel>
-            <Select 
-              onValueChange={field.onChange} 
+            <Select
+              onValueChange={field.onChange}
               defaultValue={field.value}
               disabled={isLoading}
             >
               <FormControl>
-                <SelectTrigger 
+                <SelectTrigger
                   className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
-                           text-[#240046] dark:text-white h-10 transition-colors duration-300 
-                           focus:ring-[#9D4EDD] focus:border-[#9D4EDD]
-                           ${fieldState.invalid && fieldState.isDirty ? 'border-red-500 dark:border-red-500 ring-1 ring-red-500' : ''}
-                           ${genderIsValid ? 'border-green-500 dark:border-green-500 ring-1 ring-green-500' : ''}`}
+                    text-[#240046] dark:text-white h-10 transition-colors duration-300 
+                    focus:ring-[#9D4EDD] focus:border-[#9D4EDD] pl-10 pr-10 ${alignmentClass}
+                    ${fieldState.invalid && fieldState.isDirty ? "border-red-500 dark:border-red-500 ring-1 ring-red-500" : ""}
+                    ${genderIsValid ? "border-green-500 dark:border-green-500 ring-1 ring-green-500" : ""}`}
+                  dir={direction}
                 >
-                  <SelectValue placeholder="Select gender" />
+                  <SelectValue
+                    placeholder={t("genderOptions.placeholder")}
+                    className={`${alignmentClass}`}
+                  />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/30">
-                <SelectItem value="Male" className="text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20">
-                  Male
+              <SelectContent
+                className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/30"
+                dir={direction}
+              >
+                <SelectItem
+                  value="Male"
+                  className="text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20"
+                >
+                  {t("genderOptions.male")}
                 </SelectItem>
-                <SelectItem value="Female" className="text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20">
-                  Female
+                <SelectItem
+                  value="Female"
+                  className="text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20"
+                >
+                  {t("genderOptions.female")}
                 </SelectItem>
-                <SelectItem value="Other" className="text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20">
-                  Other
+                <SelectItem
+                  value="Other"
+                  className="text-[#240046] dark:text-white hover:bg-[#E0AAFF]/20 dark:hover:bg-[#9D4EDD]/20"
+                >
+                  {t("genderOptions.other")}
                 </SelectItem>
               </SelectContent>
             </Select>

@@ -1,7 +1,6 @@
 {
   "_comment": "Login page translations for English",
   "email": "Email",
-  "password": "Password",
   "confirmPassword": "Confirm Password",
   "signIn": "Sign In",
   "signingIn": "Signing in...",
@@ -22,197 +21,213 @@
   "emailPlaceholder": "name@example.com",
   "passwordPlaceholder": "password123",
   "tooltipContentPassword": "Enter your password: password123",
-
+  
   "_footer": "Footer page translations for English",
   "footerPrivacy": "Privacy",
   "footerTerms": "Terms",
   "footerContact": "Contact",
   "footerAbout": "About",
   "footerRights": "All rights reserved to",
-
+  
   "footerCopyright": "© 2025 All rights reserved to ",
-
+  
   "_header": "Header page translations for English",
   "signUp": "Sign Up",
   "headerTagline": "Find your connection with a free first message 💜",
-
+  
   "_LoginCard": "Login page translations for English",
   "signInTitleCard": "Sign in to continue",
   "findConnections": "Find new connections",
   "noAccount": "Don't have an account yet?",
-
+  
   "_SocialLogin": "Social login translations for English",
   "continueWith": "Or continue with",
-
+  
   "_SocialLoginButton" : "Social login button translations for English",
   "loginWith": "Login with",
-
+  
   
   "providerGitHub": "GitHub",
   "providerGoogle": "Google",
   "providerFacebook": "Facebook",
-
-    "_SignupCard": "Signup page translations for English",
-    "signupCard": {
-    "title": "Create an Account",
-    "subtitle": "Sign up to get started",
-    "already_have_account": "Already have an account?",
-    "sign_in": "Sign in"
-  },
-
+  
+  "_SignupCard": "Signup page translations for English",
+  "signupCard": {
+      "title": "Create an Account",
+      "subtitle": "Sign up to get started",
+      "already_have_account": "Already have an account?",
+      "sign_in": "Sign in"
+    },
+    
     "_SignupStepIndicator": "Signup steps translations for English",
-  "signupSteps": {
-  "step": "Step",
-  "account": "Account",
-  "basic": "Basic",
-  "birthday": "Birthday",
-  "profile": "Profile",
-  "physical": "Physical",
-  "lifestyle": "Lifestyle",
-  "photos": "Photos",
-  "summary": "Summary" 
-  }, 
-
-  "_SubmitButton": "Signup form translations for English",
-"submitButton": {
-  "next": "Next",
-  "nextIn": "Next in",
-  "previous": "Previous",
-  "submit": "Submit",
-  "save": "Save",
-  "continue": "Continue",
-  "loading": "Loading...",
-  "success": "Success",
-  "error": "Error",
-  "creating_account": "Creating account...",
-  "enter_details": "Please enter your details"
-},
-"_PasswordField": "Password field translations for English",
-  "passwordField": {
-    "message": "Password must have at least 8 characters with one uppercase letter and one number."
-  },
-
-  "_TempsNotice": "Terms notice translations for English",
-  "termsNotice": {
-    "agreement": "By signing up, you agree to our Terms of Service and Privacy Policy"
-  },
+    "signupSteps": {
+        "step": "Step",
+        "account": "Account",
+        "basic": "Basic",
+        "birthday": "Birthday",
+        "profile": "Profile",
+        "physical": "Physical",
+        "lifestyle": "Lifestyle",
+        "photos": "Photos",
+        "summary": "Summary" 
+    }, 
+    
+    "_SubmitButton": "Signup form translations for English",
+    "submitButton": {
+        "next": "Next",
+        "nextIn": "Next in",
+        "previous": "Previous",
+        "submit": "Submit",
+        "save": "Save",
+        "continue": "Continue",
+        "loading": "Loading...",
+        "success": "Success",
+        "error": "Error",
+        "creating_account": "Creating account...",
+        "enter_details": "Please enter your details"
+    },
+    "_PasswordField": "Password field translations for English",
+    "passwordField": {
+        "message": "Password must have at least 8 characters with one uppercase letter and one number."
+    },
+    
+    "_TempsNotice": "Terms notice translations for English",
+    "termsNotice": {
+        "agreement": "By signing up, you agree to our Terms of Service and Privacy Policy"
+    },
     "_TermsCheckbox": "Terms of Service translations for English",
     "termsCheckbox": {
-    "agreePrefix": "I agree to the",
-    "terms": "Terms of Service",
-    "privacy": "Privacy Policy",
-    "and": "and"
-  },
-
-  "termsModal": {
-    "close": "Close",
-    "terms": {
-      "title": "Terms of Use",
-      "description": "The terms and conditions for using the app",
-      "sections": {
-        "1": {
-          "title": "Acceptance of Terms",
-          "content": "Using the app constitutes full acceptance of these terms. If you do not agree to these terms, please discontinue use of the app. These terms are designed to ensure safe and pleasant use for all users and to maintain the religious and moral values of the community."
-        },
-        "2": {
-          "title": "Service Description",
-          "content": [
-          "AKHLADATE is a dating platform designed for the religious public. The service allows users to create a profile, search for potential partners and communicate.",
-          "The platform is designed for those looking for serious and committed relationships while maintaining religious and traditional values."
-        ]
-        
-        },
-        "3": {
-          "title": "Registration and User Account",
-          "items": [
-            "The user undertakes to provide true and accurate information during registration",
-            "Minimum age for using the app: 18+ years",
-            "It is forbidden to create more than one account per user",
-            "The user is responsible for maintaining password confidentiality and access details"
-          ]
-        },
-        "4": {
-          "title": "Code of Conduct",
-          "items": [
-            "Behave respectfully and decently towards other users",
-            "Do not publish offensive, misleading or illegal content",
-            "Do not harass or harm other users in any way",
-            "Maintain modesty and traditional values in all communication"
-          ]
-        },
-        "5": {
-          "title": "Copyright and Content",
-          "content": ["All content in the app is copyright protected. The user grants a license to use the content they upload for the purpose of operating the service.",
-          "The user warrants that the content he uploads does not infringe the copyrights of others and that it is his full property."]
-        },
-        "6": {
-          "title": "Limitation of Liability",
-          "content": ["The company is not responsible for the results of using the app, including dates, meetings or relationships formed through it.",
-        "The user bears full responsibility for his behavior and decisions when using the service."]
-        },
-        "7": {
-          "title": "Changes to Terms",
-          "content": ["The company reserves the right to update the terms from time to time. Users will be notified of material changes.",
-          "Continued use of the application after receiving the notification constitutes agreement to the updated terms."]
-        }
-      }
+        "agreePrefix": "I agree to the",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "and": "and"
     },
-    "privacy": {
-      "title": "Privacy Policy",
-      "description": "Our privacy and data protection policy",
-      "sections": {
-        "1": {
-          "title": "Information Collection",
-          "content": ["We collect information you provide during registration: name, age, location, photos and additional information for profile creation.",
-            "We may also collect technical information such as IP address, browser type, and application usage data."
-        ]
+    
+    "termsModal": {
+        "close": "Close",
+        "terms": {
+            "title": "Terms of Use",
+            "description": "The terms and conditions for using the app",
+            "sections": {
+                "1": {
+                    "title": "Acceptance of Terms",
+                    "content": "Using the app constitutes full acceptance of these terms. If you do not agree to these terms, please discontinue use of the app. These terms are designed to ensure safe and pleasant use for all users and to maintain the religious and moral values of the community."
+                },
+                "2": {
+                    "title": "Service Description",
+                    "content": [
+                        "AKHLADATE is a dating platform designed for the religious public. The service allows users to create a profile, search for potential partners and communicate.",
+                        "The platform is designed for those looking for serious and committed relationships while maintaining religious and traditional values."
+                    ]
+                    
+                },
+                "3": {
+                    "title": "Registration and User Account",
+                    "items": [
+                        "The user undertakes to provide true and accurate information during registration",
+                        "Minimum age for using the app: 18+ years",
+                        "It is forbidden to create more than one account per user",
+                        "The user is responsible for maintaining password confidentiality and access details"
+                    ]
+                },
+                "4": {
+                    "title": "Code of Conduct",
+                    "items": [
+                        "Behave respectfully and decently towards other users",
+                        "Do not publish offensive, misleading or illegal content",
+                        "Do not harass or harm other users in any way",
+                        "Maintain modesty and traditional values in all communication"
+                    ]
+                },
+                "5": {
+                    "title": "Copyright and Content",
+                    "content": ["All content in the app is copyright protected. The user grants a license to use the content they upload for the purpose of operating the service.",
+                    "The user warrants that the content he uploads does not infringe the copyrights of others and that it is his full property."]
+                },
+                "6": {
+                    "title": "Limitation of Liability",
+                    "content": ["The company is not responsible for the results of using the app, including dates, meetings or relationships formed through it.",
+                    "The user bears full responsibility for his behavior and decisions when using the service."]
+                },
+                "7": {
+                    "title": "Changes to Terms",
+                    "content": ["The company reserves the right to update the terms from time to time. Users will be notified of material changes.",
+                    "Continued use of the application after receiving the notification constitutes agreement to the updated terms."]
+                }
+            }
         },
-        "2": {
-          "title": "Information Use",
-          "items": [
-            "Displaying the profile to other users in the system",
-            "Improving the service and personalizing recommendations",
-            "Communication regarding the service and important updates",
-            "Preventing fraud and maintaining security"
-          ]
-        },
-        "3": {
-          "title": "Information Sharing",
-          "content": ["We do not share personal information with third parties, except as required by law or for the operation of the service.",
-            "In exceptional cases where we are required to share information, we will do so in accordance with legal requirements and with maximum protection of privacy."
-        ]
+        "privacy": {
+            "title": "Privacy Policy",
+            "description": "Our privacy and data protection policy",
+            "sections": {
+                "1": {
+                    "title": "Information Collection",
+                    "content": ["We collect information you provide during registration: name, age, location, photos and additional information for profile creation.",
+                    "We may also collect technical information such as IP address, browser type, and application usage data."
+                ]
+            },
+            "2": {
+                "title": "Information Use",
+                "items": [
+                    "Displaying the profile to other users in the system",
+                    "Improving the service and personalizing recommendations",
+                    "Communication regarding the service and important updates",
+                    "Preventing fraud and maintaining security"
+                ]
+            },
+            "3": {
+                "title": "Information Sharing",
+                "content": ["We do not share personal information with third parties, except as required by law or for the operation of the service.",
+                "In exceptional cases where we are required to share information, we will do so in accordance with legal requirements and with maximum protection of privacy."
+            ]
         },
         "4": {
-          "title": "Data Security",
-          "content": ["We employ advanced security measures to protect your information, including encryption and two-factor authentication.",
-          "Our servers are protected by advanced security technologies and are located in secure data centers."]
+            "title": "Data Security",
+            "content": ["We employ advanced security measures to protect your information, including encryption and two-factor authentication.",
+            "Our servers are protected by advanced security technologies and are located in secure data centers."]
         },
         "5": {
-          "title": "Your Rights",
-          "items": [
-            "Access your personal information stored in the system",
-            "Correct or update inaccurate information",
-            "Delete your account and information completely",
-            "Limit the use of information for specific purposes"
+            "title": "Your Rights",
+            "items": [
+                "Access your personal information stored in the system",
+                "Correct or update inaccurate information",
+                "Delete your account and information completely",
+                "Limit the use of information for specific purposes"
           ]
         },
         "6": {
-          "title": "Cookies",
-          "content": ["We use cookies to improve user experience, save preferences and for analytics.",
+            "title": "Cookies",
+            "content": ["We use cookies to improve user experience, save preferences and for analytics.",
             "You can set your browser to block cookies, but this may affect the functionality of the application."
         ]
-        },
-        "7": {
-          "title": "Contact Us",
-          "content": ["For privacy questions, you can contact us at: privacy@akhladate.com",
-            "We commit to responding to inquiries within 48 hours and handling every request professionally and quickly."
-        ]
-        }
-      }
     },
-    "scrollToBottom": "Scroll to bottom"
-  }
+    "7": {
+        "title": "Contact Us",
+        "content": ["For privacy questions, you can contact us at: privacy@akhladate.com",
+        "We commit to responding to inquiries within 48 hours and handling every request professionally and quickly."
+    ]
+}
+}
+},
+"scrollToBottom": "Scroll to bottom"
+},
 
+"_perosn-info": "Hebrew",
+"nickname": "Nickname",
+  "username": "Username",
+  "password": "Password",
+  "gender": "Gender",
+  "genderOptions": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "placeholder": "Select gender"
+  },
+  "back" : "Back",
+  "next": "Next",
+  
+  "nicknameFieldPlaceholder": "e.g. Dani King (will display on card)",
+  "usernameFieldPlaceholder": "e.g. dani123 (visible to everyone)"
 
 
 }

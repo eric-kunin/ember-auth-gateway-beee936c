@@ -1,7 +1,6 @@
 {
   "_comment": "Login page translations for Hebrew",
   "email": "אימייל",
-  "password": "סיסמה",
   "confirmPassword": "אשר סיסמה",
   "signIn": "התחבר",
   "signingIn": "מתחבר...",
@@ -22,57 +21,57 @@
   "emailPlaceholder": "name@example.com",
   "passwordPlaceholder": "סיסמה123",
   "tooltipContentPassword": "הזן את הסיסמה שלך: סיסמה123",
-
-    "_footer": "Footer page translations for Hebrew",
-    "footerPrivacy": "פרטיות",
+  
+  "_footer": "Footer page translations for Hebrew",
+  "footerPrivacy": "פרטיות",
   "footerTerms": "תנאים",
   "footerContact": "צור קשר",
   "footerAbout": "אודותינו",
   "footerRights": "כל הזכויות שמורות ל",
   "footerCopyright": "© 2025 כל הזכויות שמורות ל ",
-
-    "_header": "Header page translations for Hebrew",
-    "signUp": "הרשמה",
-    "headerTagline": "מצא את החיבור שלך עם הודעה חינמית ראשונה 💜",
-
-
-    "_LoginCard": "Login page translations for Hebrew",
-    "signInTitleCard": "התחבר כדי להמשיך",
-    "findConnections": "מצא חיבורים חדשים",
-    "noAccount": "אין לך חשבון עדיין?",
-
+  
+  "_header": "Header page translations for Hebrew",
+  "signUp": "הרשמה",
+  "headerTagline": "מצא את החיבור שלך עם הודעה חינמית ראשונה 💜",
+  
+  
+  "_LoginCard": "Login page translations for Hebrew",
+  "signInTitleCard": "התחבר כדי להמשיך",
+  "findConnections": "מצא חיבורים חדשים",
+  "noAccount": "אין לך חשבון עדיין?",
+  
   "_SocialLogin": "Social login translations for English",
   "continueWith": "או להמשיך עם",
-
+  
   "_SocialLoginButton" : "Social login button translations for English",
   "loginWith": "התחברות באמצעות",
-
+  
   "providerGitHub": "גיטהאב",
   "providerGoogle": "גוגל",
   "providerFacebook": "פייסבוק",
-
+  
   "_SignupCard": "Signup page translations for English",
-    "signupCard": {
-    "title": "צור חשבון",
-    "subtitle": "הירשם כדי להתחיל",
-    "already_have_account": "כבר יש לך חשבון?",
-    "sign_in": "התחבר"
-  },
-
-  "_SignupStepIndicator": "Signup steps translations for Hebrew",
-  "signupSteps": {
-  "step": "שלב",
-  "account": "חשבון",
-  "basic": "בסיסי",
-  "birthday": "תאריך לידה",
-  "profile": "פרופיל",
-  "physical": "פיזי",
-  "lifestyle": "אורח חיים",
-  "photos": "תמונות",
-  "summary": "סיכום"
+  "signupCard": {
+      "title": "צור חשבון",
+      "subtitle": "הירשם כדי להתחיל",
+      "already_have_account": "כבר יש לך חשבון?",
+      "sign_in": "התחבר"
     },
-
-  "_SubmitButtom": "Signup form translations for Hebrew",
+    
+    "_SignupStepIndicator": "Signup steps translations for Hebrew",
+    "signupSteps": {
+        "step": "שלב",
+        "account": "חשבון",
+        "basic": "בסיסי",
+        "birthday": "תאריך לידה",
+        "profile": "פרופיל",
+        "physical": "פיזי",
+        "lifestyle": "אורח חיים",
+        "photos": "תמונות",
+        "summary": "סיכום"
+    },
+    
+    "_SubmitButtom": "Signup form translations for Hebrew",
     "submitButton": {
         "next": "הבא",
         "nextIn" : "הבא ב",
@@ -84,131 +83,148 @@
         "success": "הצלחה",
         "error": "שגיאה",
         "creating_account": "יוצר חשבון...",
-  "enter_details": "אנא הזן את הפרטים שלך"
+        "enter_details": "אנא הזן את הפרטים שלך"
     },
-"_PasswordField": "Password field translations for Hebrew",
-  "passwordField": {
-    "message": "הסיסמה חייבת להכיל לפחות 8 תווים עם אות גדולה אחת ומספר אחד."
-  }, 
-
-  "_TempsNotice": "Terms notice translations for Hebrew",
-  "termsNotice": {
-    "agreement": "על ידי הרשמה, הנך מסכים לתנאי השירות ולמדיניות הפרטיות שלנו"
-  },
-
-  "_TermsCheckbox": "Terms of Service translations for Hebrew",
+    "_PasswordField": "Password field translations for Hebrew",
+    "passwordField": {
+        "message": "הסיסמה חייבת להכיל לפחות 8 תווים עם אות גדולה אחת ומספר אחד."
+    }, 
+    
+    "_TempsNotice": "Terms notice translations for Hebrew",
+    "termsNotice": {
+        "agreement": "על ידי הרשמה, הנך מסכים לתנאי השירות ולמדיניות הפרטיות שלנו"
+    },
+    
+    "_TermsCheckbox": "Terms of Service translations for Hebrew",
     "termsCheckbox": {
-    "agreePrefix": "אני מסכים ל",
-    "terms": "תנאי השירות",
-    "privacy": "מדיניות הפרטיות",
-    "and": "ו"
-  },
-
-  "termsModal": {
-    "close": "סגור",
-    "terms": {
-      "title": "תקנון השימוש",
-      "description": "התנאים וההגבלות לשימוש באפליקציה",
-      "sections": {
-        "1": {
-          "title": "קבלת התנאים",
-          "content": "השימוש באפליקציה מהווה הסכמה מלאה לתנאים המפורטים כאן. אם אינך מסכים לתנאים אלו, אנא הפסק את השימוש באפליקציה. התנאים נועדו להבטיח שימוש בטוח ונעים לכל המשתמשים ולשמור על הערכים הדתיים והמוסריים של הקהילה."
-        },
-        "2": {
-          "title": "תיאור השירות",
-          "content": [
-            "AKHLADATE היא פלטפורמה לכרות היכרויות המיועדת לציבור הדתי. השירות מאפשר למשתמשים ליצור פרופיל, לחפש אחר בני זוג פוטנציאליים ולקיים תקשורת.",
-            "הפלטפורמה מיועדת למי שמחפש יחסים רציניים ומחויבים תוך שמירה על ערכי הדת והמסורת."
-        ]
-        },
-        "3": {
-          "title": "הרשמה וחשבון משתמש",
-          "items": [
-            "המשתמש מתחייב לספק מידע אמיתי ומדויק בהליך ההרשמה",
-            "גיל מינימלי לשימוש באפליקציה: +18 שנים",
-            "אסור ליצור יותר מחשבון אחד לכל משתמש",
-            "המשתמש אחראי לשמירה על סודיות הסיסמה ופרטי הגישה"
-          ]
-        },
-        "4": {
-          "title": "כלי התנהגות",
-          "items": [
-            "יש להתנהג בכבוד ובהגינות כלפי משתמשים אחרים",
-            "אסור לפרסם תוכן פוגעני, מטעה או לא חוקי",
-            "אסור להציק או לפגוע במשתמשים אחרים בכל צורה שהיא",
-            "יש לשמור על ערכי הצניעות והמסורת בכל התקשורת"
-          ]
-        },
-        "5": {
-          "title": "זכויות יוצרים ותוכן",
-          "content": ["כל התוכן באפליקציה מוגן בזכויות יוצרים. המשתמש מעניק רישיון להשתמש בתוכן שהוא מעלה לצורך הפעלת השירות.",
-            "המשתמש מתחייב שהתוכן שהוא מעלה אינו מפר זכויות יוצרים של אחרים ושהוא בבעלותו המלאה."
-          ]
-
-        },
-        "6": {
-          "title": "הגבלת אחריות",
-          "content": ["החברה אינה אחראית לתוצאות השימוש באפליקציה, לרבות היכרויות, פגישות או יחסים שנוצרים באמצעותה.",
-            "המשתמש נושא באחריות המלאה להתנהלותו ולהחלטותיו בעת השימוש בשירות."]
-        },
-        "7": {
-          "title": "שינויים בתנאים",
-          "content": ["החברה שומרת לעצמה את הזכות לעדכן את התנאים מעת לעת. המשתמשים יקבלו הודעה על שינויים מהותיים.",
-        "המשך השימוש באפליקציה לאחר קבלת ההודעה מהווה הסכמה לתנאים המעודכנים."]
+        "agreePrefix": "אני מסכים ל",
+        "terms": "תנאי השירות",
+        "privacy": "מדיניות הפרטיות",
+        "and": "ו"
+    },
+    
+    "termsModal": {
+        "close": "סגור",
+        "terms": {
+            "title": "תקנון השימוש",
+            "description": "התנאים וההגבלות לשימוש באפליקציה",
+            "sections": {
+                "1": {
+                    "title": "קבלת התנאים",
+                    "content": "השימוש באפליקציה מהווה הסכמה מלאה לתנאים המפורטים כאן. אם אינך מסכים לתנאים אלו, אנא הפסק את השימוש באפליקציה. התנאים נועדו להבטיח שימוש בטוח ונעים לכל המשתמשים ולשמור על הערכים הדתיים והמוסריים של הקהילה."
+                },
+                "2": {
+                    "title": "תיאור השירות",
+                    "content": [
+                        "AKHLADATE היא פלטפורמה לכרות היכרויות המיועדת לציבור הדתי. השירות מאפשר למשתמשים ליצור פרופיל, לחפש אחר בני זוג פוטנציאליים ולקיים תקשורת.",
+                        "הפלטפורמה מיועדת למי שמחפש יחסים רציניים ומחויבים תוך שמירה על ערכי הדת והמסורת."
+                    ]
+                },
+                "3": {
+                    "title": "הרשמה וחשבון משתמש",
+                    "items": [
+                        "המשתמש מתחייב לספק מידע אמיתי ומדויק בהליך ההרשמה",
+                        "גיל מינימלי לשימוש באפליקציה: +18 שנים",
+                        "אסור ליצור יותר מחשבון אחד לכל משתמש",
+                        "המשתמש אחראי לשמירה על סודיות הסיסמה ופרטי הגישה"
+                    ]
+                },
+                "4": {
+                    "title": "כלי התנהגות",
+                    "items": [
+                        "יש להתנהג בכבוד ובהגינות כלפי משתמשים אחרים",
+                        "אסור לפרסם תוכן פוגעני, מטעה או לא חוקי",
+                        "אסור להציק או לפגוע במשתמשים אחרים בכל צורה שהיא",
+                        "יש לשמור על ערכי הצניעות והמסורת בכל התקשורת"
+                    ]
+                },
+                "5": {
+                    "title": "זכויות יוצרים ותוכן",
+                    "content": ["כל התוכן באפליקציה מוגן בזכויות יוצרים. המשתמש מעניק רישיון להשתמש בתוכן שהוא מעלה לצורך הפעלת השירות.",
+                    "המשתמש מתחייב שהתוכן שהוא מעלה אינו מפר זכויות יוצרים של אחרים ושהוא בבעלותו המלאה."
+                ]
+                
+            },
+            "6": {
+                "title": "הגבלת אחריות",
+                "content": ["החברה אינה אחראית לתוצאות השימוש באפליקציה, לרבות היכרויות, פגישות או יחסים שנוצרים באמצעותה.",
+                "המשתמש נושא באחריות המלאה להתנהלותו ולהחלטותיו בעת השימוש בשירות."]
+            },
+            "7": {
+                "title": "שינויים בתנאים",
+                "content": ["החברה שומרת לעצמה את הזכות לעדכן את התנאים מעת לעת. המשתמשים יקבלו הודעה על שינויים מהותיים.",
+                "המשך השימוש באפליקציה לאחר קבלת ההודעה מהווה הסכמה לתנאים המעודכנים."]
+            }
         }
-      }
     },
     "privacy": {
-      "title": "מדיניות פרטיות",
-      "description": "מדיניות הפרטיות והגנת המידע שלנו",
-      "sections": {
-        "1": {
-          "title": "איסוף מידע",
-          "content": ["אנו אוספים מידע שאתה מספק בעת ההרשמה: שם, גיל, מיקום, תמונות ומידע נוסף לצורך יצירת הפרופיל.",
-        "כמו כן, אנו עשויים לאסוף מידע טכני כגון כתובת IP, סוג הדפדפן ונתוני שימוש באפליקציה."]
-        },
-        "2": {
-          "title": "שימוש במידע",
-          "items": [
-            "הצגת הפרופיל למשתמשים אחרים במערכת",
-            "שיפור השירות והתאמת המלצות אישיות",
-            "תקשורת בנוגע לשירות ועדכונים חשובים",
-            "מניעת הונאות ושמירה על האבטחה"
-          ]
-        },
-        "3": {
-          "title": "שיתוף מידע",
-          "content": ["איננו משתפים מידע אישי עם צדדים שלישיים, למעט במקרים הנדרשים על פי חוק או לצורך הפעלת השירות.",
-            "במקרים חריגים בהם נידרש לשתף מידע, נעשה זאת בהתאם לדרישות החוק ותוך הגנה מקסימלית על הפרטיות."
-        ]
+        "title": "מדיניות פרטיות",
+        "description": "מדיניות הפרטיות והגנת המידע שלנו",
+        "sections": {
+            "1": {
+                "title": "איסוף מידע",
+                "content": ["אנו אוספים מידע שאתה מספק בעת ההרשמה: שם, גיל, מיקום, תמונות ומידע נוסף לצורך יצירת הפרופיל.",
+                "כמו כן, אנו עשויים לאסוף מידע טכני כגון כתובת IP, סוג הדפדפן ונתוני שימוש באפליקציה."]
+            },
+            "2": {
+                "title": "שימוש במידע",
+                "items": [
+                    "הצגת הפרופיל למשתמשים אחרים במערכת",
+                    "שיפור השירות והתאמת המלצות אישיות",
+                    "תקשורת בנוגע לשירות ועדכונים חשובים",
+                    "מניעת הונאות ושמירה על האבטחה"
+                ]
+            },
+            "3": {
+                "title": "שיתוף מידע",
+                "content": ["איננו משתפים מידע אישי עם צדדים שלישיים, למעט במקרים הנדרשים על פי חוק או לצורך הפעלת השירות.",
+                "במקרים חריגים בהם נידרש לשתף מידע, נעשה זאת בהתאם לדרישות החוק ותוך הגנה מקסימלית על הפרטיות."
+            ]
         },
         "4": {
-          "title": "אבטחת מידע",
-          "content": ["אנו נוקטים באמצעי אבטחה מתקדמים להגנה על המידע שלך, כולל הצפנה ואימות דו-שלבי.",
-        "השרתים שלנו מוגנים בטכנולוגיות אבטחה מתקדמות ונמצאים במרכזי נתונים מאובטחים."]
+            "title": "אבטחת מידע",
+            "content": ["אנו נוקטים באמצעי אבטחה מתקדמים להגנה על המידע שלך, כולל הצפנה ואימות דו-שלבי.",
+            "השרתים שלנו מוגנים בטכנולוגיות אבטחה מתקדמות ונמצאים במרכזי נתונים מאובטחים."]
         },
         "5": {
-          "title": "זכויותיך",
-          "items": [
-            "עיון במידע האישי שלך השמור במערכת",
-            "תיקון או עדכון מידע שאינו מדויק",
-            "מחיקת החשבון והמידע שלך לחלוטין",
-            "הגבלת השימוש במידע לצרכים ספציפיים"
-          ]
+            "title": "זכויותיך",
+            "items": [
+                "עיון במידע האישי שלך השמור במערכת",
+                "תיקון או עדכון מידע שאינו מדויק",
+                "מחיקת החשבון והמידע שלך לחלוטין",
+                "הגבלת השימוש במידע לצרכים ספציפיים"
+            ]
         },
         "6": {
-          "title": "עוגיות",
-          "content": ["אנו משתמשים בעוגיות לשיפור חוויית המשתמש, שמירת העדפות ואנליטיקה.",
-          "ניתן להגדיר את הדפדפן לחסום עוגיות, אך הדבר עלול להשפיע על תפקוד האפליקציה."]
+            "title": "עוגיות",
+            "content": ["אנו משתמשים בעוגיות לשיפור חוויית המשתמש, שמירת העדפות ואנליטיקה.",
+            "ניתן להגדיר את הדפדפן לחסום עוגיות, אך הדבר עלול להשפיע על תפקוד האפליקציה."]
         },
         "7": {
-          "title": "יצירת קשר",
-          "content": ["לשאלות בנוגע לפרטיות, ניתן לפנות אלינו בכתובת: privacy@akhladate.com",
+            "title": "יצירת קשר",
+            "content": ["לשאלות בנוגע לפרטיות, ניתן לפנות אלינו בכתובת: privacy@akhladate.com",
             "אנו מתחייבים לענות על פניות בתוך 48 שעות ולטפל בכל בקשה בצורה מקצועית ומהירה."
         ]
-        }
-      }
-    },
-    "scrollToBottom": "גלול לתחתית"
-  }
+    }
+}
+},
+"scrollToBottom": "גלול לתחתית"
+},
+
+"_perosn-info": "English",
+"nickname": "כינוי",
+  "username": "שם משתמש",
+  "password": "סיסמה",
+  "gender": "מגדר",
+  "genderOptions": {
+    "male": "זכר",
+    "female": "נקבה",
+    "other": "אחר",
+    "placeholder": "בחר מגדר"
+  },
+  "back" : "בְּחֲזָרָה",
+  "next": "הַבָּא",
+  
+  "nicknameFieldPlaceholder": "לדוגמה דני המלך (יוצג על גבי הכרטיס)",
+  "usernameFieldPlaceholder": "לדוגמה dani123 (גלוי לכולם)"
 }
