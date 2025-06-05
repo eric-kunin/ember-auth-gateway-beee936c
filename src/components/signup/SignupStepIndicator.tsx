@@ -11,7 +11,10 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
   currentStep, 
   totalSteps 
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isHebrew = i18n.language === "he";
+  const direction = isHebrew ? "rtl" : "ltr";
+//   const rightClass = direction === "rtl" ? "text-right" : "text-left";
 
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
@@ -38,13 +41,19 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
   return (
     <div className="flex justify-center items-center mb-6 relative">
       {/* Background line */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 h-0.5 bg-gray-300 dark:bg-gray-700 z-0" />
+      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full px-4 sm:px-10 h-0.5 bg-gray-300 dark:bg-gray-700 z-0" />
+
       
       {/* Green progress line */}
       <div 
-        className="absolute top-1/2 left-0 h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out"
-        style={{ width: calculateProgressWidth() }}
-      />
+  className={`absolute top-1/2 h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out 
+    ${direction === 'rtl' 
+      ? 'right-0 translate-x-1'  // move slightly left
+      : 'left-0 -translate-x-1'  // move slightly right
+    }`}
+  style={{ width: calculateProgressWidth() }}
+/>
+
 
       <div className="flex justify-between w-full relative z-[2]">
         {steps.map((step) => (
