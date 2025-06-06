@@ -21,9 +21,11 @@ const NicknameField = ({ control, isLoading }: NicknameFieldProps) => {
       control={control}
       name="nickname"
       render={({ field, fieldState }) => {
-        const nicknameValue = field.value;
+        const nicknameValue = field.value || "";
         const nicknameState = fieldState;
-        const nicknameIsValid = nicknameValue && !nicknameState.invalid && nicknameState.isDirty;
+        // Fix validation state detection - field is valid if no error and value meets requirements
+        const nicknameIsValid = nicknameValue.length >= 2 && nicknameValue.length <= 15 && !nicknameState.error;
+        const showError = nicknameState.error && nicknameState.isDirty;
 
         return (
           <FormItem className="space-y-2">
@@ -31,27 +33,26 @@ const NicknameField = ({ control, isLoading }: NicknameFieldProps) => {
               {t("nickname")}
             </FormLabel>
             <div className="relative" dir={direction}>
-  <User className={`absolute top-2.5 h-5 w-5 text-[#9D4EDD]/70 dark:text-white/70 
-    ${isHebrew ? 'right-3' : 'left-3'}`} />
+              <User className={`absolute top-2.5 h-5 w-5 text-[#9D4EDD]/70 dark:text-white/70 
+                ${isHebrew ? 'right-3' : 'left-3'}`} />
 
               <FormControl>
                 <Input
-  placeholder={t("nicknameFieldPlaceholder")}
-  type="text"
-  maxLength={15}
-  className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
-           text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
-           pl-10 pr-10 h-10 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
-           ${nicknameState.invalid && nicknameState.isDirty ? 'border-red-500 dark:border-red-500 ring-1 ring-red-500' : ''}
-           ${nicknameIsValid ? 'border-green-500 dark:border-green-500 ring-1 ring-green-500' : ''}`}
-/>
-
+                  placeholder={t("nicknameFieldPlaceholder")}
+                  type="text"
+                  maxLength={15}
+                  className={`bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
+                           text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
+                           pl-10 pr-10 h-10 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]
+                           ${showError ? 'border-red-500 dark:border-red-500 ring-1 ring-red-500' : ''}
+                           ${nicknameIsValid ? 'border-green-500 dark:border-green-500 ring-1 ring-green-500' : ''}`}
+                  {...field}
+                />
               </FormControl>
               <div className={`absolute top-2.5 text-xs text-[#9D4EDD]/60 dark:text-white/60 
-  ${isHebrew ? 'left-3' : 'right-3'}`}>
-  {nicknameValue?.length || 0}/15
-</div>
-
+                ${isHebrew ? 'left-3' : 'right-3'}`}>
+                {nicknameValue.length}/15
+              </div>
             </div>
             <div className="h-5 min-h-[1.25rem]">
               <FormMessage className="text-xs text-red-500" />
