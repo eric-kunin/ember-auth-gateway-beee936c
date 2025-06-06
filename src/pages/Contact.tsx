@@ -1,12 +1,14 @@
 
 import { Link } from "react-router-dom";
-import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
+import { ArrowRight, Mail, Phone, MapPin, ArrowLeft } from "lucide-react";
 import LoginHeader from "@/components/login/LoginHeader";
 import LoginFooter from "@/components/login/LoginFooter";
 import { useTranslation } from "react-i18next";
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+     const isHebrew = i18n.language === "he";
+     const direction = isHebrew ? "rtl" : "ltr";
   
   return (
     <div className="min-h-screen w-full flex flex-col bg-black text-white" dir="rtl">
@@ -25,18 +27,18 @@ const Contact = () => {
           </div>
 
           {/* Back to home link */}
-          <div className="mb-8" dir="ltr">
+          <div className="mb-8" dir={direction != 'rtl' ? 'rtl' : 'ltr'}>
             <Link 
               to="/login" 
               className="inline-flex items-center gap-2 text-[#C77DFF] hover:text-white transition-colors"
             >
-              <ArrowRight className="h-4 w-4 rotate-180" />
+              {direction == 'rtl' ? <ArrowRight className="h-4 w-4 rotate-180" /> : <ArrowLeft className="h-4 w-4 rotate-180" />}
               {t("contact.backToHome")}
             </Link>
           </div>
 
           {/* Content */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 space-y-8">
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 space-y-8"  dir={direction == 'rtl' ? 'rtl' : 'ltr'}>
             <section>
               <h2 className="text-2xl font-semibold mb-6 text-[#C77DFF]">{t("contact.sections.welcome.title")}</h2>
               <p className="text-white/70 leading-relaxed mb-8">
