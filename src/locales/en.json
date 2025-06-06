@@ -230,6 +230,172 @@
   "nicknameFieldPlaceholder": "e.g. Dani King (will display on card)",
   "usernameFieldPlaceholder": "e.g. dani123 (visible to everyone)",
   
+  "_birthdate": "Birthdate step translations for English",
+  "birthdate": {
+    "title": "When is your birthday?",
+    "subtitle": "Your age will be calculated from this date",
+    "label": "Date of Birth",
+    "placeholder": "Select your birth date"
+  },
+  
+  "_profile": "Profile step translations for English", 
+  "profile": {
+    "title": "Complete your profile",
+    "name": {
+      "label": "Full Name",
+      "placeholder": "Enter your full name"
+    },
+    "bio": {
+      "label": "Bio",
+      "placeholder": "Tell us about yourself...",
+      "description": "Write a short description about yourself (optional)"
+    },
+    "profession": {
+      "label": "Profession",
+      "placeholder": "What do you do for work?"
+    }
+  },
+  
+  "_lifestyle1": "Lifestyle step 1 translations for English",
+  "lifestyle1": {
+    "physical": {
+      "title": "Physical Attributes",
+      "height": {
+        "label": "Height (cm)",
+        "placeholder": "Enter height in cm"
+      },
+      "eyeColor": {
+        "label": "Eye Color", 
+        "placeholder": "Select eye color",
+        "options": {
+          "brown": "Brown",
+          "blue": "Blue", 
+          "green": "Green",
+          "hazel": "Hazel",
+          "gray": "Gray",
+          "other": "Other"
+        }
+      }
+    },
+    "religious": {
+      "title": "Religious Information",
+      "religion": {
+        "label": "Religion",
+        "placeholder": "Select religion",
+        "options": {
+          "jewish": "Jewish",
+          "christian": "Christian", 
+          "muslim": "Muslim",
+          "hindu": "Hindu",
+          "buddhist": "Buddhist",
+          "other": "Other",
+          "none": "None"
+        }
+      },
+      "religiousLevel": {
+        "label": "Religious Level",
+        "placeholder": "Select level",
+        "options": {
+          "very-religious": "Very Religious",
+          "religious": "Religious",
+          "traditional": "Traditional", 
+          "secular": "Secular",
+          "other": "Other"
+        }
+      }
+    }
+  },
+  
+  "_lifestyle2": "Lifestyle step 2 translations for English",
+  "lifestyle2": {
+    "habits": {
+      "title": "Habits & Lifestyle",
+      "smoking": {
+        "label": "Smoking Status",
+        "placeholder": "Select status",
+        "options": {
+          "non-smoker": "Non-Smoker",
+          "occasional": "Occasional",
+          "regular": "Regular", 
+          "quitting": "Quitting"
+        }
+      },
+      "drinking": {
+        "label": "Drinking Status",
+        "placeholder": "Select status",
+        "options": {
+          "non-drinker": "Non-Drinker",
+          "social": "Social",
+          "regular": "Regular",
+          "rarely": "Rarely"
+        }
+      }
+    },
+    "preferences": {
+      "title": "Preferences",
+      "lookingFor": {
+        "label": "Looking For",
+        "placeholder": "What are you looking for?",
+        "options": {
+          "serious-relationship": "Serious Relationship",
+          "marriage": "Marriage",
+          "friendship": "Friendship",
+          "dating": "Dating"
+        }
+      },
+      "lookingForGender": {
+        "label": "Interested In",
+        "placeholder": "Select gender preference",
+        "options": {
+          "male": "Male",
+          "female": "Female",
+          "both": "Both"
+        }
+      },
+      "pets": {
+        "label": "Pets",
+        "placeholder": "Do you have pets?",
+        "options": {
+          "love-pets": "Love Pets",
+          "have-pets": "Have Pets",
+          "allergic": "Allergic to Pets",
+          "no-pets": "No Pets"
+        }
+      },
+      "exercise": {
+        "label": "Exercise",
+        "placeholder": "How often do you exercise?",
+        "options": {
+          "daily": "Daily",
+          "weekly": "Weekly",
+          "monthly": "Monthly",
+          "rarely": "Rarely",
+          "never": "Never"
+        }
+      },
+      "diet": {
+        "label": "Diet",
+        "placeholder": "Select diet preference",
+        "options": {
+          "omnivore": "Omnivore",
+          "vegetarian": "Vegetarian",
+          "vegan": "Vegan",
+          "kosher": "Kosher",
+          "halal": "Halal",
+          "other": "Other"
+        }
+      }
+    }
+  },
+  
+  "_photos": "Photos step translations for English",
+  "photos": {
+    "title": "Upload Profile Photos",
+    "subtitle": "Add photos to complete your profile. You can add up to 6 photos.",
+    "ready": "photo ready to upload",
+    "readyPlural": "photos ready to upload"
+  },
+  
   "_validation": "Validation error messages in English",
   "validation": {
     "nickname": {
@@ -257,6 +423,9 @@
     },
     "terms": {
       "required": "You must agree to the Terms of Service"
+    },
+    "birthdate": {
+      "required": "Please select a date of birth"
     }
   }
 }

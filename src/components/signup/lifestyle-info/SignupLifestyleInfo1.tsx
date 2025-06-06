@@ -7,6 +7,7 @@ import { Form } from "@/components/ui/form";
 import PhysicalSection from "./PhysicalSection";
 import ReligiousSection from "./ReligiousSection";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Schema for First Lifestyle Information (Physical & Religious)
 const lifestyle1Schema = z.object({
@@ -36,6 +37,8 @@ const SignupLifestyleInfo1 = ({
   onSubmit,
   onBack,
 }: SignupLifestyleInfo1Props) => {
+  const { t } = useTranslation();
+  
   const form = useForm<Lifestyle1FormValues>({
     resolver: zodResolver(lifestyle1Schema),
     defaultValues,
@@ -64,7 +67,7 @@ const SignupLifestyleInfo1 = ({
             title="Go back to previous step"
           >
             <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back</span>
+            <span>{t("back")}</span>
           </Button>
           <Button
             type="submit"
@@ -73,7 +76,7 @@ const SignupLifestyleInfo1 = ({
             disabled={isLoading}
             title="Continue to next step"
           >
-            <span>Next</span>
+            <span>{t("next")}</span>
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>

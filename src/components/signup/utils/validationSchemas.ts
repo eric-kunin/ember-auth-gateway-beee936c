@@ -33,3 +33,11 @@ export const createAccountSchema = (t: TFunction) => {
     path: ["confirmPassword"]
   });
 };
+
+export const createBirthdateSchema = (t: TFunction) => {
+  return z.object({
+    birthdate: z.date({
+      required_error: t("validation.birthdate.required") as string,
+    }),
+  });
+};

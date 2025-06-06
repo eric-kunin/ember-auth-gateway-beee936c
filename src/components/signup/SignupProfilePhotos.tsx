@@ -4,6 +4,7 @@ import { ProfileImageUpload } from "./ProfileImageUpload";
 import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight, Camera, CheckCircle } from "lucide-react";
 import { ProfileImage } from "./image-upload/types";
+import { useTranslation } from "react-i18next";
 
 interface SignupProfilePhotosProps {
   isLoading: boolean;
@@ -18,6 +19,7 @@ const SignupProfilePhotos = ({
   onBack,
   initialImages = [],
 }: SignupProfilePhotosProps) => {
+  const { t } = useTranslation();
   const [profileImages, setProfileImages] = useState<ProfileImage[]>(initialImages);
   const [isReady, setIsReady] = useState(false);
   
@@ -45,10 +47,10 @@ const SignupProfilePhotos = ({
           <Camera className="h-6 w-6" />
         </div>
         <h3 className="text-lg font-medium text-[#240046] dark:text-white">
-          Upload Profile Photos
+          {t("photos.title")}
         </h3>
         <p className="text-sm text-[#3B185F]/70 dark:text-custom-lighter/70 mt-1">
-          Add photos to complete your profile. You can add up to 6 photos.
+          {t("photos.subtitle")}
         </p>
       </div>
 
@@ -64,7 +66,9 @@ const SignupProfilePhotos = ({
         <div className="text-center mt-4">
           <div className="inline-flex items-center text-sm text-green-600 dark:text-green-400">
             <CheckCircle className="mr-1 h-4 w-4" />
-            <span>{profileImages.length} photo{profileImages.length !== 1 ? 's' : ''} ready to upload</span>
+            <span>
+              {profileImages.length} {profileImages.length === 1 ? t("photos.ready") : t("photos.readyPlural")}
+            </span>
           </div>
         </div>
       )}
@@ -78,7 +82,7 @@ const SignupProfilePhotos = ({
           title="Go back to previous step"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back
+          {t("back")}
         </Button>
         <Button
           type="submit"
@@ -87,7 +91,7 @@ const SignupProfilePhotos = ({
           disabled={isLoading}
           title="Continue to final step"
         >
-          Next
+          {t("next")}
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>

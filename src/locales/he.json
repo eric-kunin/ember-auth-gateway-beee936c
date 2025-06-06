@@ -229,6 +229,172 @@
   "nicknameFieldPlaceholder": "לדוגמה דני המלך (יוצג על גבי הכרטיס)",
   "usernameFieldPlaceholder": "לדוגמה dani123 (גלוי לכולם)",
   
+  "_birthdate": "Birthdate step translations for Hebrew",
+  "birthdate": {
+    "title": "מתי נולדת?",
+    "subtitle": "הגיל שלך יחושב מתאריך זה",
+    "label": "תאריך לידה",
+    "placeholder": "בחר את תאריך הלידה שלך"
+  },
+  
+  "_profile": "Profile step translations for Hebrew", 
+  "profile": {
+    "title": "השלם את הפרופיל שלך",
+    "name": {
+      "label": "שם מלא",
+      "placeholder": "הזן את השם המלא שלך"
+    },
+    "bio": {
+      "label": "תיאור אישי",
+      "placeholder": "ספר לנו על עצמך...",
+      "description": "כתב תיאור קצר על עצמך (אופציונלי)"
+    },
+    "profession": {
+      "label": "מקצוע",
+      "placeholder": "מה אתה עושה לפרנסה?"
+    }
+  },
+  
+  "_lifestyle1": "Lifestyle step 1 translations for Hebrew",
+  "lifestyle1": {
+    "physical": {
+      "title": "תכונות פיזיות",
+      "height": {
+        "label": "גובה (ס\"מ)",
+        "placeholder": "הזן גובה בס\"מ"
+      },
+      "eyeColor": {
+        "label": "צבע עיניים", 
+        "placeholder": "בחר צבע עיניים",
+        "options": {
+          "brown": "חום",
+          "blue": "כחול", 
+          "green": "ירוק",
+          "hazel": "אגוזי",
+          "gray": "אפור",
+          "other": "אחר"
+        }
+      }
+    },
+    "religious": {
+      "title": "מידע דתי",
+      "religion": {
+        "label": "דת",
+        "placeholder": "בחר דת",
+        "options": {
+          "jewish": "יהודי",
+          "christian": "נוצרי", 
+          "muslim": "מוסלמי",
+          "hindu": "הינדי",
+          "buddhist": "בודהיסט",
+          "other": "אחר",
+          "none": "ללא"
+        }
+      },
+      "religiousLevel": {
+        "label": "רמת דתיות",
+        "placeholder": "בחר רמה",
+        "options": {
+          "very-religious": "דתי מאוד",
+          "religious": "דתי",
+          "traditional": "מסורתי", 
+          "secular": "חילוני",
+          "other": "אחר"
+        }
+      }
+    }
+  },
+  
+  "_lifestyle2": "Lifestyle step 2 translations for Hebrew",
+  "lifestyle2": {
+    "habits": {
+      "title": "הרגלים ואורח חיים",
+      "smoking": {
+        "label": "סטטוס עישון",
+        "placeholder": "בחר סטטוס",
+        "options": {
+          "non-smoker": "לא מעשן",
+          "occasional": "מדי פעם",
+          "regular": "קבוע", 
+          "quitting": "מפסיק"
+        }
+      },
+      "drinking": {
+        "label": "סטטוס שתייה",
+        "placeholder": "בחר סטטוס",
+        "options": {
+          "non-drinker": "לא שותה",
+          "social": "חברתי",
+          "regular": "קבוע",
+          "rarely": "לעיתים רחוקות"
+        }
+      }
+    },
+    "preferences": {
+      "title": "העדפות",
+      "lookingFor": {
+        "label": "מחפש",
+        "placeholder": "מה אתה מחפש?",
+        "options": {
+          "serious-relationship": "מערכת יחסים רצינית",
+          "marriage": "נישואין",
+          "friendship": "חברות",
+          "dating": "היכרויות"
+        }
+      },
+      "lookingForGender": {
+        "label": "מעוניין ב",
+        "placeholder": "בחר העדפת מגדר",
+        "options": {
+          "male": "זכר",
+          "female": "נקבה",
+          "both": "שניהם"
+        }
+      },
+      "pets": {
+        "label": "חיות מחמד",
+        "placeholder": "יש לך חיות מחמד?",
+        "options": {
+          "love-pets": "אוהב חיות מחמד",
+          "have-pets": "יש לי חיות מחמד",
+          "allergic": "אלרגי לחיות מחמד",
+          "no-pets": "אין חיות מחמד"
+        }
+      },
+      "exercise": {
+        "label": "פעילות גופנית",
+        "placeholder": "כמה פעמים אתה מתאמן?",
+        "options": {
+          "daily": "יומי",
+          "weekly": "שבועי",
+          "monthly": "חודשי",
+          "rarely": "לעיתים רחוקות",
+          "never": "אף פעם"
+        }
+      },
+      "diet": {
+        "label": "דיאטה",
+        "placeholder": "בחר העדפת תזונה",
+        "options": {
+          "omnivore": "אוכל הכל",
+          "vegetarian": "צמחוני",
+          "vegan": "טבעוני",
+          "kosher": "כשר",
+          "halal": "חלאל",
+          "other": "אחר"
+        }
+      }
+    }
+  },
+  
+  "_photos": "Photos step translations for Hebrew",
+  "photos": {
+    "title": "העלה תמונות פרופיל",
+    "subtitle": "הוסף תמונות כדי להשלים את הפרופיל שלך. ניתן להוסיף עד 6 תמונות.",
+    "ready": "תמונה מוכנה להעלאה",
+    "readyPlural": "תמונות מוכנות להעלאה"
+  },
+  
   "_validation": "Validation error messages in Hebrew",
   "validation": {
     "nickname": {
@@ -256,6 +422,9 @@
     },
     "terms": {
       "required": "עליך להסכים לתנאי השירות"
+    },
+    "birthdate": {
+      "required": "אנא בחר תאריך לידה"
     }
   }
 }

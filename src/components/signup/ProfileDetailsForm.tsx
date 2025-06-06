@@ -7,6 +7,7 @@ import { ProfileDetailsFormValues, profileDetailsSchema } from "./profile-detail
 import NameField from "./profile-details/NameField";
 import BioSection from "./profile-details/BioSection";
 import FormActions from "./profile-details/FormActions";
+import { useTranslation } from "react-i18next";
 
 interface ProfileDetailsFormProps {
   defaultValues?: Partial<ProfileDetailsFormValues>;
@@ -29,6 +30,8 @@ const ProfileDetailsForm = ({
   onBack,
   onComplete
 }: ProfileDetailsFormProps) => {
+  const { t } = useTranslation();
+  
   const form = useForm<ProfileDetailsFormValues>({
     resolver: zodResolver(profileDetailsSchema),
     defaultValues: {
@@ -47,7 +50,7 @@ const ProfileDetailsForm = ({
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
         <h3 className="text-lg font-medium text-[#240046] dark:text-white mb-4">
-          Complete your profile
+          {t("profile.title")}
         </h3>
 
         {/* Name Field */}

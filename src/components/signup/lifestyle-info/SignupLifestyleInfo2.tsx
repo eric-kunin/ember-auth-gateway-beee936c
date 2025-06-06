@@ -7,6 +7,7 @@ import { Form } from "@/components/ui/form";
 import HabitsSection from "./HabitsSection";
 import PreferencesSection from "./PreferencesSection";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Schema for Second Lifestyle Information (Habits & Preferences)
 const lifestyle2Schema = z.object({
@@ -43,6 +44,8 @@ const SignupLifestyleInfo2 = ({
   onSubmit,
   onBack,
 }: SignupLifestyleInfo2Props) => {
+  const { t } = useTranslation();
+  
   const form = useForm<Lifestyle2FormValues>({
     resolver: zodResolver(lifestyle2Schema),
     defaultValues,
@@ -72,7 +75,7 @@ const SignupLifestyleInfo2 = ({
             title="Go back to previous step"
           >
             <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back</span>
+            <span>{t("back")}</span>
           </Button>
           <Button
             type="submit"
@@ -81,7 +84,7 @@ const SignupLifestyleInfo2 = ({
             disabled={isLoading}
             title="Continue to next step"
           >
-            <span>Next</span>
+            <span>{t("next")}</span>
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>

@@ -2,10 +2,12 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Gift } from "lucide-react";
-import { birthdateFormSchema, BirthdateFormValues } from "./schemas";
+import { BirthdateFormValues } from "./schemas";
+import { createBirthdateSchema } from "./utils/validationSchemas";
 import { Form } from "@/components/ui/form";
 import BirthdateField from "./personal-info/BirthdateField";
 import FormButtons from "./personal-info/FormButtons";
+import { useTranslation } from "react-i18next";
 
 interface SignupBirthdateProps {
   defaultValues?: Partial<BirthdateFormValues>;
@@ -22,9 +24,10 @@ const SignupBirthdate = ({
   onSubmit,
   onBack,
 }: SignupBirthdateProps) => {
+  const { t } = useTranslation();
   
   const form = useForm<BirthdateFormValues>({
-    resolver: zodResolver(birthdateFormSchema),
+    resolver: zodResolver(createBirthdateSchema(t)),
     defaultValues,
     mode: "onChange"
   });
@@ -38,10 +41,10 @@ const SignupBirthdate = ({
           </div>
         </div>
         <h2 className="text-lg font-semibold text-[#240046] dark:text-white mb-2">
-          When is your birthday?
+          {t("birthdate.title")}
         </h2>
         <p className="text-sm text-[#3B185F] dark:text-custom-lighter">
-          Your age will be calculated from this date
+          {t("birthdate.subtitle")}
         </p>
       </div>
       
