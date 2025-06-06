@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
@@ -19,6 +20,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { BirthdateFormValues } from "../schemas";
+import { useTranslation } from "react-i18next";
 
 interface BirthdateFieldProps {
   control: Control<BirthdateFormValues>;
@@ -26,6 +28,7 @@ interface BirthdateFieldProps {
 }
 
 const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
+  const { t } = useTranslation();
   const defaultDate = new Date();
   defaultDate.setFullYear(defaultDate.getFullYear() - 18);
 
@@ -65,7 +68,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
   return (
     <FormItem className="space-y-2">
       <FormLabel className="text-sm text-[#240046] dark:text-white transition-colors duration-300">
-        Date of Birth
+        {t("birthdate.label")}
       </FormLabel>
       <Popover>
         <PopoverTrigger asChild>
@@ -102,7 +105,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                     : "text-muted-foreground"
                 )}
               >
-                {field.value ? format(field.value, "MMMM dd, yyyy") : "Select your birth date"}
+                {field.value ? format(field.value, "MMMM dd, yyyy") : t("birthdate.placeholder")}
               </span>
             </Button>
           </FormControl>
