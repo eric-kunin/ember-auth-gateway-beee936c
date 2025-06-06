@@ -1,3 +1,4 @@
+
 {
   "_comment": "Login page translations for Hebrew",
   "email": "אימייל",
@@ -211,7 +212,7 @@
 "scrollToBottom": "גלול לתחתית"
 },
 
-"_perosn-info": "English",
+"_perosn-info": "Hebrew validation messages",
 "nickname": "כינוי",
   "username": "שם משתמש",
   "password": "סיסמה",
@@ -222,9 +223,39 @@
     "other": "אחר",
     "placeholder": "בחר מגדר"
   },
-  "back" : "בְּחֲזָרָה",
-  "next": "הַבָּא",
+  "back" : "בְּחֲזָרָה",
+  "next": "הַבָּא",
   
   "nicknameFieldPlaceholder": "לדוגמה דני המלך (יוצג על גבי הכרטיס)",
-  "usernameFieldPlaceholder": "לדוגמה dani123 (גלוי לכולם)"
+  "usernameFieldPlaceholder": "לדוגמה dani123 (גלוי לכולם)",
+  
+  "_validation": "Validation error messages in Hebrew",
+  "validation": {
+    "nickname": {
+      "min": "הכינוי חייב להכיל לפחות {{min}} תווים",
+      "max": "הכינוי חייב להכיל לכל היותר {{max}} תווים"
+    },
+    "username": {
+      "min": "שם המשתמש חייב להכיל לפחות {{min}} תווים",
+      "max": "שם המשתמש חייב להכיל לכל היותר {{max}} תווים",
+      "pattern": "שם המשתמש יכול להכיל רק אותיות, מספרים וקו תחתון"
+    },
+    "gender": {
+      "required": "אנא בחר מגדר"
+    },
+    "email": {
+      "invalid": "אנא הזן כתובת אימייל תקינה"
+    },
+    "password": {
+      "min": "הסיסמה חייבת להכיל לפחות {{min}} תווים",
+      "uppercase": "הסיסמה חייבת להכיל לפחות אות גדולה אחת",
+      "number": "הסיסמה חייבת להכיל לפחות מספר אחד"
+    },
+    "confirmPassword": {
+      "match": "הסיסמאות אינן תואמות"
+    },
+    "terms": {
+      "required": "עליך להסכים לתנאי השירות"
+    }
+  }
 }

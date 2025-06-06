@@ -1,3 +1,4 @@
+
 {
   "_comment": "Login page translations for English",
   "email": "Email",
@@ -212,7 +213,7 @@
 "scrollToBottom": "Scroll to bottom"
 },
 
-"_perosn-info": "Hebrew",
+"_perosn-info": "English validation messages",
 "nickname": "Nickname",
   "username": "Username",
   "password": "Password",
@@ -227,9 +228,35 @@
   "next": "Next",
   
   "nicknameFieldPlaceholder": "e.g. Dani King (will display on card)",
-  "usernameFieldPlaceholder": "e.g. dani123 (visible to everyone)"
-
-
+  "usernameFieldPlaceholder": "e.g. dani123 (visible to everyone)",
+  
+  "_validation": "Validation error messages in English",
+  "validation": {
+    "nickname": {
+      "min": "Nickname must be at least {{min}} characters",
+      "max": "Nickname must be {{max}} characters or less"
+    },
+    "username": {
+      "min": "Username must be at least {{min}} characters",
+      "max": "Username must be {{max}} characters or less",
+      "pattern": "Username can only contain letters, numbers, and underscores"
+    },
+    "gender": {
+      "required": "Please select a gender"
+    },
+    "email": {
+      "invalid": "Please enter a valid email address"
+    },
+    "password": {
+      "min": "Password must be at least {{min}} characters",
+      "uppercase": "Password must contain at least one uppercase letter",
+      "number": "Password must contain at least one number"
+    },
+    "confirmPassword": {
+      "match": "Passwords do not match"
+    },
+    "terms": {
+      "required": "You must agree to the Terms of Service"
+    }
+  }
 }
-
-

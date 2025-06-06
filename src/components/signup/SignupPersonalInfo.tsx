@@ -1,12 +1,14 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { personalInfoFormSchema, PersonalInfoFormValues } from "./schemas";
+import { PersonalInfoFormValues } from "./schemas";
+import { createPersonalInfoSchema } from "./utils/validationSchemas";
 import { Form } from "@/components/ui/form";
 import NicknameField from "./personal-info/NicknameField";
 import UsernameField from "./personal-info/UsernameField";
 import GenderField from "./personal-info/GenderField";
 import FormButtons from "./personal-info/FormButtons";
+import { useTranslation } from "react-i18next";
 
 interface SignupPersonalInfoProps {
   defaultValues?: Partial<PersonalInfoFormValues>;
@@ -25,9 +27,10 @@ const SignupPersonalInfo = ({
   onSubmit,
   onBack,
 }: SignupPersonalInfoProps) => {
+  const { t } = useTranslation();
   
   const form = useForm<PersonalInfoFormValues>({
-    resolver: zodResolver(personalInfoFormSchema),
+    resolver: zodResolver(createPersonalInfoSchema(t)),
     defaultValues,
     mode: "onChange"
   });
