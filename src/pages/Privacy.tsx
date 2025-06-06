@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import LoginHeader from "@/components/login/LoginHeader";
 import LoginFooter from "@/components/login/LoginFooter";
+import { useTranslation } from "react-i18next";
 
 const Privacy = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen w-full flex flex-col bg-black text-white" dir="rtl">
       <LoginHeader />
@@ -14,10 +17,10 @@ const Privacy = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#C77DFF] to-[#E0AAFF] bg-clip-text text-transparent">
-              מדיניות פרטיות
+              {t("privacy.title")}
             </h1>
             <p className="text-xl text-white/70">
-              ברוכים הבאים לאתר ההכרויות החינמי של ישראל
+              {t("privacy.subtitle")}
             </p>
           </div>
 
@@ -28,48 +31,44 @@ const Privacy = () => {
               className="inline-flex items-center gap-2 text-[#C77DFF] hover:text-white transition-colors"
             >
               <ArrowRight className="h-4 w-4 rotate-180" />
-              חזרה לעמוד הבית
+              {t("privacy.backToHome")}
             </Link>
           </div>
 
           {/* Content */}
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 space-y-8">
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">איסוף מידע</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("privacy.sections.dataCollection.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                אנו אוספים מידע שאתם מספקים בעת הרשמה לאתר, כולל שם, כתובת דוא"ל, תאריך לידה ותמונות פרופיל. 
-                המידע נאסף במטרה לספק לכם חווית היכרויות מותאמת ובטוחה.
+                {t("privacy.sections.dataCollection.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">שימוש במידע</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("privacy.sections.dataUsage.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                המידע שלכם משמש להתאמת פרופילים, שיפור השירות ושמירה על בטיחות האתר. 
-                אנו לא נשתף את המידע האישי שלכם עם צדדים שלישיים ללא הסכמתכם המפורשת.
+                {t("privacy.sections.dataUsage.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">אבטחת מידע</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("privacy.sections.dataSecurity.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                אנו משתמשים בטכנולוגיות הצפנה מתקדמות כדי להגן על המידע האישי שלכם. 
-                כל הנתונים מוצפנים ומאוחסנים בשרתים מאובטחים.
+                {t("privacy.sections.dataSecurity.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">זכויותיכם</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("privacy.sections.yourRights.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                יש לכם זכות לגשת למידע האישי שלכם, לעדכן אותו או למחוק את החשבון בכל עת. 
-                ניתן לפנות אלינו בכל שאלה הנוגעת לפרטיותכם.
+                {t("privacy.sections.yourRights.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">צור קשר</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("privacy.sections.contact.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                לשאלות נוספות על מדיניות הפרטיות, ניתן לפנות אלינו בדוא"ל: privacy@akhladate.com
+                {t("privacy.sections.contact.content")}
               </p>
             </section>
           </div>

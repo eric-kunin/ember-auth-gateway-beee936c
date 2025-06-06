@@ -2,8 +2,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import TermsModal from "../modals/TermsModal";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const [modalState, setModalState] = useState<{ isOpen: boolean; type: 'terms' | 'privacy' | null }>({
     isOpen: false,
     type: null
@@ -22,23 +24,23 @@ const Footer = () => {
       <footer className="w-full py-4 px-6 mt-auto bg-gradient-to-r from-white/5 to-transparent backdrop-blur-sm border-t border-white/10">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
           <div className="mb-4 sm:mb-0">
-            <p className="text-sm text-custom-lighter">© 2025 AkhlaDate. All rights reserved.</p>
+            <p className="text-sm text-custom-lighter">{t("footerCopyright")}AkhlaDate.</p>
           </div>
           <div className="flex gap-6">
             <button 
               onClick={() => openModal('privacy')}
               className="text-sm text-custom-lighter hover:text-white transition-colors cursor-pointer"
             >
-              מדיניות פרטיות
+              {t("footerPrivacy")}
             </button>
             <button 
               onClick={() => openModal('terms')}
               className="text-sm text-custom-lighter hover:text-white transition-colors cursor-pointer"
             >
-              תקנון השימוש
+              {t("footerTerms")}
             </button>
-            <Link to="/about" className="text-sm text-custom-lighter hover:text-white transition-colors">אודותינו</Link>
-            <Link to="/contact" className="text-sm text-custom-lighter hover:text-white transition-colors">צור קשר</Link>
+            <Link to="/about" className="text-sm text-custom-lighter hover:text-white transition-colors">{t("footerAbout")}</Link>
+            <Link to="/contact" className="text-sm text-custom-lighter hover:text-white transition-colors">{t("footerContact")}</Link>
           </div>
         </div>
       </footer>

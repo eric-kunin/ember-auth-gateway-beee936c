@@ -1,3 +1,4 @@
+
 {
   "_comment": "Login page translations for English",
   "email": "Email",
@@ -425,6 +426,164 @@
     },
     "birthdate": {
       "required": "Please select a date of birth"
+    }
+  },
+  
+  "_about": "About page translations for English",
+  "about": {
+    "title": "About Us",
+    "subtitle": "Welcome to Israel's Free Dating Site",
+    "backToHome": "Back to Home",
+    "sections": {
+      "mission": {
+        "title": "Our Mission",
+        "content": "AkhlaDate was founded with the mission of connecting hearts in Israel and providing a safe, free and accessible platform for anyone looking for true love. We believe that everyone deserves to find their partner, regardless of economic status or social background."
+      },
+      "features": {
+        "title": "What Makes Us Different",
+        "free": {
+          "title": "Completely Free",
+          "content": "All features on the site are available for free, with no hidden costs."
+        },
+        "safety": {
+          "title": "Maximum Safety",
+          "content": "Advanced security system to protect your privacy and safety."
+        },
+        "community": {
+          "title": "Israeli Community",
+          "content": "Specializing in matching the Israeli audience with an understanding of local culture."
+        },
+        "technology": {
+          "title": "Advanced Technology",
+          "content": "Smart matching algorithms to find the perfect match for you."
+        }
+      },
+      "story": {
+        "title": "Our Story",
+        "content": "AkhlaDate was founded in 2025 by a team of Israeli developers and designers who understood that there is a need for a real and free dating site in Israel. We believe that love should not cost money, and that everyone deserves to find their happiness."
+      },
+      "values": {
+        "title": "Our Values",
+        "list": {
+          "respect": "Respect and mutual respect between all users",
+          "transparency": "Complete transparency with no hidden costs",
+          "privacy": "Protection of users' privacy and safety",
+          "service": "Excellent customer service and ongoing support"
+        }
+      }
+    }
+  },
+  
+  "_terms": "Terms page translations for English",
+  "terms": {
+    "title": "Terms of Use",
+    "subtitle": "Welcome to Israel's Free Dating Site",
+    "backToHome": "Back to Home",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "Using the AkhlaDate site constitutes full acceptance of the terms of use detailed here. If you do not agree to these terms, please refrain from using the site."
+      },
+      "freeService": {
+        "title": "Free Service",
+        "content": "AkhlaDate is a completely free dating site for all users in Israel. We are committed to keeping the service free and accessible to everyone."
+      },
+      "conduct": {
+        "title": "Proper Behavior",
+        "content": "Site users undertake to behave with respect and civility. It is forbidden to publish offensive, sexually explicit content or any other content that may harm other users."
+      },
+      "accuracy": {
+        "title": "Information Accuracy",
+        "content": "Users undertake to provide true and accurate information in their profile. The use of a fictitious identity or false information may lead to account blocking."
+      },
+      "ageRequirement": {
+        "title": "Minimum Age",
+        "content": "The use of the site is permitted only for users aged 18 and over. We reserve the right to check the age of users and block accounts of minors."
+      },
+      "liability": {
+        "title": "Responsibility",
+        "content": "The site is not responsible for meetings or relationships formed through it. Users bear full responsibility for their actions and personal safety."
+      }
+    }
+  },
+  
+  "_privacy": "Privacy page translations for English",
+  "privacy": {
+    "title": "Privacy Policy",
+    "subtitle": "Welcome to Israel's Free Dating Site",
+    "backToHome": "Back to Home",
+    "sections": {
+      "dataCollection": {
+        "title": "Information Collection",
+        "content": "We collect information that you provide during registration to the site, including name, email address, date of birth and profile pictures. The information is collected in order to provide you with a tailored and safe dating experience."
+      },
+      "dataUsage": {
+        "title": "Information Use",
+        "content": "Your information is used to match profiles, improve the service and maintain site safety. We will not share your personal information with third parties without your explicit consent."
+      },
+      "dataSecurity": {
+        "title": "Information Security",
+        "content": "We use advanced encryption technologies to protect your personal information. All data is encrypted and stored on secure servers."
+      },
+      "yourRights": {
+        "title": "Your Rights",
+        "content": "You have the right to access your personal information, update it or delete your account at any time. You can contact us with any question regarding your privacy."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "For further questions about privacy policy, you can contact us at: privacy@akhladate.com"
+      }
+    }
+  },
+  
+  "_contact": "Contact page translations for English",
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Welcome to Israel's Free Dating Site",
+    "backToHome": "Back to Home",
+    "sections": {
+      "welcome": {
+        "title": "We'd Love to Hear from You!",
+        "content": "AkhlaDate is Israel's free dating site. We are here to help you find love and to answer any questions you may have. Contact us in any way that is convenient for you."
+      },
+      "contactInfo": {
+        "title": "Contact Details",
+        "email": {
+          "label": "Email",
+          "value": "support@akhladate.com"
+        },
+        "phone": {
+          "label": "Phone",
+          "value": "03-1234567"
+        },
+        "address": {
+          "label": "Address",
+          "value": "Tel Aviv, Israel"
+        }
+      },
+      "hours": {
+        "title": "Hours of Operation",
+        "weekdays": "Sunday - Thursday: 9:00 - 18:00",
+        "friday": "Friday: 9:00 - 14:00",
+        "saturday": "Saturday: Closed"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "questions": {
+          "free": {
+            "question": "Is the service really free?",
+            "answer": "Yes! AkhlaDate is a completely free dating site for all users in Israel."
+          },
+          "deleteAccount": {
+            "question": "How can I delete my account?",
+            "answer": "You can delete your account at any time through the profile settings or by contacting us."
+          },
+          "dataProtection": {
+            "question": "Is my information protected?",
+            "answer": "Absolutely! We use advanced encryption technologies to protect your privacy."
+          }
+        }
+      }
     }
   }
 }

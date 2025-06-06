@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import LoginHeader from "@/components/login/LoginHeader";
 import LoginFooter from "@/components/login/LoginFooter";
+import { useTranslation } from "react-i18next";
 
 const Terms = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen w-full flex flex-col bg-black text-white" dir="rtl">
       <LoginHeader />
@@ -14,10 +17,10 @@ const Terms = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#C77DFF] to-[#E0AAFF] bg-clip-text text-transparent">
-              תקנון השימוש
+              {t("terms.title")}
             </h1>
             <p className="text-xl text-white/70">
-              ברוכים הבאים לאתר ההכרויות החינמי של ישראל
+              {t("terms.subtitle")}
             </p>
           </div>
 
@@ -28,57 +31,51 @@ const Terms = () => {
               className="inline-flex items-center gap-2 text-[#C77DFF] hover:text-white transition-colors"
             >
               <ArrowRight className="h-4 w-4 rotate-180" />
-              חזרה לעמוד הבית
+              {t("terms.backToHome")}
             </Link>
           </div>
 
           {/* Content */}
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 space-y-8">
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">קבלת התקנון</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("terms.sections.acceptance.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                השימוש באתר AkhlaDate מהווה הסכמה מלאה לתנאי השימוש המפורטים כאן. 
-                אם אינכם מסכימים לתנאים אלה, אנא הימנעו משימוש באתר.
+                {t("terms.sections.acceptance.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">שירות חינמי</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("terms.sections.freeService.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                AkhlaDate הוא אתר הכרויות חינמי לחלוטין עבור כל המשתמשים בישראל. 
-                אנו מתחייבים לשמור על השירות חינמי ונגיש לכולם.
+                {t("terms.sections.freeService.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">התנהגות ראויה</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("terms.sections.conduct.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                משתמשי האתר מתחייבים להתנהג בכבוד ובתרבותיות. אסור לפרסם תוכן פוגעני, 
-                מיני מפורש או כל תוכן אחר שעלול לפגוע במשתמשים אחרים.
+                {t("terms.sections.conduct.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">אמיתות המידע</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("terms.sections.accuracy.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                המשתמשים מתחייבים לספק מידע אמיתי ומדויק בפרופיל שלהם. 
-                השימוש בזהות בדויה או מידע שקרי עלול להוביל לחסימת החשבון.
+                {t("terms.sections.accuracy.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">גיל מינימום</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("terms.sections.ageRequirement.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                השימוש באתר מותר רק למשתמשים בני 18 ומעלה. 
-                אנו שומרים לעצמנו את הזכות לבדוק גיל המשתמשים ולחסום חשבונות של קטינים.
+                {t("terms.sections.ageRequirement.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">אחריות</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("terms.sections.liability.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                האתר אינו נושא באחריות למפגשים או לקשרים שנוצרים באמצעותו. 
-                המשתמשים נושאים באחריות מלאה על הפעולות שלהם ועל הבטיחות האישית שלהם.
+                {t("terms.sections.liability.content")}
               </p>
             </section>
           </div>

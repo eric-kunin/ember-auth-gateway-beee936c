@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Heart, Users, Shield, Zap } from "lucide-react";
 import LoginHeader from "@/components/login/LoginHeader";
 import LoginFooter from "@/components/login/LoginFooter";
+import { useTranslation } from "react-i18next";
 
 const About = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen w-full flex flex-col bg-black text-white" dir="rtl">
       <LoginHeader />
@@ -14,10 +17,10 @@ const About = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-[#C77DFF] to-[#E0AAFF] bg-clip-text text-transparent">
-              אודותינו
+              {t("about.title")}
             </h1>
             <p className="text-xl text-white/70">
-              ברוכים הבאים לאתר ההכרויות החינמי של ישראל
+              {t("about.subtitle")}
             </p>
           </div>
 
@@ -28,31 +31,29 @@ const About = () => {
               className="inline-flex items-center gap-2 text-[#C77DFF] hover:text-white transition-colors"
             >
               <ArrowRight className="h-4 w-4 rotate-180" />
-              חזרה לעמוד הבית
+              {t("about.backToHome")}
             </Link>
           </div>
 
           {/* Content */}
           <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 space-y-8">
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">המשימה שלנו</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("about.sections.mission.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                AkhlaDate נוסד במטרה לחבר בין לבבות בישראל ולספק פלטפורמה בטוחה, חינמית ונגישה 
-                לכל מי שמחפש אהבה אמיתית. אנו מאמינים שכל אדם ראוי למצוא את בן או בת הזוג שלו, 
-                ללא תלות במצב הכלכלי או הרקע החברתי.
+                {t("about.sections.mission.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-6 text-[#C77DFF]">מה שמייחד אותנו</h2>
+              <h2 className="text-2xl font-semibold mb-6 text-[#C77DFF]">{t("about.sections.features.title")}</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-[#9D4EDD] to-[#7B2CBF] rounded-full flex items-center justify-center flex-shrink-0">
                     <Heart className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-2">חינמי לגמרי</h3>
-                    <p className="text-white/70">כל התכונות באתר זמינות בחינם, ללא עלויות נסתרות.</p>
+                    <h3 className="font-semibold text-white mb-2">{t("about.sections.features.free.title")}</h3>
+                    <p className="text-white/70">{t("about.sections.features.free.content")}</p>
                   </div>
                 </div>
 
@@ -61,8 +62,8 @@ const About = () => {
                     <Shield className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-2">בטיחות מקסימלית</h3>
-                    <p className="text-white/70">מערכת אבטחה מתקדמת להגנה על הפרטיות והבטיחות שלכם.</p>
+                    <h3 className="font-semibold text-white mb-2">{t("about.sections.features.safety.title")}</h3>
+                    <p className="text-white/70">{t("about.sections.features.safety.content")}</p>
                   </div>
                 </div>
 
@@ -71,8 +72,8 @@ const About = () => {
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-2">קהילה ישראלית</h3>
-                    <p className="text-white/70">מתמחים בהתאמות לקהל הישראלי עם הבנה של התרבות המקומית.</p>
+                    <h3 className="font-semibold text-white mb-2">{t("about.sections.features.community.title")}</h3>
+                    <p className="text-white/70">{t("about.sections.features.community.content")}</p>
                   </div>
                 </div>
 
@@ -81,40 +82,38 @@ const About = () => {
                     <Zap className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-2">טכנולוגיה מתקדמת</h3>
-                    <p className="text-white/70">אלגוריתמי התאמה חכמים למציאת ההתאמה המושלמת עבורכם.</p>
+                    <h3 className="font-semibold text-white mb-2">{t("about.sections.features.technology.title")}</h3>
+                    <p className="text-white/70">{t("about.sections.features.technology.content")}</p>
                   </div>
                 </div>
               </div>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">הסיפור שלנו</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("about.sections.story.title")}</h2>
               <p className="text-white/70 leading-relaxed">
-                AkhlaDate נוסד בשנת 2025 על ידי צוות של מפתחים ומעצבים ישראלים שהבינו שיש צורך 
-                באתר הכרויות אמיתי וחינמי בישראל. אנו מאמינים שאהבה לא צריכה לעלות כסף, 
-                ושכל אדם ראוי למצוא את האושר שלו.
+                {t("about.sections.story.content")}
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">הערכים שלנו</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-[#C77DFF]">{t("about.sections.values.title")}</h2>
               <ul className="space-y-3 text-white/70">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-[#C77DFF] rounded-full"></div>
-                  <span>כבוד וכבוד הדדי בין כל המשתמשים</span>
+                  <span>{t("about.sections.values.list.respect")}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-[#C77DFF] rounded-full"></div>
-                  <span>שקיפות מלאה ללא עלויות נסתרות</span>
+                  <span>{t("about.sections.values.list.transparency")}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-[#C77DFF] rounded-full"></div>
-                  <span>הגנה על הפרטיות והבטיחות של המשתמשים</span>
+                  <span>{t("about.sections.values.list.privacy")}</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-[#C77DFF] rounded-full"></div>
-                  <span>שירות לקוחות מעולה ותמיכה מתמשכת</span>
+                  <span>{t("about.sections.values.list.service")}</span>
                 </li>
               </ul>
             </section>
