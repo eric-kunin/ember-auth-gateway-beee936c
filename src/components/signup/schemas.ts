@@ -1,41 +1,35 @@
 
 import { z } from "zod";
-import i18n from "@/i18n";
 
-// Helper function to get translated validation messages
-const getValidationMessage = (key: string, params?: Record<string, any>) => {
-  return i18n.t(`validation.${key}`, params);
-};
-
-// Schema for step 1 - Account details
+// Static schemas without translations (for TypeScript inference only)
 export const accountFormSchema = z.object({
-  email: z.string().email(getValidationMessage("email.invalid")),
+  email: z.string().email("Please enter a valid email address"),
   password: z
     .string()
-    .min(8, getValidationMessage("password.min", { min: 8 }))
-    .regex(/[A-Z]/, getValidationMessage("password.uppercase"))
-    .regex(/[0-9]/, getValidationMessage("password.number")),
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
   confirmPassword: z.string(),
   agreeToTerms: z.boolean().refine(val => val === true, {
-    message: getValidationMessage("terms.required")
+    message: "You must agree to the Terms of Service"
   })
 }).refine(data => data.password === data.confirmPassword, {
-  message: getValidationMessage("confirmPassword.match"),
+  message: "Passwords do not match",
   path: ["confirmPassword"]
 });
 
 export type AccountFormValues = z.infer<typeof accountFormSchema>;
 
-// Schema for step 2 - Personal information (nickname, username, gender only)
+// Static schema for TypeScript inference
 export const personalInfoFormSchema = z.object({
   nickname: z.string()
-    .min(2, getValidationMessage("nickname.min", { min: 2 }))
-    .max(15, getValidationMessage("nickname.max", { max: 15 })),
+    .min(2, "Nickname must be at least 2 characters")
+    .max(15, "Nickname must be 15 characters or less"),
   username: z.string()
-    .min(3, getValidationMessage("username.min", { min: 3 }))
-    .max(15, getValidationMessage("username.max", { max: 15 }))
-    .regex(/^[a-zA-Z0-9_]+$/, getValidationMessage("username.pattern")),
-  gender: z.string().min(1, getValidationMessage("gender.required")),
+    .min(3, "Username must be at least 3 characters")
+    .max(15, "Username must be 15 characters or less")
+    .regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+  gender: z.string().min(1, "Please select a gender"),
 });
 
 export type PersonalInfoFormValues = z.infer<typeof personalInfoFormSchema>;

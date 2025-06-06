@@ -1,8 +1,8 @@
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import { accountFormSchema, AccountFormValues } from "./schemas";
+import { AccountFormValues } from "./schemas";
+import { createAccountSchema } from "./utils/validationSchemas";
 import { useState, useEffect } from "react";
 import TermsNotice from "./TermsNotice";
 import EmailField from "./account-form/EmailField";
@@ -29,16 +29,16 @@ const SignupForm = ({
   isLoading,
   onSubmit,
 }: SignupFormProps) => {
-  const form = useForm<AccountFormValues>({
-    resolver: zodResolver(accountFormSchema),
-    defaultValues,
-    mode: "onChange"
-  });
-
   const { t, i18n } = useTranslation();
     const isHebrew = i18n.language === "he";
     const direction = isHebrew ? "rtl" : "ltr";
   
+  const form = useForm<AccountFormValues>({
+    resolver: zodResolver(createAccountSchema(t)),
+    defaultValues,
+    mode: "onChange"
+  });
+
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
 
@@ -74,7 +74,7 @@ const SignupForm = ({
     }, 1000); // 1 second debounce
 
     return () => clearTimeout(timeoutId);
-  }, [watchedEmail, form]);
+  }, [watchedEmail, form, t]);
 
   const handleSubmit = async (data: AccountFormValues) => {
     // Reset any previous email error
