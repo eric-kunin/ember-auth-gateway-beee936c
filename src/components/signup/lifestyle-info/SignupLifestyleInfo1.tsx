@@ -37,7 +37,9 @@ const SignupLifestyleInfo1 = ({
   onSubmit,
   onBack,
 }: SignupLifestyleInfo1Props) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+    const isHebrew = i18n.language === "he";
+    const direction = isHebrew ? "rtl" : "ltr";
   
   const form = useForm<Lifestyle1FormValues>({
     resolver: zodResolver(lifestyle1Schema),
@@ -66,8 +68,17 @@ const SignupLifestyleInfo1 = ({
             className="flex-1 dark:bg-[#10002B] dark:hover:bg-[#240046] dark:text-white border-[#E0AAFF]/30 group"
             title="Go back to previous step"
           >
-            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>{t("back")}</span>
+            {isHebrew ? (
+      <>
+        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <span>{t("back")}</span>
+      </>
+    ) : (
+      <>
+        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+        <span>{t("back")}</span>
+      </>
+    )}
           </Button>
           <Button
             type="submit"
@@ -76,8 +87,17 @@ const SignupLifestyleInfo1 = ({
             disabled={isLoading}
             title="Continue to next step"
           >
-            <span>{t("next")}</span>
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            {isHebrew ? (
+      <>
+        <span>{t("next")}</span>
+        <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+      </>
+    ) : (
+      <>
+        <span>{t("next")}</span>
+        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+      </>
+    )}
           </Button>
         </div>
       </form>

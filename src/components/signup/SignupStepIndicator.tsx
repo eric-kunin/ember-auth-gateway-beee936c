@@ -39,14 +39,14 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
   };
 
   return (
-    <div className="flex justify-center items-center mb-6 relative">
+    <div className="flex justify-center items-center mb-1 relative">
       {/* Background line */}
-      <div className="absolute top-1/2 left-0 transform -translate-y-1/2 w-full px-4 sm:px-10 h-0.5 bg-gray-300 dark:bg-gray-700 z-0" />
+      <div className="absolute top-[1.625rem] left-0 transform -translate-y-1/2 w-full px-4 sm:px-10 h-0.5 bg-gray-300 dark:bg-gray-700 z-0" />
 
       
       {/* Green progress line */}
       <div 
-  className={`absolute top-1/2 h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out 
+  className={`absolute top-[1.625rem] h-0.5 bg-green-500 z-[1] transition-all duration-500 ease-in-out 
     ${direction === 'rtl' 
       ? 'right-0 translate-x-1'  // move slightly left
       : 'left-0 -translate-x-1'  // move slightly right
@@ -78,14 +78,17 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
               )}
             </div>
 
-            <span className={`text-xs mt-2 hidden sm:block text-center leading-tight
-              ${step === currentStep 
-                ? "text-green-500 font-medium"
-                : step < currentStep
-                ? "text-green-500" 
-                : "text-gray-500 dark:text-gray-400"}`}>
-              {getStepLabel(step)}
-            </span>
+            <span
+  className={`text-xs mt-2 hidden sm:block text-center leading-tight mx-1
+    ${step === currentStep 
+      ? "text-green-500 font-medium"
+      : step < currentStep
+      ? "text-green-500" 
+      : "text-gray-500 dark:text-gray-400"}`}
+>
+  {getStepLabel(step)}
+</span>
+
           </div>
         ))}
       </div>

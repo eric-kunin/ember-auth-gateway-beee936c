@@ -11,7 +11,9 @@ interface ReligiousSectionProps {
 }
 
 const ReligiousSection = ({ form, isLoading }: ReligiousSectionProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+const isHebrew = i18n.language === "he";
+const direction = isHebrew ? "rtl" : "ltr";
   
   return (
     <div>
@@ -38,17 +40,17 @@ const ReligiousSection = ({ form, isLoading }: ReligiousSectionProps) => {
                   <SelectTrigger 
                     className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                              text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
-                  >
+                  dir={direction} >
                     <SelectValue placeholder={t("lifestyle1.religious.religion.placeholder")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="orthodox">{t("lifestyle1.religious.religion.options.orthodox")}</SelectItem>
-                  <SelectItem value="conservative">{t("lifestyle1.religious.religion.options.conservative")}</SelectItem>
-                  <SelectItem value="reform">{t("lifestyle1.religious.religion.options.reform")}</SelectItem>
-                  <SelectItem value="secular">{t("lifestyle1.religious.religion.options.secular")}</SelectItem>
-                  <SelectItem value="traditional">{t("lifestyle1.religious.religion.options.traditional")}</SelectItem>
-                  <SelectItem value="other">{t("lifestyle1.religious.religion.options.other")}</SelectItem>
+                  <SelectItem dir={direction} value="orthodox">{t("lifestyle1.religious.religion.options.orthodox")}</SelectItem>
+                  <SelectItem dir={direction} value="conservative">{t("lifestyle1.religious.religion.options.conservative")}</SelectItem>
+                  <SelectItem dir={direction} value="reform">{t("lifestyle1.religious.religion.options.reform")}</SelectItem>
+                  <SelectItem dir={direction} value="secular">{t("lifestyle1.religious.religion.options.secular")}</SelectItem>
+                  <SelectItem dir={direction} value="traditional">{t("lifestyle1.religious.religion.options.traditional")}</SelectItem>
+                  <SelectItem dir={direction} value="other">{t("lifestyle1.religious.religion.options.other")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />
@@ -74,15 +76,15 @@ const ReligiousSection = ({ form, isLoading }: ReligiousSectionProps) => {
                   <SelectTrigger 
                     className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                              text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
-                  >
+                  dir={direction}>
                     <SelectValue placeholder={t("lifestyle1.religious.religiousLevel.placeholder")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="not religious">{t("lifestyle1.religious.religiousLevel.options.not religious")}</SelectItem>
-                  <SelectItem value="somewhat religious">{t("lifestyle1.religious.religiousLevel.options.somewhat religious")}</SelectItem>
-                  <SelectItem value="religious">{t("lifestyle1.religious.religiousLevel.options.religious")}</SelectItem>
-                  <SelectItem value="very religious">{t("lifestyle1.religious.religiousLevel.options.very religious")}</SelectItem>
+                  <SelectItem dir={direction} value="not religious">{t("lifestyle1.religious.religiousLevel.options.not religious")}</SelectItem>
+                  <SelectItem dir={direction} value="somewhat religious">{t("lifestyle1.religious.religiousLevel.options.somewhat religious")}</SelectItem>
+                  <SelectItem dir={direction} value="religious">{t("lifestyle1.religious.religiousLevel.options.religious")}</SelectItem>
+                  <SelectItem dir={direction} value="very religious">{t("lifestyle1.religious.religiousLevel.options.very religious")}</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage className="text-xs text-red-500" />

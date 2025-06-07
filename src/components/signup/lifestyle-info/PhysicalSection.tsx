@@ -13,7 +13,10 @@ interface PhysicalSectionProps {
 }
 
 const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+const isHebrew = i18n.language === "he";
+const direction = isHebrew ? "rtl" : "ltr";
+
   
   return (
     <div>
@@ -60,7 +63,7 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
           control={form.control}
           name="eyeColor"
           render={({ field }) => (
-            <FormItem className="space-y-2">
+            <FormItem className="space-y-2" dir={direction}>
               <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
                 <Eye className="h-4 w-4 text-[#9D4EDD]" />
                 {t("lifestyle1.physical.eyeColor.label")}
@@ -73,15 +76,22 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
                 <FormControl>
                   <SelectTrigger 
                     className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
-                             text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
-                  >
+                             text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD] "
+                  dir={direction} >
                     <SelectValue placeholder={t("lifestyle1.physical.eyeColor.placeholder")} />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
+                <SelectContent 
+                className={`
+                    bg-white dark:bg-[#240046] 
+                    border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20 
+                    
+                `}
+                dir={direction}
+                >
                   {EyeColorOptions.map((eyeColor) => (
-                    <SelectItem key={eyeColor.value} value={eyeColor.value}>
-                      <div className="flex items-center justify-between w-full">
+                    <SelectItem className="pl-7 pr-7" key={eyeColor.value} value={eyeColor.value} dir={direction}>
+                      <div className="flex items-center justify-between w-full ${isHebrew ? 'pr-2' : 'pl-2'}">
                         <span>{t(`lifestyle1.physical.eyeColor.options.${eyeColor.value}`)}</span>
                         <span 
                           className="h-4 w-4 rounded-full ml-2"
