@@ -20,6 +20,7 @@ const lifestyleSchema = z.object({
   drinkingStatus: z.string().optional(),
   lookingFor: z.string().optional(),
   lookingForGender: z.string().optional(),
+  hobbies: z.array(z.string()).default([]),
   pets: z.string().optional(),
   exercise: z.string().optional(),
   diet: z.string().optional(),
@@ -62,7 +63,7 @@ const SignupLifestyleInfo = ({
   const handleSubmit = (data: LifestyleFormValues) => {
     // Even though we removed the UI for hobbies, we need to keep the empty array
     // to maintain the API contract
-    onSubmit({ ...data, hobbies: [] });
+    onSubmit({ ...data, hobbies: data.hobbies || [] });
   };
 
   return (

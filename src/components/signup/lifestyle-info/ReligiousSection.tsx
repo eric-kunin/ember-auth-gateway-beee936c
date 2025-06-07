@@ -3,11 +3,10 @@ import { Church } from "lucide-react";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { UseFormReturn } from "react-hook-form";
-import { LifestyleFormValues } from "./SignupLifestyleInfo";
 import { useTranslation } from "react-i18next";
 
 interface ReligiousSectionProps {
-  form: UseFormReturn<LifestyleFormValues>;
+  form: UseFormReturn<any>;
   isLoading: boolean;
 }
 

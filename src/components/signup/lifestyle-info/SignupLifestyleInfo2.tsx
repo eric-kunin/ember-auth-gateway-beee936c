@@ -15,6 +15,7 @@ const lifestyle2Schema = z.object({
   drinkingStatus: z.string().optional(),
   lookingFor: z.string().optional(),
   lookingForGender: z.string().optional(),
+  hobbies: z.array(z.string()).default([]),
   pets: z.string().optional(),
   exercise: z.string().optional(),
   diet: z.string().optional(),
@@ -54,7 +55,7 @@ const SignupLifestyleInfo2 = ({
 
   const handleSubmit = (data: Lifestyle2FormValues) => {
     // Include hobbies as empty array to maintain API contract
-    onSubmit({ ...data, hobbies: [] });
+    onSubmit({ ...data, hobbies: data.hobbies || [] });
   };
 
   return (
