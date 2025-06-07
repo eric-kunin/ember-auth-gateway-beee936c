@@ -89,6 +89,7 @@ const locale = isHebrew ? he : enUS;
                 "transition-all duration-300",
                 "focus-visible:ring-2 focus-visible:ring-[#9D4EDD] focus-visible:ring-offset-2",
                 "shadow-sm hover:shadow-md",
+                "min-w-0", // Allow button to shrink if needed
                 !field.value && "text-muted-foreground",
                 fieldState.invalid && fieldState.isDirty && "border-red-500 dark:border-red-500 ring-1 ring-red-500",
                 birthdateIsValid && "border-green-500 dark:border-green-500 ring-1 ring-green-500"
@@ -97,14 +98,16 @@ const locale = isHebrew ? he : enUS;
             >
               <CalendarIcon
                 className={cn(
-                  "mr-3 h-5 w-5 transition-transform duration-300",
+                  "mr-3 h-5 w-5 transition-transform duration-300 flex-shrink-0",
                   "text-[#9D4EDD] dark:text-[#C77DFF]",
                   "group-hover:rotate-12 group-hover:scale-110"
                 )}
               />
               <span
                 className={cn(
-                  `flex-1 text-sm sm:text-base transition-colors ${isHebrew ? 'pr-2 text-right' : 'pl-2 text-left'} duration-300`,
+                  `flex-1 text-sm sm:text-base transition-colors duration-300 truncate`,
+                  `${isHebrew ? 'pr-2 text-right' : 'pl-2 text-left'}`,
+                  "min-w-0", // Allow text to truncate if needed
                   field.value
                     ? "text-[#7B2CBF] dark:text-[#E0AAFF] group-hover:text-[#9D4EDD] dark:group-hover:text-[#C77DFF]"
                     : "text-muted-foreground"
