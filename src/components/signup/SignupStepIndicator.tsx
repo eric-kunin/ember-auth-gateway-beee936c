@@ -1,3 +1,4 @@
+
 import { FC } from "react";
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +15,6 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
   const { t, i18n } = useTranslation();
   const isHebrew = i18n.language === "he";
   const direction = isHebrew ? "rtl" : "ltr";
-//   const rightClass = direction === "rtl" ? "text-right" : "text-left";
 
   const steps = Array.from({ length: totalSteps }, (_, i) => i + 1);
 
@@ -78,7 +78,7 @@ const SignupStepIndicator: FC<SignupStepIndicatorProps> = ({
               )}
             </div>
 
-            <span className={`text-xs mt-1 hidden sm:block 
+            <span className={`text-xs mt-2 hidden sm:block text-center leading-tight
               ${step === currentStep 
                 ? "text-green-500 font-medium"
                 : step < currentStep

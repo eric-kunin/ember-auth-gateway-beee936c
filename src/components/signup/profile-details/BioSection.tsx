@@ -6,6 +6,7 @@ import { UseFormReturn } from "react-hook-form";
 import { ProfileDetailsFormValues } from "../profile-details/types";
 import { BookUser, Briefcase } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface BioSectionProps {
   form: UseFormReturn<ProfileDetailsFormValues>;
@@ -13,6 +14,9 @@ interface BioSectionProps {
 }
 
 const BioSection = ({ form, isLoading }: BioSectionProps) => {
+  const { t, i18n } = useTranslation();
+  const isHebrew = i18n.language === "he";
+  
   const [bioCount, setBioCount] = useState(form.getValues().bio?.length || 0);
   const [professionCount, setProfessionCount] = useState(form.getValues().profession?.length || 0);
   
@@ -29,12 +33,12 @@ const BioSection = ({ form, isLoading }: BioSectionProps) => {
           <FormItem className="space-y-2">
             <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-2">
               <BookUser className="h-4 w-4 text-[#9D4EDD]" />
-              Bio
+              {t("profile.bio.label")}
             </FormLabel>
             <FormControl>
               <div className="relative">
                 <Textarea
-                  placeholder="Tell us about yourself..."
+                  placeholder={t("profile.bio.placeholder")}
                   className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                          text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                          h-24 max-h-36 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
@@ -47,7 +51,8 @@ const BioSection = ({ form, isLoading }: BioSectionProps) => {
                   }}
                   value={field.value || ""}
                 />
-                <div className="text-xs text-[#9D4EDD] dark:text-[#E0AAFF] absolute bottom-2 right-2">
+                <div className={`text-xs text-[#9D4EDD] dark:text-[#E0AAFF] absolute bottom-2 
+                  ${isHebrew ? 'left-2' : 'right-2'}`}>
                   {bioCount}/{BIO_MAX_CHARS}
                 </div>
               </div>
@@ -64,12 +69,12 @@ const BioSection = ({ form, isLoading }: BioSectionProps) => {
           <FormItem className="space-y-2">
             <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-2">
               <Briefcase className="h-4 w-4 text-[#9D4EDD]" />
-              Profession
+              {t("profile.profession.label")}
             </FormLabel>
             <FormControl>
               <div className="relative">
                 <Input
-                  placeholder="Your profession"
+                  placeholder={t("profile.profession.placeholder")}
                   className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                          text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                          h-11 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
@@ -82,7 +87,8 @@ const BioSection = ({ form, isLoading }: BioSectionProps) => {
                   }}
                   value={field.value || ""}
                 />
-                <div className="text-xs text-[#9D4EDD] dark:text-[#E0AAFF] absolute top-1/2 right-2 transform -translate-y-1/2">
+                <div className={`text-xs text-[#9D4EDD] dark:text-[#E0AAFF] absolute top-1/2 transform -translate-y-1/2
+                  ${isHebrew ? 'left-2' : 'right-2'}`}>
                   {professionCount}/{PROFESSION_MAX_CHARS}
                 </div>
               </div>

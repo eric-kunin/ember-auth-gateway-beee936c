@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { UseFormReturn } from "react-hook-form";
 import { LifestyleFormValues } from "./SignupLifestyleInfo";
 import { EyeColorOptions } from "./constants";
+import { useTranslation } from "react-i18next";
 
 interface PhysicalSectionProps {
   form: UseFormReturn<LifestyleFormValues>;
@@ -13,11 +14,13 @@ interface PhysicalSectionProps {
 }
 
 const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
+  const { t } = useTranslation();
+  
   return (
     <div>
       <h4 className="text-sm font-medium text-[#240046] dark:text-white mb-3 flex items-center gap-2">
         <Heart className="h-4 w-4 text-[#9D4EDD]" />
-        Physical Attributes
+        {t("lifestyle1.physical.title")}
       </h4>
       
       <div className="grid grid-cols-2 gap-4">
@@ -28,14 +31,14 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
             <FormItem className="space-y-2">
               <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
                 <Ruler className="h-4 w-4 text-[#9D4EDD]" />
-                Height (cm)
+                {t("lifestyle1.physical.height.label")}
               </FormLabel>
               <FormControl>
                 <Input
                   type="number"
                   inputMode="numeric"
                   pattern="[0-9]*"
-                  placeholder="Height in cm"
+                  placeholder={t("lifestyle1.physical.height.placeholder")}
                   className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                            text-[#240046] dark:text-white placeholder:text-[#9D4EDD]/60 dark:placeholder:text-white/60 
                            h-11 py-2 transition-colors duration-300 focus-visible:ring-[#9D4EDD]"
@@ -61,7 +64,7 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
             <FormItem className="space-y-2">
               <FormLabel className="text-[#240046] dark:text-white text-sm transition-colors duration-300 flex items-center gap-1">
                 <Eye className="h-4 w-4 text-[#9D4EDD]" />
-                Eye Color
+                {t("lifestyle1.physical.eyeColor.label")}
               </FormLabel>
               <Select
                 disabled={isLoading}
@@ -73,14 +76,14 @@ const PhysicalSection = ({ form, isLoading }: PhysicalSectionProps) => {
                     className="bg-[#f8f2ff]/70 dark:bg-[#240046]/80 border border-[#E0AAFF]/30 dark:border-0 
                              text-[#240046] dark:text-white h-11 transition-colors duration-300 focus:ring-[#9D4EDD]"
                   >
-                    <SelectValue placeholder="Select eye color" />
+                    <SelectValue placeholder={t("lifestyle1.physical.eyeColor.placeholder")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-white dark:bg-[#240046] border-[#E0AAFF]/30 dark:border-[#9D4EDD]/20">
                   {EyeColorOptions.map((eyeColor) => (
                     <SelectItem key={eyeColor.value} value={eyeColor.value}>
                       <div className="flex items-center justify-between w-full">
-                        <span>{eyeColor.label}</span>
+                        <span>{t(`lifestyle1.physical.eyeColor.options.${eyeColor.value}`)}</span>
                         <span 
                           className="h-4 w-4 rounded-full ml-2"
                           style={{ backgroundColor: eyeColor.color }}
