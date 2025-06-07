@@ -338,51 +338,18 @@
         "placeholder": "What are you looking for?",
         "options": {
           "serious-relationship": "Serious Relationship",
-          "marriage": "Marriage",
+          "casual-dating": "Casual Dating",
           "friendship": "Friendship",
-          "dating": "Dating"
+          "not-sure": "Not Sure"
         }
       },
-      "lookingForGender": {
+      "interestedIn": {
         "label": "Interested In",
         "placeholder": "Select gender preference",
         "options": {
-          "male": "Male",
-          "female": "Female",
+          "men": "Men",
+          "women": "Women",
           "both": "Both"
-        }
-      },
-      "pets": {
-        "label": "Pets",
-        "placeholder": "Do you have pets?",
-        "options": {
-          "love-pets": "Love Pets",
-          "have-pets": "Have Pets",
-          "allergic": "Allergic to Pets",
-          "no-pets": "No Pets"
-        }
-      },
-      "exercise": {
-        "label": "Exercise",
-        "placeholder": "How often do you exercise?",
-        "options": {
-          "daily": "Daily",
-          "weekly": "Weekly",
-          "monthly": "Monthly",
-          "rarely": "Rarely",
-          "never": "Never"
-        }
-      },
-      "diet": {
-        "label": "Diet",
-        "placeholder": "Select diet preference",
-        "options": {
-          "omnivore": "Omnivore",
-          "vegetarian": "Vegetarian",
-          "vegan": "Vegan",
-          "kosher": "Kosher",
-          "halal": "Halal",
-          "other": "Other"
         }
       }
     }

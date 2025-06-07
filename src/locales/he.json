@@ -347,51 +347,18 @@
         "placeholder": "מה אתה מחפש?",
         "options": {
           "serious-relationship": "מערכת יחסים רצינית",
-          "marriage": "נישואין",
+          "casual-dating": "דייטים מזדמנים",
           "friendship": "חברות",
-          "dating": "דייטים"
+          "not-sure": "לא בטוח"
         }
       },
-      "lookingForGender": {
+      "interestedIn": {
         "label": "מעוניין ב",
         "placeholder": "בחר העדפת מין",
         "options": {
-          "male": "גברים",
-          "female": "נשים",
+          "men": "גברים",
+          "women": "נשים",
           "both": "שניהם"
-        }
-      },
-      "pets": {
-        "label": "חיות מחמד",
-        "placeholder": "יש לך חיות מחמד?",
-        "options": {
-          "love-pets": "אוהב חיות מחמד",
-          "have-pets": "יש לי חיות מחמד",
-          "allergic": "אלרגי לחיות מחמד",
-          "no-pets": "אין חיות מחמד"
-        }
-      },
-      "exercise": {
-        "label": "פעילות גופנית",
-        "placeholder": "כמה פעמים אתה מתרגל?",
-        "options": {
-          "daily": "יומי",
-          "weekly": "שבועי",
-          "monthly": "חודשי",
-          "rarely": "לעיתים רחוקות",
-          "never": "אף פעם"
-        }
-      },
-      "diet": {
-        "label": "דיאטה",
-        "placeholder": "בחר העדפת תזונה",
-        "options": {
-          "omnivore": "אוכל הכל",
-          "vegetarian": "צמחוני",
-          "vegan": "טבעוני",
-          "kosher": "כשר",
-          "halal": "חלאל",
-          "other": "אחר"
         }
       }
     }
