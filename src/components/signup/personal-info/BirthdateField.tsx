@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 import { BirthdateFormValues } from "../schemas";
 import { useTranslation } from "react-i18next";
+import { he, enUS } from "date-fns/locale";
 
 interface BirthdateFieldProps {
   control: Control<BirthdateFormValues>;
@@ -28,7 +29,11 @@ interface BirthdateFieldProps {
 }
 
 const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
+const currentLocale = i18n.language === "he" ? he : enUS;
+const isHebrew = i18n.language === "he";
+const locale = isHebrew ? he : enUS;
+  const direction = isHebrew ? "rtl" : "ltr";
   const defaultDate = new Date();
   defaultDate.setFullYear(defaultDate.getFullYear() - 18);
 
@@ -99,13 +104,13 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
               />
               <span
                 className={cn(
-                  "flex-1 text-sm sm:text-base transition-colors duration-300",
+                  `flex-1 text-sm sm:text-base transition-colors ${isHebrew ? 'pr-2 text-right' : 'pl-2 text-left'} duration-300`,
                   field.value
                     ? "text-[#7B2CBF] dark:text-[#E0AAFF] group-hover:text-[#9D4EDD] dark:group-hover:text-[#C77DFF]"
                     : "text-muted-foreground"
                 )}
               >
-                {field.value ? format(field.value, "MMMM dd, yyyy") : t("birthdate.placeholder")}
+                {field.value ? format(field.value, "MMMM dd, yyyy",{ locale: currentLocale }) : t("birthdate.placeholder")}
               </span>
             </Button>
           </FormControl>
@@ -115,6 +120,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
           className="w-auto p-0 bg-white/95 dark:bg-[#240046]/95 border-[#9D4EDD]/30 rounded-xl shadow-2xl backdrop-blur-sm pointer-events-auto"
           align="center"
           sideOffset={8}
+           dir={direction}
         >
           <div className="bg-gradient-to-br from-[#f8f2ff] to-[#f0e6ff] dark:from-[#240046] dark:to-[#10002B] rounded-xl p-1">
             {viewMode === "day" ? (
@@ -129,6 +135,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                 initialFocus
                 fromYear={minYear}
                 toYear={currentYear}
+                locale={locale}
                 captionLayout="buttons"
                 className="rounded-lg pointer-events-auto bg-white/90 dark:bg-[#240046]/90 shadow-inner"
                 classNames={{
@@ -165,24 +172,33 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                       onClick={() => setViewMode("month")}
                       className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40"
                     >
-                      {format(displayMonth, "MMMM yyyy")}
+                      {format(displayMonth, "MMMM yyyy",{ locale: currentLocale })}
                     </button>
                   ),
                 }}
               />
             ) : viewMode === "month" ? (
               <div className="p-4">
-                <div className="flex justify-between items-center mb-3">
-                  <button onClick={() => changeYear(-1)} className={navButtonClass}><ChevronLeft className="w-5 h-5" /></button>
-                  <button
-                    type="button"
-                    onClick={() => setViewMode("year")}
-                    className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md bg-[#f0e6ff]/40 dark:bg-[#9D4EDD]/20 transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40"
-                  >
-                    {format(displayedMonth, "yyyy")}
-                  </button>
-                  <button onClick={() => changeYear(1)} className={navButtonClass}><ChevronRight className="w-5 h-5" /></button>
+                <div className={`flex justify-between items-center mb-3 ${direction}`}>
+                {isHebrew ? (
+                    <>
+                    <button onClick={() => changeYear(1)} className={navButtonClass}><ChevronRight className="w-5 h-5" /></button>
+                    <button onClick={() => setViewMode("year")} className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md bg-[#f0e6ff]/40 dark:bg-[#9D4EDD]/20 transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40">
+                        {format(displayedMonth, "yyyy", { locale })}
+                    </button>
+                    <button onClick={() => changeYear(-1)} className={navButtonClass}><ChevronLeft className="w-5 h-5" /></button>
+                    </>
+                ) : (
+                    <>
+                    <button onClick={() => changeYear(-1)} className={navButtonClass}><ChevronLeft className="w-5 h-5" /></button>
+                    <button onClick={() => setViewMode("year")} className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md bg-[#f0e6ff]/40 dark:bg-[#9D4EDD]/20 transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40">
+                        {format(displayedMonth, "yyyy", { locale })}
+                    </button>
+                    <button onClick={() => changeYear(1)} className={navButtonClass}><ChevronRight className="w-5 h-5" /></button>
+                    </>
+                )}
                 </div>
+
                 <div className="grid grid-cols-4 gap-2">
                   {Array.from({ length: 12 }).map((_, i) => {
                     const monthDate = new Date(displayedMonth);
@@ -198,7 +214,7 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
                         }}
                         className="text-sm font-medium text-[#240046] dark:text-white px-3 py-2 rounded-lg hover:bg-[#E0AAFF]/30 dark:hover:bg-[#9D4EDD]/30 transition-colors"
                       >
-                        {format(monthDate, "MMM")}
+                        {format(monthDate, "MMM",{ locale: currentLocale })}
                       </button>
                     );
                   })}
@@ -206,17 +222,26 @@ const BirthdateField = ({ control, isLoading }: BirthdateFieldProps) => {
               </div>
             ) : (
               <div className="p-4">
-                <div className="flex justify-between items-center mb-3">
-                  <button onClick={() => changeDecade(-1)} className={navButtonClass}><ChevronLeft className="w-6 h-6" /></button>
-                  <button
-                    type="button"
-                    onClick={() => setViewMode("month")}
-                    className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md bg-[#f0e6ff]/40 dark:bg-[#9D4EDD]/20 transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40"
-                  >
-                    {getStartOfDecade(displayedMonth.getFullYear())}–{getStartOfDecade(displayedMonth.getFullYear()) + 9}
-                  </button>
-                  <button onClick={() => changeDecade(1)} className={navButtonClass}><ChevronRight className="w-6 h-6" /></button>
-                </div>
+                <div className={`flex justify-between items-center mb-3 ${direction}`}>
+  {isHebrew ? (
+    <>
+      <button onClick={() => changeDecade(1)} className={navButtonClass}><ChevronRight className="w-6 h-6" /></button>
+      <button onClick={() => setViewMode("month")} className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md bg-[#f0e6ff]/40 dark:bg-[#9D4EDD]/20 transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40">
+        {getStartOfDecade(displayedMonth.getFullYear())}–{getStartOfDecade(displayedMonth.getFullYear()) + 9}
+      </button>
+      <button onClick={() => changeDecade(-1)} className={navButtonClass}><ChevronLeft className="w-6 h-6" /></button>
+    </>
+  ) : (
+    <>
+      <button onClick={() => changeDecade(-1)} className={navButtonClass}><ChevronLeft className="w-6 h-6" /></button>
+      <button onClick={() => setViewMode("month")} className="text-sm font-semibold text-[#240046] dark:text-white px-5 py-2 rounded-md bg-[#f0e6ff]/40 dark:bg-[#9D4EDD]/20 transition-colors duration-200 cursor-pointer hover:bg-[#E0AAFF]/40 dark:hover:bg-[#9D4EDD]/40">
+        {getStartOfDecade(displayedMonth.getFullYear())}–{getStartOfDecade(displayedMonth.getFullYear()) + 9}
+      </button>
+      <button onClick={() => changeDecade(1)} className={navButtonClass}><ChevronRight className="w-6 h-6" /></button>
+    </>
+  )}
+</div>
+
                 <div className="grid grid-cols-4 gap-2">
                   {Array.from({ length: 12 }).map((_, i) => {
                     const start = getStartOfDecade(displayedMonth.getFullYear());
