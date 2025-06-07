@@ -15,7 +15,7 @@ const lifestyle2Schema = z.object({
   drinkingStatus: z.string().optional(),
   lookingFor: z.string().optional(),
   lookingForGender: z.string().optional(),
-  hobbies: z.array(z.string()).default([]),
+  hobbies: z.array(z.string()).optional().default([]),
   pets: z.string().optional(),
   exercise: z.string().optional(),
   diet: z.string().optional(),

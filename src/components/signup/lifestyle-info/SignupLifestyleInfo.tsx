@@ -9,10 +9,11 @@ import ReligiousSection from "./ReligiousSection";
 import HabitsSection from "./HabitsSection";
 import PreferencesSection from "./PreferencesSection";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-// Schema for Lifestyle Information
+// Combined schema for all lifestyle information
 const lifestyleSchema = z.object({
-  height: z.number().min(100, "Height must be at least 100 cm").max(250, "Height must be at most 250 cm").optional().or(z.literal('')),
+  height: z.union([z.number(), z.literal("")]).optional(),
   eyeColor: z.string().optional(),
   religion: z.string().optional(),
   religiousLevel: z.string().optional(),
@@ -20,7 +21,7 @@ const lifestyleSchema = z.object({
   drinkingStatus: z.string().optional(),
   lookingFor: z.string().optional(),
   lookingForGender: z.string().optional(),
-  hobbies: z.array(z.string()).default([]),
+  hobbies: z.array(z.string()).optional().default([]),
   pets: z.string().optional(),
   exercise: z.string().optional(),
   diet: z.string().optional(),
@@ -37,7 +38,7 @@ interface SignupLifestyleInfoProps {
 
 const SignupLifestyleInfo = ({
   defaultValues = {
-    height: undefined,
+    height: "",
     eyeColor: "",
     religion: "",
     religiousLevel: "",
@@ -54,6 +55,8 @@ const SignupLifestyleInfo = ({
   onSubmit,
   onBack,
 }: SignupLifestyleInfoProps) => {
+  const { t } = useTranslation();
+  
   const form = useForm<LifestyleFormValues>({
     resolver: zodResolver(lifestyleSchema),
     defaultValues,
@@ -61,25 +64,24 @@ const SignupLifestyleInfo = ({
   });
 
   const handleSubmit = (data: LifestyleFormValues) => {
-    // Even though we removed the UI for hobbies, we need to keep the empty array
-    // to maintain the API contract
+    // Include hobbies as empty array to maintain API contract
     onSubmit({ ...data, hobbies: data.hobbies || [] });
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 sm:space-y-5">
-        {/* Physical Attributes Section */}
+        {/* Physical Section */}
         <PhysicalSection form={form} isLoading={isLoading} />
         
-        {/* Religious Information Section */}
+        {/* Religious Section */}
         <ReligiousSection form={form} isLoading={isLoading} />
         
         {/* Habits Section */}
-        <HabitsSection form={form} isLoading={isLoading} />
+        <HabitsSection form={form as any} isLoading={isLoading} />
         
         {/* Preferences Section */}
-        <PreferencesSection form={form} isLoading={isLoading} />
+        <PreferencesSection form={form as any} isLoading={isLoading} />
 
         <div className="flex gap-2 pt-2">
           <Button
@@ -90,7 +92,7 @@ const SignupLifestyleInfo = ({
             title="Go back to previous step"
           >
             <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            <span>Back</span>
+            <span>{t("back")}</span>
           </Button>
           <Button
             type="submit"
@@ -99,7 +101,7 @@ const SignupLifestyleInfo = ({
             disabled={isLoading}
             title="Continue to next step"
           >
-            <span>Next</span>
+            <span>{t("next")}</span>
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Button>
         </div>
