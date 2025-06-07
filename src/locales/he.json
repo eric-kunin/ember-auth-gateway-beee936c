@@ -1,4 +1,3 @@
-
 {
   "_comment": "Login page translations for Hebrew",
   "email": "אימייל",
@@ -347,20 +346,19 @@
         "label": "מחפש",
         "placeholder": "מה אתה מחפש?",
         "options": {
-          "serious relationship": "מערכת יחסים רצינית",
+          "serious-relationship": "מערכת יחסים רצינית",
           "marriage": "נישואין",
           "friendship": "חברות",
-          "casual": "משהו רגיל"
+          "dating": "דייטים"
         }
       },
       "lookingForGender": {
         "label": "מעוניין ב",
         "placeholder": "בחר העדפת מין",
         "options": {
-          "Male": "גברים",
-          "Female": "נשים",
-          "Both": "שניהם",
-          "Other": "אחר"
+          "male": "גברים",
+          "female": "נשים",
+          "both": "שניהם"
         }
       },
       "pets": {
@@ -404,7 +402,18 @@
     "title": "העלה תמונות פרופיל",
     "subtitle": "הוסף תמונות כדי להשלים את הפרופיל שלך. אתה יכול להוסיף עד 6 תמונות.",
     "ready": "תמונה מוכנה להעלאה",
-    "readyPlural": "תמונות מוכנות להעלאה"
+    "readyPlural": "תמונות מוכנות להעלאה",
+    "maxPhotos": "תמונות פרופיל (מקסימום 6)",
+    "addPhoto": "הוסף תמונה",
+    "dragDrop": "או גרור ושחרר",
+    "privatePhotosNote": "תמונות פרטיות יהיו גלויות רק כאשר תבחר לחשוף אותן"
+  },
+  
+  "_summary": "Summary step translations for Hebrew", 
+  "summary": {
+    "title": "סיכום פרופיל",
+    "subtitle": "סקור את המידע שלך לפני השלמת הרשמה",
+    "completeSignup": "השלם הרשמה"
   },
   
   "_validation": "Validation error messages in Hebrew",
@@ -547,7 +556,7 @@
       },
       "dataSecurity": {
         "title": "אבטחת מידע",
-        "content": "אנו משתמשים בטכנולוגיות הצפנה מתקדמות כדי להגן על המידע האישי שלכם. כל הנתונים מוצפנים ונשמרים בשרתים מאובטחים."
+        "content": "אנו משתמשים בטכנולוגיות הצפנה מתקדמים כדי להגן על המידע האישי שלכם. כל הנתונים מוצפנים ונשמרים בשרתים מאובטחים."
       },
       "yourRights": {
         "title": "הזכויות שלכם",
@@ -604,7 +613,7 @@
           },
           "dataProtection": {
             "question": "האם המידע שלי מוגן?",
-            "answer": "בהחלט! אנו משתמשים בטכנולוגיות הצפנה מתקדמות כדי להגן על הפרטיות שלכם."
+            "answer": "בהחלט! אנו משתמשים בטכנולוגיות הצפנה מתקדמים כדי להגן על הפרטיות שלכם."
           }
         }
       }

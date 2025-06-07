@@ -2,12 +2,15 @@
 import { Camera, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProfileImage } from "./types";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { useTranslation } from "react-i18next";
 
 interface PhotosSectionProps {
   profileImages: ProfileImage[];
 }
 
 const PhotosSection = ({ profileImages }: PhotosSectionProps) => {
+  const { t } = useTranslation();
+  
   if (profileImages.length === 0) {
     return null;
   }
@@ -16,7 +19,7 @@ const PhotosSection = ({ profileImages }: PhotosSectionProps) => {
     <div className="space-y-3">
       <h4 className="text-sm font-medium flex items-center text-[#240046] dark:text-white">
         <Camera className="h-4 w-4 mr-1 text-[#9D4EDD]" />
-        Profile Photos
+        {t("photos.maxPhotos")}
       </h4>
       <div className="relative">
         <Carousel className="w-full max-w-xs mx-auto">
