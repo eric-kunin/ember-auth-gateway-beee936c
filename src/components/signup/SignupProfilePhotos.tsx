@@ -3,10 +3,9 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Camera } from "lucide-react";
 import { ProfileImage } from "./image-upload/types";
-import { useImageUpload } from "./image-upload/useImageUpload";
 import { motion } from "framer-motion";
-import AddImageCard from "./image-upload/AddImageCard";
-import ImageCard from "./image-upload/ImageCard";
+import { AddImageCard } from "./image-upload/AddImageCard";
+import { ImageCard } from "./image-upload/ImageCard";
 import { useTranslation } from "react-i18next";
 
 interface SignupProfilePhotosProps {
@@ -24,7 +23,7 @@ const SignupProfilePhotos = ({
 }: SignupProfilePhotosProps) => {
   const { t } = useTranslation();
   const [selectedImages, setSelectedImages] = useState<ProfileImage[]>(initialImages);
-  const { uploadImage, isUploading } = useImageUpload();
+  const [isUploading, setIsUploading] = useState(false);
 
   // Update local state when initialImages changes
   useEffect(() => {
@@ -37,14 +36,38 @@ const SignupProfilePhotos = ({
     const remainingSlots = 6 - selectedImages.length;
     const filesToProcess = Array.from(files).slice(0, remainingSlots);
 
+    setIsUploading(true);
+    
     for (const file of filesToProcess) {
       try {
-        const uploadedImage = await uploadImage(file);
-        setSelectedImages(prev => [...prev, uploadedImage]);
+        // Create a temporary URL for preview
+        const tempUrl = URL.createObjectURL(file);
+        const newImage: ProfileImage = {
+          filePath: `temp-${Date.now()}`,
+          publicUrl: tempUrl,
+          file,
+          isUploading: true,
+          isPrivate: false
+        };
+        
+        setSelectedImages(prev => [...prev, newImage]);
+        
+        // Simulate upload completion after a short delay
+        setTimeout(() => {
+          setSelectedImages(prev => 
+            prev.map(img => 
+              img.filePath === newImage.filePath 
+                ? { ...img, isUploading: false }
+                : img
+            )
+          );
+        }, 1000);
       } catch (error) {
-        console.error("Failed to upload image:", error);
+        console.error("Failed to process image:", error);
       }
     }
+    
+    setIsUploading(false);
   };
 
   const handleRemoveImage = (index: number) => {
@@ -85,6 +108,8 @@ const SignupProfilePhotos = ({
             key={image.filePath || index}
             image={image}
             index={index}
+            isProcessing={false}
+            disabled={isLoading}
             onRemove={handleRemoveImage}
             onTogglePrivacy={handleTogglePrivacy}
           />
@@ -92,9 +117,22 @@ const SignupProfilePhotos = ({
 
         {canAddMore && (
           <AddImageCard
-            onImageSelect={handleImageSelect}
-            isUploading={isUploading}
-            photosCount={selectedImages.length}
+            isDragging={false}
+            isLoading={isUploading}
+            disabled={isLoading || isUploading}
+            onClick={() => {
+              const input = document.createElement('input');
+              input.type = 'file';
+              input.accept = 'image/*';
+              input.multiple = true;
+              input.onchange = (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.files) {
+                  handleImageSelect(target.files);
+                }
+              };
+              input.click();
+            }}
           />
         )}
       </div>

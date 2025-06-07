@@ -3,7 +3,7 @@ import { FormControl, FormField, FormItem, FormLabel } from "@/components/ui/for
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Cigarette, Wine } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
-import { Lifestyle2FormValues } from "../SignupLifestyleInfo2";
+import { Lifestyle2FormValues } from "./types";
 import { useTranslation } from "react-i18next";
 
 interface HabitsSectionProps {
